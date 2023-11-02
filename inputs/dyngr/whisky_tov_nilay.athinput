@@ -55,7 +55,7 @@ dfloor      = 1.0e-10   # floor on density rho
 tfloor      = 1.0e-8  
 dthreshold  = 1.02      # Threshold for flooring
 gamma       = 2.0       # ratio of specific heats Gamma
-dyn_scratch = 1
+dyn_scratch = 0
 fofc        = true
 enforce_maximum = false
 
