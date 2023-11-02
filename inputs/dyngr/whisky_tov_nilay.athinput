@@ -36,7 +36,7 @@ evolution  = dynamic    # dynamic/kinematic/static
 integrator = rk3        # time integration algorithm
 cfl_number = 0.4
 nlim       = -1
-tlim       = 10000
+tlim       = 1000
 ndiag      = 1          # cycles between diagnostic output
 
 <coord>
@@ -75,11 +75,17 @@ v_pert      = 0.0
 
 <output1>
 file_type   = hst      # History data dump
-dt          = 0.00001  # time increment between outputs
+dt          = 10.  # time increment between outputs
 data_format = %20.15e
 
 <output2>
-file_type   = vtk     # Binary output
+file_type   = bin    # Binary output
+variable    = mhd_w
+dt          = 10.
+slice_x3    = 0.0
+
+<output3>
+file_type   = vtk    # Binary output
 variable    = mhd_w
 dt          = 10.
 slice_x3    = 0.0
