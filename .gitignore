@@ -15,3 +15,5 @@ build/
 # editor temp files
 *~
 *.swp
+
+/home/nilay/Code/AthenaK_magnetar_winds/athenak/kokkos
