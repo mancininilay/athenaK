@@ -16,4 +16,4 @@ build/
 *~
 *.swp
 
-/home/nilay/Code/AthenaK_magnetar_winds/athenak/kokkos
+/home/nilay/Code/AthenaK_magnetar_winds/athenak/kokkos/core/src/OpenACC/Kokkos_OpenACC_ParallelFor_Team.hpp
