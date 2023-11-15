@@ -134,7 +134,8 @@ else()
 	set(TWO_PUNCTURES 0)
 endif()
 
-if (${PROBLEM} STREQUAL "elliptica_bns" or "elliptica_sns")
+if (${PROBLEM} STREQUAL "elliptica_bns" OR ${PROBLEM} STREQUAL "elliptica_sns")
+
   target_include_directories(athena PRIVATE
       ${CMAKE_SOURCE_DIR}/Elliptica_ID_Reader/include)
   target_link_libraries(athena PUBLIC
