@@ -28,7 +28,7 @@
 #include "hydro/hydro.hpp"
 #include "mhd/mhd.hpp"
 #include "dyngr/dyngr.hpp"
-#include "Elliptica_ID_Reader/src/elliptica_id_reader_lib.h"
+#include "elliptica_id_reader_lib.h"
 
 #if ELLIPTICA==0
 #error elliptica_bns.cpp requires Elliptica
