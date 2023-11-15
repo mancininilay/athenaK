@@ -114,7 +114,6 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   int &ke = indcs.ke;
   auto &coord = pmbp->pcoord->coord_data;
   auto &size = pmbp->pmb->mb_size;
-  auto &adm = pmbp->padm->adm;
 
   std::string fname = pin->GetString("problem", "initial_data_file");
   
@@ -209,7 +208,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   host_adm.alpha.InitWithShallowSlice(host_u_adm,
       adm::ADM::I_ADM_ALPHA);
   host_adm.beta_u.InitWithShallowSlice(host_u_adm,
-      adm::ADM::I_ADM_BETAX, z4c::Z4c::I_ADM_BETAZ);
+      adm::ADM::I_ADM_BETAX, adm::ADM::I_ADM_BETAZ);
   host_adm.g_dd.InitWithShallowSlice(host_u_adm,
       adm::ADM::I_ADM_GXX, adm::ADM::I_ADM_GZZ);
   host_adm.vK_dd.InitWithShallowSlice(host_u_adm,
@@ -552,7 +551,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
 
   return;
 }
-*/
+
 
 
 
@@ -738,3 +737,4 @@ void TOVHistory(HistoryData *pdata, Mesh *pm) {
   // store data in hdata array
   pdata->hdata[0] = rho_max;
 }
+*/
