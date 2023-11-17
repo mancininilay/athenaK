@@ -8,21 +8,21 @@ basename = tov
 
 <mesh>
 nghost = 4       # Number of ghost cells
-nx1    = 128     # number of cells in x1-direction
-x1min  = -30.0   # minimum x1
-x1max  = 30.0    # maximum x1
+nx1    = 256     # number of cells in x1-direction
+x1min  = -40.0   # minimum x1
+x1max  = 40.0    # maximum x1
 ix1_bc = diode   # inner boundary
 ox1_bc = diode   # outer boundary
 
-nx2    = 128     # number of cells in x2-direction
-x2min  = -30.0   # minimum x2
-x2max  = 30.0    # maximum x2
+nx2    = 256     # number of cells in x2-direction
+x2min  = -40.0   # minimum x2
+x2max  = 40.0    # maximum x2
 ix2_bc = diode   # inner boundary
 ox2_bc = diode   # outer boundary
 
-nx3    = 128    # number of cells in x3-direction
-x3min  = -30.0   # minimum x3
-x3max  = 30.0    # maximum x3
+nx3    = 256    # number of cells in x3-direction
+x3min  = -40.0   # minimum x3
+x3max  = 40.0    # maximum x3
 ix3_bc = diode   # inner boundary
 ox3_bc = diode   # outer boundary
 
