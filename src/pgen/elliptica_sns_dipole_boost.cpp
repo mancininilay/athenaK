@@ -333,10 +333,13 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     int ncells2 = (indcs.nx2 > 1)? (indcs.nx2 + 2*(indcs.ng)) : 1;
     int ncells3 = (indcs.nx3 > 1)? (indcs.nx3 + 2*(indcs.ng)) : 1;
     int nmb = pmbp->nmb_thispack;
-    DvceArray4D<Real> a1, a2, a3;
+    DvceArray4D<Real> a1, a2, a3, a1p, a2p, a3p;
     Kokkos::realloc(a1, nmb,ncells3,ncells2,ncells1);
     Kokkos::realloc(a2, nmb,ncells3,ncells2,ncells1);
     Kokkos::realloc(a3, nmb,ncells3,ncells2,ncells1);
+    Kokkos::realloc(a1p, nmb,ncells3,ncells2,ncells1);
+    Kokkos::realloc(a2p, nmb,ncells3,ncells2,ncells1);
+    Kokkos::realloc(a3p, nmb,ncells3,ncells2,ncells1);
 
     auto &nghbr = pmbp->pmb->nghbr;
     auto &mblev = pmbp->pmb->mb_lev;
@@ -368,14 +371,19 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
       Real dx2 = size.d_view(m).dx2;
       Real dx3 = size.d_view(m).dx3;
 
-      Real vx = w0(m,IVX,k,j,i);
-      Real vy = w0(m,IVY,k,j,i);
-      Real vz = w0(m,IVZ,k,j,i);
-      Real vv = (vx*vx + vy*vy + vz*vz);
-      Real lorentz = 1.0/sqrt(1.0 - vv);
+      Real wx = w0(m,IVX,k,j,i);
+      Real wy = w0(m,IVY,k,j,i);
+      Real wz = w0(m,IVZ,k,j,i);
+      Real ww = (wx*wx + wy*wy + wz*wz);
+      Real vv = ww / (1.0 + ww);
+      Real lorentz = 1/sqrt(1-vv);
+      Real vx = wx/lorentz;
+      Real vy = wy/lorentz;
+      Real vz = wz/lorentz;
 
-      a1(m,k,j,i) = A1(b_norm,r0, x1v, x2f, x3f);
-      a2(m,k,j,i) = A2(b_norm,r0, x1f, x2v, x3f);
+      a1p(m,k,j,i) = A1(b_norm,r0, x1v, x2f, x3f);
+      a2p(m,k,j,i) = A2(b_norm,r0, x1f, x2v, x3f);
+      a3p(m,k,j,i) = 0.0;
       a3(m,k,j,i) = 0.0;
 
       // When neighboring MeshBock is at finer level, compute vector potential as sum of
@@ -409,7 +417,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
           (nghbr.d_view(m,47).lev > mblev.d_view(m) && j==je+1 && k==ke+1)) {
         Real xl = x1v + 0.25*dx1;
         Real xr = x1v - 0.25*dx1;
-        a1(m,k,j,i) = 0.5*(A1(b_norm,r0, xl,x2f,x3f) + A1(b_norm,r0, xr,x2f,x3f));
+        a1p(m,k,j,i) = 0.5*(A1(b_norm,r0, xl,x2f,x3f) + A1(b_norm,r0, xr,x2f,x3f));
       }
 
       // Correct A2 at x1-faces, x3-faces, and x1x3-edges
@@ -439,12 +447,12 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
           (nghbr.d_view(m,39).lev > mblev.d_view(m) && i==ie+1 && k==ke+1)) {
         Real xl = x2v + 0.25*dx2;
         Real xr = x2v - 0.25*dx2;
-        a2(m,k,j,i) = 0.5*(A2(b_norm, r0,x1f,xl,x3f) + A2(b_norm,r0, x1f,xr,x3f));
+        a2p(m,k,j,i) = 0.5*(A2(b_norm, r0,x1f,xl,x3f) + A2(b_norm,r0, x1f,xr,x3f));
       }
 
       //implement lorentz transformation
-      a1(m,k,j,i) = (1+((lorentz-1)*(vx*vx)/(vv)))*a1(m,k,j,i) + (lorentz-1)*(vx*vy)/(vv)*a2(m,k,j,i);
-      a2(m,k,j,i) = (1+((lorentz-1)*(vy*vy)/(vv)))*a2(m,k,j,i) + (lorentz-1)*(vx*vy)/(vv)*a1(m,k,j,i);
+      a1(m,k,j,i) = (1+((lorentz-1)*(vx*vx)/(vv)))*a1p(m,k,j,i) + ((lorentz-1)*(vx*vy)*a2p(m,k,j,i))/(vv);
+      a2(m,k,j,i) = (1+((lorentz-1)*(vy*vy)/(vv)))*a2p(m,k,j,i) + ((lorentz-1)*(vx*vy)*a1p(m,k,j,i))/(vv);
 
     });
 
