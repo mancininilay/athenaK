@@ -371,9 +371,10 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
       Real dx2 = size.d_view(m).dx2;
       Real dx3 = size.d_view(m).dx3;
 
-      Real wx = w0(m,IVX,k,j,i);
-      Real wy = w0(m,IVY,k,j,i);
-      Real wz = w0(m,IVZ,k,j,i);
+      auto w0c   = pmbp->pmhd->w0;
+      Real wx = w0c(m,IVX,k,j,i);
+      Real wy = w0c(m,IVY,k,j,i);
+      Real wz = w0c(m,IVZ,k,j,i);
       Real ww = (wx*wx + wy*wy + wz*wz);
       Real vv = ww / (1.0 + ww);
       Real lorentz = 1/sqrt(1-vv);
@@ -451,8 +452,10 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
       }
 
       //implement lorentz transformation
-      a1(m,k,j,i) = (1+((lorentz-1)*(vx*vx)/(vv)))*a1p(m,k,j,i) + ((lorentz-1)*(vx*vy)*a2p(m,k,j,i))/(vv);
-      a2(m,k,j,i) = (1+((lorentz-1)*(vy*vy)/(vv)))*a2p(m,k,j,i) + ((lorentz-1)*(vx*vy)*a1p(m,k,j,i))/(vv);
+      if (vx > 0 && vy > 0) {
+        a1(m,k,j,i) = (1+((lorentz-1)*(vx*vx)/(vv)))*a1p(m,k,j,i) + ((lorentz-1)*(vx*vy)*a2p(m,k,j,i))/(vv);
+        a2(m,k,j,i) = (1+((lorentz-1)*(vy*vy)/(vv)))*a2p(m,k,j,i) + ((lorentz-1)*(vx*vy)*a1p(m,k,j,i))/(vv);
+      }
 
     });
 
