@@ -243,6 +243,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
 
   printf("Label indices saved.\n");
 
+
   // TODO(JMF): Replace with a Kokkos loop on Kokkos::DefaultHostExecutionSpace() to
   // improve performance.
   idx = 0;
@@ -371,16 +372,24 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
       Real dx2 = size.d_view(m).dx2;
       Real dx3 = size.d_view(m).dx3;
 
-      auto w0c   = pmbp->pmhd->w0;
-      Real wx = w0c(m,IVX,k,j,i);
-      Real wy = w0c(m,IVY,k,j,i);
-      Real wz = w0c(m,IVZ,k,j,i);
-      Real ww = (wx*wx + wy*wy + wz*wz);
-      Real vv = ww / (1.0 + ww);
-      Real lorentz = 1/sqrt(1-vv);
-      Real vx = wx/lorentz;
-      Real vy = wy/lorentz;
-      Real vz = wz/lorentz;
+
+      Real g[NSPMETRIC];
+      g[S11] = u_adm.g_dd(m, 0, 0, k, j, i);
+      g[S12] = u_adm.g_dd(m, 0, 1, k, j, i);
+      g[S13] = u_adm.g_dd(m, 0, 2, k, j, i);
+      g[S22] = u_adm.g_dd(m, 1, 1, k, j, i);
+      g[S23] = u_adm.g_dd(m, 1, 2, k, j, i);
+      g[S33] = u_adm.g_dd(m, 2, 2, k, j, i);
+
+      Real w[3] = {w0(m,IVX,k,j,i),
+                   w0(m,IVY,k,j,i),
+                   w0(m,IVZ,k,j,i)};
+      Real wx = w[0];
+      Real wy = w[1];
+      Real wz = w[2];
+
+      Real ww = Primitive::SquareVector(w, g);
+      Real lorentz = sqrt(1.0 + ww);
 
       a1p(m,k,j,i) = A1(b_norm,r0, x1v, x2f, x3f);
       a2p(m,k,j,i) = A2(b_norm,r0, x1f, x2v, x3f);
@@ -452,9 +461,9 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
       }
 
       //implement lorentz transformation
-      if (vx > 0 && vy > 0) {
-        a1(m,k,j,i) = (1+((lorentz-1)*(vx*vx)/(vv)))*a1p(m,k,j,i) + ((lorentz-1)*(vx*vy)*a2p(m,k,j,i))/(vv);
-        a2(m,k,j,i) = (1+((lorentz-1)*(vy*vy)/(vv)))*a2p(m,k,j,i) + ((lorentz-1)*(vx*vy)*a1p(m,k,j,i))/(vv);
+      if (lorentz > 1.0001) {
+        a1(m,k,j,i) = (1+((lorentz-1)*(wx*wx)/(ww)))*a1p(m,k,j,i) + ((lorentz-1)*(wx*wy)*a2p(m,k,j,i))/(ww);
+        a2(m,k,j,i) = (1+((lorentz-1)*(wy*wy)/(ww)))*a2p(m,k,j,i) + ((lorentz-1)*(wx*wy)*a1p(m,k,j,i))/(ww);
       }
 
     });

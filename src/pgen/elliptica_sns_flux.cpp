@@ -900,7 +900,7 @@ void snsFluxes(HistoryData *pdata, Mesh *pm) {
       Real sph = sin(phi);
       Real cph = cos(phi);
       Real drdx = r*x1/(2.0*r2 - rad2 + a2);
-      Real drdy = r*x2/(2.0*r2 - rad2 + a2);SQR(spin*cos(theta)));
+      Real drdy = r*x2/(2.0*r2 - rad2 + a2);SQR(spin*cos(theta));
 
       Real drdz = (r*x3 + a2*x3/r)/(2.0*r2-rad2+a2);
       // contravariant r component of 4-velocity
