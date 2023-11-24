@@ -791,7 +791,7 @@ def main(**kwargs):
 
     # Plot data
     for block_num in range(num_blocks_used):
-        plt.imshow(quantity[block_num], cmap=kwargs['cmap'], norm=norm, vmin=vmin,
+        plt.imshow(quantity[block_num], cmap=kwargs['cmap'], norm=norm, vmin=vmin, 
                    vmax=vmax, interpolation='none', origin='lower',
                    extent=extents[block_num])
 
@@ -812,7 +812,7 @@ def main(**kwargs):
     start_points = sample_points_on_ellipse(center, a, b, num_points)
 
 
-    plt.streamplot(x,y,bx,by,density=1,color='k',linewidth=1.5,arrowsize=1.5, start_points=start_points)
+    plt.streamplot(x,y,bx,by,density=1,color='w',linewidth=1.5,arrowsize=1.5, start_points=start_points)
 
     # Mark and/or mask horizon
     if kwargs['horizon'] or kwargs['horizon_mask']:
