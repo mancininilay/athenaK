@@ -81,6 +81,7 @@ import warnings
 
 # Numerical modules
 import numpy as np
+import scipy.interpolate
 
 # Load plotting modules
 import matplotlib
@@ -531,6 +532,8 @@ def main(**kwargs):
     # Calculate derived quantity related to radiation pressure
     elif kwargs['variable'] == 'derived:prad':
         quantity = quantities['r00_ff'] / 3.0
+
+    # Calculate derived quantity related to density
     elif kwargs['variable'] == 'derived:rho':
         quantity = quantities['dens'] 
         bbx = quantities['bcc1']
@@ -720,49 +723,59 @@ def main(**kwargs):
     else:
         quantity = quantities[variable_name]
 
-    combined_size=(320, 320)
-    # Calculate total extents
+
+    nx = 320
+    ny = 320
     min_x = min(extent[0] for extent in extents)
     max_x = max(extent[1] for extent in extents)
     min_y = min(extent[2] for extent in extents)
     max_y = max(extent[3] for extent in extents)
-    def combine_blocks_fixed_size(num_blocks_used, quantities, extents):
-        # Initialize a large empty array of fixed size
-        combined_array = np.full(combined_size, np.nan)
 
-        # Total extent sizes
-        total_x_size = max_x - min_x
-        total_y_size = max_y - min_y
 
-        # Place each block's data into the correct position
+    from scipy.interpolate import griddata
+
+    def interpolate_to_baseline_grid(num_blocks_used, quantities, extents, min_x, max_x, min_y, max_y, nx, ny):
+        # Create baseline grid
+        x = np.linspace(min_x, max_x, nx)
+        y = np.linspace(min_y, max_y, ny)
+        base_grid_x, base_grid_y = np.meshgrid(x, y)
+        
+        # Initialize a large array to hold the interpolated data
+        interpolated_data = np.zeros_like(base_grid_x)
+        contribution_count = np.zeros_like(base_grid_x)
+
         for block_num in range(num_blocks_used):
             block_data = quantities[block_num]
             x_start, x_end, y_start, y_end = extents[block_num]
 
-            # Calculate the relative position and size in the combined array
-            x_start_rel = (x_start - min_x) / total_x_size
-            x_end_rel = (x_end - min_x) / total_x_size
-            y_start_rel = (y_start - min_y) / total_y_size
-            y_end_rel = (y_end - min_y) / total_y_size
+            # Create grid for the current block
+            block_x = np.linspace(x_start, x_end, block_data.shape[1])
+            block_y = np.linspace(y_start, y_end, block_data.shape[0])
+            block_grid_x, block_grid_y = np.meshgrid(block_x, block_y)
 
-            # Convert to indices in the combined array
-            x_start_idx = int(x_start_rel * combined_size[0])
-            x_end_idx = int(x_end_rel * combined_size[0])
-            y_start_idx = int(y_start_rel * combined_size[1])
-            y_end_idx = int(y_end_rel * combined_size[1])
+            # Flatten the block grid and data for interpolation
+            points = np.vstack((block_grid_x.ravel(), block_grid_y.ravel())).T
+            values = block_data.ravel()
 
-            # Resize block data to fit into its position in the combined array
-            resized_block_data = np.resize(block_data, (y_end_idx - y_start_idx, x_end_idx - x_start_idx))
+            # Interpolate the block data onto the baseline grid
+            interpolated_block_data = griddata(points, values, (base_grid_x, base_grid_y), method='linear')
+            
+            # Combine with the overall interpolated data
+            # Assuming that we sum the contributions from each block
+            valid_contributions = ~np.isnan(interpolated_block_data)
+            interpolated_data[valid_contributions] += np.nan_to_num(interpolated_block_data[valid_contributions])
+            contribution_count[valid_contributions] += 1
 
-            # Place the block in the combined array
-            combined_array[y_start_idx:y_end_idx, x_start_idx:x_end_idx] = resized_block_data
+        interpolated_data /= np.maximum(contribution_count, 1)  # Avoid division by zero
+        return interpolated_data
 
-        return combined_array
+    # Example usage:
+    # interpolated_quantity = interpolate_to_baseline_grid(num_blocks_used, quantities, extents, min_x, max_x, min_y, max_y, nx, ny)
 
-    bx = combine_blocks_fixed_size(num_blocks_used, bbx, extents)
-    by = combine_blocks_fixed_size(num_blocks_used, bbz, extents)
-    x = np.linspace(min_x, max_x, combined_size[0])
-    y = np.linspace(min_y, max_y, combined_size[1])
+    bx = interpolate_to_baseline_grid(num_blocks_used, bbx, extents, min_x, max_x, min_y, max_y, nx, ny)
+    by = interpolate_to_baseline_grid(num_blocks_used, bbz, extents, min_x, max_x, min_y, max_y, nx, ny)
+    x = np.linspace(min_x, max_x, nx)
+    y = np.linspace(min_y, max_y, ny)
 
     # Calculate colors
     if kwargs['vmin'] is None:
@@ -812,7 +825,7 @@ def main(**kwargs):
     start_points = sample_points_on_ellipse(center, a, b, num_points)
 
 
-    plt.streamplot(x,y,bx,by,density=1,color='w',linewidth=1.5,arrowsize=1.5, start_points=start_points)
+    plt.streamplot(x,y,bx,by,density=1,color='w',linewidth=1,arrowsize=1) #, start_points=start_points)
 
     # Mark and/or mask horizon
     if kwargs['horizon'] or kwargs['horizon_mask']:
