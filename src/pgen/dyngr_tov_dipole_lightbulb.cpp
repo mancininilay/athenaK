@@ -792,9 +792,9 @@ void TOVHistory(HistoryData *pdata, Mesh *pm) {
 
 
 //source function
-void neutrinolightbulb(Mesh* pmy_mesh, const Real bdt){
-  MeshBlockPack *pmbp = pmy_mesh_->pmb_pack;
-  auto &indcs = pmy_mesh_->mb_indcs;
+void neutrinolightbulb(Mesh* pm, const Real bdt){
+  MeshBlockPack *pmbp = pm->pmb_pack;
+  auto &indcs = pm->pmb_pack->pmesh->mb_indcs;
   int &ng = indcs.ng;
   int n1 = indcs.nx1 + 2*ng;
   int n2 = (indcs.nx2 > 1) ? (indcs.nx2 + 2*ng) : 1;
@@ -857,7 +857,7 @@ void neutrinolightbulb(Mesh* pmy_mesh, const Real bdt){
     auto &uy = w0(m,IVY,k,j,i);
     auto &uz = w0(m,IVZ,k,j,i);
 
-    auto w = = {ux, uy, uz};
+    auto w = {ux, uy, uz};
     auto ww = Primitive::SquareVector(w, g3d);
     auto ut = sqrt(1.0 + ww);
 
