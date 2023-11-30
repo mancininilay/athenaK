@@ -3,8 +3,8 @@
 // Copyright(C) 2020 James M. Stone <jmstone@ias.edu> and the Athena code team
 // Licensed under the 3-clause BSD License (the "LICENSE")
 //========================================================================================
-//! \file elliptica_sns.cpp
-//  \brief Problem generator for single neutron star. Only works when ADM is enabled.
+//! \file dyngr_tov.cpp
+//  \brief Problem generator for TOV star. Only works when ADM is enabled.
 
 #include <stdio.h>
 #include <math.h>     // abs(), cos(), exp(), log(), NAN, pow(), sin(), sqrt()
@@ -28,305 +28,228 @@
 #include "hydro/hydro.hpp"
 #include "mhd/mhd.hpp"
 #include "dyngr/dyngr.hpp"
-#include "elliptica_id_reader_lib.h"
-
-#if ELLIPTICA==0
-#error elliptica_bns.cpp requires Elliptica
-#endif
 
 
-
-// Prototypes for functions used internally in this pgen.
-
-
-KOKKOS_INLINE_FUNCTION
-static Real A1(Real b_norm, Real r0, Real x1, Real x2, Real x3);
-KOKKOS_INLINE_FUNCTION
-static Real A2(Real b_norm, Real r0, Real x1, Real x2, Real x3);
-
-// Prototypes for user-defined BCs and history
-void TOVHistory(HistoryData *pdata, Mesh *pm);
-void VacuumBC(Mesh *pm);
-
-//----------------------------------------------------------------------------------------
-//! \fn void ProblemGenerator::UserProblem()
-//! \brief Sets initial conditions for TOV star in DynGR
-
-void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
-  if (restart) return;
-
-  MeshBlockPack *pmbp = pmy_mesh_->pmb_pack;
-  if (!pmbp->pcoord->is_dynamical_relativistic) {
-    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
-              << "Single neutron star problem can only be run when <adm> block is present"
-              << std::endl;
-    exit(EXIT_FAILURE);
-  }
-
-  // FIXME: Set boundary condition function?
-  //user_bcs_func = VacuumBC;
-
+// Useful container for physical parameters of star
+struct tov_pgen {
+  Real rhoc;
   Real kappa;
   Real gamma;
   Real dfloor;
   Real pfloor;
 
+  Real v_pert; // Amplitude of radial velocity perturbation, v^r = U/2(3x - x^3), x = r/R
 
+  Real b_norm;
+  Real pcut;
+  Real r0;
+  int magindex;
+
+  int npoints; // Number of points in arrays
+  Real dr; // Radial spacing for integration
+  DualArray1D<Real> R; // Array of radial coordinates
+  DualArray1D<Real> R_iso; // Array of isotropic radial coordinates
+  DualArray1D<Real> M; // Integrated mass, M(r)
+  DualArray1D<Real> P; // Pressure, P(r)
+  DualArray1D<Real> alp; // Lapse, \alpha(r)
+
+  Real R_edge; // Radius of star
+  Real M_edge; // Mass of star
+  int n_r; // Point where pressure goes to zero.
+};
+
+Real C 
+
+// Prototypes for functions used internally in this pgen.
+static void ConstructTOV(tov_pgen& pgen);
+static void RHS(Real r, Real P, Real m, Real alp,
+                tov_pgen& tov, Real& dP, Real& dm, Real& dalp);
+KOKKOS_INLINE_FUNCTION
+static void GetPrimitivesAtPoint(const tov_pgen& pgen, Real r,
+                                 Real &rho, Real &p, Real &m, Real &alp);
+KOKKOS_INLINE_FUNCTION
+static void GetPandRho(const tov_pgen& pgen, Real r, Real &rho, Real &p);
+KOKKOS_INLINE_FUNCTION
+static Real Interpolate(Real x,
+                        const Real x1, const Real x2, const Real y1, const Real y2);
+KOKKOS_INLINE_FUNCTION
+static Real A1(const tov_pgen& pgen, Real x1, Real x2, Real x3);
+KOKKOS_INLINE_FUNCTION
+static Real A2(const tov_pgen& pgen, Real x1, Real x2, Real x3);
+
+// Prototypes for user-defined BCs and history
+void TOVHistory(HistoryData *pdata, Mesh *pm);
+void VacuumBC(Mesh *pm);
+void neutrinolightbulb(Mesh* pm, const Real bdt);
+
+
+//----------------------------------------------------------------------------------------
+//! \fn void ProblemGenerator::UserProblem()
+//  \brief Sets initial conditions for TOV star in DynGR
+//  Compile with '-D PROBLEM=dyngr_tov' to enroll as user-specific problem generator
+
+void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
+  MeshBlockPack *pmbp = pmy_mesh_->pmb_pack;
+  if (!pmbp->pcoord->is_dynamical_relativistic) {
+    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
+              << "TOV star problem can only be run when <adm> block is present"
+              << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
+  tov_pgen tov;
+  // FIXME: Set boundary condition function?
+  user_bcs_func = VacuumBC;
+
+
+
+  user_srcs = true;
+  user_srcs_func = neutrinolightbulb;
+  // Read problem-specific parameters from input file
+  // global parameters
+  tov.rhoc  = pin->GetReal("problem", "rhoc");
+  tov.kappa = pin->GetReal("problem", "kappa");
+  tov.npoints = pin->GetReal("problem", "npoints");
+  tov.dr    = pin->GetReal("problem", "dr");
+  if (pmbp->pdyngr->eos_policy != DynGR_EOS::eos_ideal) {
+    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
+              << "TOV star problem currently only compatible with eos_ideal"
+              << std::endl;
+  }
   // Select either Hydro or MHD
   std::string block;
   DvceArray5D<Real> u0_, w0_;
   if (pmbp->phydro != nullptr) {
- //   u0_ = pmbp->phydro->u0;
- //   w0_ = pmbp->phydro->w0;
+    u0_ = pmbp->phydro->u0;
+    w0_ = pmbp->phydro->w0;
     block = std::string("hydro");
   } else if (pmbp->pmhd != nullptr) {
-  //  u0_ = pmbp->pmhd->u0;
-  //  w0_ = pmbp->pmhd->w0;
+    u0_ = pmbp->pmhd->u0;
+    w0_ = pmbp->pmhd->w0;
     block = std::string("mhd");
   }
+  tov.gamma = pin->GetOrAddReal(block, "gamma", 5.0/3.0);
+  tov.dfloor = pin->GetOrAddReal(block, "dfloor", (FLT_MIN));
+  tov.pfloor = pin->GetOrAddReal(block, "pfloor", (FLT_MIN));
+  tov.v_pert = pin->GetOrAddReal("problem" , "v_pert", 0.0);
+  C = pin->GetOrAddReal("problem", "C", 1.0);  
+  
+  // Set the history function for a TOV star
+  user_hist_func = &TOVHistory;
 
-  kappa = pin->GetReal("problem", "kappa");
-  gamma = pin->GetOrAddReal(block, "gamma", 5.0/3.0);
-  dfloor = pin->GetOrAddReal(block, "dfloor", (FLT_MIN));
-  pfloor = pin->GetOrAddReal(block, "pfloor", (FLT_MIN));
-
-
-  if (pmbp->pdyngr->eos_policy != DynGR_EOS::eos_ideal) {
-    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
-              << "sns star problem currently only compatible with eos_ideal"
-              << std::endl;
-  }
-
+  // Generate the TOV star
+  ConstructTOV(tov);
 
   // Capture variables for kernel
   auto &indcs = pmy_mesh_->mb_indcs;
   int &ng = indcs.ng;
-  int ncells1 = indcs.nx1 + 2*(indcs.ng);
-  int ncells2 = indcs.nx2 + 2*(indcs.ng);
-  int ncells3 = indcs.nx3 + 2*(indcs.ng);
-  int nmb = pmbp->nmb_thispack;
+  int n1 = indcs.nx1 + 2*ng;
+  int n2 = (indcs.nx2 > 1) ? (indcs.nx2 + 2*ng) : 1;
+  int n3 = (indcs.nx3 > 1) ? (indcs.nx3 + 2*ng) : 1;
   int &is = indcs.is;
   int &js = indcs.js;
   int &ks = indcs.ks;
   int &ie = indcs.ie;
   int &je = indcs.je;
   int &ke = indcs.ke;
+  int nmb1 = pmbp->nmb_thispack - 1;
   auto &coord = pmbp->pcoord->coord_data;
+
+  // initialize primitive variables for restart ----------------------------------------
+  // FIXME: need to load data on restart?
+  if (restart) {
+    auto &size = pmbp->pmb->mb_size;
+    par_for("pgen_tov0", DevExeSpace(), 0, nmb1, 0, (n3-1), 0, (n2-1), 0, (n1-1),
+    KOKKOS_LAMBDA(int m, int k, int j, int i) {
+      Real &x1min = size.d_view(m).x1min;
+      Real &x1max = size.d_view(m).x1max;
+      Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
+
+      Real &x2min = size.d_view(m).x2min;
+      Real &x2max = size.d_view(m).x2max;
+      Real x2v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
+
+      Real &x3min = size.d_view(m).x3min;
+      Real &x3max = size.d_view(m).x3max;
+      Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
+    });
+
+    return;
+  }
+
   auto &size = pmbp->pmb->mb_size;
+  auto &adm = pmbp->padm->adm;
+  auto &tov_ = tov;
+  std::cout << "Entering assignment and interpolation loop!\n";
+  par_for("pgen_tov1", DevExeSpace(), 0, nmb1, 0, (n3-1), 0, (n2-1), 0, (n1-1),
+  KOKKOS_LAMBDA(int m, int k, int j, int i) {
+    Real &x1min = size.d_view(m).x1min;
+    Real &x1max = size.d_view(m).x1max;
+    Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
 
-  std::string fname = pin->GetString("problem", "initial_data_file");
-  
-  // Initialize the data reader
-  Elliptica_ID_Reader_T *idr = elliptica_id_reader_init(fname.c_str(),"generic");
+    Real &x2min = size.d_view(m).x2min;
+    Real &x2max = size.d_view(m).x2max;
+    Real x2v = CellCenterX(j-js, indcs.nx2, x2min, x2max);
 
-  // Fields to interpolate
-  idr->ifields = "alpha,betax,betay,betaz,"
-                 "adm_gxx,adm_gxy,adm_gxz,adm_gyy,adm_gyz,adm_gzz,"
-                 "adm_Kxx,adm_Kxy,adm_Kxz,adm_Kyy,adm_Kyz,adm_Kzz,"
-                 "grhd_rho,grhd_p,grhd_vx,grhd_vy,grhd_vz";
-  
+    Real &x3min = size.d_view(m).x3min;
+    Real &x3max = size.d_view(m).x3max;
+    Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
 
-  int width = nmb*ncells1*ncells2*ncells3;
+    // Calculate the rest-mass density, pressure, and mass for a specific isotropic
+    // radial coordinate.
+    Real r = sqrt(SQR(x1v) + SQR(x2v) + SQR(x3v));
+    Real s = sqrt(SQR(x1v) + SQR(x2v));
+    Real rho, p, mass, alp;
+    //printf("Grabbing primitives!\n");
+    GetPrimitivesAtPoint(tov_, r, rho, p, mass, alp);
+    //printf("Primitives retrieved!\n");
 
-  Real *x_coords = new Real[width];
-  Real *y_coords = new Real[width];
-  Real *z_coords = new Real[width];
-
-  printf("Allocated coordinates of size %d\n",width);
-
-  // Populate coordinates for Elliptica
-  // TODO(JMF): Replace with a Kokkos loop on Kokkos::DefaultHostExecutionSpace() to
-  // improve performance.
-  int idx = 0;
-  for (int m = 0; m < nmb; m++) {
-    Real &x1min = size.h_view(m).x1min;
-    Real &x1max = size.h_view(m).x1max;
-    int nx1 = indcs.nx1;
-
-    Real &x2min = size.h_view(m).x2min;
-    Real &x2max = size.h_view(m).x2max;
-    int nx2 = indcs.nx2;
-
-    Real &x3min = size.h_view(m).x3min;
-    Real &x3max = size.h_view(m).x3max;
-    int nx3 = indcs.nx3;
-
-    for (int k = 0; k < ncells3; k++) {
-      Real z = CellCenterX(k - ks, nx3, x3min, x3max);
-      for (int j = 0; j < ncells2; j++) {
-        Real y = CellCenterX(j - js, nx2, x2min, x2max);
-        for (int i = 0; i < ncells1; i++) {
-          Real x = CellCenterX(i - is, nx1, x1min, x1max);
-          
-          x_coords[idx] = x;
-          y_coords[idx] = y;
-          z_coords[idx] = z;
-
-          // Increment flat index
-          idx++;
-        }
-      }
+    Real vr = 0.;
+    if (r <= tov.R_edge) {
+      Real x = r/tov.R_edge;
+      vr = 0.5*tov_.v_pert*(3.0*x - x*x*x);
     }
-  }
 
-  idr->set_param("ADM_B1I_form","zero",idr);   //????
-
-  // Interpolate the data
-  idr->npoints  = width;
-  idr->x_coords = x_coords;
-  idr->y_coords = y_coords;
-  idr->z_coords = z_coords;
-  printf("Coordinates assigned.\n");
-  elliptica_id_reader_interpolate(idr);
-
-  // Free the coordinates, since we'll no longer need them.
-  delete[] x_coords;
-  delete[] y_coords;
-  delete[] z_coords;
-
-  printf("Coordinates freed.\n");
-
-  // Capture variables for kernel; note that when Z4c is enabled, the gauge variables
-  // are part of the Z4c class.
-  auto &u_adm = pmbp->padm->u_adm;
-  auto &adm   = pmbp->padm->adm;
-  auto &w0    = pmbp->pmhd->w0;
-  //auto &u_z4c = pmbp->pz4c->u0;
-
-  // Because Elliptica only operates on the CPU, we can't construct the data on the GPU.
-  // Instead, we create a mirror guaranteed to be on the CPU, populate the data there,
-  // then move it back to the GPU.
-  // TODO(JMF): This needs to be tested on CPUs to ensure that it functions properly;
-  // In theory, create_mirror_view shouldn't copy the data unless it's in a different
-  // memory space.
-  
-  HostArray5D<Real>::HostMirror host_u_adm = create_mirror_view(u_adm);
-  HostArray5D<Real>::HostMirror host_w0 = create_mirror_view(w0);
-  //HostArray5D<Real>::HostMirror host_u_z4c = create_mirror_view(u_z4c);
-  adm::ADM::ADMhost_vars host_adm;
-  host_adm.alpha.InitWithShallowSlice(host_u_adm,
-      adm::ADM::I_ADM_ALPHA);
-  host_adm.beta_u.InitWithShallowSlice(host_u_adm,
-      adm::ADM::I_ADM_BETAX, adm::ADM::I_ADM_BETAZ);
-  host_adm.g_dd.InitWithShallowSlice(host_u_adm,
-      adm::ADM::I_ADM_GXX, adm::ADM::I_ADM_GZZ);
-  host_adm.vK_dd.InitWithShallowSlice(host_u_adm,
-      adm::ADM::I_ADM_KXX, adm::ADM::I_ADM_KZZ);
-
-  printf("Host mirrors created.\n");
-
-  // Save Elliptica field indices for shorthand and a small optimization.
-  const int i_alpha = idr->indx("alpha");
-  const int i_betax = idr->indx("betax");
-  const int i_betay = idr->indx("betay");
-  const int i_betaz = idr->indx("betaz");
-
-  const int i_gxx   = idr->indx("adm_gxx");
-  const int i_gxy   = idr->indx("adm_gxy");
-  const int i_gxz   = idr->indx("adm_gxz");
-  const int i_gyy   = idr->indx("adm_gyy");
-  const int i_gyz   = idr->indx("adm_gyz");
-  const int i_gzz   = idr->indx("adm_gzz");
-
-  const int i_Kxx   = idr->indx("adm_Kxx");
-  const int i_Kxy   = idr->indx("adm_Kxy");
-  const int i_Kxz   = idr->indx("adm_Kxz");
-  const int i_Kyy   = idr->indx("adm_Kyy");
-  const int i_Kyz   = idr->indx("adm_Kyz");
-  const int i_Kzz   = idr->indx("adm_Kzz");
-
-  const int i_rho   = idr->indx("grhd_rho");
-  const int i_p     = idr->indx("grhd_p");
-  const int i_vx    = idr->indx("grhd_vx");
-  const int i_vy    = idr->indx("grhd_vy");
-  const int i_vz    = idr->indx("grhd_vz");
-
-  printf("Label indices saved.\n");
-
-  // TODO(JMF): Replace with a Kokkos loop on Kokkos::DefaultHostExecutionSpace() to
-  // improve performance.
-  idx = 0;
-  for (int m = 0; m < nmb; m++) {
-    for (int k = 0; k < ncells3; k++) {
-      for (int j = 0; j < ncells2; j++) {
-        for (int i = 0; i < ncells1; i++) {
-          // Extract metric quantities
-          host_adm.alpha(m, k, j, i) = idr->field[i_alpha][idx];
-          host_adm.beta_u(m, 0, k, j, i) = idr->field[i_betax][idx];
-          host_adm.beta_u(m, 1, k, j, i) = idr->field[i_betay][idx];
-          host_adm.beta_u(m, 2, k, j, i) = idr->field[i_betaz][idx];
-          
-          Real g3d[NSPMETRIC];
-          host_adm.g_dd(m, 0, 0, k, j, i) = g3d[S11] = idr->field[i_gxx][idx];
-          host_adm.g_dd(m, 0, 1, k, j, i) = g3d[S12] = idr->field[i_gxy][idx];
-          host_adm.g_dd(m, 0, 2, k, j, i) = g3d[S13] = idr->field[i_gxz][idx];
-          host_adm.g_dd(m, 1, 1, k, j, i) = g3d[S22] = idr->field[i_gyy][idx];
-          host_adm.g_dd(m, 1, 2, k, j, i) = g3d[S23] = idr->field[i_gyz][idx];
-          host_adm.g_dd(m, 2, 2, k, j, i) = g3d[S33] = idr->field[i_gzz][idx];
-
-          host_adm.vK_dd(m, 0, 0, k, j, i) = idr->field[i_Kxx][idx];
-          host_adm.vK_dd(m, 0, 1, k, j, i) = idr->field[i_Kxy][idx];
-          host_adm.vK_dd(m, 0, 2, k, j, i) = idr->field[i_Kxz][idx];
-          host_adm.vK_dd(m, 1, 1, k, j, i) = idr->field[i_Kyy][idx];
-          host_adm.vK_dd(m, 1, 2, k, j, i) = idr->field[i_Kyz][idx];
-          host_adm.vK_dd(m, 2, 2, k, j, i) = idr->field[i_Kzz][idx];
-
-          // Extract hydro quantities
-          host_w0(m, IDN, k, j, i) = idr->field[i_rho][idx];
-          host_w0(m, IPR, k, j, i) = idr->field[i_p][idx];
-          Real vu[3] = {idr->field[i_vx][idx],
-                        idr->field[i_vy][idx],
-                        idr->field[i_vz][idx]};
-
-          // Before we store the velocity, we need to make sure it's physical and 
-          // calculate the Lorentz factor. If the velocity is superluminal, we make a
-          // last-ditch attempt to salvage the solution by rescaling it to 
-          // vsq = 1.0 - 1e-15
-          Real vsq = Primitive::SquareVector(vu, g3d);
-          if (1.0 - vsq <= 0) {
-            printf("The velocity is superluminal!\n"
-                   "Attempting to adjust...\n");
-            Real fac = sqrt((1.0 - 1e-15)/vsq);
-            vu[0] *= fac;
-            vu[1] *= fac;
-            vu[2] *= fac;
-            vsq = 1.0 - 1.0e-15;
-          }
-          Real W = sqrt(1.0 / (1.0 - vsq));
-          
-          host_w0(m, IVX, k, j, i) = W*vu[0];
-          host_w0(m, IVY, k, j, i) = W*vu[1];
-          host_w0(m, IVZ, k, j, i) = W*vu[2];
-
-          idx++;
-        }
-      }
+    // Auxiliary metric quantities
+    Real fmet = 0.0;
+    if (r > 0) {
+       // (g_rr - 1)/r^2
+       fmet = (1./(1. - 2*mass/r) - 1.)/(r*r);
     }
-  }
 
-  printf("Host mirrors filled.\n");
+    // FIXME: assumes ideal gas!
+    // Set hydrodynamic quantities
+    w0_(m,IDN,k,j,i) = fmax(rho, tov_.dfloor);
+    //w0_(m,IEN,k,j,i) = fmax(p, tov_.pfloor)/(tov_.gamma - 1.0);
+    w0_(m,IPR,k,j,i) = fmax(p, tov_.pfloor);
+    w0_(m,IVX,k,j,i) = vr*x1v/r;
+    w0_(m,IVY,k,j,i) = vr*x2v/r;
+    w0_(m,IVZ,k,j,i) = vr*x3v/r;
 
-  // Cleanup
-  elliptica_id_reader_free(idr);
-
-  printf("Elliptica freed.\n");
-
-  // Copy the data to the GPU.
-  Kokkos::deep_copy(u_adm, host_u_adm);
-  Kokkos::deep_copy(w0, host_w0);
-  //Kokkos::deep_copy(u_z4c, host_u_z4c);
-
-  printf("Data copied.\n");
-
-
+    // Set ADM variables
+    adm.alpha(m,k,j,i) = alp;
+    adm.beta_u(m,0,k,j,i) = adm.beta_u(m,1,k,j,i) = adm.beta_u(m,2,k,j,i) = 0.0;
+    adm.g_dd(m,0,0,k,j,i) = x1v*x1v*fmet + 1.0;
+    adm.g_dd(m,0,1,k,j,i) = x1v*x2v*fmet;
+    adm.g_dd(m,0,2,k,j,i) = x1v*x3v*fmet;
+    adm.g_dd(m,1,1,k,j,i) = x2v*x2v*fmet + 1.0;
+    adm.g_dd(m,1,2,k,j,i) = x2v*x3v*fmet;
+    adm.g_dd(m,2,2,k,j,i) = x3v*x3v*fmet + 1.0;
+    Real det = adm::SpatialDet(
+            adm.g_dd(m,0,0,k,j,i), adm.g_dd(m,0,1,k,j,i),
+            adm.g_dd(m,0,2,k,j,i), adm.g_dd(m,1,1,k,j,i),
+            adm.g_dd(m,1,2,k,j,i), adm.g_dd(m,2,2,k,j,i));
+    adm.psi4(m,k,j,i) = pow(det, 1./3.);
+    adm.vK_dd(m,0,0,k,j,i) = adm.vK_dd(m,0,1,k,j,i) = adm.vK_dd(m,0,2,k,j,i) = 0.0;
+    adm.vK_dd(m,1,1,k,j,i) = adm.vK_dd(m,1,2,k,j,i) = adm.vK_dd(m,2,2,k,j,i) = 0.0;
+  });
 
   if (pmbp->pmhd != nullptr) {
     // parse some parameters
-    Real b_norm;
-    Real r0;
-    b_norm = pin->GetOrAddReal("problem", "b_norm", 0.0);
-    r0 = pin->GetOrAddReal("problem", "r0", 0.0);
-
+    tov.b_norm = pin->GetOrAddReal("problem", "b_norm", 0.0);
+    tov.r0 = pin->GetOrAddReal("problem", "r0", 0.0);
+    tov.pcut = pin->GetOrAddReal("problem", "pcut", 1e-6);
+    tov.magindex = pin->GetOrAddReal("problem", "magindex", 2);
 
     // compute vector potential over all faces
     int ncells1 = indcs.nx1 + 2*(indcs.ng);
@@ -368,8 +291,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
       Real dx2 = size.d_view(m).dx2;
       Real dx3 = size.d_view(m).dx3;
 
-      a1(m,k,j,i) = A1(b_norm,r0, x1v, x2f, x3f);
-      a2(m,k,j,i) = A2(b_norm,r0, x1f, x2v, x3f);
+      a1(m,k,j,i) = A1(tov_, x1v, x2f, x3f);
+      a2(m,k,j,i) = A2(tov_, x1f, x2v, x3f);
       a3(m,k,j,i) = 0.0;
 
       // When neighboring MeshBock is at finer level, compute vector potential as sum of
@@ -403,7 +326,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
           (nghbr.d_view(m,47).lev > mblev.d_view(m) && j==je+1 && k==ke+1)) {
         Real xl = x1v + 0.25*dx1;
         Real xr = x1v - 0.25*dx1;
-        a1(m,k,j,i) = 0.5*(A1(b_norm,r0, xl,x2f,x3f) + A1(b_norm,r0, xr,x2f,x3f));
+        a1(m,k,j,i) = 0.5*(A1(tov_, xl,x2f,x3f) + A1(tov_, xr,x2f,x3f));
       }
 
       // Correct A2 at x1-faces, x3-faces, and x1x3-edges
@@ -433,7 +356,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
           (nghbr.d_view(m,39).lev > mblev.d_view(m) && i==ie+1 && k==ke+1)) {
         Real xl = x2v + 0.25*dx2;
         Real xr = x2v - 0.25*dx2;
-        a2(m,k,j,i) = 0.5*(A2(b_norm, r0,x1f,xl,x3f) + A2(b_norm,r0, x1f,xr,x3f));
+        a2(m,k,j,i) = 0.5*(A2(tov_, x1f,xl,x3f) + A2(tov_, x1f,xr,x3f));
       }
     });
 
@@ -483,12 +406,11 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
 
   std::cout << "Interpolation and assignment complete!\n";
 
-
   // Convert primitives to conserved
   if (pmbp->padm == nullptr) {
     // Complain about something here, because this is a dynamic GR test.
   } else {
-    pmbp->pdyngr->PrimToConInit(0, (ncells1-1), 0, (ncells2-1), 0, (ncells3-1));
+    pmbp->pdyngr->PrimToConInit(0, (n1-1), 0, (n2-1), 0, (n3-1));
   }
 
   if (pmbp->pz4c != nullptr) {
@@ -505,26 +427,209 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   return;
 }
 
+static void RHS(Real r, Real P, Real m, Real alp,
+                tov_pgen& tov, Real& dP, Real& dm, Real& dalp) {
+  // In our units, the equations take the form
+  // dP/dr = -(e + P)/(1 - 2m/r) (m + 4\pi r^3 P)/r^2
+  // dm/dr = 4\pi r^2 e
+  // d\alpha/dr = \alpha/(1 - 2m/r) (m + 4\pi r^3 P)/r^2
+  // FIXME: Assumes ideal gas!
+  if (r < 1e-3*tov.dr) {
+    dP = 0.0;
+    dm = 0.0;
+    dalp = 0.0;
+    return;
+  }
+  Real rho = pow(P/tov.kappa, 1.0/tov.gamma);
+  Real e   = rho + P/(tov.gamma - 1.0);
 
+  Real A = 1.0/(1.0 - 2.0*m/r);
+  Real B = (m + 4.0*M_PI*r*r*r*P)/SQR(r);
+  dP   = -(e + P)*A * B;
+  dm   = 4.0*M_PI*SQR(r)*e;
+  dalp = alp*A * B;
+}
 
+// Construct a TOV star using the shooting method.
+static void ConstructTOV(tov_pgen& tov) {
+  // First, allocate the data.
+  /*tov.R   = new Real[tov.npoints];
+  tov.M   = new Real[tov.npoints];
+  tov.P   = new Real[tov.npoints];
+  tov.alp = new Real[tov.npoints];*/
+  Kokkos::realloc(tov.R, tov.npoints);
+  Kokkos::realloc(tov.M, tov.npoints);
+  Kokkos::realloc(tov.P, tov.npoints);
+  Kokkos::realloc(tov.alp, tov.npoints);
+
+  // Set aliases
+  auto &R = tov.R.h_view;
+  auto &M = tov.M.h_view;
+  auto &P = tov.P.h_view;
+  auto &alp = tov.alp.h_view;
+  int npoints = tov.npoints;
+  Real dr = tov.dr;
+
+  // Set initial data
+  // FIXME: Assumes ideal gas for now!
+  R(0) = 0.0;
+  M(0) = 0.0;
+  P(0) = tov.kappa*pow(tov.rhoc, tov.gamma);
+  alp(0) = 1.0;
+
+  // Integrate outward using RK4
+  for (int i = 0; i < npoints-1; i++) {
+    Real r, P_pt, alp_pt, m_pt;
+
+    // First stage
+    Real dP1, dm1, dalp1;
+    r = i*dr;
+    P_pt = P(i);
+    alp_pt = alp(i);
+    m_pt = M(i);
+    RHS(r, P_pt, m_pt, alp_pt, tov, dP1, dm1, dalp1);
+
+    // Second stage
+    Real dP2, dm2, dalp2;
+    r = (i + 0.5)*dr;
+    P_pt = fmax(P(i) + 0.5*dr*dP1,0.0);
+    m_pt = M(i) + 0.5*dr*dm1;
+    alp_pt = alp(i) + 0.5*dr*dalp1;
+    RHS(r, P_pt, m_pt, alp_pt, tov, dP2, dm2, dalp2);
+
+    // Third stage
+    Real dP3, dm3, dalp3;
+    P_pt = fmax(P(i) + 0.5*dr*dP2,0.0);
+    m_pt = M(i) + 0.5*dr*dm2;
+    alp_pt = alp(i) + 0.5*dr*dalp2;
+    RHS(r, P_pt, m_pt, alp_pt, tov, dP3, dm3, dalp3);
+
+    // Fourth stage
+    Real dP4, dm4, dalp4;
+    r = (i + 1)*dr;
+    P_pt = fmax(P(i) + dr*dP3,0.0);
+    m_pt = M(i) + dr*dm3;
+    alp_pt = alp(i) + dr*dalp3;
+    RHS(r, P_pt, m_pt, alp_pt, tov, dP4, dm4, dalp4);
+
+    // Combine all the stages together
+    R(i+1) = (i + 1)*dr;
+    P(i+1) = P(i) + dr*(dP1 + 2.0*dP2 + 2.0*dP3 + dP4)/6.0;
+    M(i+1) = M(i) + dr*(dm1 + 2.0*dm2 + 2.0*dm3 + dm4)/6.0;
+    alp(i+1) = alp(i) + dr*(dalp1 + 2.0*dalp2 + 2.0*dalp3 + dalp4)/6.0;
+
+    // If the pressure falls below zero, we've hit the edge of the star.
+    if (P(i+1) <= 0.0) {
+      tov.n_r = i+1;
+      break;
+    }
+  }
+
+  // Now we can do a linear interpolation to estimate the actual edge of the star.
+  int n_r = tov.n_r;
+  tov.R_edge = Interpolate(0.0, P(n_r-1), P(n_r), R(n_r-1), R(n_r));
+  tov.M_edge = Interpolate(tov.R_edge, R(n_r-1), R(n_r), M(n_r-1), M(n_r));
+
+  // Replace the edges of the star.
+  P(n_r) = 0.0;
+  M(n_r) = tov.M_edge;
+  alp(n_r) = Interpolate(tov.R_edge, R(n_r-1), R(n_r), alp(n_r-1), alp(n_r));
+  R(n_r) = tov.R_edge;
+
+  // Rescale alpha so that it matches the Schwarzschild metric at the boundary.
+  Real rs = 2.0*tov.M_edge;
+  Real bound = sqrt(1.0 - rs/tov.R_edge);
+  Real scale = bound/alp(n_r);
+  for (int i = 0; i <= n_r; i++) {
+    alp(i) = alp(i)*scale;
+  }
+
+  // Print out details of the calculation
+  if (global_variable::my_rank == 0) {
+    std::cout << "\nTOV INITIAL DATA\n"
+              << "----------------\n";
+    std::cout << "Total points in buffer: " << tov.npoints << "\n";
+    std::cout << "Radial step: " << tov.dr << "\n";
+    std::cout << "Radius (Schwarzschild): " << tov.R_edge << "\n";
+    std::cout << "Mass: " << tov.M_edge << "\n\n";
+  }
+
+  // Sync the views to the GPU
+  tov.R.template modify<HostMemSpace>();
+  tov.M.template modify<HostMemSpace>();
+  tov.alp.template modify<HostMemSpace>();
+  tov.P.template modify<HostMemSpace>();
+
+  tov.R.template sync<DevExeSpace>();
+  tov.M.template sync<DevExeSpace>();
+  tov.alp.template sync<DevExeSpace>();
+  tov.P.template sync<DevExeSpace>();
+}
 
 KOKKOS_INLINE_FUNCTION
-static Real A1(Real b_norm, Real r0, Real x1, Real x2, Real x3) {
+static void GetPrimitivesAtPoint(const tov_pgen& tov, Real r,
+                                 Real &rho, Real &p, Real &m, Real &alp) {
+  // Check if we're past the edge of the star.
+  // If so, we just return atmosphere with Schwarzschild.
+  if (r >= tov.R_edge) {
+    rho = 0.0;
+    p = 0.0;
+    m = tov.M_edge;
+    alp = sqrt(1.0 - 2.0*m/r);
+    return;
+  }
+  // Get the lower index for where our point must be located.
+  int idx = static_cast<int>(r/tov.dr);
+  const auto &R = tov.R.d_view;
+  const auto &Ps = tov.P.d_view;
+  const auto &alps = tov.alp.d_view;
+  const auto &Ms = tov.M.d_view;
+  // Interpolate to get the primitive.
+  p = Interpolate(r, R(idx), R(idx+1), Ps(idx), Ps(idx+1));
+  m = Interpolate(r, R(idx), R(idx+1), Ms(idx), Ms(idx+1));
+  alp = Interpolate(r, R(idx), R(idx+1), alps(idx), alps(idx+1));
+  rho = pow(p/tov.kappa, 1.0/tov.gamma);
+}
+
+KOKKOS_INLINE_FUNCTION
+static void GetPandRho(const tov_pgen& tov, Real r, Real &rho, Real &p) {
+  if (r >= tov.R_edge) {
+    rho = 0.;
+    p   = 0.;
+    return;
+  }
+  // Get the lower index for where our point must be located.
+  int idx = static_cast<int>(r/tov.dr);
+  const auto &R = tov.R.d_view;
+  const auto &Ps = tov.P.d_view;
+  // Interpolate to get the pressure
+  p = Interpolate(r, R(idx), R(idx+1), Ps(idx), Ps(idx+1));
+  rho = pow(p/tov.kappa, 1.0/tov.gamma);
+}
+
+KOKKOS_INLINE_FUNCTION
+static Real A1(const tov_pgen& tov, Real x1, Real x2, Real x3) {
   Real r = sqrt(SQR(x1) + SQR(x2) + SQR(x3));
-  return -x2*b_norm*pow(r0,3)/(pow(r0,3)+pow(r,3));
+  Real p, rho;
+  GetPandRho(tov, r, rho, p);
+  return -x2*tov.b_norm*pow(tov.r0,3)/(pow(tov.r0,3)+pow(r,3));
 }
 
 
 KOKKOS_INLINE_FUNCTION
-static Real A2(Real b_norm, Real r0, Real x1, Real x2, Real x3) {
+static Real A2(const tov_pgen& tov, Real x1, Real x2, Real x3) {
   Real r = sqrt(SQR(x1) + SQR(x2) + SQR(x3));
-  return x1*b_norm*pow(r0,3)/(pow(r0,3)+pow(r,3));
+  Real p, rho;
+  GetPandRho(tov, r, rho, p);
+  return x1*tov.b_norm*pow(tov.r0,3)/(pow(tov.r0,3)+pow(r,3));
 }
 
+KOKKOS_INLINE_FUNCTION
+static Real Interpolate(Real x, const Real x1, const Real x2,
+                        const Real y1, const Real y2) {
+  return ((y2 - y1)*x + (y1*x2 - y2*x1))/(x2 - x1);
+}
 
-
-
-/*
 // Boundary function
 void VacuumBC(Mesh *pm) {
   auto &indcs = pm->mb_indcs;
@@ -684,4 +789,92 @@ void TOVHistory(HistoryData *pdata, Mesh *pm) {
   // store data in hdata array
   pdata->hdata[0] = rho_max;
 }
-*/
+
+
+//source function
+void neutrinolightbulb(Mesh* pm, const Real bdt){
+  MeshBlockPack *pmbp = pmy_mesh_->pmb_pack;
+  auto &indcs = pmy_mesh_->mb_indcs;
+  int &ng = indcs.ng;
+  int n1 = indcs.nx1 + 2*ng;
+  int n2 = (indcs.nx2 > 1) ? (indcs.nx2 + 2*ng) : 1;
+  int n3 = (indcs.nx3 > 1) ? (indcs.nx3 + 2*ng) : 1;
+  int is = indcs.is;
+  int js = indcs.js;
+  int ks = indcs.ks;
+  int ie = indcs.ie;
+  int je = indcs.je;
+  int ke = indcs.ke;
+  int nmb1 = pmbp->nmb_thispack - 1;
+  auto &coord = pmbp->pcoord->coord_data;
+  auto &size = pmbp->pmb->mb_size;
+  auto &adm = pmbp->padm->adm;
+
+
+  std::string block;
+  DvceArray5D<Real> u0, w0;
+  if (pmbp->phydro != nullptr) {
+    u0 = pmbp->phydro->u0;
+    w0 = pmbp->phydro->w0;
+    block = std::string("hydro");
+  } else if (pmbp->pmhd != nullptr) {
+    u0 = pmbp->pmhd->u0;
+    w0 = pmbp->pmhd->w0;
+    block = std::string("mhd");
+  }
+
+
+  par_for("cooling", DevExeSpace(), 0, nmb1, ks, ke, js, je, is, ie,
+  KOKKOS_LAMBDA(const int m, const int k, const int j, const int i) {
+    
+    Real &x1min = size.d_view(m).x1min;
+    Real &x1max = size.d_view(m).x1max;
+    Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
+
+    Real &x2min = size.d_view(m).x2min;
+    Real &x2max = size.d_view(m).x2max;
+    Real x2v = CellCenterX(j-js, indcs.nx2, x2min, x2max);
+
+    Real &x3min = size.d_view(m).x3min;
+    Real &x3max = size.d_view(m).x3max;
+    Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
+
+    Real r = sqrt(SQR(x1v) + SQR(x2v) + SQR(x3v));
+
+
+    Real g3d[NSPMETRIC] = {adm.g_dd(m,0,0,k,j,i), adm.g_dd(m,0,1,k,j,i),
+                           adm.g_dd(m,0,2,k,j,i), adm.g_dd(m,1,1,k,j,i),
+                           adm.g_dd(m,1,2,k,j,i), adm.g_dd(m,2,2,k,j,i)};
+
+    const Real& alpha = adm.alpha(m, k, j, i);
+    Real beta_u[3] = {adm.beta_u(m,0,k,j,i), 
+                      adm.beta_u(m,1,k,j,i), adm.beta_u(m,2,k,j,i)};
+    Real detg = adm::SpatialDet(g3d[S11], g3d[S12], g3d[S13],
+                                g3d[S22], g3d[S23], g3d[S33]);
+    Real vol = sqrt(detg);
+
+    auto &ux = w0(m,IVX,k,j,i);
+    auto &uy = w0(m,IVY,k,j,i);
+    auto &uz = w0(m,IVZ,k,j,i);
+
+    auto w = = {ux, uy, uz};
+    auto ww = Primitive::SquareVector(w, g3d);
+    auto ut = sqrt(1.0 + ww);
+
+    auto u_x = g3d[S11]*ux + g3d[S12]*uy + g3d[S13]*uz;
+    auto u_y = g3d[S12]*ux + g3d[S22]*uy + g3d[S23]*uz;
+    auto u_z = g3d[S13]*ux + g3d[S23]*uy + g3d[S33]*uz;
+
+    u0(m,IEN,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*ut*C;
+    u0(m,IM1,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_x*C;
+    u0(m,IM2,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_y*C;
+    u0(m,IM3,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_z*C;
+
+  });
+
+  return;
+
+
+}
+
+

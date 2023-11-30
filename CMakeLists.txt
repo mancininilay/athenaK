@@ -134,7 +134,7 @@ else()
 	set(TWO_PUNCTURES 0)
 endif()
 
-if (${PROBLEM} STREQUAL "elliptica_bns" OR ${PROBLEM} STREQUAL "elliptica_sns" OR ${PROBLEM} STREQUAL "star_explosion" OR ${PROBLEM} STREQUAL "elliptica_sns_dipole" OR ${PROBLEM} STREQUAL "elliptica_sns_dipole_boost" OR ${PROBLEM} STREQUAL "elliptica_sns_interior")
+if (${PROBLEM} STREQUAL "elliptica_bns" OR ${PROBLEM} STREQUAL "elliptica_sns" OR ${PROBLEM} STREQUAL "star_explosion" OR ${PROBLEM} STREQUAL "elliptica_sns_dipole" OR ${PROBLEM} STREQUAL "elliptica_sns_dipole_boost")
 
   target_include_directories(athena PRIVATE
       ${CMAKE_SOURCE_DIR}/Elliptica_ID_Reader/include)
