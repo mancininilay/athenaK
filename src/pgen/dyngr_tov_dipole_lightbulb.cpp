@@ -58,7 +58,7 @@ struct tov_pgen {
   int n_r; // Point where pressure goes to zero.
 };
 
-Real C 
+Real C;
 
 // Prototypes for functions used internally in this pgen.
 static void ConstructTOV(tov_pgen& pgen);
@@ -792,7 +792,7 @@ void TOVHistory(HistoryData *pdata, Mesh *pm) {
 
 
 //source function
-void neutrinolightbulb(Mesh* pm, const Real bdt){
+void neutrinolightbulb(Mesh* pmy_mesh, const Real bdt){
   MeshBlockPack *pmbp = pmy_mesh_->pmb_pack;
   auto &indcs = pmy_mesh_->mb_indcs;
   int &ng = indcs.ng;
