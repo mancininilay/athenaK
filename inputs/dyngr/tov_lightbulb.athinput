@@ -64,7 +64,7 @@ gamma_thermal = 1.666667
 # Piecewise polytropic eos information
 npieces     = 1
 gamma1      = 2.0
-density1    = 1
+density1    = 1.0
 P0          = 1.0e-32
 rho_min     = 1.0e-17
 
@@ -79,7 +79,7 @@ dr          = 1e-3     # radial step for TOV calculation
 b_norm      = 1.2e-5
 r0          = 3.0 
 pcut        = 1e-6
-C           = 1e16
+C           = 1e-28
 magindex    = 1
 user_hist   = true
 

@@ -862,11 +862,13 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     auto u_y = g3d[S12]*ux + g3d[S22]*uy + g3d[S23]*uz;
     auto u_z = g3d[S13]*ux + g3d[S23]*uy + g3d[S33]*uz;
 
-    u0(m,IEN,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*ut*Q;
-    u0(m,IM1,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_x*Q;
-    u0(m,IM2,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_y*Q;
-    u0(m,IM3,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_z*Q;
 
+    if (r>2.0){
+      u0(m,IEN,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*ut*Q;
+      u0(m,IM1,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_x*Q;
+      u0(m,IM2,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_y*Q;
+      u0(m,IM3,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_z*Q;
+    }
   });
 
   return;
