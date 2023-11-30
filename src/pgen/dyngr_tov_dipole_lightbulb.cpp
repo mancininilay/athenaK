@@ -796,9 +796,6 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   MeshBlockPack *pmbp = pm->pmb_pack;
   auto &indcs = pm->pmb_pack->pmesh->mb_indcs;
   int &ng = indcs.ng;
-  int n1 = indcs.nx1 + 2*ng;
-  int n2 = (indcs.nx2 > 1) ? (indcs.nx2 + 2*ng) : 1;
-  int n3 = (indcs.nx3 > 1) ? (indcs.nx3 + 2*ng) : 1;
   int is = indcs.is;
   int js = indcs.js;
   int ks = indcs.ks;
@@ -809,7 +806,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   auto &coord = pmbp->pcoord->coord_data;
   auto &size = pmbp->pmb->mb_size;
   auto &adm = pmbp->padm->adm;
-
+  Real Q = C;
 
   std::string block;
   DvceArray5D<Real> u0, w0;
@@ -865,10 +862,10 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     auto u_y = g3d[S12]*ux + g3d[S22]*uy + g3d[S23]*uz;
     auto u_z = g3d[S13]*ux + g3d[S23]*uy + g3d[S33]*uz;
 
-    u0(m,IEN,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*ut*C;
-    u0(m,IM1,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_x*C;
-    u0(m,IM2,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_y*C;
-    u0(m,IM3,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_z*C;
+    u0(m,IEN,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*ut*Q;
+    u0(m,IM1,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_x*Q;
+    u0(m,IM2,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_y*Q;
+    u0(m,IM3,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_z*Q;
 
   });
 
