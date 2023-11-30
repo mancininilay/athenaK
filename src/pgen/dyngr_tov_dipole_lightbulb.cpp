@@ -853,12 +853,12 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
                                 g3d[S22], g3d[S23], g3d[S33]);
     Real vol = sqrt(detg);
 
-    auto &ux = w0(m,IVX,k,j,i);
-    auto &uy = w0(m,IVY,k,j,i);
-    auto &uz = w0(m,IVZ,k,j,i);
+    Real ux = w0(m,IVX,k,j,i);
+    Real uy = w0(m,IVY,k,j,i);
+    Real uz = w0(m,IVZ,k,j,i);
 
-    auto w = {ux, uy, uz};
-    Real ww = Primitive::SquareVector(w, g3d);
+    Real w[3] = {ux, uy, uz};
+    Real ww = Primitive::SquareVector(&w, g3d);
     Real ut = sqrt(1.0 + ww);
 
     auto u_x = g3d[S11]*ux + g3d[S12]*uy + g3d[S13]*uz;
