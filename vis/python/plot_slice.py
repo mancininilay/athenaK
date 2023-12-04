@@ -24,7 +24,7 @@ prefixing with "derived:". An invalid request (e.g.,
 Currently, these include the following:
   - Quantities related to gas pressure:
     - pgas: gas pressure
-    - pgas_rho: gas pressure divided by density
+    - kappa: gas pressure divided by density^gamma
     - T: temperature
   - Non-relativistic quantities related to magnetic pressure:
     - pmag_nr: (magnetic pressure) = B^2 / 2
@@ -129,7 +129,7 @@ def main(**kwargs):
     # Set derived dependencies
     derived_dependencies = {}
     derived_dependencies['pgas'] = ('eint',)
-    derived_dependencies['pgas_rho'] = ('dens', 'eint')
+    derived_dependencies['kappa'] = ('dens', 'eint')
     derived_dependencies['T'] = ('dens', 'eint')
     derived_dependencies['pmag_nr'] = ('bcc1', 'bcc2', 'bcc3')
     derived_dependencies['pmag_rel'] = ('velx', 'vely', 'velz', 'bcc1', 'bcc2', 'bcc3')
@@ -284,7 +284,7 @@ def main(**kwargs):
 
         # Extract adiabatic index from input file metadata
         if kwargs['variable'] in \
-                ['derived:' + name for name in ('pgas', 'pgas_rho', 'T', 'prad_pgas')] \
+                ['derived:' + name for name in ('pgas', 'kappa', 'T', 'prad_pgas')] \
                 + ['derived:cons_hydro_rel_' + name for name in ('t', 'x', 'y', 'z')]:
             try:
                 gamma_adi = float(input_data['hydro']['gamma'])
@@ -514,12 +514,12 @@ def main(**kwargs):
 
     # Calculate derived quantity related to gas pressure
     if kwargs['variable'] in \
-            ['derived:' + name for name in ('pgas', 'pgas_rho', 'T', 'prad_pgas')]:
+            ['derived:' + name for name in ('pgas', 'kappa', 'T', 'prad_pgas')]:
         pgas = (gamma_adi - 1.0) * quantities['eint']
         if kwargs['variable'] == 'derived:pgas':
             quantity = pgas
-        elif kwargs['variable'] == 'derived:pgas_rho':
-            quantity = pgas / quantities['dens']
+        elif kwargs['variable'] == 'derived:kappa':
+            quantity = pgas / (quantities['dens']**(gamma_adi))
         elif kwargs['variable'] == 'derived:T':
             quantity = (mu * mp_cgs / kb_cgs * (length_cgs / time_cgs) ** 2 * pgas
                         / quantities['dens'])

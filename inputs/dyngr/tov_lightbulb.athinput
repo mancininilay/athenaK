@@ -59,13 +59,13 @@ gamma       = 2.0       # ratio of specific heats Gamma
 dyn_scratch = 0
 fofc        = true
 enforce_maximum = false
-gamma_thermal = 1.666667
+gamma_thermal = 1.33333
 
 # Piecewise polytropic eos information
 npieces     = 1
 gamma1      = 2.0
 density1    = 1.0
-P0          = 1.0e-32
+P0          = 100.0
 rho_min     = 1.0e-17
 
 
