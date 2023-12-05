@@ -301,29 +301,6 @@ def main(**kwargs):
             except:  # noqa: E722
                 raise RuntimeError('Unable to find adiabatic index in input file.')
 
-        # Extract units from input file metadata
-        if kwargs['variable'] == 'derived:T':
-            if input_data['coord']['general_rel'] == 'true':
-                try:
-                    length_cgs = float(input_data['units']['bhmass_msun']) * gg_msun_cgs \
-                            / c_cgs ** 2
-                except:  # noqa: E722
-                    raise RuntimeError('Unable to find black hole mass in input file.')
-                time_cgs = length_cgs / c_cgs
-            else:
-                try:
-                    length_cgs = float(input_data['units']['length_cgs'])
-                except:  # noqa: E722
-                    raise RuntimeError('Unable to find length unit in input file.')
-                try:
-                    time_cgs = float(input_data['units']['time_cgs'])
-                except:  # noqa: E722
-                    raise RuntimeError('Unable to find time unit in input file.')
-            try:
-                mu = float(input_data['units']['mu'])
-            except:  # noqa: E722
-                raise RuntimeError('Unable to find molecular weight in input file.')
-
         # Check input file metadata for relativity
         if kwargs['variable'] in \
                 ['derived:' + name for name in ('pmag_nr', 'beta_inv_nr', 'sigma_nr')] \
