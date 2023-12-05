@@ -521,7 +521,7 @@ def main(**kwargs):
         elif kwargs['variable'] == 'derived:kappa':
             quantity = pgas / (quantities['dens']**(gamma_adi))
         elif kwargs['variable'] == 'derived:T':
-            quantity = (mu * mp_cgs / kb_cgs * (length_cgs / time_cgs) ** 2 * pgas
+            quantity = (1.66e-24 / 1.38e-16 * (1.47e5/ 4.90339e-6) ** 2 * pgas
                         / quantities['dens'])
         else:
             prad = quantities['r00_ff'] / 3.0
