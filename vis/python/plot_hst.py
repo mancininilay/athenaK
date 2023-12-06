@@ -31,17 +31,24 @@ def main(**kwargs):
 
     print(data)
 
+
+
+
+
     # Load Python plotting modules
     output_file = kwargs['output']
-    if output_file != 'show':
+    if output_file == 'show':
+        import matplotlib.pyplot as plt
+        plt.figure()
+        plt.plot(x_vals, y_vals)
+        plt.show()
+    else:
         import matplotlib
         matplotlib.use('agg')
-    import matplotlib.pyplot as plt
-
-    # Plot data
-    plt.figure()
-    plt.plot(x_vals, y_vals)
-    plt.show()
+        import matplotlib.pyplot as plt
+        plt.figure()
+        plt.plot(x_vals, y_vals)
+        plt.savefig(output_file)
 
 
 # Execute main function

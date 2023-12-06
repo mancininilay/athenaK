@@ -201,28 +201,47 @@ def main(**kwargs):
         plt.show()
 
     # make animation with multiple files
-    else:
-        fig = plt.figure()
-        ax = fig.add_subplot(1, 1, 1)
+     #else:
+        #fig = plt.figure()
+        #ax = fig.add_subplot(1, 1, 1)
 
-        def update_func(i):
-            ax.clear()
-            ax.plot(x_vals[i], y_vals[i], '.')
+        #def update_func(i):
+            #ax.clear()
+           # ax.plot(x_vals[i], y_vals[i], '.')
             # if xlim != (None,None):
             #     ax.set_xlim(xlim)
             # if ylim != (None,None):
             #     ax.set_ylim(ylim)
-            ax.set_title('Time=%f'%data[i]['time'])  # noqa
-            ax.set_xlabel(xvar)
-            ax.set_ylabel(yvar)
-        Player(fig, update_func, maxi=(nfiles-1))
-        plt.show()
+            #ax.set_title('Time=%f'%data[i]['time'])  # noqa
+            #ax.set_xlabel(xvar)
+            #ax.set_ylabel(yvar)
+        #Player(fig, update_func, maxi=(nfiles-1))
+        #plt.show()
         # to save movie as mp4 use following instead of 'Player'
         # anim=FuncAnimation(fig, update_func)
         # plt.show()
         # FFwriter = animation.FFMpegWriter(fps=20)
-        # anim.save('./animation.mp4', writer = FFwriter)
+        # anim.save('./animation.mp4', writer = FFwriter)*/
 
+    else:
+        fig, ax = plt.subplots()
+
+        def update_func(i):
+            ax.clear()
+            ax.plot(x_vals[i], y_vals[i], '.')
+            ax.set_title('Time=%f' % data[i]['time'])
+            ax.set_xlabel(xvar)
+            ax.set_ylabel(yvar)
+
+        anim = FuncAnimation(fig, update_func, frames=nfiles, interval=200)
+
+    # Use the output file name from the command line arguments
+        output_file = kwargs['output']
+        if output_file != 'show':
+            FFwriter = matplotlib.animation.FFMpegWriter(fps=20)
+            anim.save(output_file, writer=FFwriter)
+        else:
+            plt.show()
 
 # Execute main function
 if __name__ == '__main__':
