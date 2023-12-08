@@ -25,6 +25,7 @@ Currently, these include the following:
   - Quantities related to gas pressure:
     - pgas: gas pressure
     - kappa: gas pressure divided by density^gamma
+    - betath: gas pressure divided by total pressure (define k tilde and gamma!!!!!!!!!!!)
     - T: temperature
   - Non-relativistic quantities related to magnetic pressure:
     - pmag_nr: (magnetic pressure) = B^2 / 2
@@ -130,6 +131,7 @@ def main(**kwargs):
     derived_dependencies = {}
     derived_dependencies['pgas'] = ('eint',)
     derived_dependencies['kappa'] = ('dens', 'eint')
+    derived_dependencies['betath'] = ('dens', 'eint')
     derived_dependencies['T'] = ('dens', 'eint')
     derived_dependencies['pmag_nr'] = ('bcc1', 'bcc2', 'bcc3')
     derived_dependencies['pmag_rel'] = ('velx', 'vely', 'velz', 'bcc1', 'bcc2', 'bcc3')
@@ -284,7 +286,7 @@ def main(**kwargs):
 
         # Extract adiabatic index from input file metadata
         if kwargs['variable'] in \
-                ['derived:' + name for name in ('pgas', 'kappa', 'T', 'prad_pgas')] \
+                ['derived:' + name for name in ('pgas', 'kappa','betath', 'T', 'prad_pgas')] \
                 + ['derived:cons_hydro_rel_' + name for name in ('t', 'x', 'y', 'z')]:
             try:
                 gamma_adi = float(input_data['hydro']['gamma'])
@@ -491,12 +493,16 @@ def main(**kwargs):
 
     # Calculate derived quantity related to gas pressure
     if kwargs['variable'] in \
-            ['derived:' + name for name in ('pgas', 'kappa', 'T', 'prad_pgas')]:
+            ['derived:' + name for name in ('pgas', 'kappa','betath', 'T', 'prad_pgas')]:
         pgas = (gamma_adi - 1.0) * quantities['eint']
+        ktilde  = 86841
+        gamma = 3.005
         if kwargs['variable'] == 'derived:pgas':
             quantity = pgas
         elif kwargs['variable'] == 'derived:kappa':
             quantity = pgas / (quantities['dens']**(gamma_adi))
+        elif kwargs['variable'] == 'derived:betath':
+            quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))/ (quantities['eint'])
         elif kwargs['variable'] == 'derived:T':
             quantity = (1.66e-24 / 1.38e-16 * (1.47e5/ 4.90339e-6) ** 2 * pgas
                         / quantities['dens'])
