@@ -26,6 +26,7 @@ Currently, these include the following:
     - pgas: gas pressure
     - kappa: gas pressure divided by density^gamma
     - betath: gas pressure divided by total pressure (define k tilde and gamma!!!!!!!!!!!)
+    - epsilon: conserved energy divided by density
     - T: temperature
   - Non-relativistic quantities related to magnetic pressure:
     - pmag_nr: (magnetic pressure) = B^2 / 2
@@ -130,6 +131,7 @@ def main(**kwargs):
     # Set derived dependencies
     derived_dependencies = {}
     derived_dependencies['pgas'] = ('eint',)
+    derived_dependencies['epsilon'] = ('dens', 'ener')
     derived_dependencies['kappa'] = ('dens', 'eint')
     derived_dependencies['betath'] = ('dens', 'eint')
     derived_dependencies['T'] = ('dens', 'eint')
@@ -504,8 +506,7 @@ def main(**kwargs):
         elif kwargs['variable'] == 'derived:betath':
             quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))/ (quantities['eint'])
         elif kwargs['variable'] == 'derived:T':
-            quantity = (1.66e-24 / 1.38e-16 * (1.47e5/ 4.90339e-6) ** 2 * pgas
-                        / quantities['dens'])
+            quantity = (((quantities['eint']- (ktilde*(quantities['dens']**gamma)))*5.635e38*3)/7.56e-15)**0.25
         else:
             prad = quantities['r00_ff'] / 3.0
             quantity = prad / pgas
@@ -513,6 +514,8 @@ def main(**kwargs):
     # Calculate derived quantity related to radiation pressure
     elif kwargs['variable'] == 'derived:prad':
         quantity = quantities['r00_ff'] / 3.0
+    elif kwargs['variable'] == 'derived:epsilon':
+        quantity = quantities['ener'] / quantities['dens']
 
     # Calculate derived quantity related to non-relativistic magnetic pressure
     elif kwargs['variable'] in \
