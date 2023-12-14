@@ -878,8 +878,8 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     auto u_y = g3d[S12]*ux + g3d[S22]*uy + g3d[S23]*uz;
     auto u_z = g3d[S13]*ux + g3d[S23]*uy + g3d[S33]*uz;
 
-    Real p = 0.0;
-    // Real p = w0(m,IEN,k,j,i) - (kappatilde * pow(w0(m,IDN,k,j,i), gamma));
+    // Real p = 0.0;
+    Real p = w0(m,IEN,k,j,i) - (kappatilde * pow(w0(m,IDN,k,j,i), gamma));
 
     Real z;
     if (w0(m,IDN,k,j,i)>rhocut){
