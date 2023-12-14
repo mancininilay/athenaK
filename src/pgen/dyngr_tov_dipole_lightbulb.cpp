@@ -59,8 +59,11 @@ struct tov_pgen {
 };
 
 Real C;
+Real B;
 Real rho_cut;
 Real T;
+Real Kappatilde;
+Real Gamma;
 
 // Prototypes for functions used internally in this pgen.
 static void ConstructTOV(tov_pgen& pgen);
@@ -134,10 +137,14 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   tov.dfloor = pin->GetOrAddReal(block, "dfloor", (FLT_MIN));
   tov.pfloor = pin->GetOrAddReal(block, "pfloor", (FLT_MIN));
   tov.v_pert = pin->GetOrAddReal("problem" , "v_pert", 0.0);
-  C = pin->GetOrAddReal("problem", "C", 1.0); 
-  rho_cut = pin->GetOrAddReal("problem", "rho_cut", 1e-6);
-  T = pin->GetOrAddReal("problem", "T", 1e-6); 
-  
+
+  C = pin->GetOrAddReal("problem", "C", 0.0);
+  B = pin->GetOrAddReal("problem", "B", 0.0);
+  rho_cut = pin->GetOrAddReal("problem", "rho_cut", 1.0);
+  T = pin->GetOrAddReal("problem", "T", 0.0); 
+  Gamma = pin->GetOrAddReal("problem", "Gamma", 3.005);
+  Kappatilde = pin->GetOrAddReal("problem", "Kappatilde",86841);
+
   // Set the history function for a TOV star
   user_hist_func = &TOVHistory;
 
@@ -813,6 +820,9 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real Q = C;
   Real Tnu = T;
   Real rhocut = rho_cut;
+  Real BB = B;
+  Real kappatilde = Kappatilde;
+  Real gamma = Gamma;
 
   std::string block;
   DvceArray5D<Real> u0, w0;
@@ -868,6 +878,8 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     auto u_y = g3d[S12]*ux + g3d[S22]*uy + g3d[S23]*uz;
     auto u_z = g3d[S13]*ux + g3d[S23]*uy + g3d[S33]*uz;
 
+    Real p = w0(m,IEN,k,j,i) - (kappatilde * pow(w0(m,IDN,k,j,i), gamma));
+
     Real z;
     if (w0(m,IDN,k,j,i)>rhocut){
       z = exp(1.0 - w0(m,IDN,k,j,i)/rhocut);
@@ -877,10 +889,13 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
 
     if (r>0.0){
-      u0(m,IEN,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*ut*Q*(pow((Tnu/4),2))*z;
-      u0(m,IM1,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_x*Q*(pow((Tnu/4),2))*z;
-      u0(m,IM2,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_y*Q*(pow((Tnu/4),2))*z;
-      u0(m,IM3,k,j,i) += alpha*vol*(bdt/pow(r,2))*w0(m,IDN,k,j,i)*u_z*Q*(pow((Tnu/4),2))*z;
+
+      u0(m,IEN,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*ut*(Q*(pow((Tnu/4),2)/pow(r,2)) - BB*pow(p,1.5))*z;
+      u0(m,IM1,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_x*(Q*(pow((Tnu/4),2)/pow(r,2)) - BB*pow(p,1.5))*z;
+      u0(m,IM2,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_y*(Q*(pow((Tnu/4),2)/pow(r,2)) - BB*pow(p,1.5))*z;
+      u0(m,IM3,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_z*(Q*(pow((Tnu/4),2)/pow(r,2)) - BB*pow(p,1.5))*z;
+
+      
     }
   });
 
