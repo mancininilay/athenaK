@@ -194,9 +194,6 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     Real rho, p, mass, alp;
     //printf("Grabbing primitives!\n");
     GetPrimitivesAtPoint(tov_, r, rho, p, mass, alp);
-    printf("Value of p and b: %e, %e\n", p, tov_.pfloor);
-
-
     //printa sia il valore di p che il valore di pfloor, se sono giusti allora il problema è nel passaggio del flooring dell'eos. Non nell'inizializzazione, ma nelle poecewise polytrope.
     //printf("Primitives retrieved!\n");
 
@@ -217,6 +214,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     // Set hydrodynamic quantities
     w0_(m,IDN,k,j,i) = fmax(rho, tov_.dfloor);
     w0_(m,IEN,k,j,i) = fmax(p, tov_.pfloor);
+    printf("Value of p and b: %e, %e\n", p, w0_(m,IEN,k,j,i));
     w0_(m,IVX,k,j,i) = vr*x1v/r;
     w0_(m,IVY,k,j,i) = vr*x2v/r;
     w0_(m,IVZ,k,j,i) = vr*x3v/r;
