@@ -194,7 +194,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     Real rho, p, mass, alp;
     //printf("Grabbing primitives!\n");
     GetPrimitivesAtPoint(tov_, r, rho, p, mass, alp);
-    std::cout << "Value of p and pfloor: " << p << ", " << tov_.pfloor << std::endl;
+    printf("Value of p and b: %f, %f\n", p, tov_.pfloor);
 
 
     //printa sia il valore di p che il valore di pfloor, se sono giusti allora il problema è nel passaggio del flooring dell'eos. Non nell'inizializzazione, ma nelle poecewise polytrope.
