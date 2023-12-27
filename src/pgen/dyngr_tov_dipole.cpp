@@ -122,8 +122,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     block = std::string("mhd");
   }
   tov.gamma = pin->GetOrAddReal(block, "gamma", 5.0/3.0);
-  tov.dfloor = pin->GetOrAddReal(block, "dfloor", (FLT_MIN));
-  tov.pfloor = pin->GetOrAddReal(block, "pfloor", (FLT_MIN));
+  tov.dfloor = pin->GetReal(block, "dfloor");
+  tov.pfloor = pin->GetReal(block, "pfloor");
   tov.v_pert = pin->GetOrAddReal("problem" , "v_pert", 0.0);
 
   // Set the history function for a TOV star
@@ -194,6 +194,10 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     Real rho, p, mass, alp;
     //printf("Grabbing primitives!\n");
     GetPrimitivesAtPoint(tov_, r, rho, p, mass, alp);
+    std::cout << "Value of p and pfloor: " << p << ", " << tov_.pfloor << std::endl;
+
+
+    //printa sia il valore di p che il valore di pfloor, se sono giusti allora il problema è nel passaggio del flooring dell'eos. Non nell'inizializzazione, ma nelle poecewise polytrope.
     //printf("Primitives retrieved!\n");
 
     Real vr = 0.;
@@ -212,7 +216,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     // FIXME: assumes ideal gas!
     // Set hydrodynamic quantities
     w0_(m,IDN,k,j,i) = fmax(rho, tov_.dfloor);
-    w0_(m,IPR,k,j,i) = fmax(p, tov_.pfloor);
+    w0_(m,IEN,k,j,i) = fmax(p, tov_.pfloor);
     w0_(m,IVX,k,j,i) = vr*x1v/r;
     w0_(m,IVY,k,j,i) = vr*x2v/r;
     w0_(m,IVZ,k,j,i) = vr*x3v/r;
