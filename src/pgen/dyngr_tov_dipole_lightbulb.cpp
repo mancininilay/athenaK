@@ -135,15 +135,16 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   }
   tov.gamma = pin->GetOrAddReal(block, "gamma", 5.0/3.0);
   tov.dfloor = pin->GetOrAddReal(block, "dfloor", (FLT_MIN));
-  tov.pfloor = pin->GetOrAddReal(block, "pfloor", (FLT_MIN));
+  tov.pfloor = pin->GetReal(block, "pfloor");
   tov.v_pert = pin->GetOrAddReal("problem" , "v_pert", 0.0);
 
   C = pin->GetOrAddReal("problem", "C", 0.0);
   B = pin->GetOrAddReal("problem", "B", 0.0);
   rho_cut = pin->GetOrAddReal("problem", "rho_cut", 1.0);
   T = pin->GetOrAddReal("problem", "T", 0.0); 
-  Gamma = pin->GetOrAddReal("problem", "Gamma", 3.005);
   Kappatilde = pin->GetOrAddReal("problem", "Kappatilde",86841);
+  Gamma = pin->GetOrAddReal("problem", "Gamma", 3.005);
+ 
 
   // Set the history function for a TOV star
   user_hist_func = &TOVHistory;
@@ -231,7 +232,6 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     // FIXME: assumes ideal gas!
     // Set hydrodynamic quantities
     w0_(m,IDN,k,j,i) = fmax(rho, tov_.dfloor);
-    //w0_(m,IEN,k,j,i) = fmax(p, tov_.pfloor)/(tov_.gamma - 1.0);
     w0_(m,IPR,k,j,i) = fmax(p, tov_.pfloor);
     w0_(m,IVX,k,j,i) = vr*x1v/r;
     w0_(m,IVY,k,j,i) = vr*x2v/r;
@@ -879,7 +879,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     auto u_z = g3d[S13]*ux + g3d[S23]*uy + g3d[S33]*uz;
 
     // Real p = 0.0;
-    Real p = fmax(w0(m,IEN,k,j,i) - (kappatilde * pow(w0(m,IDN,k,j,i), gamma)),0);
+    Real p = fmax(w0(m,IEN,k,j,i) - (kappatilde * pow(w0(m,IDN,k,j,i), gamma)),0.0);
 
     Real z;
     if (w0(m,IDN,k,j,i)>rhocut){
