@@ -15,7 +15,8 @@
 #include "eos/primitive_solver_hyd.hpp"
 
 enum class DynGR_RSolver {llf_dyngr, hlle_dyngr};     // Riemann solvers for dynamical GR
-enum class DynGR_EOS {eos_ideal, eos_piecewise_poly}; // EOS policies for dynamical GR
+enum class DynGR_EOS {eos_ideal, eos_piecewise_poly,
+                      eos_poly}; // EOS policies for dynamical GR
 enum class DynGR_Error {reset_floor};                 // Error policies for dynamical GR
 
 //----------------------------------------------------------------------------------------
@@ -93,6 +94,7 @@ class DynGR {
 
   // DynGR policies
   DynGR_RSolver rsolver_method;
+  DynGR_RSolver fofc_method;
   DynGR_EOS eos_policy;
   DynGR_Error error_policy;
 
@@ -101,6 +103,7 @@ class DynGR {
   int scratch_level;        // GPU scratch level for flux and source calculations
   bool enforce_maximum;     // enforce local maximum principle during FOFC
   Real dmp_M;               // threshold multiplier for discrete maximum principle.
+  bool fixed_evolution;     // Disable mhd evolution
 };
 
 template<class EOSPolicy, class ErrorPolicy>
@@ -117,6 +120,7 @@ class DynGRPS : public DynGR {
   template<DynGR_RSolver T>
   TaskStatus CalcFluxes(Driver *d, int stage);
 
+  template<DynGR_RSolver T>
   void FOFC(Driver *d, int stage);
 
   // functions

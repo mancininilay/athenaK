@@ -27,6 +27,7 @@
 #include "dyngr/rsolvers/hlle_dyngrmhd.hpp"
 // include PrimitiveSolver stuff
 #include "eos/primitive-solver/idealgas.hpp"
+#include "eos/primitive-solver/polytrope.hpp"
 #include "eos/primitive-solver/reset_floor.hpp"
 
 namespace dyngr {
@@ -54,10 +55,13 @@ TaskStatus DynGRPS<EOSPolicy, ErrorPolicy>::CalcFluxes(Driver *pdriver, int stag
   auto &adm = pmy_pack->padm->adm;
   auto &eos_ = pmy_pack->pmhd->peos->eos_data;
   auto &dyn_eos_ = eos;
-  const auto rsolver_ = rsolver_method_;
   bool extrema = false;
   if (recon_method_ == ReconstructionMethod::ppmx) {
     extrema = true;
+  }
+  // Short-circuit the flux calculation if everything is to be fixed.
+  if (fixed_evolution) {
+    return TaskStatus::complete;
   }
 
   //--------------------------------------------------------------------------------------
@@ -128,7 +132,6 @@ TaskStatus DynGRPS<EOSPolicy, ErrorPolicy>::CalcFluxes(Driver *pdriver, int stag
     auto &nhyd_ = nhyd;
     auto nscal_ = nvars - nhyd;
     auto &adm_ = adm;
-    const auto rsolver = rsolver_;
     int il = is; int iu = ie+1;
     if constexpr (rsolver_method_ == DynGR_RSolver::llf_dyngr) {
       LLF_DYNGR<IVX>(member, dyn_eos, indcs, size, coord, m, k, j, is, ie+1,
@@ -239,7 +242,6 @@ TaskStatus DynGRPS<EOSPolicy, ErrorPolicy>::CalcFluxes(Driver *pdriver, int stag
         auto &nhyd_ = nhyd;
         auto nscal_ = nvars - nhyd;
         auto &adm_ = adm;
-        const auto rsolver = rsolver_;
         int il = is; int iu = ie;
         if (j>(js-1)) {
           if constexpr (rsolver_method_ == DynGR_RSolver::llf_dyngr) {
@@ -345,7 +347,6 @@ TaskStatus DynGRPS<EOSPolicy, ErrorPolicy>::CalcFluxes(Driver *pdriver, int stag
         auto &adm_ = adm;
         auto &nhyd_ = nhyd;
         auto nscal_ = nvars - nhyd;
-        const auto rsolver = rsolver_;
         int il = is; int iu = ie;
         if (k>(ks-1)) {
           if constexpr (rsolver_method_ == DynGR_RSolver::llf_dyngr) {
@@ -377,7 +378,7 @@ TaskStatus DynGRPS<EOSPolicy, ErrorPolicy>::CalcFluxes(Driver *pdriver, int stag
 
   // Call FOFC if necessary
   if (pmy_pack->pmhd->use_fofc || pmy_pack->pcoord->coord_data.bh_excise) {
-    FOFC(pdriver, stage);
+    FOFC<rsolver_method_>(pdriver, stage);
   }
 
   return TaskStatus::complete;
@@ -395,5 +396,6 @@ TaskStatus DynGRPS<EOSPolicy, ErrorPolicy>::\
 
 INSTANTIATE_CALC_FLUXES(Primitive::IdealGas, Primitive::ResetFloor)
 INSTANTIATE_CALC_FLUXES(Primitive::PiecewisePolytrope, Primitive::ResetFloor)
+INSTANTIATE_CALC_FLUXES(Primitive::Polytrope, Primitive::ResetFloor)
 
 } // namespace dyngr

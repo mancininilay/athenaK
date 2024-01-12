@@ -41,7 +41,6 @@ Mesh::Mesh(ParameterInput *pin) :
   two_d(false),
   three_d(false),
   multi_d(false),
-  shearing_periodic(false),
   strictly_periodic(true) {
   // Set physical size and number of cells in mesh (root level)
   mesh_size.x1min = pin->GetReal("mesh", "x1min");
@@ -80,10 +79,24 @@ Mesh::Mesh(ParameterInput *pin) :
   if (mesh_bcs[BoundaryFace::inner_x1] != BoundaryFlag::periodic) {
     strictly_periodic = false;
   }
-  // Check if x1 boundaries are shearing periodic. When flag set to true, shearing BCs
-  // will be called in ApplyPhysicalBCs() in Hydro and/or MHD.
-  if (mesh_bcs[BoundaryFace::inner_x1] == BoundaryFlag::periodic) {
-    shearing_periodic = pin->GetOrAddBoolean("mesh","speriodic",false);
+
+  // Check if x1 boundaries are shear_periodic.
+  if (mesh_bcs[BoundaryFace::inner_x1] == BoundaryFlag::shear_periodic
+      && mesh_bcs[BoundaryFace::outer_x1] == BoundaryFlag::shear_periodic) {
+    if (one_d) {
+      std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__
+                << std::endl << "Shear Periodic Boundaries require 2D or 3D."
+                << std::endl;
+      std::exit(EXIT_FAILURE);
+    }
+  } else if ((mesh_bcs[BoundaryFace::inner_x1] == BoundaryFlag::shear_periodic
+              && mesh_bcs[BoundaryFace::outer_x1] != BoundaryFlag::shear_periodic)
+            || (mesh_bcs[BoundaryFace::inner_x1] != BoundaryFlag::shear_periodic
+              && mesh_bcs[BoundaryFace::outer_x1] == BoundaryFlag::shear_periodic)) {
+    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__
+              << std::endl << "In shearing box, both x1 bcs must be shear_periodic"
+              << std::endl;
+    std::exit(EXIT_FAILURE);
   }
 
   // Set BC flags for ix2/ox2 boundaries and error check
@@ -315,7 +328,7 @@ void Mesh::PrintMeshDiagnostics() {
   if ((max_level - root_level) > 1) {
     int nb_per_plevel[max_level];      // NOLINT(runtime/arrays)
     float cost_per_plevel[max_level];  // NOLINT(runtime/arrays)
-    for (int i=0; i<=max_level; ++i) {
+    for (int i=0; i<max_level; ++i) {
       nb_per_plevel[i] = 0;
       cost_per_plevel[i] = 0.0;
     }
@@ -462,6 +475,8 @@ BoundaryFlag Mesh::GetBoundaryFlag(const std::string& input_string) {
     return BoundaryFlag::user;
   } else if (input_string == "periodic") {
     return BoundaryFlag::periodic;
+  } else if (input_string == "shear_periodic") {
+    return BoundaryFlag::shear_periodic;
   } else if (input_string == "undef") {
     return BoundaryFlag::undef;
   } else {
@@ -494,6 +509,8 @@ std::string Mesh::GetBoundaryString(BoundaryFlag input_flag) {
       return "user";
     case BoundaryFlag::periodic:
       return "periodic";
+    case BoundaryFlag::shear_periodic:
+      return "shear_periodic";
     case BoundaryFlag::undef:
       return "undef";
     default:

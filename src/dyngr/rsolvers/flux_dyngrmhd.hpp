@@ -49,35 +49,35 @@ void SingleStateFlux(const PrimitiveSolverHydro<EOSPolicy, ErrorPolicy>& eos,
   Real uul[3] = {prim_l[IVX], prim_l[IVY], prim_l[IVZ]};
   Real udl[3];
   Primitive::LowerVector(udl, uul, g3d);
-  Real Wsql = 1.0 + Primitive::Contract(uul, udl);
-  Real iWl = 1./sqrt(Wsql);
+  Real iWsql = 1.0/(1.0 + Primitive::Contract(uul, udl));
+  Real iWl = sqrt(iWsql);
   Real vcl = prim_l[pvx]*iWl - beta_u[ivx-IVX]*ialpha;
 
-  // Calculate 4-magnetic field (undensitized) for the left state.
+  // Calculate 4-magnetic field for the left state.
   Real bul0 = Primitive::Contract(Bu_l, udl)*ialpha;
   Real bdl[3], Bd_l[3];
   Primitive::LowerVector(Bd_l, Bu_l, g3d);
   for (int a = 0; a < 3; a++) {
     bdl[a] = (alpha*bul0*udl[a] + Bd_l[a])*iWl;
   }
-  bsql = (Primitive::SquareVector(Bu_l, g3d) + SQR(alpha*bul0))/(Wsql);
+  bsql = (Primitive::SquareVector(Bu_l, g3d) + SQR(alpha*bul0))*iWsql;
 
   // Calculate W for the right state.
   Real uur[3] = {prim_r[IVX], prim_r[IVY], prim_r[IVZ]};
   Real udr[3];
   Primitive::LowerVector(udr, uur, g3d);
-  Real Wsqr = 1.0 + Primitive::Contract(uur, udr);
-  Real iWr = 1.0/sqrt(Wsqr);
+  Real iWsqr = 1.0/(1.0 + Primitive::Contract(uur, udr));
+  Real iWr = sqrt(iWsqr);
   Real vcr = prim_r[pvx]*iWr - beta_u[ivx-IVX]*ialpha;
 
-  // Calculate 4-magnetic field (densitized) for the right state.
+  // Calculate 4-magnetic field for the right state.
   Real bur0 = Primitive::Contract(Bu_r, udr)*ialpha;
   Real bdr[3], Bd_r[3];
   Primitive::LowerVector(Bd_r, Bu_r, g3d);
   for (int a = 0; a < 3; a++) {
     bdr[a] = (alpha*bur0*udr[a] + Bd_r[a])*iWr;
   }
-  bsqr = (Primitive::SquareVector(Bu_r, g3d) + SQR(alpha*bur0))/(Wsqr);
+  bsqr = (Primitive::SquareVector(Bu_r, g3d) + SQR(alpha*bur0))*iWsqr;
 
   // Calculate fluxes for the left state.
   flux_l[CDN] = cons_l[CDN]*vcl;

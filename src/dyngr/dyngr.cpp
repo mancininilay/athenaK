@@ -29,6 +29,7 @@
 #include "eos/primitive_solver_hyd.hpp"
 #include "eos/primitive-solver/idealgas.hpp"
 #include "eos/primitive-solver/piecewise_polytrope.hpp"
+#include "eos/primitive-solver/polytrope.hpp"
 #include "eos/primitive-solver/reset_floor.hpp"
 
 namespace dyngr {
@@ -44,6 +45,9 @@ DynGR* SelectDynGREOS(MeshBlockPack *ppack, ParameterInput *pin, DynGR_EOS eos_p
     case DynGR_EOS::eos_piecewise_poly:
       dyn_gr = new DynGRPS<Primitive::PiecewisePolytrope, ErrorPolicy>(ppack, pin);
       break;
+    case DynGR_EOS::eos_poly:
+      dyn_gr = new DynGRPS<Primitive::Polytrope, ErrorPolicy>(ppack, pin);
+      break;
   }
   return dyn_gr;
 }
@@ -58,7 +62,9 @@ DynGR* BuildDynGR(MeshBlockPack *ppack, ParameterInput *pin) {
     eos_policy = DynGR_EOS::eos_ideal;
   } else if (eos_string.compare("piecewise_poly") == 0) {
     eos_policy = DynGR_EOS::eos_piecewise_poly;
-  } else {
+  } else if (eos_string.compare("polytrope") == 0) {
+    eos_policy = DynGR_EOS::eos_poly;
+  }else {
     std::cout << "### FATAL ERROR in " <<__FILE__ << " at line " << __LINE__
               << std::endl << "<mhd> dyn_eos = '" << eos_string
               << "' not implemented for GR dynamics" << std::endl;
@@ -99,9 +105,22 @@ DynGR::DynGR(MeshBlockPack *pp, ParameterInput *pin) : pmy_pack(pp) {
               << "' not implemented for GR dynamics" << std::endl;
     std::exit(EXIT_FAILURE);
   }
+  std::string fofc = pin->GetOrAddString("mhd", "fofc_method", "llf");
+  if (fofc.compare("llf") == 0) {
+    fofc_method = DynGR_RSolver::llf_dyngr;
+  } else if (fofc.compare("hlle") == 0) {
+    fofc_method = DynGR_RSolver::hlle_dyngr;
+  } else {
+    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__
+              << std::endl << "<mhd> fofc_method = '" << fofc
+              << "' not implemented for FOFC" << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
   scratch_level = pin->GetOrAddInteger("mhd", "dyn_scratch", 0);
   enforce_maximum = pin->GetOrAddBoolean("mhd", "enforce_maximum", true);
   dmp_M = pin->GetOrAddReal("mhd", "dmp_M", 1.2);
+
+  fixed_evolution = pin->GetOrAddBoolean("mhd", "fixed", false);
 }
 
 DynGR::~DynGR() {
@@ -210,6 +229,10 @@ void DynGRPS<EOSPolicy, ErrorPolicy>::QueueDynGRTasks() {
 
   dep.clear();
   dep.push_back(MHD_BCS);
+  pnr->QueueTask(&MHD::Prolongate, pmhd, MHD_Prolong, "MHD_Prolong", Task_Run, dep, none);
+
+  dep.clear();
+  dep.push_back(MHD_Prolong);
   opt.push_back(Z4c_Z4c2ADM);
   pnr->QueueTask(&DynGRPS<EOSPolicy, ErrorPolicy>::ConToPrim, this, MHD_C2P, "MHD_C2P",
                  Task_Run, dep, opt);
@@ -229,6 +252,12 @@ void DynGRPS<EOSPolicy, ErrorPolicy>::PrimToConInit(int is, int ie, int js, int 
                                                     int ks, int ke) {
   eos.PrimToCons(pmy_pack->pmhd->w0, pmy_pack->pmhd->bcc0, pmy_pack->pmhd->u0,
                  is, ie, js, je, ks, ke);
+  if (pmy_pack->ptmunu != nullptr) {
+    bool fixed = fixed_evolution;
+    fixed_evolution = false;
+    SetTmunu(nullptr, 0);
+    fixed_evolution = fixed;
+  }
 }
 
 //----------------------------------------------------------------------------------------
@@ -263,6 +292,10 @@ void DynGRPS<EOSPolicy, ErrorPolicy>::ConvertInternalEnergyToPressure(int is, in
 //  \brief
 template<class EOSPolicy, class ErrorPolicy>
 TaskStatus DynGRPS<EOSPolicy, ErrorPolicy>::ConToPrim(Driver *pdrive, int stage) {
+  if (fixed_evolution) {
+    return TaskStatus::complete;
+  }
+
   // Extract the indices
   auto &indcs = pmy_pack->pmesh->mb_indcs;
   int &ng = indcs.ng;
@@ -280,6 +313,9 @@ TaskStatus DynGRPS<EOSPolicy, ErrorPolicy>::ConToPrim(Driver *pdrive, int stage)
 template<class EOSPolicy, class ErrorPolicy>
 void DynGRPS<EOSPolicy, ErrorPolicy>::ConToPrimBC(int is, int ie, int js, int je,
                                                 int ks, int ke) {
+  if (fixed_evolution) {
+    return;
+  }
   eos.ConsToPrim(pmy_pack->pmhd->u0, pmy_pack->pmhd->b0, pmy_pack->pmhd->bcc0,
                  pmy_pack->pmhd->w0, is, ie, js, je, ks, ke, false);
 }
@@ -366,6 +402,9 @@ TaskStatus DynGR::ApplyPhysicalBCs(Driver *pdrive, int stage) {
 //! \brief Add the perfect fluid contribution to the stress-energy tensor. This is assumed
 //!  to be the first contribution, so it sets the values rather than adding.
 TaskStatus DynGR::SetTmunu(Driver *pdrive, int stage) {
+  if (fixed_evolution) {
+    return TaskStatus::complete;
+  }
   auto &indcs = pmy_pack->pmesh->mb_indcs;
   //auto &size  = pmy_pack->pmb->mb_size;
   int &is = indcs.is; int &ie = indcs.ie;
@@ -384,91 +423,45 @@ TaskStatus DynGR::SetTmunu(Driver *pdrive, int stage) {
   auto &cons = pmy_pack->pmhd->u0;
   auto &bcc = pmy_pack->pmhd->bcc0;
 
-  int scr_level = scratch_level;
-  size_t scr_size = ScrArray1D<Real>::shmem_size(ncells1)*4     // scalars
-                  + ScrArray2D<Real>::shmem_size(3, ncells1)*2; // vectors
-  //size_t scr_size = 0;
-  par_for_outer("dyngr_tmunu_loop",DevExeSpace(),scr_size,scr_level,0,nmb-1,ks,ke,js,je,
-  KOKKOS_LAMBDA(TeamMember_t member, const int m, const int k, const int j) {
-    // Scratch space
-    AthenaScratchTensor<Real, TensorSymm::NONE, 3, 0> ivol;  // sqrt of 3-metric det
-    AthenaScratchTensor<Real, TensorSymm::NONE, 3, 0> iW;     // Lorentz factor
-    AthenaScratchTensor<Real, TensorSymm::NONE, 3, 0> Bv;    // B^i v_i
-    AthenaScratchTensor<Real, TensorSymm::NONE, 3, 0> Bsq;   // B^i B_i
-    AthenaScratchTensor<Real, TensorSymm::NONE, 3, 1> v_d;   // Velocity form
-    AthenaScratchTensor<Real, TensorSymm::NONE, 3, 1> B_d;   // Magnetic field form
-
-    ivol.NewAthenaScratchTensor(member, scr_level, ncells1);
-    iW.NewAthenaScratchTensor(member, scr_level, ncells1);
-    Bv.NewAthenaScratchTensor(member, scr_level, ncells1);
-    Bsq.NewAthenaScratchTensor(member, scr_level, ncells1);
-    v_d.NewAthenaScratchTensor(member, scr_level, ncells1);
-    B_d.NewAthenaScratchTensor(member, scr_level, ncells1);
-
+  par_for("dyngr_tmunu_loop",DevExeSpace(),0,nmb-1,ks,ke,js,je,is,ie,
+  KOKKOS_LAMBDA(const int m, const int k, const int j, const int i) {
     // Calculate the determinant/volume form
-    par_for_inner(member, is, ie, [&](int const i) {
-      Real detg = adm::SpatialDet(adm.g_dd(m,0,0,k,j,i), adm.g_dd(m,0,1,k,j,i),
-                                  adm.g_dd(m,0,2,k,j,i), adm.g_dd(m,1,1,k,j,i),
-                                  adm.g_dd(m,1,2,k,j,i), adm.g_dd(m,2,2,k,j,i));
-      ivol(i) = 1.0/sqrt(detg);
-    });
-    member.team_barrier();
+    Real detg = adm::SpatialDet(adm.g_dd(m,0,0,k,j,i),adm.g_dd(m,0,1,k,j,i),
+                                adm.g_dd(m,0,2,k,j,i),adm.g_dd(m,1,1,k,j,i),
+                                adm.g_dd(m,1,2,k,j,i),adm.g_dd(m,2,2,k,j,i));
+    Real ivol = 1.0/sqrt(detg);
+
     // Calculate the lower velocity components
-    v_d.ZeroClear();
-    iW.ZeroClear();
-    B_d.ZeroClear();
+    Real v_d[3] = {0.0};
+    Real iW = 0.;
+    Real B_d[3] = {0.0};
     for (int a = 0; a < 3; ++a) {
       for (int b = 0; b < 3; ++b) {
-        par_for_inner(member, is, ie, [&](int const i) {
-          v_d(a, i) += prim(m, IVX + b, k, j, i)*adm.g_dd(m, a, b, k, j, i);
-          iW(i) += prim(m, IVX + a, k, j, i)*prim(m, IVX + b, k, j, i)*
-                     adm.g_dd(m, a, b, k, j, i);
-          B_d(a, i) += bcc(m, a, k, j, i)*adm.g_dd(m, a, b, k, j, i)*ivol(i);
-        });
-        member.team_barrier();
+        v_d[a] += prim(m, IVX + b, k, j, i)*adm.g_dd(m, a, b, k, j, i);
+        iW += prim(m, IVX + a, k, j, i)*prim(m, IVX + b, k, j, i) *
+                adm.g_dd(m, a, b, k, j, i);
+        B_d[a] += bcc(m, b, k, j, i)*adm.g_dd(m, a, b, k, j, i)*ivol;
       }
     }
-    par_for_inner(member, is, ie, [&](int const i) {
-      iW(i) = 1.0/sqrt(1. + iW(i));
-    });
-    Bv.ZeroClear();
-    Bsq.ZeroClear();
+    iW = 1.0/sqrt(1. + iW);
+    Real Bv = 0.;
+    Real Bsq = 0.;
     for (int a = 0; a < 3; ++a) {
-      par_for_inner(member, is, ie, [&](int const i) {
-        Bv(i) += bcc(m, a, k, j, i) * v_d(a, i) * ivol(i);
-        Bsq(i) += bcc(m, a, k, j, i) * B_d(a, i) * ivol(i);
-      });
-      member.team_barrier();
+      Bv += bcc(m, a, k, j, i) * v_d[a]*ivol;
+      Bsq += bcc(m, a, k, j, i) * B_d[a]*ivol;
     }
+    Real bsq = (Bsq + Bv*Bv)*(iW*iW);
 
-    // TODO(JMF): member barrier here?
-
-    // Save the fluid quantities
-    par_for_inner(member, is, ie, [&](int const i) {
-      tmunu.E(m, k, j, i) = (cons(m, IDN, k, j, i) + cons(m, IEN, k, j, i))*ivol(i);
-    });
+    tmunu.E(m, k, j, i) = (cons(m, IEN, k, j, i) + cons(m, IDN, k, j, i))*ivol;
     for (int a = 0; a < 3; ++a) {
-      par_for_inner(member, is, ie, [&](int const i) {
-        tmunu.S_d(m, a, k, j, i) = cons(m, IM1 + a, k, j, i)*ivol(i);
-      });
-    }
-    for (int a = 0; a < 3; ++a) {
+      tmunu.S_d(m, a, k, j, i) = cons(m, IM1 + a, k, j, i)*ivol;
       for (int b = a; b < 3; ++b) {
-        par_for_inner(member, is, ie, [&](int const i) {
-          /*tmunu.S_dd(m, a, b, k, j, i) =
-                cons(m, IM1 + a, k, j, i)*ivol(i)*v_d(b, i)*iW(i)
-                - (B_d(a, i)*SQR(iW(i)) + Bv(i)*v_d(a, i))*B_d(b, i)
-                + (prim(m, IPR, k, j, i) + 0.5*(Bv(i)*Bv(i)/(iW(i)*iW(i)) + Bsq(i)))
-                  *adm.g_dd(m, a, b, k, j, i);*/
-          tmunu.S_dd(m, a, b, k, j, i) =
-                cons(m, IM1 + a, k, j, i)*ivol(i)*v_d(b, i)*iW(i)
-                - (B_d(a, i) + Bv(i)*v_d(a, i))*SQR(iW(i))*B_d(b, i)
-                + (prim(m, IPR, k, j, i) + 0.5*(Bsq(i) + Bv(i)*Bv(i))*(iW(i)*iW(i)))
-                  *adm.g_dd(m, a, b, k, j, i);
-        });
+        tmunu.S_dd(m, a, b, k, j, i) =
+              cons(m, IM1 + a, k, j, i)*ivol*v_d[b]*iW
+              - (B_d[a] + Bv*v_d[a])*SQR(iW)*B_d[b]
+              + (prim(m, IPR, k, j, i) + 0.5*bsq)*adm.g_dd(m, a, b, k, j, i);
       }
     }
-    member.team_barrier();
   });
   return TaskStatus::complete;
 }
@@ -477,6 +470,9 @@ template<class EOSPolicy, class ErrorPolicy> template<int NGHOST>
 void DynGRPS<EOSPolicy, ErrorPolicy>::AddCoordTermsEOS(const DvceArray5D<Real> &prim,
     const DvceArray5D<Real> &bcc,
     const Real dt, DvceArray5D<Real> &rhs) {
+  if (fixed_evolution) {
+    return;
+  }
   auto &indcs = pmy_pack->pmesh->mb_indcs;
   auto &size  = pmy_pack->pmb->mb_size;
   int &is = indcs.is; int &ie = indcs.ie;
@@ -487,6 +483,7 @@ void DynGRPS<EOSPolicy, ErrorPolicy>::AddCoordTermsEOS(const DvceArray5D<Real> &
 
   auto &adm = pmy_pack->padm->adm;
   auto &eos_ = eos.ps.GetEOS();
+  //auto &tmunu = pmy_pack->ptmunu->tmunu;
 
   int &nhyd  = pmy_pack->pmhd->nmhd;
   int &nscal = pmy_pack->pmhd->nscalars;
@@ -575,9 +572,11 @@ void DynGRPS<EOSPolicy, ErrorPolicy>::AddCoordTermsEOS(const DvceArray5D<Real> &
     Real bsq = Bv*Bv + Bsq/Wsq;
 
     Real E = (H*Wsq + Bsq) - prim_pt[PPR] - 0.5*bsq;
+    //Real E = tmunu.E(m,k,j,i);
 
     Real S_d[3] = {0.0};
     for (int a = 0; a < 3; a++) {
+      //S_d[a] = tmunu.S_d(m,a,k,j,i);
       for (int b = 0; b < 3; b++) {
         S_d[a] += ((H*Wsq + Bsq)*prim_pt[PVX + b]/W - Bv*B_u[b])*g3d[imap[a][b]];
       }
@@ -585,11 +584,18 @@ void DynGRPS<EOSPolicy, ErrorPolicy>::AddCoordTermsEOS(const DvceArray5D<Real> &
 
     Real S_uu[3][3];
     for (int a = 0; a < 3; a++) {
-      for (int b = 0; b < 3; b++) {
+      for (int b = 0; b <= a; b++) {
         S_uu[a][b] = (H + Bsq/Wsq)*prim_pt[PVX + a]*prim_pt[PVX + b]
                       - B_u[a]*B_u[b]/Wsq
                       - Bv*(B_u[a]*prim_pt[PVX + b] + B_u[b]*prim_pt[PVX + a])/W
                       + (prim_pt[PPR] + 0.5*bsq)*g3u[imap[a][b]];
+        /*S_uu[a][b] = 0.0;
+        for (int c = 0; c < 3; c++) {
+          for (int d = 0; d < 3; d++) {
+            S_uu[a][b] += tmunu.S_dd(m,c,d,k,j,i)*g3u[imap[a][c]]*g3u[imap[b][d]];
+          }
+        }*/
+        S_uu[b][a] = S_uu[a][b];
       }
     }
 
@@ -617,6 +623,7 @@ void DynGRPS<EOSPolicy, ErrorPolicy>::AddCoordTermsEOS(const DvceArray5D<Real> &
 // Instantiated templates
 template class DynGRPS<Primitive::IdealGas, Primitive::ResetFloor>;
 template class DynGRPS<Primitive::PiecewisePolytrope, Primitive::ResetFloor>;
+template class DynGRPS<Primitive::Polytrope, Primitive::ResetFloor>;
 
 // Macro for defining CoordTerms templates
 #define INSTANTIATE_COORD_TERMS(EOSPolicy, ErrorPolicy) \
@@ -632,6 +639,7 @@ void DynGRPS<EOSPolicy, ErrorPolicy>::AddCoordTermsEOS<4>(const DvceArray5D<Real
 
 INSTANTIATE_COORD_TERMS(Primitive::IdealGas, Primitive::ResetFloor);
 INSTANTIATE_COORD_TERMS(Primitive::PiecewisePolytrope, Primitive::ResetFloor);
+INSTANTIATE_COORD_TERMS(Primitive::Polytrope, Primitive::ResetFloor);
 
 #undef INSTANTIATE_COORD_TERMS
 

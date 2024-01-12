@@ -33,6 +33,7 @@ struct Z4cTaskIDs {
   TaskID recvu;
   TaskID newdt;
   TaskID bcs;
+  TaskID prol;
   TaskID algc;
   TaskID z4tad;
   TaskID admc;
@@ -168,6 +169,8 @@ class Z4c {
     Real shift_hh;
     Real shift_advect;
     Real shift_eta;
+    // Enable BSSN if false (disable theta)
+    bool use_z4c;
   };
   Options opt;
   Real diss;              // Dissipation parameter
@@ -189,6 +192,7 @@ class Z4c {
   TaskStatus CopyU(Driver *d, int stage);
   TaskStatus SendU(Driver *d, int stage);
   TaskStatus RecvU(Driver *d, int stage);
+  TaskStatus Prolongate(Driver *pdrive, int stage);
   TaskStatus ExpRKUpdate(Driver *d, int stage);
   TaskStatus NewTimeStep(Driver *d, int stage);
   TaskStatus ApplyPhysicalBCs(Driver *d, int stage);
@@ -211,7 +215,7 @@ class Z4c {
   void AlgConstr(MeshBlockPack *pmbp);
 
   // Sommerfeld boundary conditions
-  KOKKOS_FUNCTION
+  /*KOKKOS_FUNCTION
   void Z4cSommerfeld(int const m,
                      int const is, int const ie,
                      int const js, int const j,
@@ -219,12 +223,15 @@ class Z4c {
                      int const parity,
                      int const scr_size,
                      int const scr_level,
-                     TeamMember_t member);
-
+                     TeamMember_t member);*/
+  /*void Z4cSommerfeld(const int m, const int k, const int j, const int i, const int ng,
+                     const int dir, const int parity);*/
 
  private:
   MeshBlockPack* pmy_pack;  // ptr to MeshBlockPack containing this Z4c
 };
+
+
 
 } // namespace z4c
 #endif //Z4C_Z4C_HPP_
