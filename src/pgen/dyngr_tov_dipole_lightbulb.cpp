@@ -87,7 +87,6 @@ void TOVHistory(HistoryData *pdata, Mesh *pm);
 void VacuumBC(Mesh *pm);
 void neutrinolightbulb(Mesh* pm, const Real bdt);
 
-
 //----------------------------------------------------------------------------------------
 //! \fn void ProblemGenerator::UserProblem()
 //  \brief Sets initial conditions for TOV star in DynGR
@@ -105,11 +104,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   tov_pgen tov;
   // FIXME: Set boundary condition function?
   user_bcs_func = VacuumBC;
-
-
-
-  user_srcs = true;
   user_srcs_func = neutrinolightbulb;
+
   // Read problem-specific parameters from input file
   // global parameters
   tov.rhoc  = pin->GetReal("problem", "rhoc");
@@ -134,7 +130,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     block = std::string("mhd");
   }
   tov.gamma = pin->GetOrAddReal(block, "gamma", 5.0/3.0);
-  tov.dfloor = pin->GetOrAddReal(block, "dfloor", (FLT_MIN));
+  tov.dfloor = pin->GetReal(block, "dfloor");
   tov.pfloor = pin->GetReal(block, "pfloor");
   tov.v_pert = pin->GetOrAddReal("problem" , "v_pert", 0.0);
 
@@ -144,7 +140,6 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   T = pin->GetOrAddReal("problem", "T", 0.0); 
   Kappatilde = pin->GetOrAddReal("problem", "Kappatilde",86841);
   Gamma = pin->GetOrAddReal("problem", "Gamma", 3.005);
- 
 
   // Set the history function for a TOV star
   user_hist_func = &TOVHistory;
@@ -214,6 +209,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     Real rho, p, mass, alp;
     //printf("Grabbing primitives!\n");
     GetPrimitivesAtPoint(tov_, r, rho, p, mass, alp);
+    //printa sia il valore di p che il valore di pfloor, se sono giusti allora il problema è nel passaggio del flooring dell'eos. Non nell'inizializzazione, ma nelle poecewise polytrope.
     //printf("Primitives retrieved!\n");
 
     Real vr = 0.;
@@ -801,7 +797,6 @@ void TOVHistory(HistoryData *pdata, Mesh *pm) {
   pdata->hdata[0] = rho_max;
 }
 
-
 //source function
 void neutrinolightbulb(Mesh* pm, const Real bdt){
   MeshBlockPack *pmbp = pm->pmb_pack;
@@ -904,5 +899,3 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
 
 }
-
-
