@@ -997,7 +997,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
     interpolated_bcc.template sync<HostMemSpace>();
 
     grids[g]->InterpolateToSphere(1, alpha);
-    Kokkos::realloc(interpolated_alpha, grids[g]->nangles, 3);
+    Kokkos::realloc(interpolated_alpha, grids[g]->nangles, 1);
     Kokkos::deep_copy(interpolated_alpha, grids[g]->interp_vals);
     interpolated_alpha.template modify<DevExeSpace>();
     interpolated_alpha.template sync<HostMemSpace>();
@@ -1009,7 +1009,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
     interpolated_beta.template sync<HostMemSpace>();
 
     grids[g]->InterpolateToSphere(6, metric);
-    Kokkos::realloc(interpolated_metric, grids[g]->nangles, 3);
+    Kokkos::realloc(interpolated_metric, grids[g]->nangles, 6);
     Kokkos::deep_copy(interpolated_metric, grids[g]->interp_vals);
     interpolated_metric.template modify<DevExeSpace>();
     interpolated_metric.template sync<HostMemSpace>();
