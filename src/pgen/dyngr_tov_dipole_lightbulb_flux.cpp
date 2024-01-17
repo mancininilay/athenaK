@@ -911,6 +911,9 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   MeshBlockPack *pmbp = pm->pmb_pack;
   auto &indcs = pm->pmb_pack->pmesh->mb_indcs;
   int &ng = indcs.ng;
+  int n1 = indcs.nx1 + 2*ng;
+  int n2 = (indcs.nx2 > 1)? (indcs.nx2 + 2*ng) : 1;
+  int n3 = (indcs.nx3 > 1)? (indcs.nx3 + 2*ng) : 1;
   int is = indcs.is;
   int js = indcs.js;
   int ks = indcs.ks;
@@ -922,7 +925,6 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   auto &size = pmbp->pmb->mb_size;
   auto &adm = pmbp->padm->adm;
 
-  std::string block;
   int nvars;
   DvceArray5D<Real> u0, w0, bcc0;  
   if (pmbp->phydro != nullptr) {
@@ -936,7 +938,10 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
     bcc0 = pmbp->pmhd->bcc0;
   }
   
-  DvceArray5D<Real> alpha, beta, metric;
+  DvceArray5D<Real> alpha("alpha",nmb+1,1,n1,n2,n3);
+  DvceArray5D<Real> beta("beta",nmb+1,3,n1,n2,n3);
+  DvceArray5D<Real> metric("metric",nmb+1,6,n1,n2,n3);
+
 
   par_for("fixing", DevExeSpace(), 0, nmb1, ks, ke, js, je, is, ie,
   KOKKOS_LAMBDA(const int m, const int k, const int j, const int i) {
