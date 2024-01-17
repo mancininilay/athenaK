@@ -938,9 +938,9 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
     bcc0 = pmbp->pmhd->bcc0;
   }
   
-  DvceArray5D<Real> alpha("alpha",nmb+1,1,n1,n2,n3);
-  DvceArray5D<Real> beta("beta",nmb+1,3,n1,n2,n3);
-  DvceArray5D<Real> metric("metric",nmb+1,6,n1,n2,n3);
+  DvceArray5D<Real> alpha("alpha",nmb1+1,1,n1,n2,n3);
+  DvceArray5D<Real> beta("beta",nmb1+1,3,n1,n2,n3);
+  DvceArray5D<Real> metric("metric",nmb1+1,6,n1,n2,n3);
 
 
   par_for("fixing", DevExeSpace(), 0, nmb1, ks, ke, js, je, is, ie,
