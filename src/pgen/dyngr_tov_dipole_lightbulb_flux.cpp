@@ -934,7 +934,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
     bcc0 = pmbp->pmhd->bcc0;
   }
   
-  DvceArray5D<Real> alpha, metric;
+  DvceArray5D<Real> alpha, beta, metric;
 
   par_for("fixing", DevExeSpace(), 0, nmb1, ks, ke, js, je, is, ie,
   KOKKOS_LAMBDA(const int m, const int k, const int j, const int i) {
@@ -946,6 +946,9 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
     metric[m][4][k][j][i] = adm.g_dd(m,1,2,k,j,i);
     metric[m][5][k][j][i] = adm.g_dd(m,2,2,k,j,i);
     alpha[m][0][k][j][i] = adm.alpha(m, k, j, i);
+    beta[m][0][k][j][i] = adm.beta_u(m,0,k,j,i);
+    beta[m][1][k][j][i] = adm.beta_u(m,1,k,j,i);
+    beta[m][2][k][j][i] = adm.beta_u(m,2,k,j,i);
 
   });
 
@@ -974,7 +977,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   // go through angles at each radii:
   DualArray2D<Real> interpolated_bcc;  // needed for MHD
   DualArray2D<Real> interpolated_metric;  // needed for ADM
-  DualArray2D<Real> interpolated_aplha;
+  DualArray2D<Real> interpolated_alpha;
   DualArray2D<Real> interpolated_beta;
 
   for (int g=0; g<nradii; ++g) {
@@ -997,7 +1000,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
     interpolated_alpha.template modify<DevExeSpace>();
     interpolated_alpha.template sync<HostMemSpace>();
 
-    grids[g]->InterpolateToSphere(3, adm.beta_u);
+    grids[g]->InterpolateToSphere(3, beta);
     Kokkos::realloc(interpolated_beta, grids[g]->nangles, 3);
     Kokkos::deep_copy(interpolated_beta, grids[g]->interp_vals);
     interpolated_beta.template modify<DevExeSpace>();
