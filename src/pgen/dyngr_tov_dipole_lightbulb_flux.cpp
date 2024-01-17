@@ -11,6 +11,7 @@
 
 #include <algorithm>  // max(), max_element(), min(), min_element()
 #include <iostream>   // endl
+#include <iomanip>
 #include <limits>     // numeric_limits::max()
 #include <sstream>    // stringstream
 #include <string>     // c_str(), string
