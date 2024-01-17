@@ -108,6 +108,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   auto &grids = spherical_grids;
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 10.0));
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 20.0));
+  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 50.0));
   user_hist_func = tovFluxes;
 
   // Read problem-specific parameters from input file
@@ -939,16 +940,16 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   par_for("fixing", DevExeSpace(), 0, nmb1, ks, ke, js, je, is, ie,
   KOKKOS_LAMBDA(const int m, const int k, const int j, const int i) {
     
-    metric[m][0][k][j][i] = adm.g_dd(m,0,0,k,j,i);
-    metric[m][1][k][j][i] = adm.g_dd(m,0,1,k,j,i);
-    metric[m][2][k][j][i] = adm.g_dd(m,0,2,k,j,i);
-    metric[m][3][k][j][i] = adm.g_dd(m,1,1,k,j,i);
-    metric[m][4][k][j][i] = adm.g_dd(m,1,2,k,j,i);
-    metric[m][5][k][j][i] = adm.g_dd(m,2,2,k,j,i);
-    alpha[m][0][k][j][i] = adm.alpha(m, k, j, i);
-    beta[m][0][k][j][i] = adm.beta_u(m,0,k,j,i);
-    beta[m][1][k][j][i] = adm.beta_u(m,1,k,j,i);
-    beta[m][2][k][j][i] = adm.beta_u(m,2,k,j,i);
+    metric(m,0,k,j,i) = adm.g_dd(m,0,0,k,j,i);
+    metric(m,1,k,j,1) = adm.g_dd(m,0,1,k,j,i);
+    metric(m,2,k,j,1)  = adm.g_dd(m,0,2,k,j,i);
+    metric(m,3,k,j,1)  = adm.g_dd(m,1,1,k,j,i);
+    metric(m,4,k,j,1)  = adm.g_dd(m,1,2,k,j,i);
+    metric(m,5,k,j,1)  = adm.g_dd(m,2,2,k,j,i);
+    alpha(m,0,k,j,i) = adm.alpha(m, k, j, i);
+    beta(m,0,k,j,i) = adm.beta_u(m,0,k,j,i);
+    beta(m,1,k,j,i) = adm.beta_u(m,1,k,j,i);
+    beta(m,2,k,j,i) = adm.beta_u(m,2,k,j,i);
 
   });
 
@@ -1039,11 +1040,11 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
                           interpolated_beta.h_view(n,1),
                           interpolated_beta.h_view(n,2)};
       Real int_g3d[NSPMETRIC] = {interpolated_metric.h_view(n,0),
-                             interpolated_metric.h_view(n,1),
-                             interpolated_metric.h_view(n,2),
-                             interpolated_metric.h_view(n,3),
-                             interpolated_metric.h_view(n,4),
-                             interpolated_metric.h_view(n,5)};
+                                 interpolated_metric.h_view(n,1),
+                                 interpolated_metric.h_view(n,2),
+                                 interpolated_metric.h_view(n,3),
+                                 interpolated_metric.h_view(n,4),
+                                 interpolated_metric.h_view(n,5)};
       
 
       Real r2 = SQR(r);
