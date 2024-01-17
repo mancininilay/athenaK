@@ -942,11 +942,11 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   KOKKOS_LAMBDA(const int m, const int k, const int j, const int i) {
     
     metric(m,0,k,j,i) = adm.g_dd(m,0,0,k,j,i);
-    metric(m,1,k,j,1) = adm.g_dd(m,0,1,k,j,i);
-    metric(m,2,k,j,1)  = adm.g_dd(m,0,2,k,j,i);
-    metric(m,3,k,j,1)  = adm.g_dd(m,1,1,k,j,i);
-    metric(m,4,k,j,1)  = adm.g_dd(m,1,2,k,j,i);
-    metric(m,5,k,j,1)  = adm.g_dd(m,2,2,k,j,i);
+    metric(m,1,k,j,i) = adm.g_dd(m,0,1,k,j,i);
+    metric(m,2,k,j,i)  = adm.g_dd(m,0,2,k,j,i);
+    metric(m,3,k,j,i)  = adm.g_dd(m,1,1,k,j,i);
+    metric(m,4,k,j,i)  = adm.g_dd(m,1,2,k,j,i);
+    metric(m,5,k,j,i)  = adm.g_dd(m,2,2,k,j,i);
     alpha(m,0,k,j,i) = adm.alpha(m, k, j, i);
     beta(m,0,k,j,i) = adm.beta_u(m,0,k,j,i);
     beta(m,1,k,j,i) = adm.beta_u(m,1,k,j,i);
