@@ -918,7 +918,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
       u0(m,IM1,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_x*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
       u0(m,IM2,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_y*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
       u0(m,IM3,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_z*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
-      //u0(m,nvars,k,j,i) += alpha*vol*bdt*(lambda1-lambda2*w0(m,nvars,k,j,i))*z;
+      u0(m,nvars,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*(lambda1-lambda2*w0(m,nvars,k,j,i))*z;
       
     }
   });
