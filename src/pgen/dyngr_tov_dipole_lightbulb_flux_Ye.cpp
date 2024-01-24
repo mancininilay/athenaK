@@ -841,6 +841,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
   std::string block;
   DvceArray5D<Real> u0, w0;
+  int nvars;
   if (pmbp->phydro != nullptr) {
     nvars = pmbp->phydro->nhydro + pmbp->phydro->nscalars;
     u0 = pmbp->phydro->u0;
