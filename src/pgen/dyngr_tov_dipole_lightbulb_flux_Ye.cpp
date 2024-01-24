@@ -109,7 +109,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   auto &grids = spherical_grids;
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 10.0));
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 20.0));
-  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 50.0));
+  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 30.0));
   user_hist_func = tovFluxes;
 
   // Read problem-specific parameters from input file
@@ -241,7 +241,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
 
     Real f = 0.5;
     if (r <= tov.R_edge) {
-      f=0.2;
+      f=0.05;
     }
 
     // FIXME: assumes ideal gas!
@@ -832,20 +832,22 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   auto &coord = pmbp->pcoord->coord_data;
   auto &size = pmbp->pmb->mb_size;
   auto &adm = pmbp->padm->adm;
-  Real Q = C;
-  Real Tnu = T;
+  Real Q = C; //Lve,52
+  Real Tnu = T; //Tnue
   Real rhocut = rho_cut;
-  Real BB = B;
+  Real BB = B;  
   Real kappatilde = Kappatilde;
   Real gamma = Gamma;
 
   std::string block;
   DvceArray5D<Real> u0, w0;
   if (pmbp->phydro != nullptr) {
+    nvars = pmbp->phydro->nhydro + pmbp->phydro->nscalars;
     u0 = pmbp->phydro->u0;
     w0 = pmbp->phydro->w0;
     block = std::string("hydro");
   } else if (pmbp->pmhd != nullptr) {
+    nvars = pmbp->pmhd->nmhd + pmbp->pmhd->nscalars;
     u0 = pmbp->pmhd->u0;
     w0 = pmbp->pmhd->w0;
     block = std::string("mhd");
@@ -887,7 +889,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
     Real w[3] = {ux, uy, uz};
     Real ww = Primitive::SquareVector(w, g3d);
-    Real ut = sqrt(1.0 + ww);
+    Real ut = sqrt(1.0 + ww);  //Lorentz Factor
 
     auto u_x = g3d[S11]*ux + g3d[S12]*uy + g3d[S13]*uz;
     auto u_y = g3d[S12]*ux + g3d[S22]*uy + g3d[S23]*uz;
@@ -895,6 +897,9 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
     // Real p = 0.0;
     Real p = fmax(w0(m,IEN,k,j,i) - (kappatilde * pow(w0(m,IDN,k,j,i), gamma)),0.0);
+    Real lambda1 = 0.0109*(Q/pow(r,2))*((4.58*Tnu)+2.586+(0.438/Tnu))+ ((1.285e10)*pow(p,1.25));
+    Real lambda2 = lambda1 + 0.0109*(Q/pow(r,2))*((6.477*Tnu)-2.586+(0.309/Tnu))+ ((1.285e10)*pow(p,1.25));
+
 
     Real z;
     if (w0(m,IDN,k,j,i)>rhocut){
@@ -906,11 +911,11 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
     if (r>0.0){
 
-      u0(m,IEN,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*ut*(Q*(pow((Tnu/4.0),2)/pow(r,2)) - BB*pow(p,1.5))*z;
-      u0(m,IM1,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_x*(Q*(pow((Tnu/4.0),2)/pow(r,2)) - BB*pow(p,1.5))*z;
-      u0(m,IM2,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_y*(Q*(pow((Tnu/4.0),2)/pow(r,2)) - BB*pow(p,1.5))*z;
-      u0(m,IM3,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_z*(Q*(pow((Tnu/4.0),2)/pow(r,2)) - BB*pow(p,1.5))*z;
-
+      u0(m,IEN,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*ut*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,IM1,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_x*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2)))- BB*pow(p,1.5))*z;
+      u0(m,IM2,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_y*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,IM3,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_z*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,nvars,k,j,i) += alpha*vol*bdt*(lambda1-lambda2*w0(m,nvars,k,j,i))*z;
       
     }
   });
