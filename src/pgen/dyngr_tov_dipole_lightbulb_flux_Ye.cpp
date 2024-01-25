@@ -109,7 +109,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   auto &grids = spherical_grids;
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 10.0));
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 20.0));
-  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 30.0));
+  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 30.0));
   user_hist_func = tovFluxes;
 
   // Read problem-specific parameters from input file
