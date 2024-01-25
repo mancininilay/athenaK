@@ -109,7 +109,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   auto &grids = spherical_grids;
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 10.0));
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 20.0));
-  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 30.0));
+  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 30.0));
   user_hist_func = tovFluxes;
 
   // Read problem-specific parameters from input file
@@ -843,12 +843,12 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   DvceArray5D<Real> u0, w0;
   int nvars;
   if (pmbp->phydro != nullptr) {
-    nvars = pmbp->phydro->nhydro + pmbp->phydro->nscalars;
+    nvars = pmbp->phydro->nhydro;
     u0 = pmbp->phydro->u0;
     w0 = pmbp->phydro->w0;
     block = std::string("hydro");
   } else if (pmbp->pmhd != nullptr) {
-    nvars = pmbp->pmhd->nmhd + pmbp->pmhd->nscalars;
+    nvars = pmbp->pmhd->nmhd;
     u0 = pmbp->pmhd->u0;
     w0 = pmbp->pmhd->w0;
     block = std::string("mhd");
@@ -911,14 +911,14 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
     if (r>0.0){
 
-      //Real lambda1 = 0.0109*(Q/pow(r,2))*((4.58*Tnu)+2.586+(0.438/Tnu))+ ((1.285e10)*pow(p,1.25));
-      //Real lambda2 = lambda1 + 0.0109*(Q/pow(r,2))*((6.477*Tnu)-2.586+(0.309/Tnu))+ ((1.285e10)*pow(p,1.25));
+      Real lambda1 = 0.0109*(Q/pow(r,2))*((4.58*Tnu)+2.586+(0.438/Tnu))+ ((1.285e10)*pow(p,1.25));
+      Real lambda2 = lambda1 + 0.0109*(Q/pow(r,2))*((6.477*Tnu)-2.586+(0.309/Tnu))+ ((1.285e10)*pow(p,1.25));
 
       u0(m,IEN,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*ut *((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
       u0(m,IM1,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_x*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
       u0(m,IM2,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_y*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
       u0(m,IM3,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_z*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
-      //u0(m,nvars,k,j,i) += alpha*vol*bdt*(w0(m,IDN,k,j,i)*vol*ut)*(lambda1-lambda2*w0(m,nvars,k,j,i))*z;
+      u0(m,nvars,k,j,i) += alpha*vol*bdt*(w0(m,IDN,k,j,i)*vol*ut)*(lambda1-lambda2*w0(m,nvars,k,j,i))*z;
       
     }
   });
