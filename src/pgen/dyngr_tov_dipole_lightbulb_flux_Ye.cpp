@@ -110,6 +110,13 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 10.0));
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 20.0));
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 30.0));
+  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 50.0));
+  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 70.0));
+  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 100.0));
+  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 125.0));
+  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 150.0));
+  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 200.0));
+  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 230.0));
   user_hist_func = tovFluxes;
 
   // Read problem-specific parameters from input file
@@ -984,7 +991,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   // extract grids, number of radii, number of fluxes, and history appending index
   auto &grids = pm->pgen->spherical_grids;
   int nradii = grids.size();
-  int nflux = 4;
+  int nflux = 1;
 
   pdata->nhist = nradii*nflux;
   if (pdata->nhist > NHISTORY_VARIABLES) {
@@ -998,9 +1005,9 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
     stream << std::fixed << std::setprecision(1) << grids[g]->radius;
     std::string rad_str = stream.str();
     pdata->label[nflux*g+0] = "mdot_" + rad_str;
-    pdata->label[nflux*g+1] = "edot_" + rad_str;
-    pdata->label[nflux*g+2] = "ldot_" + rad_str;
-    pdata->label[nflux*g+3] = "phi_" + rad_str;
+    //pdata->label[nflux*g+1] = "edot_" + rad_str;
+    //pdata->label[nflux*g+2] = "ldot_" + rad_str;
+    //pdata->label[nflux*g+3] = "phi_" + rad_str;
   }
 
   // go through angles at each radii:
@@ -1012,9 +1019,9 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   for (int g=0; g<nradii; ++g) {
     // zero fluxes at this radius
     pdata->hdata[nflux*g+0] = 0.0;
-    pdata->hdata[nflux*g+1] = 0.0;
-    pdata->hdata[nflux*g+2] = 0.0;
-    pdata->hdata[nflux*g+3] = 0.0;
+    //pdata->hdata[nflux*g+1] = 0.0;
+    //pdata->hdata[nflux*g+2] = 0.0;
+    //pdata->hdata[nflux*g+3] = 0.0;
 
     // interpolate primitives (and cell-centered magnetic fields iff mhd)
     grids[g]->InterpolateToSphere(3, bcc0);
@@ -1086,6 +1093,8 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
                    utilde[1] - W*int_beta[1]/int_alpha,
                    utilde[2] - W*int_beta[2]/int_alpha};
       Real ur = u[0]*sin(theta)*cos(phi) + u[1]*sin(theta)*sin(phi) + u[2]*cos(theta);
+      //Real uphi =
+      //Real h = 
 
       // integration params
       Real &domega = grids[g]->solid_angles.h_view(n);
@@ -1099,8 +1108,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
       //pdata->hdata[nflux*g+1] += -1.0*t1_0*sqrtmdet*domega;
 
       // compute angular momentum flux
-      //Real t1_3 = (int_dn + gamma*int_ie + b_sq)*ur*u_ph - br*b_ph;
-      //pdata->hdata[nflux*g+2] += t1_3*sqrtmdet*domega;
+      //pdata->hdata[nflux*g+2] += int_dn*ur*uphi*h*r2*domega*sqrtmdet*int_alpha*pow(W,2);
 
       // compute magnetic flux
       //pdata->hdata[nflux*g+3] += 0.5*fabs(br*u0 - b0*ur)*sqrtmdet*domega;
