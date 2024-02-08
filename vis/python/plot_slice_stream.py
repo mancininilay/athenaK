@@ -825,7 +825,7 @@ def main(**kwargs):
     start_points = sample_points_on_ellipse(center, a, b, num_points)
 
 
-    plt.streamplot(x,y,bx,by,density=1,color='w',linewidth=1,arrowsize=1) #, start_points=start_points)
+    plt.streamplot(x,y,bx,by,density=5,color='w',linewidth=1,arrowsize=1) #, start_points=start_points)
 
     # Mark and/or mask horizon
     if kwargs['horizon'] or kwargs['horizon_mask']:
