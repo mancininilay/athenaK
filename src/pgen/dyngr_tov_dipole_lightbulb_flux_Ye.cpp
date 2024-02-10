@@ -51,9 +51,10 @@ struct tov_pgen {
   DualArray1D<Real> M; // Integrated mass, M(r)
   DualArray1D<Real> P; // Pressure, P(r)
   DualArray1D<Real> alp; // Lapse, \alpha(r)
-
+  Real Yfloor; // Floor for Ye
   Real R_edge; // Radius of star
   Real M_edge; // Mass of star
+
   int n_r; // Point where pressure goes to zero.
 };
 
@@ -63,7 +64,7 @@ Real rho_cut;
 Real T;
 Real Kappatilde;
 Real Gamma;
-Real Yfloor;
+
 
 // Prototypes for functions used internally in this pgen.
 static void ConstructTOV(tov_pgen& pgen);
@@ -154,6 +155,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   tov.dfloor = pin->GetReal(block, "dfloor");
   tov.pfloor = pin->GetReal(block, "pfloor");
   tov.v_pert = pin->GetOrAddReal("problem" , "v_pert", 0.0);
+  tov.Yfloor = pin->GetOrAddReal(block, "s1_atmosphere", 0.5);
 
   C = pin->GetOrAddReal("problem", "C", 0.0);
   B = pin->GetOrAddReal("problem", "B", 0.0);
@@ -161,7 +163,6 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   T = pin->GetOrAddReal("problem", "T", 0.0); 
   Kappatilde = pin->GetOrAddReal("problem", "Kappatilde",86841);
   Gamma = pin->GetOrAddReal("problem", "Gamma", 3.005);
-  Yfloor = pin->GetOrAddReal(block, "s1_atmosphere", 0.5);
 
   // Set the history function for a TOV star
   
@@ -252,7 +253,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     if (r <= tov.R_edge) {
       f=0.05;
     } else {
-      f = Yfloor;
+      f = tov.Yfloor;
     }
 
     if (r > tov.R_edge) {
