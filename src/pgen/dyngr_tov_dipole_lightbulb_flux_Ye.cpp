@@ -63,6 +63,7 @@ Real rho_cut;
 Real T;
 Real Kappatilde;
 Real Gamma;
+Real Yfloor;
 
 // Prototypes for functions used internally in this pgen.
 static void ConstructTOV(tov_pgen& pgen);
@@ -160,6 +161,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   T = pin->GetOrAddReal("problem", "T", 0.0); 
   Kappatilde = pin->GetOrAddReal("problem", "Kappatilde",86841);
   Gamma = pin->GetOrAddReal("problem", "Gamma", 3.005);
+  Yfloor = pin->GetOrAddReal(block, "s1_atmosphere", 0.5);
 
   // Set the history function for a TOV star
   
@@ -249,7 +251,14 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     Real f = 0.5;
     if (r <= tov.R_edge) {
       f=0.05;
+    } else {
+      f = Yfloor;
     }
+
+    if (r > tov.R_edge) {
+      rho = 1e-16*pow(tov.R_edge/r, 2);
+    } 
+
 
     // FIXME: assumes ideal gas!
     // Set hydrodynamic quantities
