@@ -52,7 +52,7 @@ struct tov_pgen {
   DualArray1D<Real> P; // Pressure, P(r)
   DualArray1D<Real> alp; // Lapse, \alpha(r)
   Real Yfloor; // Floor for Ye
-  Reak tfloor; // Floor for temperature
+  Real tfloor; // Floor for temperature
   Real R_edge; // Radius of star
   Real M_edge; // Mass of star
 
