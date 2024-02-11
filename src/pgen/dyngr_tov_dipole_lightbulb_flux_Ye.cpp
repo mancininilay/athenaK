@@ -52,6 +52,7 @@ struct tov_pgen {
   DualArray1D<Real> P; // Pressure, P(r)
   DualArray1D<Real> alp; // Lapse, \alpha(r)
   Real Yfloor; // Floor for Ye
+  Reak Tfloor; // Floor for temperature
   Real R_edge; // Radius of star
   Real M_edge; // Mass of star
 
@@ -156,6 +157,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   tov.pfloor = pin->GetReal(block, "pfloor");
   tov.v_pert = pin->GetOrAddReal("problem" , "v_pert", 0.0);
   tov.Yfloor = pin->GetOrAddReal(block, "s1_atmosphere", 0.5);
+  tov.Tfloor = pin->GetOrAddReal(block, "tfloor", 1.0);
 
   C = pin->GetOrAddReal("problem", "C", 0.0);
   B = pin->GetOrAddReal("problem", "B", 0.0);
@@ -256,8 +258,9 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
       f = tov.Yfloor;
     }
 
-    if (r > tov.R_edge) {
+    if (r >= tov.R_edge) {
       rho = 1e-16*pow(tov.R_edge/r, 2);
+      p = rho * tov.tfloor*1000;
     } 
 
 
