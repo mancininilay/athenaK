@@ -19,7 +19,7 @@
     #error NHISTORY > NREDUCTION in outputs.hpp
 #endif
 
-#define NOUTPUT_CHOICES 139
+#define NOUTPUT_CHOICES 142
 // choices for output variables used in <ouput> blocks in input file
 // TO ADD MORE CHOICES:
 //   - add more strings to array below, change NOUTPUT_CHOICES above appropriately
@@ -46,7 +46,6 @@ static const char *var_choice[NOUTPUT_CHOICES] = {
   "rad_mhd_bcc2",  "rad_mhd_bcc3",   "rad_mhd_bcc",    "rad_mhd_u_bcc",  "rad_mhd_w_bcc",
   // 59-78
 
-
   "adm_gxx", "adm_gxy", "adm_gxz", "adm_gyy", "adm_gyz", "adm_gzz",
   "adm_Kxx", "adm_Kxy", "adm_Kxz", "adm_Kyy", "adm_Kyz", "adm_Kzz",
   "adm_psi4",
@@ -63,17 +62,20 @@ static const char *var_choice[NOUTPUT_CHOICES] = {
   "z4c_betax", "z4c_betay", "z4c_betaz", // 97-118
   "z4c", // 119
 
+  "weyl_rpsi4", "weyl_ipsi4", // 120 - 121
+  "weyl", // 122
+
   "con_C",
   "con_H",
   "con_M",
   "con_Z",
-  "con_Mx", "con_My", "con_Mz", // 120-126
-  "con", // 127
+  "con_Mx", "con_My", "con_Mz", // 123-129
+  "con", // 130
 
   "tmunu_Sxx", "tmunu_Sxy", "tmunu_Sxz", "tmunu_Syy", "tmunu_Syz", "tmunu_Szz",
   "tmunu_E",
-  "tmunu_Sx", "tmunu_Sy", "tmunu_Sz", // 128-137
-  "tmunu" // 138
+  "tmunu_Sx", "tmunu_Sy", "tmunu_Sz", // 131-140
+  "tmunu" // 141
 };
 
 // forward declarations

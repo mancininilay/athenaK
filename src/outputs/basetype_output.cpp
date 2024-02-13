@@ -127,7 +127,14 @@ BaseTypeOutput::BaseTypeOutput(OutputParameters opar, Mesh *pm) :
        << std::endl << "Input file is likely missing corresponding block" << std::endl;
     exit(EXIT_FAILURE);
   }
-  if ((ivar>=128) && (ivar <=138) && (pm->pmb_pack->ptmunu == nullptr)) {
+  if ((ivar>=128) && (ivar<131) && (pm->pmb_pack->pz4c == nullptr)) {
+    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
+       << "Output of weyl variable requested in <output> block '"
+       << out_params.block_name << "' but weyl object not constructed."
+       << std::endl << "Input file is likely missing corresponding block" << std::endl;
+    exit(EXIT_FAILURE);
+  }
+  if ((ivar>=131) && (ivar <=141) && (pm->pmb_pack->ptmunu == nullptr)) {
     std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
        << "Output of Tmunu variable requested in <output> block '"
        << out_params.block_name << "' but no Tmunu object has been constructed."
@@ -495,6 +502,12 @@ BaseTypeOutput::BaseTypeOutput(OutputParameters opar, Mesh *pm) :
         out_params.variable.compare(z4c::Z4c::Z4c_names[v]) == 0) {
       outvars.emplace_back(z4c::Z4c::Z4c_names[v], v, &(pm->pmb_pack->pz4c->u0));
     }
+  }
+
+  // weyl scalars
+  if (out_params.variable.compare("weyl") == 0) {
+    outvars.emplace_back("weyl_rpsi4",0,&(pm->pmb_pack->pz4c->u_weyl));
+    outvars.emplace_back("weyl_ipsi4",1,&(pm->pmb_pack->pz4c->u_weyl));
   }
 
   // radiation moments in coordinate frame
