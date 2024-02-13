@@ -258,10 +258,10 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
       f = tov.Yfloor;
     }
 
-    if (r >= tov.R_edge) {
-      rho = 1e-16*pow(tov.R_edge/r, 2);
+    //if (r >= tov.R_edge) {
+      //rho = 1e-16*pow(tov.R_edge/r, 2);
       //p = rho * tov.tfloor*1000;
-    } 
+    //} 
 
 
     // FIXME: assumes ideal gas!
