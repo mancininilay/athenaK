@@ -260,7 +260,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
 
     if (r >= tov.R_edge) {
       rho = 1e-16*pow(tov.R_edge/r, 2);
-      p = rho * tov.tfloor*1000;
+      //p = rho * tov.tfloor*1000;
     } 
 
 
