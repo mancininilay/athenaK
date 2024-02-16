@@ -43,6 +43,8 @@ struct tov_pgen {
   Real pcut;
   Real r0;
   int magindex;
+  Real Yfloor;
+  Real tfloor;
 
   int npoints; // Number of points in arrays
   Real dr; // Radial spacing for integration
@@ -154,6 +156,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   tov.dfloor = pin->GetReal(block, "dfloor");
   tov.pfloor = pin->GetReal(block, "pfloor");
   tov.v_pert = pin->GetOrAddReal("problem" , "v_pert", 0.0);
+  tov.Yfloor = pin->GetOrAddReal("problem", "s1_atmosphere", 0.46);
+  tov.tfloor = pin->GetOrAddReal("problem", "tfloor", 0.0);
 
   C = pin->GetOrAddReal("problem", "C", 0.0);
   B = pin->GetOrAddReal("problem", "B", 0.0);
@@ -250,12 +254,14 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     Real f = 0.5;
     if (r <= tov.R_edge) {
       f=0.05;
-    } 
+    } else if (r > tov.R_edge) {
+      f = tov.Yfloor;
+    }
 
-    //if (r >= tov.R_edge) {
-      //rho = 1e-16*pow(tov.R_edge/r, 2);
+    if (r >= tov.R_edge) {
+      rho = 1e-16*pow(tov.R_edge/r, 2);
       //p = rho * tov.tfloor*1000;
-    //} 
+    } 
 
 
     // FIXME: assumes ideal gas!
