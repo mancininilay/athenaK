@@ -10,6 +10,16 @@ import argparse
 # Athena++ modules
 import athena_read
 
+def running_average(t, x, dt_mean):
+    """
+    Smoothen a timeseries over a given timestep
+    """
+    import numpy as np
+    dt = t[1]-t[0]
+    N = 2*int(round(dt_mean/dt)) + 1
+    ker = np.ones(N)/N
+    return t[(N-1)//2:-(N-1)//2], np.convolve(x, ker, mode="valid")
+
 
 # Main function
 def main(**kwargs):
@@ -64,12 +74,3 @@ if __name__ == '__main__':
 
 
 
-def running_average(t, x, dt_mean):
-    """
-    Smoothen a timeseries over a given timestep
-    """
-    import numpy as np
-    dt = t[1]-t[0]
-    N = 2*int(round(dt_mean/dt)) + 1
-    ker = np.ones(N)/N
-    return t[(N-1)//2:-(N-1)//2], np.convolve(x, ker, mode="valid")
