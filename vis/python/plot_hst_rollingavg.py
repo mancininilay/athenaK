@@ -6,15 +6,16 @@
 
 # Python modules
 import argparse
+import numpy as np
 
 # Athena++ modules
 import athena_read
+
 
 def running_average(t, x, dt_mean):
     """
     Smoothen a timeseries over a given timestep
     """
-    import numpy as np
     dt = t[1]-t[0]
     N = 2*int(round(dt_mean/dt)) + 1
     ker = np.ones(N)/N
@@ -38,9 +39,16 @@ def main(**kwargs):
 
     y_vals = data[variables]
     x_vals = data["time"]
+    last_2000_points = y_vals[-2000:]  # Extract the last 2000 points from y_vals
+    avg_last_2000 = np.mean(last_2000_points)  # Calculate the average of these points
+    std_dev_last_2000 = np.std(last_2000_points)  # Calculate the standard deviation of these points
+
+    print("Average of the last 2000 points:", avg_last_2000)
+    print("Standard deviation of the last 2000 points:", std_dev_last_2000)
     x_vals, y_vals = running_average(x_vals, y_vals, 100.0)
 
     print(data)
+
 
     # Load Python plotting modules
     output_file = kwargs['output']
