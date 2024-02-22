@@ -39,7 +39,8 @@ def main(**kwargs):
 
     y_vals = data[variables]
     x_vals = data["time"]
-    last_2000_points = y_vals[-2000:]  # Extract the last 2000 points from y_vals
+    last_2000_points = y_vals[-2000:]  # Extract the last 2000 points from y_vals 
+    print(last_2000_points)
     avg_last_2000 = np.mean(last_2000_points)  # Calculate the average of these points
     std_dev_last_2000 = np.std(last_2000_points)  # Calculate the standard deviation of these points
 
