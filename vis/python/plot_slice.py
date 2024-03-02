@@ -499,6 +499,7 @@ def main(**kwargs):
         pgas = (gamma_adi - 1.0) * quantities['eint']
         ktilde  = 86841
         gamma = 3.005
+        conv = (12/11)*(5.635e38/1.6e-6)*(1/8.56e31)
         if kwargs['variable'] == 'derived:pgas':
             quantity = pgas
         elif kwargs['variable'] == 'derived:kappa':
@@ -506,7 +507,7 @@ def main(**kwargs):
         elif kwargs['variable'] == 'derived:betath':
             quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))/ (quantities['eint'])
         elif kwargs['variable'] == 'derived:T':
-            quantity = (((quantities['eint']- (ktilde*(quantities['dens']**gamma)))*5.635e38*3)/7.56e-15)**0.25
+            quantity = ((quantities['eint']- (ktilde*(quantities['dens']**gamma)))*conv)**0.25 #T in Mev
         else:
             prad = quantities['r00_ff'] / 3.0
             quantity = prad / pgas
