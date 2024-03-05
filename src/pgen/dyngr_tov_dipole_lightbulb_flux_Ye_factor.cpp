@@ -900,9 +900,19 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     int i = (idx - m*nkji - k*nji - j*nx1) + is;
     k += ks;
     j += js;
+
+    Real &x1min = size.d_view(m).x1min;
+    Real &x1max = size.d_view(m).x1max;
     Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
+
+    Real &x2min = size.d_view(m).x2min;
+    Real &x2max = size.d_view(m).x2max;
     Real x2v = CellCenterX(j-js, indcs.nx2, x2min, x2max);
+
+    Real &x3min = size.d_view(m).x3min;
+    Real &x3max = size.d_view(m).x3max;
     Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
+
     Real r = sqrt(SQR(x1v) + SQR(x2v) + SQR(x3v));
 
     if (w0(m,IDN,k,j,i) < rhocut*1.1 && w0(m,IDN,k,j,i) > rhocut*0.9) {
@@ -930,9 +940,19 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     int i = (idx - m*nkji - k*nji - j*nx1) + is;
     k += ks;
     j += js;
+
+    Real &x1min = size.d_view(m).x1min;
+    Real &x1max = size.d_view(m).x1max;
     Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
+
+    Real &x2min = size.d_view(m).x2min;
+    Real &x2max = size.d_view(m).x2max;
     Real x2v = CellCenterX(j-js, indcs.nx2, x2min, x2max);
+
+    Real &x3min = size.d_view(m).x3min;
+    Real &x3max = size.d_view(m).x3max;
     Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
+    
     Real r = sqrt(SQR(x1v) + SQR(x2v) + SQR(x3v));
 
     if (w0(m,IDN,k,j,i) < rhocut*1.1 && w0(m,IDN,k,j,i) > rhocut*0.9) {
