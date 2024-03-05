@@ -876,9 +876,6 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     block = std::string("mhd");
   }
 
-  
-  bool factor_calculated = false; 
-
   par_for("findfactors", DevExeSpace(), 0, nmb1, ks, ke, js, je, is, ie,
   KOKKOS_LAMBDA(const int m, const int k, const int j, const int i) {
 
@@ -899,8 +896,8 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
     
     
-    if (!factor_calculated) { // Check if factor is already calculated
-      if (w0_(m,IDN,k,j,i) < rhocut*1.1 && w0_(m,IDN,k,j,i) > rhocut*0.9) {
+    //if (!factor_calculated) { // Check if factor is already calculated
+      if (w0(m,IDN,k,j,i) < rhocut*1.1 && w0(m,IDN,k,j,i) > rhocut*0.9) {
         // Compute factor here as needed
 
         Real p = fmax(w0(m,IEN,k,j,i) - (kappatilde * pow(w0(m,IDN,k,j,i), gamma)),0.0); //Thermal pressure
@@ -910,9 +907,9 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
         factor2 = lambda1/(lambda2*w0(m,nvars,k,j,i));
 
         // Ensure this update is thread-safe! Its not right now but only a few threads will enter this block
-        factor_calculated = true; // Indicate that alpha has been calculated
+        //factor_calculated = true; // Indicate that alpha has been calculated
       }
-    }
+    //}
     
   });
 
