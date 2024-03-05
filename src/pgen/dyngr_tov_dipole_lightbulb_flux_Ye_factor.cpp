@@ -859,8 +859,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real BB = B;  
   Real kappatilde = Kappatilde;
   Real gamma = Gamma;
-  Real factor = 1.0;  //this is hacky because in one of the iterations it might not be computed... this is unlikely to happen
-  Real factor2 = 1.0;
+  
 
   std::string block;
   DvceArray5D<Real> u0, w0;
@@ -877,42 +876,82 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     block = std::string("mhd");
   }
 
-  par_for("findfactors", DevExeSpace(), 0, nmb1, ks, ke, js, je, is, ie,
-  KOKKOS_LAMBDA(const int m, const int k, const int j, const int i) {
+  int nx1 = indcs.nx1;
+  int nx2 = indcs.nx2;
+  int nx3 = indcs.nx3;
+  const int nmkji = (pm->pmb_pack->nmb_thispack)*nx3*nx2*nx1;
+  const int nkji = nx3*nx2*nx1;
+  const int nji = nx2*nx1;
 
 
-    Real &x1min = size.d_view(m).x1min;
-    Real &x1max = size.d_view(m).x1max;
+  Real initial_value = std::numeric_limits<Real>::max();
+  Real initial_value2 = std::numeric_limits<Real>::max();
+  Real min_computed_value = initial_value;
+  Real min_computed_value2 = initial_value2;
+  Real factor = 1.0;  //this is hacky because in one of the iterations it might not be computed... this is unlikely to happen
+  Real factor2 = 1.0;
+
+  Kokkos::parallel_reduce("findfactor",Kokkos::RangePolicy<>(DevExeSpace(), 0, nmkji),
+  KOKKOS_LAMBDA(const int &idx, Real &f) {
+    // coompute n,k,j,i indices of thread
+    int m = (idx)/nkji;
+    int k = (idx - m*nkji)/nji;
+    int j = (idx - m*nkji - k*nji)/nx1;
+    int i = (idx - m*nkji - k*nji - j*nx1) + is;
+    k += ks;
+    j += js;
     Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
-
-    Real &x2min = size.d_view(m).x2min;
-    Real &x2max = size.d_view(m).x2max;
     Real x2v = CellCenterX(j-js, indcs.nx2, x2min, x2max);
-
-    Real &x3min = size.d_view(m).x3min;
-    Real &x3max = size.d_view(m).x3max;
     Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
-
     Real r = sqrt(SQR(x1v) + SQR(x2v) + SQR(x3v));
 
-    
-    
-    //if (!factor_calculated) { // Check if factor is already calculated
-      if (w0(m,IDN,k,j,i) < rhocut*1.1 && w0(m,IDN,k,j,i) > rhocut*0.9) {
+    if (w0(m,IDN,k,j,i) < rhocut*1.1 && w0(m,IDN,k,j,i) > rhocut*0.9) {
+        // Compute factor here as needed
+
+        Real p = fmax(w0(m,IEN,k,j,i) - (kappatilde * pow(w0(m,IDN,k,j,i), gamma)),0.0); //Thermal pressure
+        f = fmin(f,(0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2)))/(BB*pow(p,1.5)));
+
+        // Ensure this update is thread-safe! Its not right now but only a few threads will enter this block
+        //factor_calculated = true; // Indicate that alpha has been calculated
+      }
+
+  }, Kokkos::Min<Real>(min_computed_value));
+
+  if (min_computed_value != initial_value) {
+    factor = min_computed_value; // Update factor only if the condition was met.
+  }
+
+  Kokkos::parallel_reduce("findfactor2",Kokkos::RangePolicy<>(DevExeSpace(), 0, nmkji),
+  KOKKOS_LAMBDA(const int &idx, Real &f2) {
+    // coompute n,k,j,i indices of thread
+    int m = (idx)/nkji;
+    int k = (idx - m*nkji)/nji;
+    int j = (idx - m*nkji - k*nji)/nx1;
+    int i = (idx - m*nkji - k*nji - j*nx1) + is;
+    k += ks;
+    j += js;
+    Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
+    Real x2v = CellCenterX(j-js, indcs.nx2, x2min, x2max);
+    Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
+    Real r = sqrt(SQR(x1v) + SQR(x2v) + SQR(x3v));
+
+    if (w0(m,IDN,k,j,i) < rhocut*1.1 && w0(m,IDN,k,j,i) > rhocut*0.9) {
         // Compute factor here as needed
 
         Real p = fmax(w0(m,IEN,k,j,i) - (kappatilde * pow(w0(m,IDN,k,j,i), gamma)),0.0); //Thermal pressure
         Real lambda1 = 0.0109*(Q/pow(r,2))*((4.58*Tnu)+2.586+(0.438/Tnu))+ ((1.285e10)*pow(p,1.25));
         Real lambda2 = lambda1 + 0.0109*(Q/pow(r,2))*((6.477*Tnu)-2.586+(0.309/Tnu))+ ((1.285e10)*pow(p,1.25));
-        factor = (0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2)))/(BB*pow(p,1.5));
-        factor2 = lambda1/(lambda2*w0(m,nvars,k,j,i));
+        f2 = fmin(f2,lambda1/(lambda2*w0(m,nvars,k,j,i)));
 
         // Ensure this update is thread-safe! Its not right now but only a few threads will enter this block
         //factor_calculated = true; // Indicate that alpha has been calculated
       }
-    //}
-    
-  });
+
+  }, Kokkos::Min<Real>(min_computed_value2));
+  
+  if (min_computed_value2 != initial_value2) {
+    factor2 = min_computed_value2; // Update factor only if the condition was met.
+  }
 
 
   par_for("cooling", DevExeSpace(), 0, nmb1, ks, ke, js, je, is, ie,
