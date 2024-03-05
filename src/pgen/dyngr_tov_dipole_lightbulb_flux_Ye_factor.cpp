@@ -65,8 +65,7 @@ Real rho_cut;
 Real T;
 Real Kappatilde;
 Real Gamma;
-Real factor = 1.0;
-Real factor2 = 1.0;
+
 
 
 // Prototypes for functions used internally in this pgen.
@@ -860,6 +859,8 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real BB = B;  
   Real kappatilde = Kappatilde;
   Real gamma = Gamma;
+  Real factor = 1.0;  //this is hacky because in one of the iterations it might not be computed... this is unlikely to happen
+  Real factor2 = 1.0;
 
   std::string block;
   DvceArray5D<Real> u0, w0;
