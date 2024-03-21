@@ -135,6 +135,7 @@ def main(**kwargs):
     derived_dependencies['kappa'] = ('dens', 'eint')
     derived_dependencies['betath'] = ('dens', 'eint')
     derived_dependencies['T'] = ('dens', 'eint')
+    derived_dependencies['pthermal'] = ('dens', 'eint')
     derived_dependencies['pmag_nr'] = ('bcc1', 'bcc2', 'bcc3')
     derived_dependencies['pmag_rel'] = ('velx', 'vely', 'velz', 'bcc1', 'bcc2', 'bcc3')
     derived_dependencies['beta_inv_nr'] = ('eint', 'bcc1', 'bcc2', 'bcc3')
@@ -288,7 +289,7 @@ def main(**kwargs):
 
         # Extract adiabatic index from input file metadata
         if kwargs['variable'] in \
-                ['derived:' + name for name in ('pgas', 'kappa','betath', 'T', 'prad_pgas')] \
+                ['derived:' + name for name in ('pgas', 'kappa','betath', 'T', 'prad_pgas','pthermal')] \
                 + ['derived:cons_hydro_rel_' + name for name in ('t', 'x', 'y', 'z')]:
             try:
                 gamma_adi = float(input_data['hydro']['gamma'])
@@ -506,6 +507,8 @@ def main(**kwargs):
             quantity = pgas / (quantities['dens']**(gamma_adi))
         elif kwargs['variable'] == 'derived:betath':
             quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))/ (quantities['eint'])
+        elif kwargs['variable'] == 'derived:pthermal':
+            quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))
         elif kwargs['variable'] == 'derived:T':
             quantity = ((quantities['eint']- (ktilde*(quantities['dens']**gamma)))*conv)**0.25 #T in Mev
         else:
