@@ -864,9 +864,9 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real kappa = Kappa;
   Real kappatilde = Kappatilde;
   Real gamma = Gamma;
-  Real rstar = Rstar;
-  Real pstar = (kappa - kappatilde)*pow(rhocut,gamma);
-  Real factor = (BB*pow(pstar,1.5))/(0.0079*Q*(pow((Tnu/4.0),2)/pow(rstar,2)));
+  //Real rstar = Rstar;
+  //Real pstar = (kappa - kappatilde)*pow(rhocut,gamma);
+  //Real factor = (BB*pow(pstar,1.5))/(0.0079*Q*(pow((Tnu/4.0),2)/pow(rstar,2)));
 
   std::string block;
   DvceArray5D<Real> u0, w0;
@@ -943,10 +943,10 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
       Real lambda1 = 0.0109*(Q/pow(r,2))*((4.58*Tnu)+2.586+(0.438/Tnu))+ ((1.285e10)*pow(p,1.25));
       Real lambda2 = lambda1 + 0.0109*(Q/pow(r,2))*((6.477*Tnu)-2.586+(0.309/Tnu))+ ((1.285e10)*pow(p,1.25));
 
-      u0(m,IEN,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*ut *((factor*0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
-      u0(m,IM1,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_x*((factor*0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
-      u0(m,IM2,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_y*((factor*0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
-      u0(m,IM3,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_z*((factor*0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,IEN,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*ut *((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,IM1,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_x*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,IM2,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_y*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,IM3,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_z*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
       u0(m,nvars,k,j,i) += alpha*vol*bdt*(w0(m,IDN,k,j,i)*vol*ut)*(lambda1 - lambda2*w0(m,nvars,k,j,i))*z;
       
     }
