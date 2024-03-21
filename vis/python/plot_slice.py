@@ -496,7 +496,7 @@ def main(**kwargs):
 
     # Calculate derived quantity related to gas pressure
     if kwargs['variable'] in \
-            ['derived:' + name for name in ('pgas', 'kappa','betath', 'T', 'prad_pgas')]:
+            ['derived:' + name for name in ('pgas', 'kappa','betath', 'T', 'pthermal', 'prad_pgas')]:
         pgas = (gamma_adi - 1.0) * quantities['eint']
         ktilde  = 86841
         gamma = 3.005
