@@ -1112,7 +1112,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
                                   g3d[S22], g3d[S23], g3d[S33]);
       Real sqrtmdet = sqrt(detg);
       Real utilde[3] = {int_vx, int_vy, int_vz};
-      Real uu = Primitive::SquareVector(utilde, int_g3d);
+      Real uu = Primitive::SquareVector(utilde, g3d);
       Real W = sqrt(1.0 + uu); // Lorentz factor
       Real u[3] = {utilde[0] - W*int_beta[0]/int_alpha,
                    utilde[1] - W*int_beta[1]/int_alpha,
