@@ -1099,7 +1099,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
       Real int_beta[3] = {interpolated_beta.h_view(n,0),
                           interpolated_beta.h_view(n,1),
                           interpolated_beta.h_view(n,2)};
-      Real int_g3d[NSPMETRIC] = {interpolated_metric.h_view(n,0),
+      Real g3d[NSPMETRIC] =     {interpolated_metric.h_view(n,0),
                                  interpolated_metric.h_view(n,1),
                                  interpolated_metric.h_view(n,2),
                                  interpolated_metric.h_view(n,3),
@@ -1108,8 +1108,8 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
       
 
       Real r2 = SQR(r);
-      Real detg = adm::SpatialDet(int_g3d[S11], int_g3d[S12], int_g3d[S13],
-                                  int_g3d[S22], int_g3d[S23], int_g3d[S33]);
+      Real detg = adm::SpatialDet(g3d[S11], g3d[S12], g3d[S13],
+                                  g3d[S22], g3d[S23], g3d[S33]);
       Real sqrtmdet = sqrt(detg);
       Real utilde[3] = {int_vx, int_vy, int_vz};
       Real uu = Primitive::SquareVector(utilde, int_g3d);
@@ -1155,6 +1155,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
                    g3d[S13]*int_beta[2]*b[0] + g3d[S23]*int_beta[2]*b[1] + g3d[S33]*int_beta[2]*b[2];
 
       Real u_0 = - int_alpha*W + betau;
+      Real u0 =  W/int_alpha;
       Real b_0 = - int_alpha*int_alpha*b0 + betab;
 
       // integration params
