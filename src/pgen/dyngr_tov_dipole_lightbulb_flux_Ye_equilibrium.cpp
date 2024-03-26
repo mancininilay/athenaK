@@ -112,16 +112,16 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   user_srcs_func = neutrinolightbulb;
   //user_hist_func = &TOVHistory;
   auto &grids = spherical_grids;
-  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 10.0));
-  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 20.0));
+  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 10.0));
+  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 20.0));
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 30.0));
-  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 50.0));
-  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 70.0));
+  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 50.0));
+  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 70.0));
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 100.0));
-  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 125.0));
-  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 150.0));
+  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 125.0));
+  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 150.0));
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 200.0));
-  grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 230.0));
+  //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 230.0));
   user_hist_func = tovFluxes;
 
   // Read problem-specific parameters from input file
@@ -975,6 +975,9 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   auto &coord = pmbp->pcoord->coord_data;
   auto &size = pmbp->pmb->mb_size;
   auto &adm = pmbp->padm->adm;
+  Real kappatilde = Kappatilde;
+  Real gamma = Gamma;
+  Real factor = kappatilde * (1.0 - ((1/3)/(gamma - 1.0)));
 
   int nvars;
   DvceArray5D<Real> u0, w0, bcc0;  
@@ -1027,9 +1030,9 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
     stream << std::fixed << std::setprecision(1) << grids[g]->radius;
     std::string rad_str = stream.str();
     pdata->label[nflux*g+0] = "mdot_" + rad_str;
-    //pdata->label[nflux*g+1] = "edot_" + rad_str;
-    //pdata->label[nflux*g+2] = "ldot_" + rad_str;
-    //pdata->label[nflux*g+3] = "phi_" + rad_str;
+    pdata->label[nflux*g+1] = "edot_" + rad_str;
+    pdata->label[nflux*g+2] = "ldot_" + rad_str;
+    pdata->label[nflux*g+3] = "phi_" + rad_str;
   }
 
   // go through angles at each radii:
@@ -1041,9 +1044,9 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   for (int g=0; g<nradii; ++g) {
     // zero fluxes at this radius
     pdata->hdata[nflux*g+0] = 0.0;
-    //pdata->hdata[nflux*g+1] = 0.0;
-    //pdata->hdata[nflux*g+2] = 0.0;
-    //pdata->hdata[nflux*g+3] = 0.0;
+    pdata->hdata[nflux*g+1] = 0.0;
+    pdata->hdata[nflux*g+2] = 0.0;
+    pdata->hdata[nflux*g+3] = 0.0;
 
     // interpolate primitives (and cell-centered magnetic fields iff mhd)
     grids[g]->InterpolateToSphere(3, bcc0);
@@ -1115,8 +1118,44 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
                    utilde[1] - W*int_beta[1]/int_alpha,
                    utilde[2] - W*int_beta[2]/int_alpha};
       Real ur = u[0]*sin(theta)*cos(phi) + u[1]*sin(theta)*sin(phi) + u[2]*cos(theta);
-      //Real uphi =
-      //Real h = 
+      Real u_[3] = {g3d[S11]*utilde[0] + g3d[S12]*utilde[1] + g3d[S13]*utilde[2],
+                    g3d[S12]*utilde[0] + g3d[S22]*utilde[1] + g3d[S23]*utilde[2],
+                    g3d[S13]*utilde[0] + g3d[S23]*utilde[1] + g3d[S33]*utilde[2]};
+      Real u_phi = (-u_[0]*sin(phi) + u_[1]*cos(phi))*r*sin(theta);
+      Real hrho = int_dn + int_ie + 3.0*(int_ie - factor*pow(int_dn,gamma));
+
+
+      Real B[3] = {int_bx/sqrtmdet,
+                   int_by/sqrtmdet,
+                   int_bz/sqrtmdet};  //this is the cursive B
+
+      Real Bv = g3d[S11]*B[0]*utilde[0] + g3d[S12]*B[0]*utilde[1] + g3d[S13]*B[0]*utilde[2] +
+                g3d[S12]*B[1]*utilde[0] + g3d[S22]*B[1]*utilde[1] + g3d[S23]*B[1]*utilde[2] +
+                g3d[S13]*B[2]*utilde[0] + g3d[S23]*B[2]*utilde[1] + g3d[S33]*B[2]*utilde[2];
+
+      Real b0 = Bv/int_alpha;
+      Real B_[3] = {g3d[S11]*B[0] + g3d[S12]*B[1] + g3d[S13]*B[2],
+                    g3d[S12]*B[0] + g3d[S22]*B[1] + g3d[S23]*B[2],
+                    g3d[S13]*B[0] + g3d[S23]*B[1] + g3d[S33]*B[2]};
+
+      Real b[3] = {(B[0] + int_alpha*b0*u[0])/W, (B[1] + int_alpha*b0*u[1])/W, (B[2] + int_alpha*b0*u[2])/W}; 
+      Real b_[3] = {(B_[0] + int_alpha*b0*u_[0])/W, (B_[1] + int_alpha*b0*u_[1])/W, (B_[2] + int_alpha*b0*u_[2])/W};
+      Real br = b[0]*sin(theta)*cos(phi) + b[1]*sin(theta)*sin(phi) + b[2]*cos(theta);
+      Real b_phi = (-b_[0]*sin(phi) + b_[1]*cos(phi))*r*sin(theta);
+
+      Real Bsq = Primitive::SquareVector(B, g3d);
+      Real bsq = (Bv*Bv + Bsq)/(W*W);
+
+      Real betau = g3d[S11]*int_beta[0]*u[0] + g3d[S12]*int_beta[0]*u[1] + g3d[S13]*int_beta[0]*u[2] +
+                   g3d[S12]*int_beta[1]*u[0] + g3d[S22]*int_beta[1]*u[1] + g3d[S23]*int_beta[1]*u[2] +
+                   g3d[S13]*int_beta[2]*u[0] + g3d[S23]*int_beta[2]*u[1] + g3d[S33]*int_beta[2]*u[2];
+
+      Real betab = g3d[S11]*int_beta[0]*b[0] + g3d[S12]*int_beta[0]*b[1] + g3d[S13]*int_beta[0]*b[2] +
+                   g3d[S12]*int_beta[1]*b[0] + g3d[S22]*int_beta[1]*b[1] + g3d[S23]*int_beta[1]*b[2] +
+                   g3d[S13]*int_beta[2]*b[0] + g3d[S23]*int_beta[2]*b[1] + g3d[S33]*int_beta[2]*b[2];
+
+      Real u_0 = - int_alpha*W + betau;
+      Real b_0 = - int_alpha*int_alpha*b0 + betab;
 
       // integration params
       Real &domega = grids[g]->solid_angles.h_view(n);
@@ -1125,15 +1164,16 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
       // compute mass flux
       pdata->hdata[nflux*g+0] += -1.0*int_dn*ur*r2*domega*sqrtmdet*int_alpha;
 
-      // compute energy flux
-      //Real t1_0 = (int_dn + gamma*int_ie + b_sq)*ur*u_0 - br*b_0;
-      //pdata->hdata[nflux*g+1] += -1.0*t1_0*sqrtmdet*domega;
+     // compute energy flux
+      Real t1_0 = (hrho + bsq)*ur*u_0 - br*b_0;
+      pdata->hdata[nflux*g+1] += -1.0*t1_0*sqrtmdet*domega*int_alpha*r2;
 
       // compute angular momentum flux
-      //pdata->hdata[nflux*g+2] += int_dn*ur*uphi*h*r2*domega*sqrtmdet*int_alpha*pow(W,2);
+      Real t1_3 = (hrho + bsq)*ur*u_phi - br*b_phi;
+      pdata->hdata[nflux*g+2] += -1.0*t1_3*sqrtmdet*domega*int_alpha*r2;
 
       // compute magnetic flux
-      //pdata->hdata[nflux*g+3] += 0.5*fabs(br*u0 - b0*ur)*sqrtmdet*domega;
+      pdata->hdata[nflux*g+3] += 0.5*fabs(br*u0 - b0*ur)*sqrtmdet*domega*int_alpha*r2;
     }
   }
 
@@ -1143,4 +1183,4 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   }
 
   return;
-}
+ }
