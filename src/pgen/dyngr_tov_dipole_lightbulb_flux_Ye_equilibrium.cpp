@@ -1157,6 +1157,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
       Real u_0 = - int_alpha*W + betau;
       Real u0 =  W/int_alpha;
       Real b_0 = - int_alpha*int_alpha*b0 + betab;
+      Real Br = B[0]*sin(theta)*cos(phi) + B[1]*sin(theta)*sin(phi) + B[2]*cos(theta);
 
       // integration params
       Real &domega = grids[g]->solid_angles.h_view(n);
@@ -1174,7 +1175,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
       pdata->hdata[nflux*g+2] += -1.0*t1_3*sqrtmdet*domega*int_alpha*r2;
 
       // compute magnetic flux
-      pdata->hdata[nflux*g+3] += 0.5*fabs(br*u0 - b0*ur)*sqrtmdet*domega*int_alpha*r2;
+      pdata->hdata[nflux*g+3] += 0.5*fabs(Br)*sqrtmdet*domega*int_alpha*r2;
     }
   }
 
