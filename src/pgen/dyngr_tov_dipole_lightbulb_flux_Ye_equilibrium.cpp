@@ -1016,7 +1016,7 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
   // extract grids, number of radii, number of fluxes, and history appending index
   auto &grids = pm->pgen->spherical_grids;
   int nradii = grids.size();
-  int nflux = 1;
+  int nflux = 4;
 
   pdata->nhist = nradii*nflux;
   if (pdata->nhist > NHISTORY_VARIABLES) {
