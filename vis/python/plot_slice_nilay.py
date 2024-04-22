@@ -867,7 +867,7 @@ def main(**kwargs):
     
     # Calculate derived quantity related to gas pressure
     if kwargs['variable'] in \
-            ['derived:' + name for name in ('pgas', 'sigma','beta','vr','vphi', 'kappa','betath', 'T', 'pthermal', 'prad_pgas','Br','Bphi')]:
+            ['derived:' + name for name in ('pgas', 'sigma','beta','vr','vphi', 'kappa','betath', 'T', 'pthermal', 'prad_pgas','Br','Bphi','Machcs','Machva')]:
         pgas = 1 #useless variable 
         conv = (12/11)*(5.635e38/1.6e-6)*(1/8.56e31)
 
@@ -889,7 +889,7 @@ def main(**kwargs):
         elif kwargs['variable'] == 'derived:Machcs':
             quantity = np.abs(vr)/np.sqrt(csq)
         elif kwargs['variable'] == 'derived:Machva':
-            quantity = np.abs(vr)/np.sqrt(vasq)
+            quantity = np
         elif kwargs['variable'] == 'derived:betath':
             quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))/ (quantities['eint'])
         elif kwargs['variable'] == 'derived:pthermal':
