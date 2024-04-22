@@ -131,13 +131,15 @@ def main(**kwargs):
     # Set derived dependencies
     derived_dependencies = {}
 
-    derived_dependencies['sigma'] = ('dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
+    derived_dependencies['sigma'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
     derived_dependencies['beta'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
-    derived_dependencies['vr'] = ('bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
-    derived_dependencies['vphi'] = ('bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
-    derived_dependencies['Br'] = ('bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
-    derived_dependencies['Bphi'] = ('bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
-    derived_dependencies['T'] = ('dens', 'eint')
+    derived_dependencies['vr'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
+    derived_dependencies['vphi'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
+    derived_dependencies['Br'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
+    derived_dependencies['Bphi'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
+    derived_dependencies['Machcs'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
+    derived_dependencies['Machva'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
+    derived_dependencies['T'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
     
     derived_dependencies['pgas'] = ('eint')
     derived_dependencies['epsilon'] = ('dens', 'ener')
@@ -827,6 +829,8 @@ def main(**kwargs):
     Bx = quantities['bcc1']
     By = quantities['bcc2']
     Bz = quantities['bcc3']
+    rho = quantities['dens']
+    p = quantities['eint']
 
     uu = gxx*utildex**2 + 2*gxy*utildex*utildey + 2*gxz*utildex*utildez + gyy*utildey**2 + 2*gyz*utildey*utildez + gzz*utildez**2
     W = np.sqrt(1+uu)
@@ -852,14 +856,19 @@ def main(**kwargs):
     Bsq = gxx*Bx**2 + 2*gxy*Bx*By + 2*gxz*Bx*Bz + gyy*By**2 + 2*gyz*By*Bz + gzz*Bz**2
     bsq = (Bv**2 + Bsq)/(W**2)
 
+    ktilde  = 86841
+    gamma = 3.005
+    factor = ktilde * (1.0 - ((1/3)/(gamma - 1.0)))
+    hrho = rho + p + (3*(p - factor*(rho**gamma)))
+
+    csq = ((4/3) * p)/hrho
+    vasq = bsq / (bsq + hrho)
 
     
     # Calculate derived quantity related to gas pressure
     if kwargs['variable'] in \
             ['derived:' + name for name in ('pgas', 'sigma','beta','vr','vphi', 'kappa','betath', 'T', 'pthermal', 'prad_pgas','Br','Bphi')]:
         pgas = 1 #useless variable 
-        ktilde  = 86841
-        gamma = 3.005
         conv = (12/11)*(5.635e38/1.6e-6)*(1/8.56e31)
 
 
@@ -877,6 +886,10 @@ def main(**kwargs):
             quantity = Br
         elif kwargs['variable'] == 'derived:Bphi':
             quantity = Bphi
+        elif kwargs['variable'] == 'derived:Machcs':
+            quantity = np.abs(vr)/np.sqrt(csq)
+        elif kwargs['variable'] == 'derived:Machva':
+            quantity = np.abs(vr)/np.sqrt(vasq)
         elif kwargs['variable'] == 'derived:betath':
             quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))/ (quantities['eint'])
         elif kwargs['variable'] == 'derived:pthermal':
