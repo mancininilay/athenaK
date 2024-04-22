@@ -15,11 +15,9 @@ def run_plot(i):
     subprocess.run(cmd, shell=True, check=True)
     print(f'Processed {input_file} into {output_file}')
 
-# Number of files to process
-n_files = 434
 
 # Number of parallel processes
 n_processes = 8  # Adjust this number based on your CPU
 
 with concurrent.futures.ProcessPoolExecutor(max_workers=n_processes) as executor:
-    executor.map(run_plot, range(n_files))
+    executor.map(run_plot, range(1,1200,10))
