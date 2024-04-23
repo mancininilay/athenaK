@@ -889,7 +889,7 @@ def main(**kwargs):
         elif kwargs['variable'] == 'derived:Machcs':
             quantity = np.abs(vr)/np.sqrt(csq)
         elif kwargs['variable'] == 'derived:Machva':
-            quantity = np
+            quantity = np.abs(vr)/np.sqrt(vasq)
         elif kwargs['variable'] == 'derived:betath':
             quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))/ (quantities['eint'])
         elif kwargs['variable'] == 'derived:pthermal':
