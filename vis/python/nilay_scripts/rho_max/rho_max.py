@@ -35,4 +35,4 @@ plt.ylabel('rho-max')
 plt.title('Plot of rho-max vs. Index')  # Added a title for clarity
 plt.legend(['rho-max'])
 plt.grid(True)
-plt.show()
+plt.savefig('rho-max_plot.png', format='png', dpi=300) 
