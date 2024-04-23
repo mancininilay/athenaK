@@ -19,18 +19,20 @@ def run_plot(i):
 
 n_processes = 8
 results = []
+x = []
+indices = range(1, 1201, 10)  # Create a range of indices to iterate over
 with concurrent.futures.ProcessPoolExecutor(max_workers=n_processes) as executor:
-    for output in executor.map(run_plot, range(1, 1201)):
+    # Use zip to iterate over results and indices together
+    for output, idx in zip(executor.map(run_plot, indices), indices):
         results.append(output)
-
-# Create a linspace from 1 to 1200 for the x-axis
-x_values = np.linspace(1, 1200, num=1200)
+        x.append(idx)
 
 # Plotting the results
 plt.figure(figsize=(10, 6))
-plt.plot(x_values, results,'-')
+plt.plot(x, results, '-')  # Use 'x' for x-axis values
 plt.xlabel('Index')
 plt.ylabel('rho-max')
-plt.legend()
+plt.title('Plot of rho-max vs. Index')  # Added a title for clarity
+plt.legend(['rho-max'])
 plt.grid(True)
 plt.show()
