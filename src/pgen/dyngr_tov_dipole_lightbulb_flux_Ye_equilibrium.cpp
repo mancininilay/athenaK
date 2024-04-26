@@ -864,6 +864,8 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real kappa = Kappa;
   Real kappatilde = Kappatilde;
   Real gamma = Gamma;
+  Real factor = kappatilde * (1.0 - ((1/3)/(gamma - 1.0)));
+
   //Real rstar = Rstar;
   //Real pstar = (kappa - kappatilde)*pow(rhocut,gamma);
   //Real factor = (BB*pow(pstar,1.5))/(0.0079*Q*(pow((Tnu/4.0),2)/pow(rstar,2)));
@@ -880,6 +882,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     nvars = pmbp->pmhd->nmhd;
     u0 = pmbp->pmhd->u0;
     w0 = pmbp->pmhd->w0;
+    bcc0 = pmbp->pmhd->bcc0;
     block = std::string("mhd");
   }
 
@@ -906,24 +909,56 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
                            adm.g_dd(m,0,2,k,j,i), adm.g_dd(m,1,1,k,j,i),
                            adm.g_dd(m,1,2,k,j,i), adm.g_dd(m,2,2,k,j,i)};
 
-    const Real& alpha = adm.alpha(m, k, j, i);
-    Real beta_u[3] = {adm.beta_u(m,0,k,j,i), 
-                      adm.beta_u(m,1,k,j,i), adm.beta_u(m,2,k,j,i)};
+    Real alpha = adm.alpha(m, k, j, i);
+    Real beta[3] = {adm.beta_u(m,0,k,j,i), adm.beta_u(m,1,k,j,i), adm.beta_u(m,2,k,j,i)};
+
     Real detg = adm::SpatialDet(g3d[S11], g3d[S12], g3d[S13],
                                 g3d[S22], g3d[S23], g3d[S33]);
     Real vol = sqrt(detg);
 
-    Real ux = w0(m,IVX,k,j,i);
-    Real uy = w0(m,IVY,k,j,i);
-    Real uz = w0(m,IVZ,k,j,i);
+    Real utilde[3] = {w0(m,IVX,k,j,i), w0(m,IVY,k,j,i), w0(m,IVZ,k,j,i)};
+    Real uu = Primitive::SquareVector(utilde, g3d);
+    Real W = sqrt(1.0 + uu); // Lorentz factor
 
-    Real w[3] = {ux, uy, uz};
-    Real ww = Primitive::SquareVector(w, g3d);
-    Real ut = sqrt(1.0 + ww);  //Lorentz Factor
+    Real u_[3] = {g3d[S11]*utilde[0] + g3d[S12]*utilde[1] + g3d[S13]*utilde[2],
+                  g3d[S12]*utilde[0] + g3d[S22]*utilde[1] + g3d[S23]*utilde[2],
+                  g3d[S13]*utilde[0] + g3d[S23]*utilde[1] + g3d[S33]*utilde[2]}
 
-    auto u_x = g3d[S11]*ux + g3d[S12]*uy + g3d[S13]*uz;
-    auto u_y = g3d[S12]*ux + g3d[S22]*uy + g3d[S23]*uz;
-    auto u_z = g3d[S13]*ux + g3d[S23]*uy + g3d[S33]*uz;
+    Real u[3] = {utilde[0] - W*int_beta[0]/alpha,
+                 utilde[1] - W*int_beta[1]/alpha,
+                 utilde[2] - W*int_beta[2]/alpha};
+
+    Real Bx = bcc0(m,IBX,k,j,i);
+    Real By = bcc0(m,IBY,k,j,i);
+    Real Bz = bcc0(m,IBZ,k,j,i);
+
+    Real B[3] =   {Bx/vol, By/vol, Bz/vol};  //this is the cursive B
+
+    Real Bv = g3d[S11]*B[0]*utilde[0] + g3d[S12]*B[0]*utilde[1] + g3d[S13]*B[0]*utilde[2] +
+              g3d[S12]*B[1]*utilde[0] + g3d[S22]*B[1]*utilde[1] + g3d[S23]*B[1]*utilde[2] +
+              g3d[S13]*B[2]*utilde[0] + g3d[S23]*B[2]*utilde[1] + g3d[S33]*B[2]*utilde[2];
+
+    Real b0 = Bv/alpha;
+
+    Real B_[3] = {g3d[S11]*B[0] + g3d[S12]*B[1] + g3d[S13]*B[2],
+                  g3d[S12]*B[0] + g3d[S22]*B[1] + g3d[S23]*B[2],
+                  g3d[S13]*B[0] + g3d[S23]*B[1] + g3d[S33]*B[2]};
+
+    Real b[3] = {(B[0] + alpha*b0*u[0])/W, (B[1] + alpha*b0*u[1])/W, (B[2] + alpha*b0*u[2])/W}; 
+    Real b_[3] = {(B_[0] + alpha*b0*u_[0])/W, (B_[1] + alpha*b0*u_[1])/W, (B_[2] + alpha*b0*u_[2])/W};
+
+    Real Bsq = Primitive::SquareVector(B, g3d);
+    Real bsq = (Bv*Bv + Bsq)/(W*W);
+
+    Real hrho = w0(m,IDN,k,j,i) + w0(m,IEN,k,j,i) + 3.0*(w0(m,IEN,k,j,i)- factor*pow(w0(m,IDN,k,j,i),gamma));
+
+    //compute conserved variables at time t
+    Real D = vol*W*w0(m,IDN,k,j,i);
+    Real S[3] = {vol*((hrho + bsq)*W*u_[0] - Bv*b_[0]),
+                 vol*((hrho + bsq)*W*u_[1] - Bv*b_[1]),
+                 vol*((hrho + bsq)*W*u_[2] - Bv*b_[2])};
+    Real tau = vol*((hrho + bsq)*W*W -(W*w0(m,IDN,k,j,i))-(w0(m,IEN,k,j,i)+0.5*bsq)-(Bv*Bv));
+
 
     // Real p = 0.0;
     Real p = fmax(w0(m,IEN,k,j,i) - (kappatilde * pow(w0(m,IDN,k,j,i), gamma)),0.0); //Thermal pressure
@@ -943,11 +978,15 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
       Real lambda1 = 0.0109*(Q/pow(r,2))*((4.58*Tnu)+2.586+(0.438/Tnu))+ ((1.285e10)*pow(p,1.25));
       Real lambda2 = lambda1 + 0.0109*(Q/pow(r,2))*((6.477*Tnu)-2.586+(0.309/Tnu))+ ((1.285e10)*pow(p,1.25));
 
-      u0(m,IEN,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*ut *((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
-      u0(m,IM1,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_x*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
-      u0(m,IM2,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_y*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
-      u0(m,IM3,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_z*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
-      u0(m,nvars,k,j,i) += alpha*vol*bdt*(w0(m,IDN,k,j,i)*vol*ut)*(lambda1 - lambda2*w0(m,nvars,k,j,i))*z;
+      //star freezing
+      
+
+      //neutrino lightbulb
+      u0(m,IEN,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*W    *((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,IM1,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_[0]*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,IM2,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_[1]*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,IM3,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_[2]*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,nvars,k,j,i) += alpha*vol*bdt*(D)*(lambda1 - lambda2*w0(m,nvars,k,j,i))*z;
       
     }
   });
