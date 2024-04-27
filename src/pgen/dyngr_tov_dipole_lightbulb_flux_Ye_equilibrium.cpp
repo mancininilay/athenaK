@@ -882,7 +882,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     nvars = pmbp->pmhd->nmhd;
     u0 = pmbp->pmhd->u0;
     w0 = pmbp->pmhd->w0;
-    auto &bcc0 = pmbp->pmhd->bcc0;
+    auto& bcc0 = pmbp->pmhd->bcc0;
     block = std::string("mhd");
   }
 
