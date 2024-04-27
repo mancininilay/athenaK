@@ -882,10 +882,9 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     nvars = pmbp->pmhd->nmhd;
     u0 = pmbp->pmhd->u0;
     w0 = pmbp->pmhd->w0;
-    bcc0 = pmbp->pmhd->bcc0;
+    auto &bcc0 = pmbp->pmhd->bcc0;
     block = std::string("mhd");
   }
-
 
   par_for("cooling", DevExeSpace(), 0, nmb1, ks, ke, js, je, is, ie,
   KOKKOS_LAMBDA(const int m, const int k, const int j, const int i) {
@@ -922,11 +921,11 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
     Real u_[3] = {g3d[S11]*utilde[0] + g3d[S12]*utilde[1] + g3d[S13]*utilde[2],
                   g3d[S12]*utilde[0] + g3d[S22]*utilde[1] + g3d[S23]*utilde[2],
-                  g3d[S13]*utilde[0] + g3d[S23]*utilde[1] + g3d[S33]*utilde[2]}
+                  g3d[S13]*utilde[0] + g3d[S23]*utilde[1] + g3d[S33]*utilde[2]};
 
-    Real u[3] = {utilde[0] - W*int_beta[0]/alpha,
-                 utilde[1] - W*int_beta[1]/alpha,
-                 utilde[2] - W*int_beta[2]/alpha};
+    Real u[3] = {utilde[0] - W*beta[0]/alpha,
+                 utilde[1] - W*beta[1]/alpha,
+                 utilde[2] - W*beta[2]/alpha};
 
     Real Bx = bcc0(m,IBX,k,j,i);
     Real By = bcc0(m,IBY,k,j,i);
@@ -978,14 +977,21 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
       Real lambda1 = 0.0109*(Q/pow(r,2))*((4.58*Tnu)+2.586+(0.438/Tnu))+ ((1.285e10)*pow(p,1.25));
       Real lambda2 = lambda1 + 0.0109*(Q/pow(r,2))*((6.477*Tnu)-2.586+(0.309/Tnu))+ ((1.285e10)*pow(p,1.25));
 
-      //star freezing
+      //star freezing (if z=1 the no extra source term, if z=0 then source sets to unevolved state)
       
+      u0(m,IDN,k,j,i) += (1-z)*(D    - u0(m,IDN,k,j,i));
+      u0(m,IM1,k,j,i) += (1-z)*(S[0] - u0(m,IM1,k,j,i));
+      u0(m,IM2,k,j,i) += (1-z)*(S[1] - u0(m,IM2,k,j,i));
+      u0(m,IM3,k,j,i) += (1-z)*(S[2] - u0(m,IM3,k,j,i));
+      u0(m,IEN,k,j,i) += (1-z)*(tau  - u0(m,IEN,k,j,i));
+
 
       //neutrino lightbulb
-      u0(m,IEN,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*W    *((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      
       u0(m,IM1,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_[0]*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
       u0(m,IM2,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_[1]*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
       u0(m,IM3,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*u_[2]*((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
+      u0(m,IEN,k,j,i) += alpha*vol*bdt*w0(m,IDN,k,j,i)*W    *((0.0079*Q*(pow((Tnu/4.0),2)/pow(r,2))) - BB*pow(p,1.5))*z;
       u0(m,nvars,k,j,i) += alpha*vol*bdt*(D)*(lambda1 - lambda2*w0(m,nvars,k,j,i))*z;
       
     }
