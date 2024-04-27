@@ -871,7 +871,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   //Real factor = (BB*pow(pstar,1.5))/(0.0079*Q*(pow((Tnu/4.0),2)/pow(rstar,2)));
 
   std::string block;
-  DvceArray5D<Real> u0, w0;
+  DvceArray5D<Real> u0, w0, bcc0;
   int nvars;
   if (pmbp->phydro != nullptr) {
     nvars = pmbp->phydro->nhydro;
@@ -882,7 +882,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     nvars = pmbp->pmhd->nmhd;
     u0 = pmbp->pmhd->u0;
     w0 = pmbp->pmhd->w0;
-    auto& bcc0 = pmbp->pmhd->bcc0;
+    bcc0 = pmbp->pmhd->bcc0;
     block = std::string("mhd");
   }
 
