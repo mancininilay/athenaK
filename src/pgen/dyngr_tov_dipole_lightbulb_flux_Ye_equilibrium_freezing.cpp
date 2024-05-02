@@ -866,6 +866,10 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real kappatilde = Kappatilde;
   Real gamma = Gamma;
   Real factor = kappatilde * (1.0 - ((1/3)/(gamma - 1.0)));
+  DvceArray4D<Real> a1_ = a1;
+  DvceArray4D<Real> a2_ = a2;
+  DvceArray4D<Real> a3_ = a3;
+
 
   //Real rstar = Rstar;
   //Real pstar = (kappa - kappatilde)*pow(rhocut,gamma);
@@ -967,25 +971,33 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
       z = 1.0;
     }
 
+    Real z2;
+    Real rhocut2 = 10*rhocut;
+    if (w0(m,IDN,k,j,i)>rhocut2){
+      z2 = exp(1.0 - w0(m,IDN,k,j,i)/rhocut2);
+    } else {
+      z2 = 1.0;
+    }
+
     //Let's compute the freezing of magnetic field:
 
     Real dx1 = size.d_view(m).dx1;
     Real dx2 = size.d_view(m).dx2;
     Real dx3 = size.d_view(m).dx3;
 
-    b0.x1f(m,k,j,i) += (1-z)*(((a3(m,k,j+1,i) - a3(m,k,j,i))/dx2 - (a2(m,k+1,j,i) - a2(m,k,j,i))/dx3) - b0.x1f(m,k,j,i));
-    b0.x2f(m,k,j,i) += (1-z)*(((a1(m,k+1,j,i) - a1(m,k,j,i))/dx3 - (a3(m,k,j,i+1) - a3(m,k,j,i))/dx1) - b0.x2f(m,k,j,i));
-    b0.x3f(m,k,j,i) += (1-z)*(((a2(m,k,j,i+1) - a2(m,k,j,i))/dx1 - (a1(m,k,j+1,i) - a1(m,k,j,i))/dx2) - b0.x3f(m,k,j,i));
+    b0.x1f(m,k,j,i) += (1-z2)*(((a3_(m,k,j+1,i) - a3_(m,k,j,i))/dx2 - (a2_(m,k+1,j,i) - a2_(m,k,j,i))/dx3) - b0.x1f(m,k,j,i));
+    b0.x2f(m,k,j,i) += (1-z2)*(((a1_(m,k+1,j,i) - a1_(m,k,j,i))/dx3 - (a3_(m,k,j,i+1) - a3_(m,k,j,i))/dx1) - b0.x2f(m,k,j,i));
+    b0.x3f(m,k,j,i) += (1-z2)*(((a2_(m,k,j,i+1) - a2_(m,k,j,i))/dx1 - (a1_(m,k,j+1,i) - a1_(m,k,j,i))/dx2) - b0.x3f(m,k,j,i));
 
       // Include extra face-component at edge of block in each direction
     if (i==ie) {
-      b0.x1f(m,k,j,i+1) += (1-z)*(((a3(m,k,j+1,i+1) - a3(m,k,j,i+1))/dx2 - (a2(m,k+1,j,i+1) - a2(m,k,j,i+1))/dx3) - b0.x1f(m,k,j,i+1));
+      b0.x1f(m,k,j,i+1) += (1-z2)*(((a3_(m,k,j+1,i+1) - a3_(m,k,j,i+1))/dx2 - (a2_(m,k+1,j,i+1) - a2_(m,k,j,i+1))/dx3) - b0.x1f(m,k,j,i+1));
     }
     if (j==je) {
-      b0.x2f(m,k,j+1,i) += (1-z)*(((a1(m,k+1,j+1,i) - a1(m,k,j+1,i))/dx3 - (a3(m,k,j+1,i+1) - a3(m,k,j+1,i))/dx1) - b0.x2f(m,k,j+1,i));
+      b0.x2f(m,k,j+1,i) += (1-z2)*(((a1_(m,k+1,j+1,i) - a1_(m,k,j+1,i))/dx3 - (a3_(m,k,j+1,i+1) - a3_(m,k,j+1,i))/dx1) - b0.x2f(m,k,j+1,i));
     }
     if (k==ke) {
-      b0.x3f(m,k+1,j,i) += (1-z)*(((a2(m,k+1,j,i+1) - a2(m,k+1,j,i))/dx1 - (a1(m,k+1,j+1,i) - a1(m,k+1,j,i))/dx2) - b0.x3f(m,k+1,j,i));
+      b0.x3f(m,k+1,j,i) += (1-z2)*(((a2_(m,k+1,j,i+1) - a2_(m,k+1,j,i))/dx1 - (a1_(m,k+1,j+1,i) - a1_(m,k+1,j,i))/dx2) - b0.x3f(m,k+1,j,i));
     }
 
 
@@ -1000,11 +1012,11 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
       //star freezing (if z=1 the no extra source term, if z=0 then source sets to unevolved state)
       
-      u0(m,IDN,k,j,i) += (1-z)*(D    - u0(m,IDN,k,j,i));
-      u0(m,IM1,k,j,i) += (1-z)*(S[0] - u0(m,IM1,k,j,i));
-      u0(m,IM2,k,j,i) += (1-z)*(S[1] - u0(m,IM2,k,j,i));
-      u0(m,IM3,k,j,i) += (1-z)*(S[2] - u0(m,IM3,k,j,i));
-      u0(m,IEN,k,j,i) += (1-z)*(tau  - u0(m,IEN,k,j,i));
+      u0(m,IDN,k,j,i) += (1-z2)*(D    - u0(m,IDN,k,j,i));
+      u0(m,IM1,k,j,i) += (1-z2)*(S[0] - u0(m,IM1,k,j,i));
+      u0(m,IM2,k,j,i) += (1-z2)*(S[1] - u0(m,IM2,k,j,i));
+      u0(m,IM3,k,j,i) += (1-z2)*(S[2] - u0(m,IM3,k,j,i));
+      u0(m,IEN,k,j,i) += (1-z2)*(tau  - u0(m,IEN,k,j,i));
 
 
       //neutrino lightbulb
