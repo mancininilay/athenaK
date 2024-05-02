@@ -888,7 +888,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     u0 = pmbp->pmhd->u0;
     w0 = pmbp->pmhd->w0;
     bcc0 = pmbp->pmhd->bcc0;
-    auto &b0 = pmbp->pmhd->b0;
+    auto b0_ = pmbp->pmhd->b0_;
     block = std::string("mhd");
   }
 
@@ -985,19 +985,19 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     Real dx2 = size.d_view(m).dx2;
     Real dx3 = size.d_view(m).dx3;
 
-    b0.x1f(m,k,j,i) += (1-z2)*(((a3_(m,k,j+1,i) - a3_(m,k,j,i))/dx2 - (a2_(m,k+1,j,i) - a2_(m,k,j,i))/dx3) - b0.x1f(m,k,j,i));
-    b0.x2f(m,k,j,i) += (1-z2)*(((a1_(m,k+1,j,i) - a1_(m,k,j,i))/dx3 - (a3_(m,k,j,i+1) - a3_(m,k,j,i))/dx1) - b0.x2f(m,k,j,i));
-    b0.x3f(m,k,j,i) += (1-z2)*(((a2_(m,k,j,i+1) - a2_(m,k,j,i))/dx1 - (a1_(m,k,j+1,i) - a1_(m,k,j,i))/dx2) - b0.x3f(m,k,j,i));
+    b0_.x1f(m,k,j,i) += (1-z2)*(((a3_(m,k,j+1,i) - a3_(m,k,j,i))/dx2 - (a2_(m,k+1,j,i) - a2_(m,k,j,i))/dx3) - b0_.x1f(m,k,j,i));
+    b0_.x2f(m,k,j,i) += (1-z2)*(((a1_(m,k+1,j,i) - a1_(m,k,j,i))/dx3 - (a3_(m,k,j,i+1) - a3_(m,k,j,i))/dx1) - b0_.x2f(m,k,j,i));
+    b0_.x3f(m,k,j,i) += (1-z2)*(((a2_(m,k,j,i+1) - a2_(m,k,j,i))/dx1 - (a1_(m,k,j+1,i) - a1_(m,k,j,i))/dx2) - b0_.x3f(m,k,j,i));
 
       // Include extra face-component at edge of block in each direction
     if (i==ie) {
-      b0.x1f(m,k,j,i+1) += (1-z2)*(((a3_(m,k,j+1,i+1) - a3_(m,k,j,i+1))/dx2 - (a2_(m,k+1,j,i+1) - a2_(m,k,j,i+1))/dx3) - b0.x1f(m,k,j,i+1));
+      b0_.x1f(m,k,j,i+1) += (1-z2)*(((a3_(m,k,j+1,i+1) - a3_(m,k,j,i+1))/dx2 - (a2_(m,k+1,j,i+1) - a2_(m,k,j,i+1))/dx3) - b0_.x1f(m,k,j,i+1));
     }
     if (j==je) {
-      b0.x2f(m,k,j+1,i) += (1-z2)*(((a1_(m,k+1,j+1,i) - a1_(m,k,j+1,i))/dx3 - (a3_(m,k,j+1,i+1) - a3_(m,k,j+1,i))/dx1) - b0.x2f(m,k,j+1,i));
+      b0_.x2f(m,k,j+1,i) += (1-z2)*(((a1_(m,k+1,j+1,i) - a1_(m,k,j+1,i))/dx3 - (a3_(m,k,j+1,i+1) - a3_(m,k,j+1,i))/dx1) - b0_.x2f(m,k,j+1,i));
     }
     if (k==ke) {
-      b0.x3f(m,k+1,j,i) += (1-z2)*(((a2_(m,k+1,j,i+1) - a2_(m,k+1,j,i))/dx1 - (a1_(m,k+1,j+1,i) - a1_(m,k+1,j,i))/dx2) - b0.x3f(m,k+1,j,i));
+      b0_.x3f(m,k+1,j,i) += (1-z2)*(((a2_(m,k+1,j,i+1) - a2_(m,k+1,j,i))/dx1 - (a1_(m,k+1,j+1,i) - a1_(m,k+1,j,i))/dx2) - b0_.x3f(m,k+1,j,i));
     }
 
 
