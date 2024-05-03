@@ -857,9 +857,9 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   //////////////////////////////////////
 
   DvceArray4D<Real> a1, a2, a3;
-  Kokkos::realloc(a1, nmb,ncells3,ncells2,ncells1);
-  Kokkos::realloc(a2, nmb,ncells3,ncells2,ncells1);
-  Kokkos::realloc(a3, nmb,ncells3,ncells2,ncells1);
+  Kokkos::realloc(a1, nmb1+1,ncells3,ncells2,ncells1);
+  Kokkos::realloc(a2, nmb1+1,ncells3,ncells2,ncells1);
+  Kokkos::realloc(a3, nmb1+1,ncells3,ncells2,ncells1);
 
   auto &nghbr = pmbp->pmb->nghbr;
   auto &mblev = pmbp->pmb->mb_lev;
