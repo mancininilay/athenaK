@@ -317,8 +317,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     auto &nghbr = pmbp->pmb->nghbr;
     auto &mblev = pmbp->pmb->mb_lev;
 
-    par_for("pgen_potential", DevExeSpace(), 0,nmb-1,ks,ke+1,js,je+1,is,ie+1,
-    KOKKOS_LAMBDA(int m, int k, int j, int i) {
+    par_for("pgen_potential", DevExeSpace(), 0,nmb-1,ks,ke+1,js,je+1,is,ie+1, 
+    [=] KOKKOS_LAMBDA(int m, int k, int j, int i) {
       Real &x1min = size.d_view(m).x1min;
       Real &x1max = size.d_view(m).x1max;
       int nx1 = indcs.nx1;
