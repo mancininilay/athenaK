@@ -396,7 +396,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
           (nghbr.d_view(m,39).lev > mblev.d_view(m) && i==ie+1 && k==ke+1)) {
         Real xl = x2v + 0.25*dx2;
         Real xr = x2v - 0.25*dx2;
-        a2(m,k,j,i) = 0.5*(A2(x1f,xl,x3f) + A2(1f,xr,x3f));
+        a2(m,k,j,i) = 0.5*(A2(x1f,xl,x3f) + A2(x1f,xr,x3f));
       }
     });
 
@@ -838,6 +838,9 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   int je = indcs.je;
   int ke = indcs.ke;
   int nmb1 = pmbp->nmb_thispack - 1;
+  int ncells1 = indcs.nx1 + 2*(indcs.ng);
+  int ncells2 = (indcs.nx2 > 1)? (indcs.nx2 + 2*(indcs.ng)) : 1;
+  int ncells3 = (indcs.nx3 > 1)? (indcs.nx3 + 2*(indcs.ng)) : 1;
   auto &coord = pmbp->pcoord->coord_data;
   auto &size = pmbp->pmb->mb_size;
   auto &adm = pmbp->padm->adm;
@@ -861,7 +864,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   auto &nghbr = pmbp->pmb->nghbr;
   auto &mblev = pmbp->pmb->mb_lev;
 
-    par_for("pgen_potential", DevExeSpace(), 0,nmb-1,ks,ke+1,js,je+1,is,ie+1, 
+    par_for("pgen_potential", DevExeSpace(), 0,nmb1,ks,ke+1,js,je+1,is,ie+1, 
     KOKKOS_LAMBDA(int m, int k, int j, int i) {
       Real &x1min = size.d_view(m).x1min;
       Real &x1max = size.d_view(m).x1max;
@@ -953,7 +956,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
           (nghbr.d_view(m,39).lev > mblev.d_view(m) && i==ie+1 && k==ke+1)) {
         Real xl = x2v + 0.25*dx2;
         Real xr = x2v - 0.25*dx2;
-        a2(m,k,j,i) = 0.5*(A2(x1f,xl,x3f) + A2(1f,xr,x3f));
+        a2(m,k,j,i) = 0.5*(A2(x1f,xl,x3f) + A2(x1f,xr,x3f));
       }
     });
 
