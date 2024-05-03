@@ -77,9 +77,9 @@ KOKKOS_INLINE_FUNCTION
 static Real Interpolate(Real x,
                         const Real x1, const Real x2, const Real y1, const Real y2);
 KOKKOS_INLINE_FUNCTION
-static Real A1(Real x1, Real x2, Real x3);
+static Real A1(Real x1, Real x2, Real x3, Real r0, Real b_norm);
 KOKKOS_INLINE_FUNCTION
-static Real A2(Real x1, Real x2, Real x3);
+static Real A2(Real x1, Real x2, Real x3, Real r0, Real b_norm);
 
 // Prototypes for user-defined BCs and history
 void TOVHistory(HistoryData *pdata, Mesh *pm);
@@ -331,8 +331,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
       Real dx2 = size.d_view(m).dx2;
       Real dx3 = size.d_view(m).dx3;
 
-      a1(m,k,j,i) = A1(x1v, x2f, x3f);
-      a2(m,k,j,i) = A2(x1f, x2v, x3f);
+      a1(m,k,j,i) = A1(x1v, x2f, x3f, r0, b_norm);
+      a2(m,k,j,i) = A2(x1f, x2v, x3f, r0, b_norm);
       a3(m,k,j,i) = 0.0;
 
       // When neighboring MeshBock is at finer level, compute vector potential as sum of
@@ -366,7 +366,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
           (nghbr.d_view(m,47).lev > mblev.d_view(m) && j==je+1 && k==ke+1)) {
         Real xl = x1v + 0.25*dx1;
         Real xr = x1v - 0.25*dx1;
-        a1(m,k,j,i) = 0.5*(A1(xl,x2f,x3f) + A1(xr,x2f,x3f));
+        a1(m,k,j,i) = 0.5*(A1(xl,x2f,x3f, r0, b_norm) + A1(xr,x2f,x3f, r0, b_norm));
       }
 
       // Correct A2 at x1-faces, x3-faces, and x1x3-edges
@@ -396,7 +396,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
           (nghbr.d_view(m,39).lev > mblev.d_view(m) && i==ie+1 && k==ke+1)) {
         Real xl = x2v + 0.25*dx2;
         Real xr = x2v - 0.25*dx2;
-        a2(m,k,j,i) = 0.5*(A2(x1f,xl,x3f) + A2(x1f,xr,x3f));
+        a2(m,k,j,i) = 0.5*(A2(x1f,xl,x3f, r0, b_norm) + A2(x1f,xr,x3f, r0, b_norm));
       }
     });
 
@@ -648,14 +648,14 @@ static void GetPandRho(const tov_pgen& tov, Real r, Real &rho, Real &p) {
 }
 
 KOKKOS_INLINE_FUNCTION
-static Real A1(Real x1, Real x2, Real x3) {
+static Real A1(Real x1, Real x2, Real x3, Real r0, Real b_norm) {
   Real r = sqrt(SQR(x1) + SQR(x2) + SQR(x3));
   return -x2*b_norm*pow(r0,3)/(pow(r0,3)+pow(r,3));
 }
 
 
 KOKKOS_INLINE_FUNCTION
-static Real A2(Real x1, Real x2, Real x3) {
+static Real A2(Real x1, Real x2, Real x3, Real r0, Real b_norm) {
   Real r = sqrt(SQR(x1) + SQR(x2) + SQR(x3));
   return x1*b_norm*pow(r0,3)/(pow(r0,3)+pow(r,3));
 }
@@ -847,6 +847,8 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real Q = C; //Lve,52
   Real Tnu = T; //Tnue
   Real rhocut = rho_cut;
+  Real r0_ = r0;
+  Real b_norm_ = b_norm;
   Real BB = B;  
   Real kappa = Kappa;
   Real kappatilde = Kappatilde;
@@ -891,8 +893,8 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
       Real dx2 = size.d_view(m).dx2;
       Real dx3 = size.d_view(m).dx3;
 
-      a1(m,k,j,i) = A1(x1v, x2f, x3f);
-      a2(m,k,j,i) = A2(x1f, x2v, x3f);
+      a1(m,k,j,i) = A1(x1v, x2f, x3f, r0_, b_norm_);
+      a2(m,k,j,i) = A2(x1f, x2v, x3f, r0_, b_norm_);
       a3(m,k,j,i) = 0.0;
 
       // When neighboring MeshBock is at finer level, compute vector potential as sum of
@@ -926,7 +928,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
           (nghbr.d_view(m,47).lev > mblev.d_view(m) && j==je+1 && k==ke+1)) {
         Real xl = x1v + 0.25*dx1;
         Real xr = x1v - 0.25*dx1;
-        a1(m,k,j,i) = 0.5*(A1(xl,x2f,x3f) + A1(xr,x2f,x3f));
+        a1(m,k,j,i) = 0.5*(A1(xl,x2f,x3f, r0_, b_norm_) + A1(xr,x2f,x3f, r0_, b_norm_));
       }
 
       // Correct A2 at x1-faces, x3-faces, and x1x3-edges
@@ -956,7 +958,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
           (nghbr.d_view(m,39).lev > mblev.d_view(m) && i==ie+1 && k==ke+1)) {
         Real xl = x2v + 0.25*dx2;
         Real xr = x2v - 0.25*dx2;
-        a2(m,k,j,i) = 0.5*(A2(x1f,xl,x3f) + A2(x1f,xr,x3f));
+        a2(m,k,j,i) = 0.5*(A2(x1f,xl,x3f, r0_, b_norm_) + A2(x1f,xr,x3f, r0_, b_norm_));
       }
     });
 
