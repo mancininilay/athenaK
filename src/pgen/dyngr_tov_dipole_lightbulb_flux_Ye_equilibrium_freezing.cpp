@@ -289,6 +289,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     // parse some parameters
     b_norm = pin->GetOrAddReal("problem", "b_norm", 0.0);
     r0 = pin->GetOrAddReal("problem", "r0", 0.0);
+    Real r0_ = r0;
+    Real b_norm_ = b_norm;
 
     // compute vector potential over all faces
     int ncells1 = indcs.nx1 + 2*(indcs.ng);
@@ -331,8 +333,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
       Real dx2 = size.d_view(m).dx2;
       Real dx3 = size.d_view(m).dx3;
 
-      a1(m,k,j,i) = A1(x1v, x2f, x3f, r0, b_norm);
-      a2(m,k,j,i) = A2(x1f, x2v, x3f, r0, b_norm);
+      a1(m,k,j,i) = A1(x1v, x2f, x3f, r0_, b_norm_);
+      a2(m,k,j,i) = A2(x1f, x2v, x3f, r0_, b_norm_);
       a3(m,k,j,i) = 0.0;
 
       // When neighboring MeshBock is at finer level, compute vector potential as sum of
@@ -366,7 +368,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
           (nghbr.d_view(m,47).lev > mblev.d_view(m) && j==je+1 && k==ke+1)) {
         Real xl = x1v + 0.25*dx1;
         Real xr = x1v - 0.25*dx1;
-        a1(m,k,j,i) = 0.5*(A1(xl,x2f,x3f, r0, b_norm) + A1(xr,x2f,x3f, r0, b_norm));
+        a1(m,k,j,i) = 0.5*(A1(xl,x2f,x3f, r0_, b_norm_) + A1(xr,x2f,x3f, r0_, b_norm_));
       }
 
       // Correct A2 at x1-faces, x3-faces, and x1x3-edges
@@ -396,7 +398,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
           (nghbr.d_view(m,39).lev > mblev.d_view(m) && i==ie+1 && k==ke+1)) {
         Real xl = x2v + 0.25*dx2;
         Real xr = x2v - 0.25*dx2;
-        a2(m,k,j,i) = 0.5*(A2(x1f,xl,x3f, r0, b_norm) + A2(x1f,xr,x3f, r0, b_norm));
+        a2(m,k,j,i) = 0.5*(A2(x1f,xl,x3f, r0_, b_norm_) + A2(x1f,xr,x3f, r0_, b_norm_));
       }
     });
 
