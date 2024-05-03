@@ -869,7 +869,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   DvceArray4D<Real> a1_ = a1;
   DvceArray4D<Real> a2_ = a2;
   DvceArray4D<Real> a3_ = a3;
-
+  auto &b0_ = pmbp->pmhd->b0;
 
   //Real rstar = Rstar;
   //Real pstar = (kappa - kappatilde)*pow(rhocut,gamma);
@@ -888,7 +888,6 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     u0 = pmbp->pmhd->u0;
     w0 = pmbp->pmhd->w0;
     bcc0 = pmbp->pmhd->bcc0;
-    auto &b0_ = pmbp->pmhd->b0;
     block = std::string("mhd");
   }
 
