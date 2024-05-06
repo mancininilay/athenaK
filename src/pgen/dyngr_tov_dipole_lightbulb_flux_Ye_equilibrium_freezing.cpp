@@ -1065,9 +1065,9 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     }
 
     Real z2;
-    Real rhocut2 = 100*rhocut;
+    Real rhocut2 = 6.5e-4;
     if (w0(m,IDN,k,j,i)>rhocut2){
-      z2 = exp(1.0 - w0(m,IDN,k,j,i)/rhocut2);
+      z2 = exp(50*(1.0 - w0(m,IDN,k,j,i)/rhocut2));
     } else {
       z2 = 1.0;
     }
