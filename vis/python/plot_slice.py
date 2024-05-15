@@ -510,7 +510,7 @@ def main(**kwargs):
         elif kwargs['variable'] == 'derived:pthermal':
             quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))
         elif kwargs['variable'] == 'derived:T':
-            quantity = (np.max(0,(quantities['eint']- (ktilde*(quantities['dens']**gamma)))*conv))**0.25 #T in Mev
+            quantity = (np.maximum(0,(quantities['eint']- (ktilde*(quantities['dens']**gamma)))*conv))**0.25 #T in Mev
         else:
             prad = quantities['r00_ff'] / 3.0
             quantity = prad / pgas
