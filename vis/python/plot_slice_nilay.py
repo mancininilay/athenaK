@@ -83,6 +83,8 @@ import warnings
 
 # Numerical modules
 import numpy as np
+import scipy
+import scipy.interpolate
 
 # Load plotting modules
 import matplotlib
@@ -887,9 +889,9 @@ def main(**kwargs):
         elif kwargs['variable'] == 'derived:Bphi':
             quantity = Bphi
         elif kwargs['variable'] == 'derived:Machcs':
-            quantity = np.abs(vr)/np.sqrt(csq)
+            quantity = np.sqrt(vr**2 + vy**2)/np.sqrt(csq)
         elif kwargs['variable'] == 'derived:Machva':
-            quantity = np.abs(vr)/np.sqrt(vasq)
+            quantity = np.sqrt(vr**2 + vy**2)/np.sqrt(vasq)
         elif kwargs['variable'] == 'derived:betath':
             quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))/ (quantities['eint'])
         elif kwargs['variable'] == 'derived:pthermal':
@@ -1089,6 +1091,59 @@ def main(**kwargs):
     else:
         quantity = quantities[variable_name]
 
+    nx = 320
+    ny = 320
+    min_x = min(extent[0] for extent in extents)
+    max_x = max(extent[1] for extent in extents)
+    min_y = min(extent[2] for extent in extents)
+    max_y = max(extent[3] for extent in extents)
+
+
+    from scipy.interpolate import griddata
+
+    def interpolate_to_baseline_grid(num_blocks_used, quantities, extents, min_x, max_x, min_y, max_y, nx, ny):
+        # Create baseline grid
+        x = np.linspace(min_x, max_x, nx)
+        y = np.linspace(min_y, max_y, ny)
+        base_grid_x, base_grid_y = np.meshgrid(x, y)
+        
+        # Initialize a large array to hold the interpolated data
+        interpolated_data = np.zeros_like(base_grid_x)
+        contribution_count = np.zeros_like(base_grid_x)
+
+        for block_num in range(num_blocks_used):
+            block_data = quantities[block_num]
+            x_start, x_end, y_start, y_end = extents[block_num]
+
+            # Create grid for the current block
+            block_x = np.linspace(x_start, x_end, block_data.shape[1])
+            block_y = np.linspace(y_start, y_end, block_data.shape[0])
+            block_grid_x, block_grid_y = np.meshgrid(block_x, block_y)
+
+            # Flatten the block grid and data for interpolation
+            points = np.vstack((block_grid_x.ravel(), block_grid_y.ravel())).T
+            values = block_data.ravel()
+
+            # Interpolate the block data onto the baseline grid
+            interpolated_block_data = griddata(points, values, (base_grid_x, base_grid_y), method='linear')
+            
+            # Combine with the overall interpolated data
+            # Assuming that we sum the contributions from each block
+            valid_contributions = ~np.isnan(interpolated_block_data)
+            interpolated_data[valid_contributions] += np.nan_to_num(interpolated_block_data[valid_contributions])
+            contribution_count[valid_contributions] += 1
+
+        interpolated_data /= np.maximum(contribution_count, 1)  # Avoid division by zero
+        return interpolated_data
+
+    # Example usage:
+    # interpolated_quantity = interpolate_to_baseline_grid(num_blocks_used, quantities, extents, min_x, max_x, min_y, max_y, nx, ny)
+
+    bx = interpolate_to_baseline_grid(num_blocks_used,  quantities['bcc1'], extents, min_x, max_x, min_y, max_y, nx, ny)
+    by = interpolate_to_baseline_grid(num_blocks_used,  quantities['bcc3'], extents, min_x, max_x, min_y, max_y, nx, ny)
+    x = np.linspace(min_x, max_x, nx)
+    y = np.linspace(min_y, max_y, ny)
+
     # Calculate colors
     if kwargs['vmin'] is None:
         vmin = np.nanmin(quantity)
@@ -1116,12 +1171,29 @@ def main(**kwargs):
 
     # Plot data
     for block_num in range(num_blocks_used):
-        plt.imshow(quantity[block_num], cmap=kwargs['cmap'], norm=norm, vmin=vmin,
+        plt.imshow(quantity[block_num], cmap=kwargs['cmap'], norm=norm, vmin=vmin, 
                    vmax=vmax, interpolation='none', origin='lower',
                    extent=extents[block_num])
 
     # Make colorbar
     plt.colorbar()
+
+    def sample_points_on_ellipse(center, a, b, num_points):
+
+        angles = np.linspace(0, 2 * np.pi, num_points, endpoint=False)
+        return [(center[0] + a * np.cos(angle), center[1] + b * np.sin(angle)) for angle in angles]
+
+    # Example usage:
+    # Assuming the center of the ellipse is at (0,0) with semi-major axis a=10, semi-minor axis b=5
+    center = (0, 0)
+    a = 12  # semi-major axis
+    b = 12   # semi-minor axis
+    num_points = 1000
+    start_points = sample_points_on_ellipse(center, a, b, num_points)
+
+
+    plt.streamplot(x,y,bx,by,density=1,color='w',linewidth=1,arrowsize=1) #, start_points=start_points)
+
 
     # Mark and/or mask horizon
     if kwargs['horizon'] or kwargs['horizon_mask']:
