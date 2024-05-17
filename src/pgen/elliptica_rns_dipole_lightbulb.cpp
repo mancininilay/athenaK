@@ -3,8 +3,8 @@
 // Copyright(C) 2020 James M. Stone <jmstone@ias.edu> and the Athena code team
 // Licensed under the 3-clause BSD License (the "LICENSE")
 //========================================================================================
-//! \file dyngr_tov.cpp
-//  \brief Problem generator for TOV star. Only works when ADM is enabled.
+//! \file elliptica_sns.cpp
+//  \brief Problem generator for single neutron star. Only works when ADM is enabled.
 
 #include <stdio.h>
 #include <math.h>     // abs(), cos(), exp(), log(), NAN, pow(), sin(), sqrt()
@@ -29,58 +29,22 @@
 #include "hydro/hydro.hpp"
 #include "mhd/mhd.hpp"
 #include "dyngr/dyngr.hpp"
+#include "elliptica_id_reader_lib.h"
+
+#if ELLIPTICA==0
+#error elliptica_bns.cpp requires Elliptica
+#endif
 
 
-// Useful container for physical parameters of star
-struct tov_pgen {
-  Real rhoc;
-  Real kappa;
-  Real gamma;
-  Real dfloor;
-  Real pfloor;
-  Real Yfloor;
-  Real tfloor;
-
-  int npoints; // Number of points in arrays
-  Real dr; // Radial spacing for integration
-  DualArray1D<Real> R; // Array of radial coordinates
-  DualArray1D<Real> R_iso; // Array of isotropic radial coordinates
-  DualArray1D<Real> M; // Integrated mass, M(r)
-  DualArray1D<Real> P; // Pressure, P(r)
-  DualArray1D<Real> alp; // Lapse, \alpha(r)
-  Real R_edge; // Radius of star
-  Real M_edge; // Mass of star
-
-  int n_r; // Point where pressure goes to zero.
-};
-
-Real C;
-Real B;
-Real rho_cut;
-Real rho_cut2;
-Real T;
-Real Kappatilde;
-Real Kappa;
-Real Gamma;
-Real b_norm;
-Real r0;
 
 // Prototypes for functions used internally in this pgen.
-static void ConstructTOV(tov_pgen& pgen);
-static void RHS(Real r, Real P, Real m, Real alp,
-                tov_pgen& tov, Real& dP, Real& dm, Real& dalp);
-KOKKOS_INLINE_FUNCTION
-static void GetPrimitivesAtPoint(const tov_pgen& pgen, Real r,
-                                 Real &rho, Real &p, Real &m, Real &alp);
-KOKKOS_INLINE_FUNCTION
-static void GetPandRho(const tov_pgen& pgen, Real r, Real &rho, Real &p);
-KOKKOS_INLINE_FUNCTION
-static Real Interpolate(Real x,
-                        const Real x1, const Real x2, const Real y1, const Real y2);
+
+
 KOKKOS_INLINE_FUNCTION
 static Real A1(Real x1, Real x2, Real x3, Real r0, Real b_norm);
 KOKKOS_INLINE_FUNCTION
 static Real A2(Real x1, Real x2, Real x3, Real r0, Real b_norm);
+
 
 // Prototypes for user-defined BCs and history
 void TOVHistory(HistoryData *pdata, Mesh *pm);
@@ -88,25 +52,39 @@ void VacuumBC(Mesh *pm);
 void neutrinolightbulb(Mesh* pm, const Real bdt);
 void tovFluxes(HistoryData *pdata, Mesh *pm);
 
+
+Real C; //heating constant
+Real B; //cooling constant
+Real rho_cut;  //cutoff for neutrino lightbulb
+Real rho_cut2; //cutoff for mhd freezing
+Real T; //neutrino temperature
+Real Kappatilde; //kappa constant of the true Eos
+Real Kappa; //kappa constant for the star initialization
+Real Gamma; //nuclear eos adiabatic index
+Real b_norm; //magnetic field normalization
+Real r0; //magnetic field scale radius
+
+
+
 //----------------------------------------------------------------------------------------
 //! \fn void ProblemGenerator::UserProblem()
-//  \brief Sets initial conditions for TOV star in DynGR
-//  Compile with '-D PROBLEM=dyngr_tov' to enroll as user-specific problem generator
+//! \brief Sets initial conditions for TOV star in DynGR
 
 void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
+  if (restart) return;
+
   MeshBlockPack *pmbp = pmy_mesh_->pmb_pack;
   if (!pmbp->pcoord->is_dynamical_relativistic) {
     std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
-              << "TOV star problem can only be run when <adm> block is present"
+              << "Single neutron star problem can only be run when <adm> block is present"
               << std::endl;
     exit(EXIT_FAILURE);
   }
 
-  tov_pgen tov;
-  // FIXME: Set boundary condition function?
-  //user_bcs_func = VacuumBC;
+
   user_srcs_func = neutrinolightbulb;
-  //user_hist_func = &TOVHistory;
+  user_hist_func = tovFluxes;
+
   auto &grids = spherical_grids;
   //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 10.0));
   //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 20.0));
@@ -118,44 +96,22 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 150.0));
   grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 200.0));
   //grids.push_back(std::make_unique<SphericalGrid>(pmbp, 5, 230.0));
-  user_hist_func = tovFluxes;
+  
 
-  // Read problem-specific parameters from input file
-  // global parameters
-  tov.rhoc  = pin->GetReal("problem", "rhoc");
-  tov.kappa = pin->GetReal("problem", "kappa");
-  tov.npoints = pin->GetReal("problem", "npoints");
-  tov.dr    = pin->GetReal("problem", "dr");
-  if (pmbp->pdyngr->eos_policy != DynGR_EOS::eos_ideal) {
-    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
-              << "TOV star problem currently only compatible with eos_ideal"
-              << std::endl;
-  }
   // Select either Hydro or MHD
-  int nvars, nscalars;
   std::string block;
-  DvceArray5D<Real> u0_, w0_;
-
   if (pmbp->phydro != nullptr) {
-    nvars = pmbp->phydro->nhydro;
-    nscalars = pmbp->phydro->nscalars;
-    u0_ = pmbp->phydro->u0;
-    w0_ = pmbp->phydro->w0;
+ //   u0_ = pmbp->phydro->u0;
+ //   w0_ = pmbp->phydro->w0;
     block = std::string("hydro");
   } else if (pmbp->pmhd != nullptr) {
+  //  u0_ = pmbp->pmhd->u0;
+  //  w0_ = pmbp->pmhd->w0;
     nvars = pmbp->pmhd->nmhd;
-    nscalars = pmbp->pmhd->nscalars;
-    u0_ = pmbp->pmhd->u0;
-    w0_ = pmbp->pmhd->w0;
     block = std::string("mhd");
   }
 
-  tov.gamma = pin->GetOrAddReal(block, "gamma", 5.0/3.0);
-  tov.dfloor = pin->GetReal(block, "dfloor");
-  tov.pfloor = pin->GetReal(block, "pfloor");
-  tov.Yfloor = pin->GetOrAddReal("problem", "s1_atmosphere", 0.46);
-  tov.tfloor = pin->GetOrAddReal("problem", "tfloor", 0.0);
-
+  Real Yfloor = pin->GetOrAddReal("problem", "s1_atmosphere", 0.46);
   C = pin->GetOrAddReal("problem", "C", 0.0);
   B = pin->GetOrAddReal("problem", "B", 0.0);
   rho_cut = pin->GetOrAddReal("problem", "rho_cut", 1.0);
@@ -165,127 +121,259 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   Kappatilde = pin->GetOrAddReal("problem", "Kappatilde",86841);
   Gamma = pin->GetOrAddReal("problem", "Gamma", 3.005);
 
-  // Set the history function for a TOV star
-  
 
-  // Generate the TOV star
-  ConstructTOV(tov);
+  if (pmbp->pdyngr->eos_policy != DynGR_EOS::eos_ideal) {
+    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
+              << "sns star problem currently only compatible with eos_ideal"
+              << std::endl;
+  }
 
 
   // Capture variables for kernel
   auto &indcs = pmy_mesh_->mb_indcs;
   int &ng = indcs.ng;
-  int n1 = indcs.nx1 + 2*ng;
-  int n2 = (indcs.nx2 > 1) ? (indcs.nx2 + 2*ng) : 1;
-  int n3 = (indcs.nx3 > 1) ? (indcs.nx3 + 2*ng) : 1;
+  int ncells1 = indcs.nx1 + 2*(indcs.ng);
+  int ncells2 = indcs.nx2 + 2*(indcs.ng);
+  int ncells3 = indcs.nx3 + 2*(indcs.ng);
+  int nmb = pmbp->nmb_thispack;
   int &is = indcs.is;
   int &js = indcs.js;
   int &ks = indcs.ks;
   int &ie = indcs.ie;
   int &je = indcs.je;
   int &ke = indcs.ke;
-  int nmb1 = pmbp->nmb_thispack - 1;
   auto &coord = pmbp->pcoord->coord_data;
+  auto &size = pmbp->pmb->mb_size;
 
-  // initialize primitive variables for restart ----------------------------------------
-  // FIXME: need to load data on restart?
-  if (restart) {
-    auto &size = pmbp->pmb->mb_size;
-    par_for("pgen_tov0", DevExeSpace(), 0, nmb1, 0, (n3-1), 0, (n2-1), 0, (n1-1),
-    KOKKOS_LAMBDA(int m, int k, int j, int i) {
-      Real &x1min = size.d_view(m).x1min;
-      Real &x1max = size.d_view(m).x1max;
-      Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
+  std::string fname = pin->GetString("problem", "initial_data_file");
+  
+  // Initialize the data reader
+  Elliptica_ID_Reader_T *idr = elliptica_id_reader_init(fname.c_str(),"generic");
 
-      Real &x2min = size.d_view(m).x2min;
-      Real &x2max = size.d_view(m).x2max;
-      Real x2v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
+  // Fields to interpolate
+  idr->ifields = "alpha,betax,betay,betaz,"
+                 "adm_gxx,adm_gxy,adm_gxz,adm_gyy,adm_gyz,adm_gzz,"
+                 "adm_Kxx,adm_Kxy,adm_Kxz,adm_Kyy,adm_Kyz,adm_Kzz,"
+                 "grhd_rho,grhd_p,grhd_vx,grhd_vy,grhd_vz";
+  
 
-      Real &x3min = size.d_view(m).x3min;
-      Real &x3max = size.d_view(m).x3max;
-      Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
-    });
+  int width = nmb*ncells1*ncells2*ncells3;
 
-    return;
+  Real *x_coords = new Real[width];
+  Real *y_coords = new Real[width];
+  Real *z_coords = new Real[width];
+
+  printf("Allocated coordinates of size %d\n",width);
+
+  // Populate coordinates for Elliptica
+  // TODO(JMF): Replace with a Kokkos loop on Kokkos::DefaultHostExecutionSpace() to
+  // improve performance.
+  int idx = 0;
+  for (int m = 0; m < nmb; m++) {
+    Real &x1min = size.h_view(m).x1min;
+    Real &x1max = size.h_view(m).x1max;
+    int nx1 = indcs.nx1;
+
+    Real &x2min = size.h_view(m).x2min;
+    Real &x2max = size.h_view(m).x2max;
+    int nx2 = indcs.nx2;
+
+    Real &x3min = size.h_view(m).x3min;
+    Real &x3max = size.h_view(m).x3max;
+    int nx3 = indcs.nx3;
+
+    for (int k = 0; k < ncells3; k++) {
+      Real z = CellCenterX(k - ks, nx3, x3min, x3max);
+      for (int j = 0; j < ncells2; j++) {
+        Real y = CellCenterX(j - js, nx2, x2min, x2max);
+        for (int i = 0; i < ncells1; i++) {
+          Real x = CellCenterX(i - is, nx1, x1min, x1max);
+          
+          x_coords[idx] = x;
+          y_coords[idx] = y;
+          z_coords[idx] = z;
+
+          // Increment flat index
+          idx++;
+        }
+      }
+    }
   }
 
-  auto &size = pmbp->pmb->mb_size;
-  auto &adm = pmbp->padm->adm;
-  auto &tov_ = tov;
-  std::cout << "Entering assignment and interpolation loop!\n";
+  idr->set_param("ADM_B1I_form","zero",idr);   //????
+
+  // Interpolate the data
+  idr->npoints  = width;
+  idr->x_coords = x_coords;
+  idr->y_coords = y_coords;
+  idr->z_coords = z_coords;
+  printf("Coordinates assigned.\n");
+  elliptica_id_reader_interpolate(idr);
+
+  // Free the coordinates, since we'll no longer need them.
+  delete[] x_coords;
+  delete[] y_coords;
+  delete[] z_coords;
+
+  printf("Coordinates freed.\n");
+
+  // Capture variables for kernel; note that when Z4c is enabled, the gauge variables
+  // are part of the Z4c class.
+  auto &u_adm = pmbp->padm->u_adm;
+  auto &adm   = pmbp->padm->adm;
+  auto &w0    = pmbp->pmhd->w0;
+  //auto &u_z4c = pmbp->pz4c->u0;
+
+  // Because Elliptica only operates on the CPU, we can't construct the data on the GPU.
+  // Instead, we create a mirror guaranteed to be on the CPU, populate the data there,
+  // then move it back to the GPU.
+  // TODO(JMF): This needs to be tested on CPUs to ensure that it functions properly;
+  // In theory, create_mirror_view shouldn't copy the data unless it's in a different
+  // memory space.
+  
+  HostArray5D<Real>::HostMirror host_u_adm = create_mirror_view(u_adm);
+  HostArray5D<Real>::HostMirror host_w0 = create_mirror_view(w0);
+  //HostArray5D<Real>::HostMirror host_u_z4c = create_mirror_view(u_z4c);
+  adm::ADM::ADMhost_vars host_adm;
+  host_adm.alpha.InitWithShallowSlice(host_u_adm,
+      adm::ADM::I_ADM_ALPHA);
+  host_adm.beta_u.InitWithShallowSlice(host_u_adm,
+      adm::ADM::I_ADM_BETAX, adm::ADM::I_ADM_BETAZ);
+  host_adm.g_dd.InitWithShallowSlice(host_u_adm,
+      adm::ADM::I_ADM_GXX, adm::ADM::I_ADM_GZZ);
+  host_adm.vK_dd.InitWithShallowSlice(host_u_adm,
+      adm::ADM::I_ADM_KXX, adm::ADM::I_ADM_KZZ);
+
+  printf("Host mirrors created.\n");
+
+  // Save Elliptica field indices for shorthand and a small optimization.
+  const int i_alpha = idr->indx("alpha");
+  const int i_betax = idr->indx("betax");
+  const int i_betay = idr->indx("betay");
+  const int i_betaz = idr->indx("betaz");
+
+  const int i_gxx   = idr->indx("adm_gxx");
+  const int i_gxy   = idr->indx("adm_gxy");
+  const int i_gxz   = idr->indx("adm_gxz");
+  const int i_gyy   = idr->indx("adm_gyy");
+  const int i_gyz   = idr->indx("adm_gyz");
+  const int i_gzz   = idr->indx("adm_gzz");
+
+  const int i_Kxx   = idr->indx("adm_Kxx");
+  const int i_Kxy   = idr->indx("adm_Kxy");
+  const int i_Kxz   = idr->indx("adm_Kxz");
+  const int i_Kyy   = idr->indx("adm_Kyy");
+  const int i_Kyz   = idr->indx("adm_Kyz");
+  const int i_Kzz   = idr->indx("adm_Kzz");
+
+  const int i_rho   = idr->indx("grhd_rho");
+  const int i_p     = idr->indx("grhd_p");
+  const int i_vx    = idr->indx("grhd_vx");
+  const int i_vy    = idr->indx("grhd_vy");
+  const int i_vz    = idr->indx("grhd_vz");
+
+  printf("Label indices saved.\n");
+
+  // TODO(JMF): Replace with a Kokkos loop on Kokkos::DefaultHostExecutionSpace() to
+  // improve performance.
+  idx = 0;
+  for (int m = 0; m < nmb; m++) {
+    for (int k = 0; k < ncells3; k++) {
+      for (int j = 0; j < ncells2; j++) {
+        for (int i = 0; i < ncells1; i++) {
+          // Extract metric quantities
+          host_adm.alpha(m, k, j, i) = idr->field[i_alpha][idx];
+          host_adm.beta_u(m, 0, k, j, i) = idr->field[i_betax][idx];
+          host_adm.beta_u(m, 1, k, j, i) = idr->field[i_betay][idx];
+          host_adm.beta_u(m, 2, k, j, i) = idr->field[i_betaz][idx];
+          
+          Real g3d[NSPMETRIC];
+          host_adm.g_dd(m, 0, 0, k, j, i) = g3d[S11] = idr->field[i_gxx][idx];
+          host_adm.g_dd(m, 0, 1, k, j, i) = g3d[S12] = idr->field[i_gxy][idx];
+          host_adm.g_dd(m, 0, 2, k, j, i) = g3d[S13] = idr->field[i_gxz][idx];
+          host_adm.g_dd(m, 1, 1, k, j, i) = g3d[S22] = idr->field[i_gyy][idx];
+          host_adm.g_dd(m, 1, 2, k, j, i) = g3d[S23] = idr->field[i_gyz][idx];
+          host_adm.g_dd(m, 2, 2, k, j, i) = g3d[S33] = idr->field[i_gzz][idx];
+
+          host_adm.vK_dd(m, 0, 0, k, j, i) = idr->field[i_Kxx][idx];
+          host_adm.vK_dd(m, 0, 1, k, j, i) = idr->field[i_Kxy][idx];
+          host_adm.vK_dd(m, 0, 2, k, j, i) = idr->field[i_Kxz][idx];
+          host_adm.vK_dd(m, 1, 1, k, j, i) = idr->field[i_Kyy][idx];
+          host_adm.vK_dd(m, 1, 2, k, j, i) = idr->field[i_Kyz][idx];
+          host_adm.vK_dd(m, 2, 2, k, j, i) = idr->field[i_Kzz][idx];
+
+          // Extract hydro quantities
+          host_w0(m, IDN, k, j, i) = idr->field[i_rho][idx];
+          host_w0(m, IPR, k, j, i) = idr->field[i_p][idx];
+          Real vu[3] = {idr->field[i_vx][idx],
+                        idr->field[i_vy][idx],
+                        idr->field[i_vz][idx]};
+
+          // Before we store the velocity, we need to make sure it's physical and 
+          // calculate the Lorentz factor. If the velocity is superluminal, we make a
+          // last-ditch attempt to salvage the solution by rescaling it to 
+          // vsq = 1.0 - 1e-15
+          Real vsq = Primitive::SquareVector(vu, g3d);
+          if (1.0 - vsq <= 0) {
+            printf("The velocity is superluminal!\n"
+                   "Attempting to adjust...\n");
+            Real fac = sqrt((1.0 - 1e-15)/vsq);
+            vu[0] *= fac;
+            vu[1] *= fac;
+            vu[2] *= fac;
+            vsq = 1.0 - 1.0e-15;
+          }
+          Real W = sqrt(1.0 / (1.0 - vsq));
+          
+          host_w0(m, IVX, k, j, i) = W*vu[0];
+          host_w0(m, IVY, k, j, i) = W*vu[1];
+          host_w0(m, IVZ, k, j, i) = W*vu[2];
+
+          idx++;
+        }
+      }
+    }
+  }
+
+  printf("Host mirrors filled.\n");
+
+  // Cleanup
+  elliptica_id_reader_free(idr);
+
+  printf("Elliptica freed.\n");
+
+  // Copy the data to the GPU.
+  Kokkos::deep_copy(u_adm, host_u_adm);
+  Kokkos::deep_copy(w0, host_w0);
+  //Kokkos::deep_copy(u_z4c, host_u_z4c);
+
+  printf("Data copied.\n");
+
+  //set the inital Ye
+  
+  int n1 = indcs.nx1 + 2*ng;
+  int n2 = (indcs.nx2 > 1) ? (indcs.nx2 + 2*ng) : 1;
+  int n3 = (indcs.nx3 > 1) ? (indcs.nx3 + 2*ng) : 1;
+  int nmb1 = pmbp->nmb_thispack - 1;
+  
+
+
   par_for("pgen_tov1", DevExeSpace(), 0, nmb1, 0, (n3-1), 0, (n2-1), 0, (n1-1),
   KOKKOS_LAMBDA(int m, int k, int j, int i) {
-    Real &x1min = size.d_view(m).x1min;
-    Real &x1max = size.d_view(m).x1max;
-    Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
-
-    Real &x2min = size.d_view(m).x2min;
-    Real &x2max = size.d_view(m).x2max;
-    Real x2v = CellCenterX(j-js, indcs.nx2, x2min, x2max);
-
-    Real &x3min = size.d_view(m).x3min;
-    Real &x3max = size.d_view(m).x3max;
-    Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
-
-    // Calculate the rest-mass density, pressure, and mass for a specific isotropic
-    // radial coordinate.
-    Real r = sqrt(SQR(x1v) + SQR(x2v) + SQR(x3v));
-    Real s = sqrt(SQR(x1v) + SQR(x2v));
-    Real rho, p, mass, alp;
-    //printf("Grabbing primitives!\n");
-    GetPrimitivesAtPoint(tov_, r, rho, p, mass, alp);
-    //printa sia il valore di p che il valore di pfloor, se sono giusti allora il problema è nel passaggio del flooring dell'eos. Non nell'inizializzazione, ma nelle poecewise polytrope.
-    //printf("Primitives retrieved!\n");
-
+    Real rho = w0(m,IDN,k,j,i);
     
 
-
-    // Auxiliary metric quantities
-    Real fmet = 0.0;
-    if (r > 0) {
-       // (g_rr - 1)/r^2
-       fmet = (1./(1. - 2*mass/r) - 1.)/(r*r);
-    }
-
     Real f = 0.5;
-    if (r <= tov.R_edge) {
+    if (rho >= 2.0e-8) {
       f=0.05;
-    } else if (r > tov.R_edge) {
-      f = tov.Yfloor;
+    } else {
+      f = Yfloor;
     }
 
-    //if (r >= tov.R_edge) {
-      //rho = 1e-16*pow(tov.R_edge/r, 2);
-      //p = rho * tov.tfloor*1000;
-    //} 
-
-
-    // FIXME: assumes ideal gas!
-    // Set hydrodynamic quantities
-    w0_(m,IDN,k,j,i) = fmax(rho, tov_.dfloor);
-    w0_(m,IPR,k,j,i) = fmax(p, tov_.pfloor);
-    w0_(m,IVX,k,j,i) = 0.0;
-    w0_(m,IVY,k,j,i) = 0.0;
-    w0_(m,IVZ,k,j,i) = 0.0;
-    w0_(m,nvars,k,j,i) = f;
-
-    // Set ADM variables
-    adm.alpha(m,k,j,i) = alp;
-    adm.beta_u(m,0,k,j,i) = adm.beta_u(m,1,k,j,i) = adm.beta_u(m,2,k,j,i) = 0.0;
-    adm.g_dd(m,0,0,k,j,i) = x1v*x1v*fmet + 1.0;
-    adm.g_dd(m,0,1,k,j,i) = x1v*x2v*fmet;
-    adm.g_dd(m,0,2,k,j,i) = x1v*x3v*fmet;
-    adm.g_dd(m,1,1,k,j,i) = x2v*x2v*fmet + 1.0;
-    adm.g_dd(m,1,2,k,j,i) = x2v*x3v*fmet;
-    adm.g_dd(m,2,2,k,j,i) = x3v*x3v*fmet + 1.0;
-    Real det = adm::SpatialDet(
-            adm.g_dd(m,0,0,k,j,i), adm.g_dd(m,0,1,k,j,i),
-            adm.g_dd(m,0,2,k,j,i), adm.g_dd(m,1,1,k,j,i),
-            adm.g_dd(m,1,2,k,j,i), adm.g_dd(m,2,2,k,j,i));
-    adm.psi4(m,k,j,i) = pow(det, 1./3.);
-    adm.vK_dd(m,0,0,k,j,i) = adm.vK_dd(m,0,1,k,j,i) = adm.vK_dd(m,0,2,k,j,i) = 0.0;
-    adm.vK_dd(m,1,1,k,j,i) = adm.vK_dd(m,1,2,k,j,i) = adm.vK_dd(m,2,2,k,j,i) = 0.0;
+    w0(m,nvars,k,j,i) = f;
+    
   });
+
 
   if (pmbp->pmhd != nullptr) {
     // parse some parameters
@@ -471,185 +559,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   return;
 }
 
-static void RHS(Real r, Real P, Real m, Real alp,
-                tov_pgen& tov, Real& dP, Real& dm, Real& dalp) {
-  // In our units, the equations take the form
-  // dP/dr = -(e + P)/(1 - 2m/r) (m + 4\pi r^3 P)/r^2
-  // dm/dr = 4\pi r^2 e
-  // d\alpha/dr = \alpha/(1 - 2m/r) (m + 4\pi r^3 P)/r^2
-  // FIXME: Assumes ideal gas!
-  if (r < 1e-3*tov.dr) {
-    dP = 0.0;
-    dm = 0.0;
-    dalp = 0.0;
-    return;
-  }
-  Real rho = pow(P/tov.kappa, 1.0/tov.gamma);
-  Real e   = rho + P/(tov.gamma - 1.0);
 
-  Real A = 1.0/(1.0 - 2.0*m/r);
-  Real B = (m + 4.0*M_PI*r*r*r*P)/SQR(r);
-  dP   = -(e + P)*A * B;
-  dm   = 4.0*M_PI*SQR(r)*e;
-  dalp = alp*A * B;
-}
 
-// Construct a TOV star using the shooting method.
-static void ConstructTOV(tov_pgen& tov) {
-  // First, allocate the data.
-  /*tov.R   = new Real[tov.npoints];
-  tov.M   = new Real[tov.npoints];
-  tov.P   = new Real[tov.npoints];
-  tov.alp = new Real[tov.npoints];*/
-  Kokkos::realloc(tov.R, tov.npoints);
-  Kokkos::realloc(tov.M, tov.npoints);
-  Kokkos::realloc(tov.P, tov.npoints);
-  Kokkos::realloc(tov.alp, tov.npoints);
-
-  // Set aliases
-  auto &R = tov.R.h_view;
-  auto &M = tov.M.h_view;
-  auto &P = tov.P.h_view;
-  auto &alp = tov.alp.h_view;
-  int npoints = tov.npoints;
-  Real dr = tov.dr;
-
-  // Set initial data
-  // FIXME: Assumes ideal gas for now!
-  R(0) = 0.0;
-  M(0) = 0.0;
-  P(0) = tov.kappa*pow(tov.rhoc, tov.gamma);
-  alp(0) = 1.0;
-
-  // Integrate outward using RK4
-  for (int i = 0; i < npoints-1; i++) {
-    Real r, P_pt, alp_pt, m_pt;
-
-    // First stage
-    Real dP1, dm1, dalp1;
-    r = i*dr;
-    P_pt = P(i);
-    alp_pt = alp(i);
-    m_pt = M(i);
-    RHS(r, P_pt, m_pt, alp_pt, tov, dP1, dm1, dalp1);
-
-    // Second stage
-    Real dP2, dm2, dalp2;
-    r = (i + 0.5)*dr;
-    P_pt = fmax(P(i) + 0.5*dr*dP1,0.0);
-    m_pt = M(i) + 0.5*dr*dm1;
-    alp_pt = alp(i) + 0.5*dr*dalp1;
-    RHS(r, P_pt, m_pt, alp_pt, tov, dP2, dm2, dalp2);
-
-    // Third stage
-    Real dP3, dm3, dalp3;
-    P_pt = fmax(P(i) + 0.5*dr*dP2,0.0);
-    m_pt = M(i) + 0.5*dr*dm2;
-    alp_pt = alp(i) + 0.5*dr*dalp2;
-    RHS(r, P_pt, m_pt, alp_pt, tov, dP3, dm3, dalp3);
-
-    // Fourth stage
-    Real dP4, dm4, dalp4;
-    r = (i + 1)*dr;
-    P_pt = fmax(P(i) + dr*dP3,0.0);
-    m_pt = M(i) + dr*dm3;
-    alp_pt = alp(i) + dr*dalp3;
-    RHS(r, P_pt, m_pt, alp_pt, tov, dP4, dm4, dalp4);
-
-    // Combine all the stages together
-    R(i+1) = (i + 1)*dr;
-    P(i+1) = P(i) + dr*(dP1 + 2.0*dP2 + 2.0*dP3 + dP4)/6.0;
-    M(i+1) = M(i) + dr*(dm1 + 2.0*dm2 + 2.0*dm3 + dm4)/6.0;
-    alp(i+1) = alp(i) + dr*(dalp1 + 2.0*dalp2 + 2.0*dalp3 + dalp4)/6.0;
-
-    // If the pressure falls below zero, we've hit the edge of the star.
-    if (P(i+1) <= 0.0) {
-      tov.n_r = i+1;
-      break;
-    }
-  }
-
-  // Now we can do a linear interpolation to estimate the actual edge of the star.
-  int n_r = tov.n_r;
-  tov.R_edge = Interpolate(0.0, P(n_r-1), P(n_r), R(n_r-1), R(n_r));
-  tov.M_edge = Interpolate(tov.R_edge, R(n_r-1), R(n_r), M(n_r-1), M(n_r));
-
-  // Replace the edges of the star.
-  P(n_r) = 0.0;
-  M(n_r) = tov.M_edge;
-  alp(n_r) = Interpolate(tov.R_edge, R(n_r-1), R(n_r), alp(n_r-1), alp(n_r));
-  R(n_r) = tov.R_edge;
-
-  // Rescale alpha so that it matches the Schwarzschild metric at the boundary.
-  Real rs = 2.0*tov.M_edge;
-  Real bound = sqrt(1.0 - rs/tov.R_edge);
-  Real scale = bound/alp(n_r);
-  for (int i = 0; i <= n_r; i++) {
-    alp(i) = alp(i)*scale;
-  }
-
-  // Print out details of the calculation
-  if (global_variable::my_rank == 0) {
-    std::cout << "\nTOV INITIAL DATA\n"
-              << "----------------\n";
-    std::cout << "Total points in buffer: " << tov.npoints << "\n";
-    std::cout << "Radial step: " << tov.dr << "\n";
-    std::cout << "Radius (Schwarzschild): " << tov.R_edge << "\n";
-    std::cout << "Mass: " << tov.M_edge << "\n\n";
-  }
-
-  // Sync the views to the GPU
-  tov.R.template modify<HostMemSpace>();
-  tov.M.template modify<HostMemSpace>();
-  tov.alp.template modify<HostMemSpace>();
-  tov.P.template modify<HostMemSpace>();
-
-  tov.R.template sync<DevExeSpace>();
-  tov.M.template sync<DevExeSpace>();
-  tov.alp.template sync<DevExeSpace>();
-  tov.P.template sync<DevExeSpace>();
-}
-
-KOKKOS_INLINE_FUNCTION
-static void GetPrimitivesAtPoint(const tov_pgen& tov, Real r,
-                                 Real &rho, Real &p, Real &m, Real &alp) {
-  // Check if we're past the edge of the star.
-  // If so, we just return atmosphere with Schwarzschild.
-  if (r >= tov.R_edge) {
-    rho = 0.0;
-    p = 0.0;
-    m = tov.M_edge;
-    alp = sqrt(1.0 - 2.0*m/r);
-    return;
-  }
-  // Get the lower index for where our point must be located.
-  int idx = static_cast<int>(r/tov.dr);
-  const auto &R = tov.R.d_view;
-  const auto &Ps = tov.P.d_view;
-  const auto &alps = tov.alp.d_view;
-  const auto &Ms = tov.M.d_view;
-  // Interpolate to get the primitive.
-  p = Interpolate(r, R(idx), R(idx+1), Ps(idx), Ps(idx+1));
-  m = Interpolate(r, R(idx), R(idx+1), Ms(idx), Ms(idx+1));
-  alp = Interpolate(r, R(idx), R(idx+1), alps(idx), alps(idx+1));
-  rho = pow(p/tov.kappa, 1.0/tov.gamma);
-}
-
-KOKKOS_INLINE_FUNCTION
-static void GetPandRho(const tov_pgen& tov, Real r, Real &rho, Real &p) {
-  if (r >= tov.R_edge) {
-    rho = 0.;
-    p   = 0.;
-    return;
-  }
-  // Get the lower index for where our point must be located.
-  int idx = static_cast<int>(r/tov.dr);
-  const auto &R = tov.R.d_view;
-  const auto &Ps = tov.P.d_view;
-  // Interpolate to get the pressure
-  p = Interpolate(r, R(idx), R(idx+1), Ps(idx), Ps(idx+1));
-  rho = pow(p/tov.kappa, 1.0/tov.gamma);
-}
 
 KOKKOS_INLINE_FUNCTION
 static Real A1(Real x1, Real x2, Real x3, Real r0, Real b_norm) {
@@ -662,172 +573,6 @@ KOKKOS_INLINE_FUNCTION
 static Real A2(Real x1, Real x2, Real x3, Real r0, Real b_norm) {
   Real r = sqrt(SQR(x1) + SQR(x2) + SQR(x3));
   return x1*b_norm*pow(r0,3)/(pow(r0,3)+pow(r,3));
-}
-
-KOKKOS_INLINE_FUNCTION
-static Real Interpolate(Real x, const Real x1, const Real x2,
-                        const Real y1, const Real y2) {
-  return ((y2 - y1)*x + (y1*x2 - y2*x1))/(x2 - x1);
-}
-
-// Boundary function
-void VacuumBC(Mesh *pm) {
-  auto &indcs = pm->mb_indcs;
-  int &ng = indcs.ng;
-  int n1 = indcs.nx1 + 2*ng;
-  int n2 = (indcs.nx2 > 1)? (indcs.nx2 + 2*ng) : 1;
-  int n3 = (indcs.nx3 > 1)? (indcs.nx3 + 2*ng) : 1;
-  int &is = indcs.is;  int &ie  = indcs.ie;
-  int &js = indcs.js;  int &je  = indcs.je;
-  int &ks = indcs.ks;  int &ke  = indcs.ke;
-  auto &mb_bcs = pm->pmb_pack->pmb->mb_bcs;
-  
-  DvceArray5D<Real> u0_, w0_;
-  u0_ = pm->pmb_pack->pmhd->u0;
-  w0_ = pm->pmb_pack->pmhd->w0;
-  auto &b0 = pm->pmb_pack->pmhd->b0;
-  int nmb = pm->pmb_pack->nmb_thispack;
-  int nvar = u0_.extent_int(1);
-
-  Real &dfloor = pm->pmb_pack->pmhd->peos->eos_data.dfloor;
-  
-  // X1-Boundary
-  // Set X1-BCs on b0 if Meshblock face is at the edge of the computational domain.
-  par_for("noinflow_x1", DevExeSpace(),0,(nmb-1),0,(n3-1),0,(n2-1),
-  KOKKOS_LAMBDA(int m, int k, int j) {
-    if (mb_bcs.d_view(m,BoundaryFace::inner_x1) == BoundaryFlag::user) {
-      for (int i=0; i<ng; ++i) {
-        b0.x1f(m,k,j,is-i-1) = b0.x1f(m,k,j,is);
-        b0.x2f(m,k,j,is-i-1) = b0.x2f(m,k,j,is);
-        if (j == n2-1) {b0.x2f(m,k,j+1,is-i-1) = b0.x2f(m,k,j+1,is);}
-        b0.x3f(m,k,j,is-i-1) = b0.x3f(m,k,j,is);
-        if (k == n3-1) {b0.x3f(m,k+1,j,is-i-1) = b0.x3f(m,k+1,j,is);}
-        u0_(m, IDN, k, j, is-i-1) = dfloor;
-        u0_(m, IM1, k, j, is-i-1) = 0.0;
-        u0_(m, IM2, k, j, is-i-1) = 0.0;
-        u0_(m, IM3, k, j, is-i-1) = 0.0;
-        u0_(m, IEN, k, j, is-i-1) = 0.0;
-      }
-    }
-    if (mb_bcs.d_view(m,BoundaryFace::outer_x1) == BoundaryFlag::user) {
-      for (int i=0; i<ng; ++i) {
-        b0.x1f(m,k,j,ie+i+2) = b0.x1f(m,k,j,ie+1);
-        b0.x2f(m,k,j,ie+i+1) = b0.x2f(m,k,j,ie);
-        if (j == n2-1) {b0.x2f(m,k,j+1,ie+i+1) = b0.x2f(m,k,j+1,ie);}
-        b0.x3f(m,k,j,ie+i+1) = b0.x3f(m,k,j,ie);
-        if (k == n3-1) {b0.x3f(m,k+1,j,ie+i+1) = b0.x3f(m,k+1,j,ie);}
-        u0_(m, IDN, k, j, ie+i+1) = dfloor;
-        u0_(m, IM1, k, j, ie+i+1) = 0.0;
-        u0_(m, IM2, k, j, ie+i+1) = 0.0;
-        u0_(m, IM3, k, j, ie+i+1) = 0.0;
-        u0_(m, IEN, k, j, ie+i+1) = 0.0;
-      }
-    }
-  });
-
-  // X2-Boundary
-  // Set X2-BCs on b0 if Meshblock face is at the edge of computational domain
-  par_for("noinflow_field_x2", DevExeSpace(),0,(nmb-1),0,(n3-1),0,(n1-1),
-  KOKKOS_LAMBDA(int m, int k, int i) {
-    if (mb_bcs.d_view(m,BoundaryFace::inner_x2) == BoundaryFlag::user) {
-      for (int j=0; j<ng; ++j) {
-        b0.x1f(m,k,js-j-1,i) = b0.x1f(m,k,js,i);
-        if (i == n1-1) {b0.x1f(m,k,js-j-1,i+1) = b0.x1f(m,k,js,i+1);}
-        b0.x2f(m,k,js-j-1,i) = b0.x2f(m,k,js,i);
-        b0.x3f(m,k,js-j-1,i) = b0.x3f(m,k,js,i);
-        if (k == n3-1) {b0.x3f(m,k+1,js-j-1,i) = b0.x3f(m,k+1,js,i);}
-        u0_(m, IDN, k, js-j-1, i) = dfloor;
-        u0_(m, IM1, k, js-j-1, i) = 0.0;
-        u0_(m, IM2, k, js-j-1, i) = 0.0;
-        u0_(m, IM3, k, js-j-1, i) = 0.0;
-        u0_(m, IEN, k, js-j-1, i) = 0.0;
-      }
-    }
-    if (mb_bcs.d_view(m,BoundaryFace::outer_x2) == BoundaryFlag::user) {
-      for (int j=0; j<ng; ++j) {
-        b0.x1f(m,k,je+j+1,i) = b0.x1f(m,k,je,i);
-        if (i == n1-1) {b0.x1f(m,k,je+j+1,i+1) = b0.x1f(m,k,je,i+1);}
-        b0.x2f(m,k,je+j+2,i) = b0.x2f(m,k,je+1,i);
-        b0.x3f(m,k,je+j+1,i) = b0.x3f(m,k,je,i);
-        if (k == n3-1) {b0.x3f(m,k+1,je+j+1,i) = b0.x3f(m,k+1,je,i);}
-        u0_(m, IDN, k, je+j+1, i) = dfloor;
-        u0_(m, IM1, k, je+j+1, i) = 0.0;
-        u0_(m, IM2, k, je+j+1, i) = 0.0;
-        u0_(m, IM3, k, je+j+1, i) = 0.0;
-        u0_(m, IEN, k, je+j+1, i) = 0.0;
-      }
-    }
-  });
-
-  // X3-Boundary
-  // Set X3-BCs on b0 if Meshblock face is at the edge of computational domain
-  par_for("noinflow_field_x3", DevExeSpace(),0,(nmb-1),0,(n2-1),0,(n1-1),
-  KOKKOS_LAMBDA(int m, int j, int i) {
-    if (mb_bcs.d_view(m,BoundaryFace::inner_x3) == BoundaryFlag::user) {
-      for (int k=0; k<ng; ++k) {
-        b0.x1f(m,ks-k-1,j,i) = b0.x1f(m,ks,j,i);
-        if (i == n1-1) {b0.x1f(m,ks-k-1,j,i+1) = b0.x1f(m,ks,j,i+1);}
-        b0.x2f(m,ks-k-1,j,i) = b0.x2f(m,ks,j,i);
-        if (j == n2-1) {b0.x2f(m,ks-k-1,j+1,i) = b0.x2f(m,ks,j+1,i);}
-        b0.x3f(m,ks-k-1,j,i) = b0.x3f(m,ks,j,i);
-        u0_(m, IDN, ks-k-1, j, i) = dfloor;
-        u0_(m, IM1, ks-k-1, j, i) = 0.0;
-        u0_(m, IM2, ks-k-1, j, i) = 0.0;
-        u0_(m, IM3, ks-k-1, j, i) = 0.0;
-        u0_(m, IEN, ks-k-1, j, i) = 0.0;
-      }
-    }
-    if (mb_bcs.d_view(m,BoundaryFace::outer_x3) == BoundaryFlag::user) {
-      for (int k=0; k<ng; ++k) {
-        b0.x1f(m,ke+k+1,j,i) = b0.x1f(m,ke,j,i);
-        if (i == n1-1) {b0.x1f(m,ke+k+1,j,i+1) = b0.x1f(m,ke,j,i+1);}
-        b0.x2f(m,ke+k+1,j,i) = b0.x2f(m,ke,j,i);
-        if (j == n2-1) {b0.x2f(m,ke+k+1,j+1,i) = b0.x2f(m,ke,j+1,i);}
-        b0.x3f(m,ke+k+2,j,i) = b0.x3f(m,ke+1,j,i);
-        u0_(m, IDN, ke+k+1, j, i) = dfloor;
-        u0_(m, IM1, ke+k+1, j, i) = 0.0;
-        u0_(m, IM2, ke+k+1, j, i) = 0.0;
-        u0_(m, IM3, ke+k+1, j, i) = 0.0;
-        u0_(m, IEN, ke+k+1, j, i) = 0.0;
-      }
-    }
-  });
-}
-
-// History function
-void TOVHistory(HistoryData *pdata, Mesh *pm) {
-  // Select the number of outputs and create labels for them.
-  int &nmhd = pm->pmb_pack->pmhd->nmhd;
-  pdata->nhist = 1;
-  pdata->label[0] = "rho-max";
-
-  // capture class variables for kernel
-  auto &w0_ = pm->pmb_pack->pmhd->w0;
-
-  // loop over all MeshBlocks in this pack
-  auto &indcs = pm->pmb_pack->pmesh->mb_indcs;
-  int is = indcs.is; int nx1 = indcs.nx1;
-  int js = indcs.js; int nx2 = indcs.nx2;
-  int ks = indcs.ks; int nx3 = indcs.nx3;
-  const int nmkji = (pm->pmb_pack->nmb_thispack)*nx3*nx2*nx1;
-  const int nkji = nx3*nx2*nx1;
-  const int nji = nx2*nx1;
-  Real rho_max;
-  Kokkos::parallel_reduce("TOVHistSums",Kokkos::RangePolicy<>(DevExeSpace(), 0, nmkji),
-  KOKKOS_LAMBDA(const int &idx, Real &mb_max) {
-    // coompute n,k,j,i indices of thread
-    int m = (idx)/nkji;
-    int k = (idx - m*nkji)/nji;
-    int j = (idx - m*nkji - k*nji)/nx1;
-    int i = (idx - m*nkji - k*nji - j*nx1) + is;
-    k += ks;
-    j += js;
-
-    mb_max = fmax(mb_max, w0_(m,IDN,k,j,i));
-  }, Kokkos::Max<Real>(rho_max));
-
-  // store data in hdata array
-  pdata->hdata[0] = rho_max;
 }
 
 //source function
@@ -1359,3 +1104,189 @@ void tovFluxes(HistoryData *pdata, Mesh *pm) {
 
   return;
  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+// Boundary function
+void VacuumBC(Mesh *pm) {
+  auto &indcs = pm->mb_indcs;
+  int &ng = indcs.ng;
+  int n1 = indcs.nx1 + 2*ng;
+  int n2 = (indcs.nx2 > 1)? (indcs.nx2 + 2*ng) : 1;
+  int n3 = (indcs.nx3 > 1)? (indcs.nx3 + 2*ng) : 1;
+  int &is = indcs.is;  int &ie  = indcs.ie;
+  int &js = indcs.js;  int &je  = indcs.je;
+  int &ks = indcs.ks;  int &ke  = indcs.ke;
+  auto &mb_bcs = pm->pmb_pack->pmb->mb_bcs;
+  
+  DvceArray5D<Real> u0_, w0_;
+  u0_ = pm->pmb_pack->pmhd->u0;
+  w0_ = pm->pmb_pack->pmhd->w0;
+  auto &b0 = pm->pmb_pack->pmhd->b0;
+  int nmb = pm->pmb_pack->nmb_thispack;
+  int nvar = u0_.extent_int(1);
+
+  Real &dfloor = pm->pmb_pack->pmhd->peos->eos_data.dfloor;
+  
+  // X1-Boundary
+  // Set X1-BCs on b0 if Meshblock face is at the edge of the computational domain.
+  par_for("noinflow_x1", DevExeSpace(),0,(nmb-1),0,(n3-1),0,(n2-1),
+  KOKKOS_LAMBDA(int m, int k, int j) {
+    if (mb_bcs.d_view(m,BoundaryFace::inner_x1) == BoundaryFlag::user) {
+      for (int i=0; i<ng; ++i) {
+        b0.x1f(m,k,j,is-i-1) = b0.x1f(m,k,j,is);
+        b0.x2f(m,k,j,is-i-1) = b0.x2f(m,k,j,is);
+        if (j == n2-1) {b0.x2f(m,k,j+1,is-i-1) = b0.x2f(m,k,j+1,is);}
+        b0.x3f(m,k,j,is-i-1) = b0.x3f(m,k,j,is);
+        if (k == n3-1) {b0.x3f(m,k+1,j,is-i-1) = b0.x3f(m,k+1,j,is);}
+        u0_(m, IDN, k, j, is-i-1) = dfloor;
+        u0_(m, IM1, k, j, is-i-1) = 0.0;
+        u0_(m, IM2, k, j, is-i-1) = 0.0;
+        u0_(m, IM3, k, j, is-i-1) = 0.0;
+        u0_(m, IEN, k, j, is-i-1) = 0.0;
+      }
+    }
+    if (mb_bcs.d_view(m,BoundaryFace::outer_x1) == BoundaryFlag::user) {
+      for (int i=0; i<ng; ++i) {
+        b0.x1f(m,k,j,ie+i+2) = b0.x1f(m,k,j,ie+1);
+        b0.x2f(m,k,j,ie+i+1) = b0.x2f(m,k,j,ie);
+        if (j == n2-1) {b0.x2f(m,k,j+1,ie+i+1) = b0.x2f(m,k,j+1,ie);}
+        b0.x3f(m,k,j,ie+i+1) = b0.x3f(m,k,j,ie);
+        if (k == n3-1) {b0.x3f(m,k+1,j,ie+i+1) = b0.x3f(m,k+1,j,ie);}
+        u0_(m, IDN, k, j, ie+i+1) = dfloor;
+        u0_(m, IM1, k, j, ie+i+1) = 0.0;
+        u0_(m, IM2, k, j, ie+i+1) = 0.0;
+        u0_(m, IM3, k, j, ie+i+1) = 0.0;
+        u0_(m, IEN, k, j, ie+i+1) = 0.0;
+      }
+    }
+  });
+
+  // X2-Boundary
+  // Set X2-BCs on b0 if Meshblock face is at the edge of computational domain
+  par_for("noinflow_field_x2", DevExeSpace(),0,(nmb-1),0,(n3-1),0,(n1-1),
+  KOKKOS_LAMBDA(int m, int k, int i) {
+    if (mb_bcs.d_view(m,BoundaryFace::inner_x2) == BoundaryFlag::user) {
+      for (int j=0; j<ng; ++j) {
+        b0.x1f(m,k,js-j-1,i) = b0.x1f(m,k,js,i);
+        if (i == n1-1) {b0.x1f(m,k,js-j-1,i+1) = b0.x1f(m,k,js,i+1);}
+        b0.x2f(m,k,js-j-1,i) = b0.x2f(m,k,js,i);
+        b0.x3f(m,k,js-j-1,i) = b0.x3f(m,k,js,i);
+        if (k == n3-1) {b0.x3f(m,k+1,js-j-1,i) = b0.x3f(m,k+1,js,i);}
+        u0_(m, IDN, k, js-j-1, i) = dfloor;
+        u0_(m, IM1, k, js-j-1, i) = 0.0;
+        u0_(m, IM2, k, js-j-1, i) = 0.0;
+        u0_(m, IM3, k, js-j-1, i) = 0.0;
+        u0_(m, IEN, k, js-j-1, i) = 0.0;
+      }
+    }
+    if (mb_bcs.d_view(m,BoundaryFace::outer_x2) == BoundaryFlag::user) {
+      for (int j=0; j<ng; ++j) {
+        b0.x1f(m,k,je+j+1,i) = b0.x1f(m,k,je,i);
+        if (i == n1-1) {b0.x1f(m,k,je+j+1,i+1) = b0.x1f(m,k,je,i+1);}
+        b0.x2f(m,k,je+j+2,i) = b0.x2f(m,k,je+1,i);
+        b0.x3f(m,k,je+j+1,i) = b0.x3f(m,k,je,i);
+        if (k == n3-1) {b0.x3f(m,k+1,je+j+1,i) = b0.x3f(m,k+1,je,i);}
+        u0_(m, IDN, k, je+j+1, i) = dfloor;
+        u0_(m, IM1, k, je+j+1, i) = 0.0;
+        u0_(m, IM2, k, je+j+1, i) = 0.0;
+        u0_(m, IM3, k, je+j+1, i) = 0.0;
+        u0_(m, IEN, k, je+j+1, i) = 0.0;
+      }
+    }
+  });
+
+  // X3-Boundary
+  // Set X3-BCs on b0 if Meshblock face is at the edge of computational domain
+  par_for("noinflow_field_x3", DevExeSpace(),0,(nmb-1),0,(n2-1),0,(n1-1),
+  KOKKOS_LAMBDA(int m, int j, int i) {
+    if (mb_bcs.d_view(m,BoundaryFace::inner_x3) == BoundaryFlag::user) {
+      for (int k=0; k<ng; ++k) {
+        b0.x1f(m,ks-k-1,j,i) = b0.x1f(m,ks,j,i);
+        if (i == n1-1) {b0.x1f(m,ks-k-1,j,i+1) = b0.x1f(m,ks,j,i+1);}
+        b0.x2f(m,ks-k-1,j,i) = b0.x2f(m,ks,j,i);
+        if (j == n2-1) {b0.x2f(m,ks-k-1,j+1,i) = b0.x2f(m,ks,j+1,i);}
+        b0.x3f(m,ks-k-1,j,i) = b0.x3f(m,ks,j,i);
+        u0_(m, IDN, ks-k-1, j, i) = dfloor;
+        u0_(m, IM1, ks-k-1, j, i) = 0.0;
+        u0_(m, IM2, ks-k-1, j, i) = 0.0;
+        u0_(m, IM3, ks-k-1, j, i) = 0.0;
+        u0_(m, IEN, ks-k-1, j, i) = 0.0;
+      }
+    }
+    if (mb_bcs.d_view(m,BoundaryFace::outer_x3) == BoundaryFlag::user) {
+      for (int k=0; k<ng; ++k) {
+        b0.x1f(m,ke+k+1,j,i) = b0.x1f(m,ke,j,i);
+        if (i == n1-1) {b0.x1f(m,ke+k+1,j,i+1) = b0.x1f(m,ke,j,i+1);}
+        b0.x2f(m,ke+k+1,j,i) = b0.x2f(m,ke,j,i);
+        if (j == n2-1) {b0.x2f(m,ke+k+1,j+1,i) = b0.x2f(m,ke,j+1,i);}
+        b0.x3f(m,ke+k+2,j,i) = b0.x3f(m,ke+1,j,i);
+        u0_(m, IDN, ke+k+1, j, i) = dfloor;
+        u0_(m, IM1, ke+k+1, j, i) = 0.0;
+        u0_(m, IM2, ke+k+1, j, i) = 0.0;
+        u0_(m, IM3, ke+k+1, j, i) = 0.0;
+        u0_(m, IEN, ke+k+1, j, i) = 0.0;
+      }
+    }
+  });
+}
+
+// History function
+void TOVHistory(HistoryData *pdata, Mesh *pm) {
+  // Select the number of outputs and create labels for them.
+  int &nmhd = pm->pmb_pack->pmhd->nmhd;
+  pdata->nhist = 1;
+  pdata->label[0] = "rho-max";
+
+  // capture class variables for kernel
+  auto &w0_ = pm->pmb_pack->pmhd->w0;
+
+  // loop over all MeshBlocks in this pack
+  auto &indcs = pm->pmb_pack->pmesh->mb_indcs;
+  int is = indcs.is; int nx1 = indcs.nx1;
+  int js = indcs.js; int nx2 = indcs.nx2;
+  int ks = indcs.ks; int nx3 = indcs.nx3;
+  const int nmkji = (pm->pmb_pack->nmb_thispack)*nx3*nx2*nx1;
+  const int nkji = nx3*nx2*nx1;
+  const int nji = nx2*nx1;
+  Real rho_max;
+  Kokkos::parallel_reduce("TOVHistSums",Kokkos::RangePolicy<>(DevExeSpace(), 0, nmkji),
+  KOKKOS_LAMBDA(const int &idx, Real &mb_max) {
+    // coompute n,k,j,i indices of thread
+    int m = (idx)/nkji;
+    int k = (idx - m*nkji)/nji;
+    int j = (idx - m*nkji - k*nji)/nx1;
+    int i = (idx - m*nkji - k*nji - j*nx1) + is;
+    k += ks;
+    j += js;
+
+    mb_max = fmax(mb_max, w0_(m,IDN,k,j,i));
+  }, Kokkos::Max<Real>(rho_max));
+
+  // store data in hdata array
+  pdata->hdata[0] = rho_max;
+}
+*/
