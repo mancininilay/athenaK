@@ -29,6 +29,8 @@
 #include "mhd/mhd.hpp"
 #include "dyngr/dyngr.hpp"
 
+#include <Kokkos_Random.hpp>
+
 
 // Useful container for physical parameters of star
 struct tov_pgen {
@@ -39,6 +41,7 @@ struct tov_pgen {
   Real pfloor;
 
   Real v_pert; // Amplitude of radial velocity perturbation, v^r = U/2(3x - x^3), x = r/R
+  Real p_pert; // Amplitude of random pressure perturbations
 
   Real b_norm;
   Real pcut;
@@ -78,6 +81,8 @@ static void GetPrimitivesAtIsoPoint(const tov_pgen& pgen, Real r_iso,
 KOKKOS_INLINE_FUNCTION
 static void GetPandRho(const tov_pgen& pgen, Real r, Real &rho, Real &p);
 KOKKOS_INLINE_FUNCTION
+static void GetPandRhoIso(const tov_pgen& pgen, Real r, Real &rho, Real &p);
+KOKKOS_INLINE_FUNCTION
 static Real Interpolate(Real x,
                         const Real x1, const Real x2, const Real y1, const Real y2);
 KOKKOS_INLINE_FUNCTION
@@ -113,8 +118,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   tov.kappa = pin->GetReal("problem", "kappa");
   tov.npoints = pin->GetReal("problem", "npoints");
   tov.dr    = pin->GetReal("problem", "dr");
-  if (pmbp->pdyngr->eos_policy != DynGR_EOS::eos_ideal &&
-      pmbp->pdyngr->eos_policy != DynGR_EOS::eos_poly) {
+  if (pmbp->pdyngr->eos_policy != DynGR_EOS::eos_ideal) {
     std::cout << "### WARNING in " << __FILE__ << "  at line " << __LINE__ << std::endl
               << "TOV star problem currently assumes a fixed polytropic EOS" << std::endl;
     /*std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
@@ -138,7 +142,10 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   tov.dfloor = pin->GetOrAddReal(block, "dfloor", (FLT_MIN));
   tov.pfloor = pin->GetOrAddReal(block, "pfloor", (FLT_MIN));
   tov.v_pert = pin->GetOrAddReal("problem" , "v_pert", 0.0);
+  tov.p_pert = pin->GetOrAddReal("problem", "p_pert", 0.0);
   tov.isotropic = pin->GetOrAddBoolean("problem", "isotropic", false);
+
+  bool minkowski = pin->GetOrAddBoolean("problem", "minkowski", false);
 
   // Set the history function for a TOV star
   user_hist_func = &TOVHistory;
@@ -164,28 +171,13 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   // initialize primitive variables for restart ----------------------------------------
   // FIXME: need to load data on restart?
   if (restart) {
-    auto &size = pmbp->pmb->mb_size;
-    par_for("pgen_tov0", DevExeSpace(), 0, nmb1, 0, (n3-1), 0, (n2-1), 0, (n1-1),
-    KOKKOS_LAMBDA(int m, int k, int j, int i) {
-      Real &x1min = size.d_view(m).x1min;
-      Real &x1max = size.d_view(m).x1max;
-      Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
-
-      Real &x2min = size.d_view(m).x2min;
-      Real &x2max = size.d_view(m).x2max;
-      Real x2v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
-
-      Real &x3min = size.d_view(m).x3min;
-      Real &x3max = size.d_view(m).x3max;
-      Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
-    });
-
     return;
   }
 
   auto &size = pmbp->pmb->mb_size;
   auto &adm = pmbp->padm->adm;
   auto &tov_ = tov;
+  Kokkos::Random_XorShift64_Pool<> rand_pool64(pmbp->gids);
   std::cout << "Entering assignment and interpolation loop!\n";
   par_for("pgen_tov1", DevExeSpace(), 0, nmb1, 0, (n3-1), 0, (n2-1), 0, (n1-1),
   KOKKOS_LAMBDA(int m, int k, int j, int i) {
@@ -207,20 +199,26 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     Real s = sqrt(SQR(x1v) + SQR(x2v));
     Real rho, p, mass, alp, r_schw;
     Real vr = 0.;
+    Real p_pert = 0.;
     //printf("Grabbing primitives!\n");
     if (!tov.isotropic) {
       GetPrimitivesAtPoint(tov_, r, rho, p, mass, alp);
       if (r <= tov.R_edge) {
         Real x = r/tov.R_edge;
         vr = 0.5*tov_.v_pert*(3.0*x - x*x*x);
+        auto rand_gen = rand_pool64.get_state();
+        p_pert = 2.0*tov_.p_pert*(rand_gen.frand() - 0.5);
+        rand_pool64.free_state(rand_gen);
       }
-    }
-    else {
+    } else {
       GetPrimitivesAtIsoPoint(tov_, r, rho, p, mass, alp);
       r_schw = FindSchwarzschildR(tov, r, mass);
       if (r_schw <= tov.R_edge) {
         Real x = r_schw/tov.R_edge;
         vr = 0.5*tov_.v_pert*(3.0*x - x*x*x);
+        auto rand_gen = rand_pool64.get_state();
+        p_pert = 2.0*tov_.p_pert*(rand_gen.frand() - 0.5);
+        rand_pool64.free_state(rand_gen);
       }
     }
     //printf("Primitives retrieved!\n");
@@ -230,14 +228,19 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     // Set hydrodynamic quantities
     w0_(m,IDN,k,j,i) = fmax(rho, tov_.dfloor);
     //w0_(m,IEN,k,j,i) = fmax(p, tov_.pfloor)/(tov_.gamma - 1.0);
-    w0_(m,IPR,k,j,i) = fmax(p, tov_.pfloor);
+    w0_(m,IPR,k,j,i) = fmax(p*(1. + p_pert), tov_.pfloor);
     w0_(m,IVX,k,j,i) = vr*x1v/r;
     w0_(m,IVY,k,j,i) = vr*x2v/r;
     w0_(m,IVZ,k,j,i) = vr*x3v/r;
 
     // Set ADM variables
     adm.alpha(m,k,j,i) = alp;
-    if (!tov.isotropic) {
+    if (minkowski) {
+      adm.g_dd(m,0,0,k,j,i) = adm.g_dd(m,1,1,k,j,i) = adm.g_dd(m,2,2,k,j,i) = 1.0;
+      adm.g_dd(m,0,1,k,j,i) = adm.g_dd(m,0,2,k,j,i) = adm.g_dd(m,1,2,k,j,i) = 0.0;
+      adm.beta_u(m,0,k,j,i) = adm.beta_u(m,1,k,j,i) = adm.beta_u(m,2,k,j,i) = 0.0;
+      adm.alpha(m,k,j,i) = 1.0;
+    } else if (!tov.isotropic) {
       // Auxiliary metric quantities
       Real fmet = 0.0;
       if (r > 0) {
@@ -273,11 +276,18 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     adm.vK_dd(m,1,1,k,j,i) = adm.vK_dd(m,1,2,k,j,i) = adm.vK_dd(m,2,2,k,j,i) = 0.0;
   });
 
-  if (pmbp->pmhd != nullptr && !tov.isotropic) {
+  if (pmbp->pmhd != nullptr) {
     // parse some parameters
     tov.b_norm = pin->GetOrAddReal("problem", "b_norm", 0.0);
     tov.pcut = pin->GetOrAddReal("problem", "pcut", 1e-6);
     tov.magindex = pin->GetOrAddReal("problem", "magindex", 2);
+
+    // If use_pcut_rel = true, we take pcut to be a percentage of pmax rather than
+    // an absolute cutoff.
+    if (pin->GetOrAddBoolean("problem", "use_pcut_rel", false)) {
+      Real pmax = tov.kappa*pow(tov.rhoc, tov.gamma);
+      tov.pcut = tov.pcut * pmax;
+    }
 
     // compute vector potential over all faces
     int ncells1 = indcs.nx1 + 2*(indcs.ng);
@@ -712,7 +722,7 @@ static void GetPrimitivesAtIsoPoint(const tov_pgen& tov, Real r_iso,
     idx--;
   }*/
   if (idx >= tov.npoints || idx < 0) {
-    printf("There's a problem with the index!\n"
+    printf("There's a problem with the index!\n" // NOLINT
            " idx = %d\n"
            " r_iso = %g\n"
            " dr = %g\n",idx,r_iso,tov.dr);
@@ -744,10 +754,30 @@ static void GetPandRho(const tov_pgen& tov, Real r, Real &rho, Real &p) {
 }
 
 KOKKOS_INLINE_FUNCTION
+static void GetPandRhoIso(const tov_pgen& tov, Real r, Real &rho, Real &p) {
+  if (r >= tov.R_edge_iso) {
+    rho = 0.;
+    p   = 0.;
+    return;
+  }
+  // We need to search to find the right index because isotropic coordinates aren't
+  // evenly spaced.
+  int idx = FindIsotropicIndex(tov, r);
+  const auto R_iso = tov.R_iso.d_view;
+  const auto &Ps = tov.P.d_view;
+  p = Interpolate(r, R_iso(idx), R_iso(idx+1), Ps(idx), Ps(idx+1));
+  rho = pow(p/tov.kappa, 1.0/tov.gamma);
+}
+
+KOKKOS_INLINE_FUNCTION
 static Real A1(const tov_pgen& tov, Real x1, Real x2, Real x3) {
   Real r = sqrt(SQR(x1) + SQR(x2) + SQR(x3));
   Real p, rho;
-  GetPandRho(tov, r, rho, p);
+  if (!tov.isotropic) {
+    GetPandRho(tov, r, rho, p);
+  } else {
+    GetPandRhoIso(tov, r, rho, p);
+  }
   return -x2*tov.b_norm*fmax(p - tov.pcut, 0.0)*pow(1.0 - rho/tov.rhoc,tov.magindex);
 }
 
@@ -755,7 +785,11 @@ KOKKOS_INLINE_FUNCTION
 static Real A2(const tov_pgen& tov, Real x1, Real x2, Real x3) {
   Real r = sqrt(SQR(x1) + SQR(x2) + SQR(x3));
   Real p, rho;
-  GetPandRho(tov, r, rho, p);
+  if (!tov.isotropic) {
+    GetPandRho(tov, r, rho, p);
+  } else {
+    GetPandRhoIso(tov, r, rho, p);
+  }
   return x1*tov.b_norm*fmax(p - tov.pcut, 0.0)*pow(1.0 - rho/tov.rhoc,tov.magindex);
 }
 
@@ -776,7 +810,7 @@ void VacuumBC(Mesh *pm) {
   int &js = indcs.js;  int &je  = indcs.je;
   int &ks = indcs.ks;  int &ke  = indcs.ke;
   auto &mb_bcs = pm->pmb_pack->pmb->mb_bcs;
-  
+
   DvceArray5D<Real> u0_, w0_;
   u0_ = pm->pmb_pack->pmhd->u0;
   w0_ = pm->pmb_pack->pmhd->w0;
@@ -792,7 +826,7 @@ void VacuumBC(Mesh *pm) {
   }
 
   Real &dfloor = pm->pmb_pack->pmhd->peos->eos_data.dfloor;
-  
+
   // X1-Boundary
   // Set X1-BCs on b0 if Meshblock face is at the edge of the computational domain.
   par_for("noinflow_x1", DevExeSpace(),0,(nmb-1),0,(n3-1),0,(n2-1),
@@ -982,7 +1016,7 @@ void TOVHistory(HistoryData *pdata, Mesh *pm) {
     MPI_Reduce(MPI_IN_PLACE, &alpha_min, 1, MPI_ATHENA_REAL, MPI_MIN, 0, MPI_COMM_WORLD);
   } else {
     MPI_Reduce(&rho_max, &rho_max, 1, MPI_ATHENA_REAL, MPI_MAX, 0, MPI_COMM_WORLD);
-    MPI_Reduce(&alpha_min, &alpha_min, 1, MPI_ATHENA_REAL, MPI_MAX, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&alpha_min, &alpha_min, 1, MPI_ATHENA_REAL, MPI_MIN, 0, MPI_COMM_WORLD);
     rho_max = 0.;
     alpha_min = 0.;
   }

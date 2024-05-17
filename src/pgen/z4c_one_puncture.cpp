@@ -21,16 +21,19 @@
 #include "globals.hpp"
 #include "mesh/mesh.hpp"
 #include "z4c/z4c.hpp"
+#include "z4c/z4c_amr.hpp"
 #include "adm/adm.hpp"
 #include "coordinates/cell_locations.hpp"
 
 
 void ADMOnePuncture(MeshBlockPack *pmbp, ParameterInput *pin);
+void RefinementCondition(MeshBlockPack* pmbp);
 
 //----------------------------------------------------------------------------------------
 //! \fn ProblemGenerator::UserProblem_()
 //! \brief Problem Generator for single puncture
 void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
+  user_ref_func  = RefinementCondition;
   MeshBlockPack *pmbp = pmy_mesh_->pmb_pack;
   auto &indcs = pmy_mesh_->mb_indcs;
 
@@ -51,8 +54,16 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     case 4: pmbp->pz4c->ADMToZ4c<4>(pmbp, pin);
             break;
   }
+  pmbp->pz4c->Z4cToADM(pmbp);
+  switch (indcs.ng) {
+    case 2: pmbp->pz4c->ADMConstraints<2>(pmbp);
+            break;
+    case 3: pmbp->pz4c->ADMConstraints<3>(pmbp);
+            break;
+    case 4: pmbp->pz4c->ADMConstraints<4>(pmbp);
+            break;
+  }
   std::cout<<"OnePuncture initialized."<<std::endl;
-
 
   return;
 }
@@ -119,4 +130,9 @@ void ADMOnePuncture(MeshBlockPack *pmbp, ParameterInput *pin) {
       adm.g_dd(m,a,b,k,j,i) *= adm.psi4(m,k,j,i);
     }
   });
+}
+
+// how decide the refinement
+void RefinementCondition(MeshBlockPack* pmbp) {
+  pmbp->pz4c->pz4c_amr->Refine(pmbp);
 }

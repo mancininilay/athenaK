@@ -200,11 +200,13 @@ class PrimitiveSolver {
                           Real rsq, Real rbsq, Real h_min) const;
 
  public:
+  Real tol;
+
   /// Constructor
   //PrimitiveSolver(EOS<EOSPolicy, ErrorPolicy> *eos) : peos(eos) {
   PrimitiveSolver() {
     //root = NumTools::Root();
-    root.tol = 1e-15;
+    tol = 1e-15;
     root.iterations = 30;
   }
 
@@ -324,7 +326,7 @@ Error PrimitiveSolver<EOSPolicy, ErrorPolicy>::CheckDensityValid(Real& mul, Real
         /*if (mu <= root.tol) {
           mu += root.tol;
         }*/
-        bool result = root.NewtonSafe(MuFromW, mulc, muhc, mu, bsq, rsq, rbsq, W);
+        bool result = root.NewtonSafe(MuFromW, mulc, muhc, mu, 1e-10, bsq, rsq, rbsq, W);
         if (!result) {
           return Error::BRACKETING_FAILED;
         }
@@ -346,7 +348,7 @@ Error PrimitiveSolver<EOSPolicy, ErrorPolicy>::CheckDensityValid(Real& mul, Real
         Real mulc = mul;
         Real muhc = muh;
         // We can tighten up the bounds for muh.
-        bool result = root.NewtonSafe(MuFromW, mulc, muhc, mu, bsq, rsq, rbsq, W);
+        bool result = root.NewtonSafe(MuFromW, mulc, muhc, mu, 1e-10, bsq, rsq, rbsq, W);
         if (!result) {
           return Error::BRACKETING_FAILED;
         }
@@ -484,7 +486,8 @@ SolverResult PrimitiveSolver<EOSPolicy, ErrorPolicy>::ConToPrim(Real prim[NPRIM]
     // the accuracy of the root solve for speed reasons.
     Real mulc = mul;
     Real mulh = muh;
-    bool result = root.NewtonSafe(UpperRoot, mulc, mulh, mu, bsqr, rsqr, rbsqr, min_h);
+    bool result = root.NewtonSafe(UpperRoot, mulc, mulh, mu, 1e-10,
+                                  bsqr, rsqr, rbsqr, min_h);
     // Scream if the bracketing failed.
     if (!result) {
       HandleFailure(prim, cons, b, g3d);
@@ -494,7 +497,7 @@ SolverResult PrimitiveSolver<EOSPolicy, ErrorPolicy>::ConToPrim(Real prim[NPRIM]
       // To avoid problems with the case where the root and the upper bound collide,
       // we will perturb the bound slightly upward.
       // TODO(JF): Is there a more rigorous way of treating this?
-      muh = mu*(1. + root.tol);
+      muh = mu*(1. + 1e-10);
     }
   }
 
@@ -511,8 +514,8 @@ SolverResult PrimitiveSolver<EOSPolicy, ErrorPolicy>::ConToPrim(Real prim[NPRIM]
 
   // Do the root solve.
   Real n, P, T, mu;
-  bool result = root.FalsePosition(RootFunction, mul, muh, mu, D, q, bsqr, rsqr, rbsqr,
-                                   Y, &eos, &n, &T, &P);
+  bool result = root.FalsePosition(RootFunction, mul, muh, mu, tol,
+                                   D, q, bsqr, rsqr, rbsqr, Y, &eos, &n, &T, &P);
   // WARNING: the reported number of iterations is not thread-safe and should only be
   // trusted on single-thread benchmarks.
   solver_result.iterations = root.iterations;
@@ -594,8 +597,9 @@ Error PrimitiveSolver<EOSPolicy, ErrorPolicy>::PrimToCon(Real prim[NPRIM],
   Real Wvsq = Contract(Wv_u, Wv_d);
   Real Wsq = 1.0 + Wvsq;
   Real W = sqrt(Wsq);
+  Real iW = 1.0/W;
   // Get the 3-velocity.
-  Real v_d[3] = {Wv_d[0]/W, Wv_d[1]/W, Wv_d[2]/W};
+  Real v_d[3] = {Wv_d[0]*iW, Wv_d[1]*iW, Wv_d[2]*iW};
 
   // For the magnetic field contribution, we need to find
   // B_i, B^2, and B^i*v_i.
@@ -626,7 +630,7 @@ Error PrimitiveSolver<EOSPolicy, ErrorPolicy>::PrimToCon(Real prim[NPRIM],
   Sx = (HWsqpb*v_d[0] - Bv*B_d[0]);
   Sy = (HWsqpb*v_d[1] - Bv*B_d[1]);
   Sz = (HWsqpb*v_d[2] - Bv*B_d[2]);
-  tau = (HWsqpb - p - 0.5*(Bv*Bv + Bsq/Wsq)) - D;
+  tau = (HWsqpb - p - 0.5*(Bv*Bv + Bsq*(iW*iW))) - D;
 
   return Error::SUCCESS;
 }

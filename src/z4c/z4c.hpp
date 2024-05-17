@@ -7,8 +7,11 @@
 //========================================================================================
 //! \file z4c.hpp
 //! \brief definitions for Z4c class
+
+#include <map>
 #include <memory>    // make_unique, unique_ptr
-#include <vector>    // vector
+#include <string>
+#include <vector>
 #include "athena.hpp"
 #include "utils/finite_diff.hpp"
 #include "parameter_input.hpp"
@@ -28,6 +31,7 @@ class Driver;
 
 struct Z4cTaskIDs {
   TaskID irecv;
+  TaskID irecvweyl;
   TaskID copyu;
   TaskID crhs;
   TaskID sombc;
@@ -43,12 +47,19 @@ struct Z4cTaskIDs {
   TaskID csend;
   TaskID crecv;
   TaskID restu;
-  TaskID ptrack;
+  TaskID ptrck;
   TaskID weyl_scalar;
-  TaskID waveform;
+  TaskID wave_extr;
+  TaskID weyl_rest;
+  TaskID weyl_send;
+  TaskID weyl_prol;
+  TaskID weyl_recv;
+  TaskID csendweyl;
+  TaskID crecvweyl;
 };
 
 namespace z4c {
+class Z4c_AMR;
 
 // Shift needed for derivatives
 //----------------------------------------------------------------------------------------
@@ -103,6 +114,7 @@ class Z4c {
   DvceArray5D<Real> u_rhs;     // z4c rhs storage
   DvceArray5D<Real> coarse_u0; // coarse representation of z4c solution
   DvceArray5D<Real> u_weyl; // weyl scalars
+  DvceArray5D<Real> coarse_u_weyl; // coarse representation of weyl scalars
 
   // puncture location
   Real ppos[3] = {0.,0.,0.}; // later on initiate from input file
@@ -194,6 +206,9 @@ class Z4c {
   // Boundary communication buffers and functions for u
   BoundaryValuesCC *pbval_u;
 
+  // Boundary communication buffers for the weyl scalar
+  BoundaryValuesCC *pbval_weyl;
+
   // following only used for time-evolving flow
   Real dtnew;
   // container to hold names of TaskIDs
@@ -205,29 +220,38 @@ class Z4c {
   HostArray3D<Real> psi_out;
   Real waveform_dt;
   Real last_output_time;
+  int nrad; // number of radii to perform wave extraction
 
   // functions
-  void AssembleZ4cTasks(TaskList &start, TaskList &run, TaskList &end);
+  void AssembleZ4cTasks(std::map<std::string, std::shared_ptr<TaskList>> tl);
   void QueueZ4cTasks();
   TaskStatus InitRecv(Driver *d, int stage);
   TaskStatus ClearRecv(Driver *d, int stage);
   TaskStatus ClearSend(Driver *d, int stage);
+  TaskStatus InitRecvWeyl(Driver *d, int stage);
+  TaskStatus ClearRecvWeyl(Driver *d, int stage);
+  TaskStatus ClearSendWeyl(Driver *d, int stage);
   TaskStatus CopyU(Driver *d, int stage);
   TaskStatus SendU(Driver *d, int stage);
   TaskStatus RecvU(Driver *d, int stage);
+  TaskStatus SendWeyl(Driver *d, int stage);
+  TaskStatus RecvWeyl(Driver *d, int stage);
   TaskStatus Prolongate(Driver *pdrive, int stage);
+  TaskStatus ProlongateWeyl(Driver *pdrive, int stage);
   TaskStatus ExpRKUpdate(Driver *d, int stage);
   TaskStatus NewTimeStep(Driver *d, int stage);
   TaskStatus ApplyPhysicalBCs(Driver *d, int stage);
   TaskStatus EnforceAlgConstr(Driver *d, int stage);
 
   TaskStatus Z4cToADM_(Driver *d, int stage);
+  TaskStatus UpdateExcisionMasks(Driver *d, int stage);
   TaskStatus ADMConstraints_(Driver *d, int stage);
   TaskStatus Z4cBoundaryRHS(Driver *d, int stage);
   TaskStatus RestrictU(Driver *d, int stage);
+  TaskStatus RestrictWeyl(Driver *d, int stage);
   TaskStatus PunctureTracker(Driver *d, int stage);
-  TaskStatus CalcWeylScalar_(Driver *d, int stage);
-  TaskStatus CalcWaveForm_(Driver *d, int stage);
+  TaskStatus CalcWeylScalar(Driver *d, int stage);
+  TaskStatus CalcWaveForm(Driver *d, int stage);
 
   template <int NGHOST>
   TaskStatus CalcRHS(Driver *d, int stage);
@@ -241,6 +265,9 @@ class Z4c {
   void Z4cWeyl(MeshBlockPack *pmbp);
   void WaveExtr(MeshBlockPack *pmbp);
   void AlgConstr(MeshBlockPack *pmbp);
+
+  // amr criteria
+  Z4c_AMR *pz4c_amr{nullptr};
 
  private:
   MeshBlockPack* pmy_pack;  // ptr to MeshBlockPack containing this Z4c

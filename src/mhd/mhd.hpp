@@ -8,6 +8,10 @@
 //! \file mhd.hpp
 //  \brief definitions for MHD class
 
+#include <map>
+#include <memory>
+#include <string>
+
 #include "athena.hpp"
 #include "parameter_input.hpp"
 #include "tasklist/task_list.hpp"
@@ -37,6 +41,7 @@ enum class MHD_RSolver {advect, llf, hlle, hlld, roe,   // non-relativistic
 //  \brief container to hold TaskIDs of all mhd tasks
 
 struct MHDTaskIDs {
+  TaskID savest;
   TaskID irecv;
   TaskID copyu;
   TaskID flux;
@@ -109,6 +114,11 @@ class MHD {
   DvceArray4D<Real> e2x3, e1x3;
   Real dtnew;
 
+  // following used for time derivatives in computation of jcon
+  bool wbcc_saved = false;
+  DvceArray5D<Real> wsaved;
+  DvceArray5D<Real> bccsaved;
+
   // following used for FOFC algorithm
   DvceArray4D<bool> fofc;  // flag for each cell to indicate if FOFC is needed
   bool use_fofc = false;   // flag to enable FOFC
@@ -117,10 +127,13 @@ class MHD {
   MHDTaskIDs id;
 
   // functions...
-  void AssembleMHDTasks(TaskList &start, TaskList &run, TaskList &end);
-  // ...in start task list
+  void SetSaveWBcc();
+  void AssembleMHDTasks(std::map<std::string, std::shared_ptr<TaskList>> tl);
+  // ...in "before_timeintegrator" task list
+  TaskStatus SaveMHDState(Driver *d, int stage);
+  // ...in "before_stagen_tl" task list
   TaskStatus InitRecv(Driver *d, int stage);
-  // ...in run task list
+  // ...in "stagen_tl" task list
   TaskStatus CopyCons(Driver *d, int stage);
   TaskStatus Fluxes(Driver *d, int stage);
   TaskStatus SendFlux(Driver *d, int stage);
@@ -140,7 +153,7 @@ class MHD {
   TaskStatus Prolongate(Driver* pdrive, int stage);
   TaskStatus ConToPrim(Driver *d, int stage);
   TaskStatus NewTimeStep(Driver *d, int stage);
-  // ...in end task list
+  // ...in "after_stagen_tl" task list
   TaskStatus ClearSend(Driver *d, int stage);
   TaskStatus ClearRecv(Driver *d, int stage);  // also in Driver::Initialize
 
@@ -152,6 +165,7 @@ class MHD {
   void FOFC(Driver *d, int stage);
 
   DvceArray5D<Real> utest, bcctest;  // scratch arrays for FOFC
+
  private:
   MeshBlockPack* pmy_pack;   // ptr to MeshBlockPack containing this MHD
   // temporary variables used to store face-centered electric fields returned by RS

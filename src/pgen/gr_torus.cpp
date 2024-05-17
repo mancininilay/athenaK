@@ -108,7 +108,8 @@ struct torus_pgen {
   bool prograde;                              // flag indicating disk is prograde (FM)
   Real r_edge, r_peak, l, rho_max;            // fixed torus parameters
   Real l_peak;                                // fixed torus parameters
-  Real c_param, n_param;                      // fixed disk parameters
+  Real c_param;                               // calculated chakrabarti parameter
+  Real n_param;                               // fixed or calculated chakrabarti parameter
   Real log_h_edge, log_h_peak;                // calculated torus parameters
   Real ptot_over_rho_peak, rho_peak;          // more calculated torus parameters
   Real r_outer_edge;                          // even more calculated torus parameters
@@ -229,6 +230,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   torus.rho_max = pin->GetReal("problem", "rho_max");
   torus.r_edge = pin->GetReal("problem", "r_edge");
   torus.r_peak = pin->GetReal("problem", "r_peak");
+  torus.n_param = pin->GetOrAddReal("problem", "n_param",0.0);
   torus.prograde = pin->GetOrAddBoolean("problem","prograde",true);
   torus.fm_torus = pin->GetOrAddBoolean("problem", "fm_torus", false);
   torus.chakrabarti_torus = pin->GetOrAddBoolean("problem", "chakrabarti_torus", false);
@@ -459,8 +461,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     Real ptot;
     if (!use_dyngr) {
       ptot = gm1*w0_(m,IEN,k,j,i);
-    }
-    else {
+    } else {
       ptot = w0_(m,IPR,k,j,i);
     }
     if (is_radiation_enabled) ptot += urad/3.0;
@@ -994,10 +995,14 @@ static Real CalculateT(struct torus_pgen pgen, Real rho, Real ptot_over_rho) {
 
 //----------------------------------------------------------------------------------------
 // Function for calculating c, n parameters controlling angular momentum profile
-// in Chakrabarti torus
+// in Chakrabarti torus, where l = c * lambda^n. edited so that n can be pre-specified
+// such that the assumption of keplerian angular momentum at the inner edge is dropped
 
 KOKKOS_INLINE_FUNCTION
 static void CalculateCN(struct torus_pgen pgen, Real *cparam, Real *nparam) {
+  Real n_input = pgen.n_param;
+  Real nn; // slope of angular momentum profile
+  Real cc; // constant of angular momentum profile
   Real l_edge = ((SQR(pgen.r_edge) + SQR(pgen.spin) - 2.0*pgen.spin*sqrt(pgen.r_edge))/
                  (sqrt(pgen.r_edge)*(pgen.r_edge - 2.0) + pgen.spin));
   Real l_peak = ((SQR(pgen.r_peak) + SQR(pgen.spin) - 2.0*pgen.spin*sqrt(pgen.r_peak))/
@@ -1008,8 +1013,13 @@ static void CalculateCN(struct torus_pgen pgen, Real *cparam, Real *nparam) {
   Real lambda_peak = sqrt((l_peak*(-2.0*pgen.spin*l_peak + SQR(pgen.r_peak)*pgen.r_peak
                                    + SQR(pgen.spin)*(2.0+pgen.r_peak)))/
                           (2.0*pgen.spin + l_peak*(pgen.r_peak - 2.0)));
-  Real nn = log(l_peak/l_edge)/log(lambda_peak/lambda_edge);
-  Real cc = l_edge*pow(lambda_edge, -nn);
+  if (n_input == 0.0) {
+    nn = log(l_peak/l_edge)/log(lambda_peak/lambda_edge);
+    cc = l_edge*pow(lambda_edge, -nn);
+  } else {
+    nn = n_input;
+    cc = l_peak*pow(lambda_peak, -nn);
+  }
   *cparam = cc;
   *nparam = nn;
   return;
@@ -1917,84 +1927,4 @@ void TorusFluxes(HistoryData *pdata, Mesh *pm) {
   }
 
   return;
-}
-
-void TorusHistory(HistoryData *pdata, Mesh *pm) {
-  // If we don't have access to the magnetic field, then it doesn't
-  // make much sense to track the divergence.
-  if (pdata->physics != PhysicsModule::MagnetoHydroDynamics) {
-    return;
-  }
-  // Otherwise, the first thing to do is increase the number of outputs
-  int &nmhd = pm->pmb_pack->pmhd->nmhd;
-  pdata->nhist += 1;
-  pdata->label[nmhd+6] = "|divB|";
-
-  // Capture class variables for kernel
-  auto &bx1f = pm->pmb_pack->pmhd->b0.x1f;
-  auto &bx2f = pm->pmb_pack->pmhd->b0.x2f;
-  auto &bx3f = pm->pmb_pack->pmhd->b0.x3f;
-  auto &size = pm->pmb_pack->pmb->mb_size;
-  auto &bcc  = pm->pmb_pack->pmhd->bcc0;
-  auto &coord = pm->pmb_pack->pcoord->coord_data;
-  auto &flat = coord.is_minkowski;
-
-  // loop over all MeshBlocks in this pack
-  auto &indcs = pm->pmb_pack->pmesh->mb_indcs;
-  int is = indcs.is; int nx1 = indcs.nx1;
-  int js = indcs.js; int nx2 = indcs.nx2;
-  int ks = indcs.ks; int nx3 = indcs.nx3;
-  const int nmkji = (pm->pmb_pack->nmb_thispack)*nx3*nx2*nx1;
-  const int nkji = nx3*nx2*nx1;
-  const int nji  = nx2*nx1;
-  Real sum_divb;
-  Kokkos::parallel_reduce("HistSums",Kokkos::RangePolicy<>(DevExeSpace(), 0, nmkji),
-  KOKKOS_LAMBDA(const int &idx, Real &mb_sum) {
-    // compute n,k,j,i indices of thread
-    int m = (idx)/nkji;
-    int k = (idx - m*nkji)/nji;
-    int j = (idx - m*nkji - k*nji)/nx1;
-    int i = (idx - m*nkji - k*nji - j*nx1) + is;
-    k += ks;
-    j += js;
-
-    Real &x1min = size.d_view(m).x1min;
-    Real &x1max = size.d_view(m).x1max;
-    Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
-
-    Real &x2min = size.d_view(m).x2min;
-    Real &x2max = size.d_view(m).x2max;
-    Real x2v = CellCenterX(j-js, indcs.nx2, x2min, x2max);
-
-    Real &x3min = size.d_view(m).x3min;
-    Real &x3max = size.d_view(m).x3max;
-    Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
-
-    Real vol = size.d_view(m).dx1*size.d_view(m).dx2*size.d_view(m).dx3;
-    Real dx  = size.d_view(m).dx1;
-    Real dy  = size.d_view(m).dx2;
-    Real dz  = size.d_view(m).dx3;
-
-    // What matters the most is actually |div B|/|B|. Therefore, we need to use
-    // the cell-centered field to estimate the average magnitude across the cell.
-    /*Real gdd[4][4], guu[4][4];
-    ComputeMetricAndInverse(x1v, x2v, x3v, flat, coord.bh_spin, gdd, guu);
-    Real g3d[NSPMETRIC] = {gdd[1][1], gdd[1][2], gdd[1][3],
-                           gdd[2][2], gdd[2][3], gdd[3][3]};
-    Real sdetg = sqrt(Primitive::GetDeterminant(g3d));
-    Real B_u[3] = {bcc(m, IBX, k, j, i)/sdetg, 
-                   bcc(m, IBY, k, j, i)/sdetg,
-                   bcc(m, IBZ, k, j, i)/sdetg};
-    Real Bmag = sqrt(Primitive::SquareVector(B_u, g3d)) + 1e-60;
-    if (!isfinite(Bmag)) {
-      printf("There's a problem with Bmag!\n");
-    }*/
-
-    mb_sum += fabs(vol*( (bx1f(m, k, j, i+1) - bx1f(m, k, j, i))/dx
-                  + (bx2f(m, k, j+1, i) - bx2f(m, k, j, i))/dy
-                  + (bx3f(m, k+1, j, i) - bx3f(m, k, j, i))/dz));
-  }, Kokkos::Sum<Real>(sum_divb));
-
-  // Store data in hdata array
-  pdata->hdata[nmhd+6] = sum_divb;
 }

@@ -12,6 +12,7 @@ build/
 
 # Mac OS metadata
 .DS_Store
+.vscode
 
 # editor temp files
 *~

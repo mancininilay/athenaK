@@ -12,6 +12,7 @@
 // C headers
 #include <float.h>
 #include <math.h>
+#include <stdio.h>
 
 // C++ headers
 #include <string>
@@ -24,7 +25,6 @@
 #include "eos/primitive-solver/primitive_solver.hpp"
 #include "eos/primitive-solver/idealgas.hpp"
 #include "eos/primitive-solver/piecewise_polytrope.hpp"
-#include "eos/primitive-solver/polytrope.hpp"
 #include "eos/primitive-solver/reset_floor.hpp"
 
 // AthenaK headers
@@ -34,6 +34,8 @@
 #include "parameter_input.hpp"
 #include "adm/adm.hpp"
 #include "mhd/mhd.hpp"
+#include "coordinates/coordinates.hpp"
+#include "coordinates/cell_locations.hpp"
 
 template<class EOSPolicy, class ErrorPolicy>
 class PrimitiveSolverHydro {
@@ -43,11 +45,6 @@ class PrimitiveSolverHydro {
     if constexpr(std::is_same_v<Primitive::IdealGas, EOSPolicy>) {
       ps.GetEOSMutable().SetGamma(pin->GetOrAddReal(block, "gamma", 5.0/3.0));
       ps.GetEOSMutable().SetNSpecies(pin->GetOrAddInteger(block, "nscalars", 0));
-    }
-    // Parameters for a simple polytrope
-    if constexpr(std::is_same_v<Primitive::Polytrope, EOSPolicy>) {
-      ps.GetEOSMutable().SetGamma(pin->GetOrAddReal(block, "gamma", 2.0));
-      ps.GetEOSMutable().SetKappa(pin->GetOrAddReal(block, "K", 100.0));
     }
     // Parameters for a piecewise polytrope
     if constexpr(std::is_same_v<Primitive::PiecewisePolytrope, EOSPolicy>) {
@@ -104,7 +101,7 @@ class PrimitiveSolverHydro {
     ps.GetEOSMutable().SetDensityFloor(pin->GetOrAddReal(block, "dfloor", (FLT_MIN)));
     ps.GetEOSMutable().SetTemperatureFloor(pin->GetOrAddReal(block, "tfloor", (FLT_MIN)));
     ps.GetEOSMutable().SetThreshold(pin->GetOrAddReal(block, "dthreshold", 1.0));
-    ps.GetRootSolverMutable().tol = pin->GetOrAddReal(block, "c2p_tol", 1e-15);
+    ps.tol = pin->GetOrAddReal(block, "c2p_tol", 1e-15);
     ps.GetRootSolverMutable().iterations = pin->GetOrAddInteger(block, "c2p_iter", 50);
     errcap = pin->GetOrAddInteger(block, "c2perrs", 1000);
     SetPolicyParams(block, pin);
@@ -279,9 +276,10 @@ class PrimitiveSolverHydro {
                   DvceArray5D<Real> &bcc0, DvceArray5D<Real> &prim,
                   const int il, const int iu, const int jl, const int ju,
                   const int kl, const int ku, bool floors_only=false) {
-    //auto &indcs = pmy_pack->pmesh->mb_indcs;
-    //int &is = indcs.is, &js = indcs.js, &ks = indcs.ks;
-    //auto &size = pmy_pack->pmb->mb_size;
+    auto &indcs = pmy_pack->pmesh->mb_indcs;
+    int &is = indcs.is, &js = indcs.js, &ks = indcs.ks;
+    int &ie = indcs.ie, &je = indcs.ie, &ke = indcs.ke;
+    auto &size = pmy_pack->pmb->mb_size;
 
     int &nhyd = pmy_pack->pmhd->nmhd;
     int &nscal = pmy_pack->pmhd->nscalars;
@@ -332,8 +330,13 @@ class PrimitiveSolverHydro {
       k += kl;
 
       // Add in a short circuit where FOFC is guaranteed.
-      if (floors_only && (fofc_(m, k, j, i) || excision_flux_(m, k, j, i))) {
+      if (floors_only && fofc_(m, k, j, i)) {
         return;
+      }
+      if (floors_only && excise) {
+        if (excision_flux_(m,k,j,i)) {
+          return;
+        }
       }
 
       // Extract the metric
@@ -416,22 +419,25 @@ class PrimitiveSolverHydro {
           printf("An error occurred during the primitive solve: %s\n"
                  "  Location: (%d, %d, %d, %d)\n"
                  "  Conserved vars: \n"
-                 "    D   = %g\n"
-                 "    Sx  = %g\n"
-                 "    Sy  = %g\n"
-                 "    Sz  = %g\n"
-                 "    tau = %g\n"
+                 "    D   = %.17g\n"
+                 "    Sx  = %.17g\n"
+                 "    Sy  = %.17g\n"
+                 "    Sz  = %.17g\n"
+                 "    tau = %.17g\n"
+                 "    Bx  = %.17g\n"
+                 "    By  = %.17g\n"
+                 "    Bz  = %.17g\n"
                  "  Metric vars: \n"
-                 "    detg = %g\n"
-                 "    g_dd = {%g, %g, %g, %g, %g, %g}\n"
-                 "    alp  = %g\n"
-                 "    beta = {%g, %g, %g}\n"
-                 "    psi4 = %g\n"
-                 "    K_dd = {%g, %g, %g, %g, %g, %g}\n",
+                 "    detg = %.17g\n"
+                 "    g_dd = {%.17g, %.17g, %.17g, %.17g, %.17g, %.17g}\n"
+                 "    alp  = %.17g\n"
+                 "    beta = {%.17g, %.17g, %.17g}\n"
+                 "    psi4 = %.17g\n"
+                 "    K_dd = {%.17g, %.17g, %.17g, %.17g, %.17g, %.17g}\n",
                  ErrorToString(result.error),
                  m, k, j, i,
                  cons_pt_old[CDN], cons_pt_old[CSX], cons_pt_old[CSY], cons_pt_old[CSZ],
-                 cons_pt_old[CTA], detg,
+                 cons_pt_old[CTA], b3u[IBX], b3u[IBY], b3u[IBZ], detg,
                  g3d[S11], g3d[S12], g3d[S13], g3d[S22], g3d[S23], g3d[S33],
                  adm.alpha(m, k, j, i),
                  adm.beta_u(m, 0, k, j, i),
@@ -460,6 +466,32 @@ class PrimitiveSolverHydro {
         // If the conservative variables were floored or adjusted for consistency,
         // we need to copy the conserved variables, too.
         if (result.cons_floor || result.cons_adjusted) {
+          /*if (fabs((cons_pt[CDN] - cons_pt_old[CDN])/cons_pt_old[CDN]) > 1e-12) {
+            Real &x1min = size.d_view(m).x1min;
+            Real &x1max = size.d_view(m).x1max;
+            Real x1v = CellCenterX(i-is, indcs.nx1, x1min, x1max);
+
+            Real &x2min = size.d_view(m).x2min;
+            Real &x2max = size.d_view(m).x2max;
+            Real x2v = CellCenterX(j-js, indcs.nx2, x2min, x2max);
+
+            Real &x3min = size.d_view(m).x3min;
+            Real &x3max = size.d_view(m).x3max;
+            Real x3v = CellCenterX(k-ks, indcs.nx3, x3min, x3max);
+            bool is_ghost = (i < is) || (i > ie) ||
+                            (j < js) || (j > je) ||
+                            (k < ks) || (k > ke);
+
+            printf("Density was nontrivially adjusted on MeshBlock %d!\n"
+                   "  Grid index: (i=%d, j=%d, k=%d)\n"
+                   "  Physical position: (%g, %g, %g)\n"
+                   "  D (old): %.17g\n"
+                   "  D (new): %.17g\n"
+                   "  Ghost zone? %s\n",
+                   m, i, j, k,
+                   x1v, x2v, x3v, cons_pt_old[CDN], cons_pt[CDN],
+                   is_ghost ? "true" : "false");
+          }*/
           cons(m, IDN, k, j, i) = cons_pt[CDN]*sdetg;
           cons(m, IM1, k, j, i) = cons_pt[CSX]*sdetg;
           cons(m, IM2, k, j, i) = cons_pt[CSY]*sdetg;
@@ -475,59 +507,13 @@ class PrimitiveSolverHydro {
     if (floors_only) {
       ps.GetEOSMutable().SetPrimitiveFloorFailure(prim_failure);
       ps.GetEOSMutable().SetConservedFloorFailure(cons_failure);
-    }
-    else {
+    } else {
       nerrs += count_errs;
     }
   }
 
   // Get the transformed magnetosonic speeds at a point in a given direction.
   KOKKOS_INLINE_FUNCTION
-  void GetGRFastMagnetosonicSpeeds(Real& lambda_p, Real& lambda_m,
-                                   Real prim[NPRIM], Real bsq, Real g3d[NSPMETRIC],
-                                   Real beta_u[3], Real alpha, Real gii,
-                                   int pvx) const {
-    Real uu[3] = {prim[PVX], prim[PVY], prim[PVZ]};
-    Real usq = Primitive::SquareVector(uu, g3d);
-    int index = pvx - PVX;
-
-    // Get the Lorentz factor and the 3-velocity.
-    Real iWsq = 1.0/(1.0 + usq);
-    Real iW = sqrt(iWsq);
-    Real vsq = usq*iWsq;
-    Real vu = uu[index]*iW;
-
-    // Calculate the fast magnetosonic speed in the comoving frame.
-    Real cs = ps.GetEOS().GetSoundSpeed(prim[PRH], prim[PTM], &prim[PYF]);
-    Real csq = cs*cs;
-    Real H = ps.GetEOS().GetBaryonMass()*prim[PRH]*
-             ps.GetEOS().GetEnthalpy(prim[PRH], prim[PTM], &prim[PYF]);
-    Real vasq = bsq/(bsq + H);
-    Real cmsq = csq + vasq - csq*vasq;
-
-    Real iWsq_ad = 1.0 - vsq*cmsq;
-    Real dis = (cmsq*iWsq)*(gii*iWsq_ad - vu*vu*(1.0 - cmsq));
-    if (dis < 0.) {
-      printf("There's a problem with the magnetosonic speed!\n"
-             "  dis = %g\n"
-             "  gii = %g\n"
-             "  csq = %g\n"
-             "  vsq = %g\n"
-             "  usq = %g\n"
-             "  rho = %g\n"
-             "  vu  = %g\n"
-             "  T   = %g\n"
-             "  bsq = %g\n",
-             dis, gii, csq, vsq, usq, prim[PRH], prim[PTM], vu, bsq);
-      //exit(EXIT_FAILURE);
-    }
-    Real sdis = sqrt(dis);
-
-    lambda_p = alpha*(vu*(1.0 - cmsq) + sdis)/iWsq_ad - beta_u[index];
-    lambda_m = alpha*(vu*(1.0 - cmsq) - sdis)/iWsq_ad - beta_u[index];
-  }
-
-  /*KOKKOS_INLINE_FUNCTION
   void GetGRFastMagnetosonicSpeeds(Real& lambda_p, Real& lambda_m,
                                    Real prim[NPRIM], Real bsq, Real g3d[NSPMETRIC],
                                    Real beta_u[3], Real alpha, Real gii,
@@ -557,14 +543,14 @@ class PrimitiveSolverHydro {
     // Set fast magnetosonic speed in appropriate coordinates
     Real a = u0*u0 - (g00 + u0*u0)*cmsq;
     Real b = -2.0 * (u0 * u1 - (g01 + u0 * u1) *cmsq);
-    Real c = u1*u1 - (gii + u1*u1)*cmsq;
+    Real c = u1*u1 - (g11 + u1*u1)*cmsq;
     Real a1 = b / a;
     Real a0 = c / a;
     Real s = fmax(a1*a1 - 4.0 * a0, 0.0);
     s = sqrt(s);
     lambda_p = (a1 >= 0.0) ? -2.0 * a0 / (a1 + s) : (-a1 + s) / 2.0;
     lambda_m = (a1 >= 0.0) ? (-a1 - s) / 2.0 : -2.0 * a0 / (a1 - s);
-  }*/
+  }
 
   // A function for converting PrimitiveSolver errors to strings
   KOKKOS_INLINE_FUNCTION
@@ -602,23 +588,23 @@ class PrimitiveSolverHydro {
   int CheckForConservedNaNs(const Real cons_pt[NCONS]) const {
     int nans = 0;
     if (!isfinite(cons_pt[CDN])) {
-      printf("D is NaN!\n");
+      printf("D is NaN!\n"); // NOLINT
       nans = 1;
     }
     if (!isfinite(cons_pt[CSX])) {
-      printf("Sx is NaN!\n");
+      printf("Sx is NaN!\n"); // NOLINT
       nans = 1;
     }
     if (!isfinite(cons_pt[CSY])) {
-      printf("Sy is NaN!\n");
+      printf("Sy is NaN!\n"); // NOLINT
       nans = 1;
     }
     if (!isfinite(cons_pt[CSZ])) {
-      printf("Sz is NaN!\n");
+      printf("Sz is NaN!\n"); // NOLINT
       nans = 1;
     }
     if (!isfinite(cons_pt[CTA])) {
-      printf("Tau is NaN!\n");
+      printf("Tau is NaN!\n"); // NOLINT
       nans = 1;
     }
 
@@ -628,12 +614,12 @@ class PrimitiveSolverHydro {
   KOKKOS_INLINE_FUNCTION
   void DumpPrimitiveVars(const Real prim_pt[NPRIM]) const {
     printf("Primitive vars: \n"
-           "  rho = %g\n"
-           "  ux  = %g\n"
-           "  uy  = %g\n"
-           "  uz  = %g\n"
-           "  P   = %g\n"
-           "  T   = %g\n",
+           "  rho = %.17g\n"
+           "  ux  = %.17g\n"
+           "  uy  = %.17g\n"
+           "  uz  = %.17g\n"
+           "  P   = %.17g\n"
+           "  T   = %.17g\n",
            prim_pt[PRH], prim_pt[PVX], prim_pt[PVY],
            prim_pt[PVZ], prim_pt[PPR], prim_pt[PTM]);
   }

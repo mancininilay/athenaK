@@ -9,6 +9,7 @@
 //  \brief NumericalRelativity handles the creation of a TaskList for NR modules.
 
 #include <vector>
+#include <map>
 #include <functional>
 #include <string>
 
@@ -48,10 +49,12 @@ enum TaskName {
   MHD_Prolong,
   MHD_C2P,
   MHD_Newdt,
-  MHD_Clear,
+  MHD_ClearS,
+  MHD_ClearR,
   MHD_NTASKS,
 
   Z4c_Recv,
+  Z4c_IRecvW,
   Z4c_CopyU,
   Z4c_CalcRHS,
   Z4c_SomBC,
@@ -64,11 +67,19 @@ enum TaskName {
   Z4c_Prolong,
   Z4c_AlgC,
   Z4c_Z4c2ADM,
+  Z4c_Excise,
   Z4c_ADMC,
   Z4c_ClearS,
   Z4c_ClearR,
   Z4c_Weyl,
+  Z4c_RestW,
+  Z4c_SendW,
+  Z4c_RecvW,
+  Z4c_ProlW,
+  Z4c_ClearSW,
+  Z4c_ClearRW,
   Z4c_Wave,
+  Z4c_PT,
   Z4c_NTASKS
 };
 
@@ -105,8 +116,8 @@ class NumericalRelativity {
   // Task function must have arguments (Driver*, int).
   template <class F>
   void QueueTask(F func, TaskName name, const std::string name_string,
-                 TaskLocation loc, std::vector<TaskName>& dependencies,
-                 std::vector<TaskName>& optional) {
+                 TaskLocation loc, std::vector<TaskName> dependencies = {},
+                 std::vector<TaskName> optional = {}) {
     // Don't add this task if its physics dependencies aren't met, e.g,
     // don't add Z4c matter source terms if Z4c is disabled.
     if (!DependenciesMet(dependencies)) {
@@ -125,8 +136,8 @@ class NumericalRelativity {
   // function of class T.
   template <class F, class T>
   void QueueTask(F func, T *obj, TaskName name, const std::string name_string,
-                 TaskLocation loc, std::vector<TaskName>& dependencies,
-                 std::vector<TaskName>& optional) {
+                 TaskLocation loc, std::vector<TaskName> dependencies = {},
+                 std::vector<TaskName> optional = {}) {
     // Don't add this task if its physics dependencies aren't met, e.g.,
     // don't add Z4c matter source terms if Z4c is disabled.
     if (!DependenciesMet(dependencies)) {
@@ -142,7 +153,8 @@ class NumericalRelativity {
       [=](Driver *d, int s) mutable -> TaskStatus {return (obj->*func)(d,s);}));
   }
 
-  void AssembleNumericalRelativityTasks(TaskList &start, TaskList &run, TaskList &end);
+  void AssembleNumericalRelativityTasks(
+         std::map<std::string, std::shared_ptr<TaskList>>& tl);
 
  private:
   MeshBlockPack *pmy_pack;
@@ -161,7 +173,10 @@ class NumericalRelativity {
   void AddExtraDependencies(std::vector<TaskName>& required,
                             std::vector<TaskName>& optional);
 
-  bool AssembleNumericalRelativityTasks(TaskList &list, std::vector<QueuedTask> &queue);
+  void PrintMissingTasks(std::vector<QueuedTask> &queue);
+
+  bool AssembleNumericalRelativityTasks(std::shared_ptr<TaskList>& list,
+         std::vector<QueuedTask> &queue);
 };
 
 } // namespace numrel

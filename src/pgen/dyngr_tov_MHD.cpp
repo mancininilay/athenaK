@@ -84,6 +84,7 @@ void VacuumBC(Mesh *pm);
 //  \brief Sets initial conditions for TOV star in DynGR
 //  Compile with '-D PROBLEM=dyngr_tov' to enroll as user-specific problem generator
 
+[[deprecated("Use dyngr_tov.cpp with use_pcut_rel=true, isotropic=false instead.")]]
 void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   MeshBlockPack *pmbp = pmy_mesh_->pmb_pack;
   if (!pmbp->pcoord->is_dynamical_relativistic) {
@@ -103,8 +104,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   tov.kappa = pin->GetReal("problem", "kappa");
   tov.npoints = pin->GetReal("problem", "npoints");
   tov.dr    = pin->GetReal("problem", "dr");
-  if (pmbp->pdyngr->eos_policy != DynGR_EOS::eos_ideal &&
-      pmbp->pdyngr->eos_policy != DynGR_EOS::eos_poly) {
+  if (pmbp->pdyngr->eos_policy != DynGR_EOS::eos_ideal) {
     std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
               << "TOV star problem currently only compatible with eos_ideal and eos_poly"
               << std::endl;
@@ -129,6 +129,13 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
 
   // Set the history function for a TOV star
   user_hist_func = &TOVHistory;
+
+  // Print a deprecation warning.
+  std::cout << "### WARNING in " << __FILE__ << " at line " << __LINE__ << std::endl
+            << "dyngr_tov_MHD.cpp is deprecated and will be removed soon."
+            << std::endl
+            << "Please use dyngr_tov.cpp with use_pcut_rel=true, isotropic=false instead."
+            << std::endl;
 
   // Generate the TOV star
   ConstructTOV(tov);
@@ -658,7 +665,7 @@ void VacuumBC(Mesh *pm) {
   int &js = indcs.js;  int &je  = indcs.je;
   int &ks = indcs.ks;  int &ke  = indcs.ke;
   auto &mb_bcs = pm->pmb_pack->pmb->mb_bcs;
-  
+
   DvceArray5D<Real> u0_, w0_;
   u0_ = pm->pmb_pack->pmhd->u0;
   w0_ = pm->pmb_pack->pmhd->w0;
@@ -667,7 +674,7 @@ void VacuumBC(Mesh *pm) {
   int nvar = u0_.extent_int(1);
 
   Real &dfloor = pm->pmb_pack->pmhd->peos->eos_data.dfloor;
-  
+
   // X1-Boundary
   // Set X1-BCs on b0 if Meshblock face is at the edge of the computational domain.
   par_for("noinflow_x1", DevExeSpace(),0,(nmb-1),0,(n3-1),0,(n2-1),
