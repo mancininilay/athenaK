@@ -99,6 +99,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   
 
   // Select either Hydro or MHD
+  int nvars;
   std::string block;
   if (pmbp->phydro != nullptr) {
  //   u0_ = pmbp->phydro->u0;
