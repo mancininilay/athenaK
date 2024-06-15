@@ -58,6 +58,7 @@ Real C;
 Real B;
 Real rho_cut;
 Real rho_cut2;
+Real r_cut;
 Real T;
 Real Kappatilde;
 Real Kappa;
@@ -160,6 +161,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   B = pin->GetOrAddReal("problem", "B", 0.0);
   rho_cut = pin->GetOrAddReal("problem", "rho_cut", 1.0);
   rho_cut2 = pin->GetOrAddReal("problem", "rho_cut2", 1.0);
+  r_cut = pin->GetOrAddReal("problem", "r_cut", 1.0);
   T = pin->GetOrAddReal("problem", "T", 0.0); 
   Kappa = pin->GetReal("problem", "kappa");
   Kappatilde = pin->GetOrAddReal("problem", "Kappatilde",86841);
@@ -852,6 +854,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real Tnu = T; //Tnue
   Real rhocut = rho_cut;
   Real rhocut2 = rho_cut2;
+  Real rcut = r_cut;
   Real r0_ = r0;
   Real b_norm_ = b_norm;
   Real BB = B;  
@@ -1074,25 +1077,32 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
       z2 = 1.0;
     }
 
+   Real z3;
+   if (r<rcut){
+      z3 = exp(10*(-1.0 + r/rcut));
+    } else {
+      z3 = 1.0;
+    }
+
     //Let's compute the freezing of magnetic field:
 
     Real dx1 = size.d_view(m).dx1;
     Real dx2 = size.d_view(m).dx2;
     Real dx3 = size.d_view(m).dx3;
 
-    b0_.x1f(m,k,j,i) += (1-z2)*(((a3(m,k,j+1,i) - a3(m,k,j,i))/dx2 - (a2(m,k+1,j,i) - a2(m,k,j,i))/dx3) - b0_.x1f(m,k,j,i));
-    b0_.x2f(m,k,j,i) += (1-z2)*(((a1(m,k+1,j,i) - a1(m,k,j,i))/dx3 - (a3(m,k,j,i+1) - a3(m,k,j,i))/dx1) - b0_.x2f(m,k,j,i));
-    b0_.x3f(m,k,j,i) += (1-z2)*(((a2(m,k,j,i+1) - a2(m,k,j,i))/dx1 - (a1(m,k,j+1,i) - a1(m,k,j,i))/dx2) - b0_.x3f(m,k,j,i));
+    b0_.x1f(m,k,j,i) += (1-z3)*(((a3(m,k,j+1,i) - a3(m,k,j,i))/dx2 - (a2(m,k+1,j,i) - a2(m,k,j,i))/dx3) - b0_.x1f(m,k,j,i));
+    b0_.x2f(m,k,j,i) += (1-z3)*(((a1(m,k+1,j,i) - a1(m,k,j,i))/dx3 - (a3(m,k,j,i+1) - a3(m,k,j,i))/dx1) - b0_.x2f(m,k,j,i));
+    b0_.x3f(m,k,j,i) += (1-z3)*(((a2(m,k,j,i+1) - a2(m,k,j,i))/dx1 - (a1(m,k,j+1,i) - a1(m,k,j,i))/dx2) - b0_.x3f(m,k,j,i));
 
       // Include extra face-component at edge of block in each direction
     if (i==ie) {
-      b0_.x1f(m,k,j,i+1) += (1-z2)*(((a3(m,k,j+1,i+1) - a3(m,k,j,i+1))/dx2 - (a2(m,k+1,j,i+1) - a2(m,k,j,i+1))/dx3) - b0_.x1f(m,k,j,i+1));
+      b0_.x1f(m,k,j,i+1) += (1-z3)*(((a3(m,k,j+1,i+1) - a3(m,k,j,i+1))/dx2 - (a2(m,k+1,j,i+1) - a2(m,k,j,i+1))/dx3) - b0_.x1f(m,k,j,i+1));
     }
     if (j==je) {
-      b0_.x2f(m,k,j+1,i) += (1-z2)*(((a1(m,k+1,j+1,i) - a1(m,k,j+1,i))/dx3 - (a3(m,k,j+1,i+1) - a3(m,k,j+1,i))/dx1) - b0_.x2f(m,k,j+1,i));
+      b0_.x2f(m,k,j+1,i) += (1-z3)*(((a1(m,k+1,j+1,i) - a1(m,k,j+1,i))/dx3 - (a3(m,k,j+1,i+1) - a3(m,k,j+1,i))/dx1) - b0_.x2f(m,k,j+1,i));
     }
     if (k==ke) {
-      b0_.x3f(m,k+1,j,i) += (1-z2)*(((a2(m,k+1,j,i+1) - a2(m,k+1,j,i))/dx1 - (a1(m,k+1,j+1,i) - a1(m,k+1,j,i))/dx2) - b0_.x3f(m,k+1,j,i));
+      b0_.x3f(m,k+1,j,i) += (1-z3)*(((a2(m,k+1,j,i+1) - a2(m,k+1,j,i))/dx1 - (a1(m,k+1,j+1,i) - a1(m,k+1,j,i))/dx2) - b0_.x3f(m,k+1,j,i));
     }
 
 
