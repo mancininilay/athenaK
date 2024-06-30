@@ -553,6 +553,8 @@ src/CMakeFiles/athena.dir/dyngr/dyngr.cpp.o : /storage/home/nkm5669/work/athenak
     /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/idealgas.hpp \
     /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/eos_policy_interface.hpp \
     /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/piecewise_polytrope.hpp \
+    /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/eos_compose.hpp \
+    /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/../../athena.hpp \
     /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/reset_floor.hpp \
     /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/error_policy_interface.hpp \
     /storage/home/nkm5669/work/athenak/src/coordinates/cell_locations.hpp \

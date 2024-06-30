@@ -538,6 +538,7 @@ src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_fr
     /storage/home/nkm5669/work/athenak/src/mesh/meshblock_pack.hpp \
     /storage/home/nkm5669/work/athenak/src/driver/driver.hpp \
     /storage/home/nkm5669/work/athenak/src/outputs/outputs.hpp \
+    /storage/home/nkm5669/work/athenak/kokkos/containers/src/Kokkos_ScatterView.hpp \
     /storage/home/nkm5669/work/athenak/src/pgen/pgen.hpp \
     /storage/home/nkm5669/work/athenak/src/geodesic-grid/spherical_grid.hpp \
     /storage/home/nkm5669/work/athenak/src/geodesic-grid/geodesic_grid.hpp \
@@ -563,6 +564,7 @@ src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_fr
     /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/idealgas.hpp \
     /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/eos_policy_interface.hpp \
     /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/piecewise_polytrope.hpp \
-    /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/polytrope.hpp \
+    /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/eos_compose.hpp \
+    /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/../../athena.hpp \
     /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/reset_floor.hpp \
     /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/error_policy_interface.hpp

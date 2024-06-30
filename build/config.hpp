@@ -7,12 +7,12 @@
 //========================================================================================
 
 // problem generator (string)
-#define PROBLEM_GENERATOR "elliptica_rns_dipole_lightbulb"
+#define PROBLEM_GENERATOR "dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing"
 #define USER_PROBLEM_ENABLED 1
 
 #define TWO_PUNCTURES 0
 
-#define ELLIPTICA 1
+#define ELLIPTICA 0
 
 #define LORENE 0
 

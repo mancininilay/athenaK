@@ -601,10 +601,24 @@ src/CMakeFiles/athena.dir/eos/primitive-solver/unit_system.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/athena.dir/eos/primitive-solver/unit_system.cpp.s"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/unit_system.cpp -o CMakeFiles/athena.dir/eos/primitive-solver/unit_system.cpp.s
 
+src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.o: src/CMakeFiles/athena.dir/flags.make
+src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.o: ../src/eos/primitive-solver/eos_compose.cpp
+src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.o"
+	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.o -MF CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.o.d -o CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.o -c /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/eos_compose.cpp
+
+src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.i"
+	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/eos_compose.cpp > CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.i
+
+src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.s"
+	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /storage/home/nkm5669/work/athenak/src/eos/primitive-solver/eos_compose.cpp -o CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.s
+
 src/CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.o: ../src/geodesic-grid/geodesic_grid.cpp
 src/CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object src/CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object src/CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.o -MF CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.o.d -o CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.o -c /storage/home/nkm5669/work/athenak/src/geodesic-grid/geodesic_grid.cpp
 
 src/CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.i: cmake_force
@@ -618,7 +632,7 @@ src/CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.o: ../src/geodesic-grid/spherical_grid.cpp
 src/CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object src/CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object src/CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.o -MF CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.o.d -o CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.o -c /storage/home/nkm5669/work/athenak/src/geodesic-grid/spherical_grid.cpp
 
 src/CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.i: cmake_force
@@ -632,7 +646,7 @@ src/CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/hydro/hydro.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/hydro/hydro.cpp.o: ../src/hydro/hydro.cpp
 src/CMakeFiles/athena.dir/hydro/hydro.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/hydro/hydro.cpp.o -MF CMakeFiles/athena.dir/hydro/hydro.cpp.o.d -o CMakeFiles/athena.dir/hydro/hydro.cpp.o -c /storage/home/nkm5669/work/athenak/src/hydro/hydro.cpp
 
 src/CMakeFiles/athena.dir/hydro/hydro.cpp.i: cmake_force
@@ -646,7 +660,7 @@ src/CMakeFiles/athena.dir/hydro/hydro.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/hydro/hydro_fluxes.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/hydro/hydro_fluxes.cpp.o: ../src/hydro/hydro_fluxes.cpp
 src/CMakeFiles/athena.dir/hydro/hydro_fluxes.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro_fluxes.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro_fluxes.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/hydro/hydro_fluxes.cpp.o -MF CMakeFiles/athena.dir/hydro/hydro_fluxes.cpp.o.d -o CMakeFiles/athena.dir/hydro/hydro_fluxes.cpp.o -c /storage/home/nkm5669/work/athenak/src/hydro/hydro_fluxes.cpp
 
 src/CMakeFiles/athena.dir/hydro/hydro_fluxes.cpp.i: cmake_force
@@ -660,7 +674,7 @@ src/CMakeFiles/athena.dir/hydro/hydro_fluxes.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/hydro/hydro_fofc.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/hydro/hydro_fofc.cpp.o: ../src/hydro/hydro_fofc.cpp
 src/CMakeFiles/athena.dir/hydro/hydro_fofc.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro_fofc.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro_fofc.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/hydro/hydro_fofc.cpp.o -MF CMakeFiles/athena.dir/hydro/hydro_fofc.cpp.o.d -o CMakeFiles/athena.dir/hydro/hydro_fofc.cpp.o -c /storage/home/nkm5669/work/athenak/src/hydro/hydro_fofc.cpp
 
 src/CMakeFiles/athena.dir/hydro/hydro_fofc.cpp.i: cmake_force
@@ -674,7 +688,7 @@ src/CMakeFiles/athena.dir/hydro/hydro_fofc.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/hydro/hydro_newdt.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/hydro/hydro_newdt.cpp.o: ../src/hydro/hydro_newdt.cpp
 src/CMakeFiles/athena.dir/hydro/hydro_newdt.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro_newdt.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro_newdt.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/hydro/hydro_newdt.cpp.o -MF CMakeFiles/athena.dir/hydro/hydro_newdt.cpp.o.d -o CMakeFiles/athena.dir/hydro/hydro_newdt.cpp.o -c /storage/home/nkm5669/work/athenak/src/hydro/hydro_newdt.cpp
 
 src/CMakeFiles/athena.dir/hydro/hydro_newdt.cpp.i: cmake_force
@@ -688,7 +702,7 @@ src/CMakeFiles/athena.dir/hydro/hydro_newdt.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/hydro/hydro_tasks.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/hydro/hydro_tasks.cpp.o: ../src/hydro/hydro_tasks.cpp
 src/CMakeFiles/athena.dir/hydro/hydro_tasks.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro_tasks.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro_tasks.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/hydro/hydro_tasks.cpp.o -MF CMakeFiles/athena.dir/hydro/hydro_tasks.cpp.o.d -o CMakeFiles/athena.dir/hydro/hydro_tasks.cpp.o -c /storage/home/nkm5669/work/athenak/src/hydro/hydro_tasks.cpp
 
 src/CMakeFiles/athena.dir/hydro/hydro_tasks.cpp.i: cmake_force
@@ -702,7 +716,7 @@ src/CMakeFiles/athena.dir/hydro/hydro_tasks.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/hydro/hydro_update.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/hydro/hydro_update.cpp.o: ../src/hydro/hydro_update.cpp
 src/CMakeFiles/athena.dir/hydro/hydro_update.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro_update.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object src/CMakeFiles/athena.dir/hydro/hydro_update.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/hydro/hydro_update.cpp.o -MF CMakeFiles/athena.dir/hydro/hydro_update.cpp.o.d -o CMakeFiles/athena.dir/hydro/hydro_update.cpp.o -c /storage/home/nkm5669/work/athenak/src/hydro/hydro_update.cpp
 
 src/CMakeFiles/athena.dir/hydro/hydro_update.cpp.i: cmake_force
@@ -716,7 +730,7 @@ src/CMakeFiles/athena.dir/hydro/hydro_update.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/ion-neutral/ion-neutral.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/ion-neutral/ion-neutral.cpp.o: ../src/ion-neutral/ion-neutral.cpp
 src/CMakeFiles/athena.dir/ion-neutral/ion-neutral.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object src/CMakeFiles/athena.dir/ion-neutral/ion-neutral.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object src/CMakeFiles/athena.dir/ion-neutral/ion-neutral.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/ion-neutral/ion-neutral.cpp.o -MF CMakeFiles/athena.dir/ion-neutral/ion-neutral.cpp.o.d -o CMakeFiles/athena.dir/ion-neutral/ion-neutral.cpp.o -c /storage/home/nkm5669/work/athenak/src/ion-neutral/ion-neutral.cpp
 
 src/CMakeFiles/athena.dir/ion-neutral/ion-neutral.cpp.i: cmake_force
@@ -730,7 +744,7 @@ src/CMakeFiles/athena.dir/ion-neutral/ion-neutral.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.cpp.o: ../src/ion-neutral/ion-neutral_tasks.cpp
 src/CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object src/CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object src/CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.cpp.o -MF CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.cpp.o.d -o CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.cpp.o -c /storage/home/nkm5669/work/athenak/src/ion-neutral/ion-neutral_tasks.cpp
 
 src/CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.cpp.i: cmake_force
@@ -744,7 +758,7 @@ src/CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mesh/build_tree.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mesh/build_tree.cpp.o: ../src/mesh/build_tree.cpp
 src/CMakeFiles/athena.dir/mesh/build_tree.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object src/CMakeFiles/athena.dir/mesh/build_tree.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object src/CMakeFiles/athena.dir/mesh/build_tree.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mesh/build_tree.cpp.o -MF CMakeFiles/athena.dir/mesh/build_tree.cpp.o.d -o CMakeFiles/athena.dir/mesh/build_tree.cpp.o -c /storage/home/nkm5669/work/athenak/src/mesh/build_tree.cpp
 
 src/CMakeFiles/athena.dir/mesh/build_tree.cpp.i: cmake_force
@@ -758,7 +772,7 @@ src/CMakeFiles/athena.dir/mesh/build_tree.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mesh/load_balance.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mesh/load_balance.cpp.o: ../src/mesh/load_balance.cpp
 src/CMakeFiles/athena.dir/mesh/load_balance.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object src/CMakeFiles/athena.dir/mesh/load_balance.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object src/CMakeFiles/athena.dir/mesh/load_balance.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mesh/load_balance.cpp.o -MF CMakeFiles/athena.dir/mesh/load_balance.cpp.o.d -o CMakeFiles/athena.dir/mesh/load_balance.cpp.o -c /storage/home/nkm5669/work/athenak/src/mesh/load_balance.cpp
 
 src/CMakeFiles/athena.dir/mesh/load_balance.cpp.i: cmake_force
@@ -772,7 +786,7 @@ src/CMakeFiles/athena.dir/mesh/load_balance.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mesh/mesh.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mesh/mesh.cpp.o: ../src/mesh/mesh.cpp
 src/CMakeFiles/athena.dir/mesh/mesh.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object src/CMakeFiles/athena.dir/mesh/mesh.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object src/CMakeFiles/athena.dir/mesh/mesh.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mesh/mesh.cpp.o -MF CMakeFiles/athena.dir/mesh/mesh.cpp.o.d -o CMakeFiles/athena.dir/mesh/mesh.cpp.o -c /storage/home/nkm5669/work/athenak/src/mesh/mesh.cpp
 
 src/CMakeFiles/athena.dir/mesh/mesh.cpp.i: cmake_force
@@ -786,7 +800,7 @@ src/CMakeFiles/athena.dir/mesh/mesh.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mesh/meshblock.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mesh/meshblock.cpp.o: ../src/mesh/meshblock.cpp
 src/CMakeFiles/athena.dir/mesh/meshblock.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object src/CMakeFiles/athena.dir/mesh/meshblock.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object src/CMakeFiles/athena.dir/mesh/meshblock.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mesh/meshblock.cpp.o -MF CMakeFiles/athena.dir/mesh/meshblock.cpp.o.d -o CMakeFiles/athena.dir/mesh/meshblock.cpp.o -c /storage/home/nkm5669/work/athenak/src/mesh/meshblock.cpp
 
 src/CMakeFiles/athena.dir/mesh/meshblock.cpp.i: cmake_force
@@ -800,7 +814,7 @@ src/CMakeFiles/athena.dir/mesh/meshblock.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mesh/meshblock_pack.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mesh/meshblock_pack.cpp.o: ../src/mesh/meshblock_pack.cpp
 src/CMakeFiles/athena.dir/mesh/meshblock_pack.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object src/CMakeFiles/athena.dir/mesh/meshblock_pack.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building CXX object src/CMakeFiles/athena.dir/mesh/meshblock_pack.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mesh/meshblock_pack.cpp.o -MF CMakeFiles/athena.dir/mesh/meshblock_pack.cpp.o.d -o CMakeFiles/athena.dir/mesh/meshblock_pack.cpp.o -c /storage/home/nkm5669/work/athenak/src/mesh/meshblock_pack.cpp
 
 src/CMakeFiles/athena.dir/mesh/meshblock_pack.cpp.i: cmake_force
@@ -814,7 +828,7 @@ src/CMakeFiles/athena.dir/mesh/meshblock_pack.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mesh/meshblock_tree.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mesh/meshblock_tree.cpp.o: ../src/mesh/meshblock_tree.cpp
 src/CMakeFiles/athena.dir/mesh/meshblock_tree.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building CXX object src/CMakeFiles/athena.dir/mesh/meshblock_tree.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building CXX object src/CMakeFiles/athena.dir/mesh/meshblock_tree.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mesh/meshblock_tree.cpp.o -MF CMakeFiles/athena.dir/mesh/meshblock_tree.cpp.o.d -o CMakeFiles/athena.dir/mesh/meshblock_tree.cpp.o -c /storage/home/nkm5669/work/athenak/src/mesh/meshblock_tree.cpp
 
 src/CMakeFiles/athena.dir/mesh/meshblock_tree.cpp.i: cmake_force
@@ -828,7 +842,7 @@ src/CMakeFiles/athena.dir/mesh/meshblock_tree.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mesh/mesh_refinement.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mesh/mesh_refinement.cpp.o: ../src/mesh/mesh_refinement.cpp
 src/CMakeFiles/athena.dir/mesh/mesh_refinement.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building CXX object src/CMakeFiles/athena.dir/mesh/mesh_refinement.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building CXX object src/CMakeFiles/athena.dir/mesh/mesh_refinement.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mesh/mesh_refinement.cpp.o -MF CMakeFiles/athena.dir/mesh/mesh_refinement.cpp.o.d -o CMakeFiles/athena.dir/mesh/mesh_refinement.cpp.o -c /storage/home/nkm5669/work/athenak/src/mesh/mesh_refinement.cpp
 
 src/CMakeFiles/athena.dir/mesh/mesh_refinement.cpp.i: cmake_force
@@ -842,7 +856,7 @@ src/CMakeFiles/athena.dir/mesh/mesh_refinement.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mhd/mhd.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mhd/mhd.cpp.o: ../src/mhd/mhd.cpp
 src/CMakeFiles/athena.dir/mhd/mhd.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mhd/mhd.cpp.o -MF CMakeFiles/athena.dir/mhd/mhd.cpp.o.d -o CMakeFiles/athena.dir/mhd/mhd.cpp.o -c /storage/home/nkm5669/work/athenak/src/mhd/mhd.cpp
 
 src/CMakeFiles/athena.dir/mhd/mhd.cpp.i: cmake_force
@@ -856,7 +870,7 @@ src/CMakeFiles/athena.dir/mhd/mhd.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mhd/mhd_corner_e.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mhd/mhd_corner_e.cpp.o: ../src/mhd/mhd_corner_e.cpp
 src/CMakeFiles/athena.dir/mhd/mhd_corner_e.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_corner_e.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_corner_e.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mhd/mhd_corner_e.cpp.o -MF CMakeFiles/athena.dir/mhd/mhd_corner_e.cpp.o.d -o CMakeFiles/athena.dir/mhd/mhd_corner_e.cpp.o -c /storage/home/nkm5669/work/athenak/src/mhd/mhd_corner_e.cpp
 
 src/CMakeFiles/athena.dir/mhd/mhd_corner_e.cpp.i: cmake_force
@@ -870,7 +884,7 @@ src/CMakeFiles/athena.dir/mhd/mhd_corner_e.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mhd/mhd_ct.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mhd/mhd_ct.cpp.o: ../src/mhd/mhd_ct.cpp
 src/CMakeFiles/athena.dir/mhd/mhd_ct.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_ct.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_ct.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mhd/mhd_ct.cpp.o -MF CMakeFiles/athena.dir/mhd/mhd_ct.cpp.o.d -o CMakeFiles/athena.dir/mhd/mhd_ct.cpp.o -c /storage/home/nkm5669/work/athenak/src/mhd/mhd_ct.cpp
 
 src/CMakeFiles/athena.dir/mhd/mhd_ct.cpp.i: cmake_force
@@ -884,7 +898,7 @@ src/CMakeFiles/athena.dir/mhd/mhd_ct.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mhd/mhd_fluxes.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mhd/mhd_fluxes.cpp.o: ../src/mhd/mhd_fluxes.cpp
 src/CMakeFiles/athena.dir/mhd/mhd_fluxes.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_fluxes.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_fluxes.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mhd/mhd_fluxes.cpp.o -MF CMakeFiles/athena.dir/mhd/mhd_fluxes.cpp.o.d -o CMakeFiles/athena.dir/mhd/mhd_fluxes.cpp.o -c /storage/home/nkm5669/work/athenak/src/mhd/mhd_fluxes.cpp
 
 src/CMakeFiles/athena.dir/mhd/mhd_fluxes.cpp.i: cmake_force
@@ -898,7 +912,7 @@ src/CMakeFiles/athena.dir/mhd/mhd_fluxes.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mhd/mhd_fofc.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mhd/mhd_fofc.cpp.o: ../src/mhd/mhd_fofc.cpp
 src/CMakeFiles/athena.dir/mhd/mhd_fofc.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_fofc.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_fofc.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mhd/mhd_fofc.cpp.o -MF CMakeFiles/athena.dir/mhd/mhd_fofc.cpp.o.d -o CMakeFiles/athena.dir/mhd/mhd_fofc.cpp.o -c /storage/home/nkm5669/work/athenak/src/mhd/mhd_fofc.cpp
 
 src/CMakeFiles/athena.dir/mhd/mhd_fofc.cpp.i: cmake_force
@@ -912,7 +926,7 @@ src/CMakeFiles/athena.dir/mhd/mhd_fofc.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mhd/mhd_newdt.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mhd/mhd_newdt.cpp.o: ../src/mhd/mhd_newdt.cpp
 src/CMakeFiles/athena.dir/mhd/mhd_newdt.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_newdt.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_newdt.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mhd/mhd_newdt.cpp.o -MF CMakeFiles/athena.dir/mhd/mhd_newdt.cpp.o.d -o CMakeFiles/athena.dir/mhd/mhd_newdt.cpp.o -c /storage/home/nkm5669/work/athenak/src/mhd/mhd_newdt.cpp
 
 src/CMakeFiles/athena.dir/mhd/mhd_newdt.cpp.i: cmake_force
@@ -926,7 +940,7 @@ src/CMakeFiles/athena.dir/mhd/mhd_newdt.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mhd/mhd_tasks.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mhd/mhd_tasks.cpp.o: ../src/mhd/mhd_tasks.cpp
 src/CMakeFiles/athena.dir/mhd/mhd_tasks.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_tasks.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_tasks.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mhd/mhd_tasks.cpp.o -MF CMakeFiles/athena.dir/mhd/mhd_tasks.cpp.o.d -o CMakeFiles/athena.dir/mhd/mhd_tasks.cpp.o -c /storage/home/nkm5669/work/athenak/src/mhd/mhd_tasks.cpp
 
 src/CMakeFiles/athena.dir/mhd/mhd_tasks.cpp.i: cmake_force
@@ -940,7 +954,7 @@ src/CMakeFiles/athena.dir/mhd/mhd_tasks.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/mhd/mhd_update.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/mhd/mhd_update.cpp.o: ../src/mhd/mhd_update.cpp
 src/CMakeFiles/athena.dir/mhd/mhd_update.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_update.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building CXX object src/CMakeFiles/athena.dir/mhd/mhd_update.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/mhd/mhd_update.cpp.o -MF CMakeFiles/athena.dir/mhd/mhd_update.cpp.o.d -o CMakeFiles/athena.dir/mhd/mhd_update.cpp.o -c /storage/home/nkm5669/work/athenak/src/mhd/mhd_update.cpp
 
 src/CMakeFiles/athena.dir/mhd/mhd_update.cpp.i: cmake_force
@@ -954,7 +968,7 @@ src/CMakeFiles/athena.dir/mhd/mhd_update.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/numerical-relativity/numerical_relativity.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/numerical-relativity/numerical_relativity.cpp.o: ../src/numerical-relativity/numerical_relativity.cpp
 src/CMakeFiles/athena.dir/numerical-relativity/numerical_relativity.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building CXX object src/CMakeFiles/athena.dir/numerical-relativity/numerical_relativity.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building CXX object src/CMakeFiles/athena.dir/numerical-relativity/numerical_relativity.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/numerical-relativity/numerical_relativity.cpp.o -MF CMakeFiles/athena.dir/numerical-relativity/numerical_relativity.cpp.o.d -o CMakeFiles/athena.dir/numerical-relativity/numerical_relativity.cpp.o -c /storage/home/nkm5669/work/athenak/src/numerical-relativity/numerical_relativity.cpp
 
 src/CMakeFiles/athena.dir/numerical-relativity/numerical_relativity.cpp.i: cmake_force
@@ -968,7 +982,7 @@ src/CMakeFiles/athena.dir/numerical-relativity/numerical_relativity.cpp.s: cmake
 src/CMakeFiles/athena.dir/outputs/io_wrapper.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/io_wrapper.cpp.o: ../src/outputs/io_wrapper.cpp
 src/CMakeFiles/athena.dir/outputs/io_wrapper.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building CXX object src/CMakeFiles/athena.dir/outputs/io_wrapper.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building CXX object src/CMakeFiles/athena.dir/outputs/io_wrapper.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/io_wrapper.cpp.o -MF CMakeFiles/athena.dir/outputs/io_wrapper.cpp.o.d -o CMakeFiles/athena.dir/outputs/io_wrapper.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/io_wrapper.cpp
 
 src/CMakeFiles/athena.dir/outputs/io_wrapper.cpp.i: cmake_force
@@ -982,7 +996,7 @@ src/CMakeFiles/athena.dir/outputs/io_wrapper.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/outputs.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/outputs.cpp.o: ../src/outputs/outputs.cpp
 src/CMakeFiles/athena.dir/outputs/outputs.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building CXX object src/CMakeFiles/athena.dir/outputs/outputs.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building CXX object src/CMakeFiles/athena.dir/outputs/outputs.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/outputs.cpp.o -MF CMakeFiles/athena.dir/outputs/outputs.cpp.o.d -o CMakeFiles/athena.dir/outputs/outputs.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/outputs.cpp
 
 src/CMakeFiles/athena.dir/outputs/outputs.cpp.i: cmake_force
@@ -996,7 +1010,7 @@ src/CMakeFiles/athena.dir/outputs/outputs.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/basetype_output.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/basetype_output.cpp.o: ../src/outputs/basetype_output.cpp
 src/CMakeFiles/athena.dir/outputs/basetype_output.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building CXX object src/CMakeFiles/athena.dir/outputs/basetype_output.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building CXX object src/CMakeFiles/athena.dir/outputs/basetype_output.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/basetype_output.cpp.o -MF CMakeFiles/athena.dir/outputs/basetype_output.cpp.o.d -o CMakeFiles/athena.dir/outputs/basetype_output.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/basetype_output.cpp
 
 src/CMakeFiles/athena.dir/outputs/basetype_output.cpp.i: cmake_force
@@ -1010,7 +1024,7 @@ src/CMakeFiles/athena.dir/outputs/basetype_output.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/derived_variables.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/derived_variables.cpp.o: ../src/outputs/derived_variables.cpp
 src/CMakeFiles/athena.dir/outputs/derived_variables.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building CXX object src/CMakeFiles/athena.dir/outputs/derived_variables.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building CXX object src/CMakeFiles/athena.dir/outputs/derived_variables.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/derived_variables.cpp.o -MF CMakeFiles/athena.dir/outputs/derived_variables.cpp.o.d -o CMakeFiles/athena.dir/outputs/derived_variables.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/derived_variables.cpp
 
 src/CMakeFiles/athena.dir/outputs/derived_variables.cpp.i: cmake_force
@@ -1024,7 +1038,7 @@ src/CMakeFiles/athena.dir/outputs/derived_variables.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/binary.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/binary.cpp.o: ../src/outputs/binary.cpp
 src/CMakeFiles/athena.dir/outputs/binary.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building CXX object src/CMakeFiles/athena.dir/outputs/binary.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building CXX object src/CMakeFiles/athena.dir/outputs/binary.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/binary.cpp.o -MF CMakeFiles/athena.dir/outputs/binary.cpp.o.d -o CMakeFiles/athena.dir/outputs/binary.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/binary.cpp
 
 src/CMakeFiles/athena.dir/outputs/binary.cpp.i: cmake_force
@@ -1038,7 +1052,7 @@ src/CMakeFiles/athena.dir/outputs/binary.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/eventlog.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/eventlog.cpp.o: ../src/outputs/eventlog.cpp
 src/CMakeFiles/athena.dir/outputs/eventlog.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building CXX object src/CMakeFiles/athena.dir/outputs/eventlog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building CXX object src/CMakeFiles/athena.dir/outputs/eventlog.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/eventlog.cpp.o -MF CMakeFiles/athena.dir/outputs/eventlog.cpp.o.d -o CMakeFiles/athena.dir/outputs/eventlog.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/eventlog.cpp
 
 src/CMakeFiles/athena.dir/outputs/eventlog.cpp.i: cmake_force
@@ -1052,7 +1066,7 @@ src/CMakeFiles/athena.dir/outputs/eventlog.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/formatted_table.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/formatted_table.cpp.o: ../src/outputs/formatted_table.cpp
 src/CMakeFiles/athena.dir/outputs/formatted_table.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building CXX object src/CMakeFiles/athena.dir/outputs/formatted_table.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building CXX object src/CMakeFiles/athena.dir/outputs/formatted_table.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/formatted_table.cpp.o -MF CMakeFiles/athena.dir/outputs/formatted_table.cpp.o.d -o CMakeFiles/athena.dir/outputs/formatted_table.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/formatted_table.cpp
 
 src/CMakeFiles/athena.dir/outputs/formatted_table.cpp.i: cmake_force
@@ -1066,7 +1080,7 @@ src/CMakeFiles/athena.dir/outputs/formatted_table.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/history.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/history.cpp.o: ../src/outputs/history.cpp
 src/CMakeFiles/athena.dir/outputs/history.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building CXX object src/CMakeFiles/athena.dir/outputs/history.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building CXX object src/CMakeFiles/athena.dir/outputs/history.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/history.cpp.o -MF CMakeFiles/athena.dir/outputs/history.cpp.o.d -o CMakeFiles/athena.dir/outputs/history.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/history.cpp
 
 src/CMakeFiles/athena.dir/outputs/history.cpp.i: cmake_force
@@ -1080,7 +1094,7 @@ src/CMakeFiles/athena.dir/outputs/history.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/restart.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/restart.cpp.o: ../src/outputs/restart.cpp
 src/CMakeFiles/athena.dir/outputs/restart.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building CXX object src/CMakeFiles/athena.dir/outputs/restart.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Building CXX object src/CMakeFiles/athena.dir/outputs/restart.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/restart.cpp.o -MF CMakeFiles/athena.dir/outputs/restart.cpp.o.d -o CMakeFiles/athena.dir/outputs/restart.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/restart.cpp
 
 src/CMakeFiles/athena.dir/outputs/restart.cpp.i: cmake_force
@@ -1094,7 +1108,7 @@ src/CMakeFiles/athena.dir/outputs/restart.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/coarsened_binary.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/coarsened_binary.cpp.o: ../src/outputs/coarsened_binary.cpp
 src/CMakeFiles/athena.dir/outputs/coarsened_binary.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Building CXX object src/CMakeFiles/athena.dir/outputs/coarsened_binary.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_75) "Building CXX object src/CMakeFiles/athena.dir/outputs/coarsened_binary.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/coarsened_binary.cpp.o -MF CMakeFiles/athena.dir/outputs/coarsened_binary.cpp.o.d -o CMakeFiles/athena.dir/outputs/coarsened_binary.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/coarsened_binary.cpp
 
 src/CMakeFiles/athena.dir/outputs/coarsened_binary.cpp.i: cmake_force
@@ -1108,7 +1122,7 @@ src/CMakeFiles/athena.dir/outputs/coarsened_binary.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/track_prtcl.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/track_prtcl.cpp.o: ../src/outputs/track_prtcl.cpp
 src/CMakeFiles/athena.dir/outputs/track_prtcl.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_75) "Building CXX object src/CMakeFiles/athena.dir/outputs/track_prtcl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_76) "Building CXX object src/CMakeFiles/athena.dir/outputs/track_prtcl.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/track_prtcl.cpp.o -MF CMakeFiles/athena.dir/outputs/track_prtcl.cpp.o.d -o CMakeFiles/athena.dir/outputs/track_prtcl.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/track_prtcl.cpp
 
 src/CMakeFiles/athena.dir/outputs/track_prtcl.cpp.i: cmake_force
@@ -1122,7 +1136,7 @@ src/CMakeFiles/athena.dir/outputs/track_prtcl.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/vtk_mesh.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/vtk_mesh.cpp.o: ../src/outputs/vtk_mesh.cpp
 src/CMakeFiles/athena.dir/outputs/vtk_mesh.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_76) "Building CXX object src/CMakeFiles/athena.dir/outputs/vtk_mesh.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_77) "Building CXX object src/CMakeFiles/athena.dir/outputs/vtk_mesh.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/vtk_mesh.cpp.o -MF CMakeFiles/athena.dir/outputs/vtk_mesh.cpp.o.d -o CMakeFiles/athena.dir/outputs/vtk_mesh.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/vtk_mesh.cpp
 
 src/CMakeFiles/athena.dir/outputs/vtk_mesh.cpp.i: cmake_force
@@ -1136,7 +1150,7 @@ src/CMakeFiles/athena.dir/outputs/vtk_mesh.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/vtk_prtcl.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/vtk_prtcl.cpp.o: ../src/outputs/vtk_prtcl.cpp
 src/CMakeFiles/athena.dir/outputs/vtk_prtcl.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_77) "Building CXX object src/CMakeFiles/athena.dir/outputs/vtk_prtcl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_78) "Building CXX object src/CMakeFiles/athena.dir/outputs/vtk_prtcl.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/vtk_prtcl.cpp.o -MF CMakeFiles/athena.dir/outputs/vtk_prtcl.cpp.o.d -o CMakeFiles/athena.dir/outputs/vtk_prtcl.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/vtk_prtcl.cpp
 
 src/CMakeFiles/athena.dir/outputs/vtk_prtcl.cpp.i: cmake_force
@@ -1150,7 +1164,7 @@ src/CMakeFiles/athena.dir/outputs/vtk_prtcl.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/particles/particles.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/particles/particles.cpp.o: ../src/particles/particles.cpp
 src/CMakeFiles/athena.dir/particles/particles.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_78) "Building CXX object src/CMakeFiles/athena.dir/particles/particles.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_79) "Building CXX object src/CMakeFiles/athena.dir/particles/particles.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/particles/particles.cpp.o -MF CMakeFiles/athena.dir/particles/particles.cpp.o.d -o CMakeFiles/athena.dir/particles/particles.cpp.o -c /storage/home/nkm5669/work/athenak/src/particles/particles.cpp
 
 src/CMakeFiles/athena.dir/particles/particles.cpp.i: cmake_force
@@ -1164,7 +1178,7 @@ src/CMakeFiles/athena.dir/particles/particles.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/particles/particles_pushers.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/particles/particles_pushers.cpp.o: ../src/particles/particles_pushers.cpp
 src/CMakeFiles/athena.dir/particles/particles_pushers.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_79) "Building CXX object src/CMakeFiles/athena.dir/particles/particles_pushers.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_80) "Building CXX object src/CMakeFiles/athena.dir/particles/particles_pushers.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/particles/particles_pushers.cpp.o -MF CMakeFiles/athena.dir/particles/particles_pushers.cpp.o.d -o CMakeFiles/athena.dir/particles/particles_pushers.cpp.o -c /storage/home/nkm5669/work/athenak/src/particles/particles_pushers.cpp
 
 src/CMakeFiles/athena.dir/particles/particles_pushers.cpp.i: cmake_force
@@ -1178,7 +1192,7 @@ src/CMakeFiles/athena.dir/particles/particles_pushers.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/particles/particles_tasks.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/particles/particles_tasks.cpp.o: ../src/particles/particles_tasks.cpp
 src/CMakeFiles/athena.dir/particles/particles_tasks.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_80) "Building CXX object src/CMakeFiles/athena.dir/particles/particles_tasks.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_81) "Building CXX object src/CMakeFiles/athena.dir/particles/particles_tasks.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/particles/particles_tasks.cpp.o -MF CMakeFiles/athena.dir/particles/particles_tasks.cpp.o.d -o CMakeFiles/athena.dir/particles/particles_tasks.cpp.o -c /storage/home/nkm5669/work/athenak/src/particles/particles_tasks.cpp
 
 src/CMakeFiles/athena.dir/particles/particles_tasks.cpp.i: cmake_force
@@ -1192,7 +1206,7 @@ src/CMakeFiles/athena.dir/particles/particles_tasks.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/outputs/pdf.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/outputs/pdf.cpp.o: ../src/outputs/pdf.cpp
 src/CMakeFiles/athena.dir/outputs/pdf.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_81) "Building CXX object src/CMakeFiles/athena.dir/outputs/pdf.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building CXX object src/CMakeFiles/athena.dir/outputs/pdf.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/outputs/pdf.cpp.o -MF CMakeFiles/athena.dir/outputs/pdf.cpp.o.d -o CMakeFiles/athena.dir/outputs/pdf.cpp.o -c /storage/home/nkm5669/work/athenak/src/outputs/pdf.cpp
 
 src/CMakeFiles/athena.dir/outputs/pdf.cpp.i: cmake_force
@@ -1206,7 +1220,7 @@ src/CMakeFiles/athena.dir/outputs/pdf.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/pgen.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/pgen.cpp.o: ../src/pgen/pgen.cpp
 src/CMakeFiles/athena.dir/pgen/pgen.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building CXX object src/CMakeFiles/athena.dir/pgen/pgen.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building CXX object src/CMakeFiles/athena.dir/pgen/pgen.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/pgen.cpp.o -MF CMakeFiles/athena.dir/pgen/pgen.cpp.o.d -o CMakeFiles/athena.dir/pgen/pgen.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/pgen.cpp
 
 src/CMakeFiles/athena.dir/pgen/pgen.cpp.i: cmake_force
@@ -1220,7 +1234,7 @@ src/CMakeFiles/athena.dir/pgen/pgen.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/advection.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/advection.cpp.o: ../src/pgen/tests/advection.cpp
 src/CMakeFiles/athena.dir/pgen/tests/advection.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/advection.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/advection.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/advection.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/advection.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/advection.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/advection.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/advection.cpp.i: cmake_force
@@ -1234,7 +1248,7 @@ src/CMakeFiles/athena.dir/pgen/tests/advection.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/cpaw.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/cpaw.cpp.o: ../src/pgen/tests/cpaw.cpp
 src/CMakeFiles/athena.dir/pgen/tests/cpaw.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/cpaw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/cpaw.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/cpaw.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/cpaw.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/cpaw.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/cpaw.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/cpaw.cpp.i: cmake_force
@@ -1248,7 +1262,7 @@ src/CMakeFiles/athena.dir/pgen/tests/cpaw.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/gr_bondi.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/gr_bondi.cpp.o: ../src/pgen/tests/gr_bondi.cpp
 src/CMakeFiles/athena.dir/pgen/tests/gr_bondi.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/gr_bondi.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/gr_bondi.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/gr_bondi.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/gr_bondi.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/gr_bondi.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/gr_bondi.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/gr_bondi.cpp.i: cmake_force
@@ -1262,7 +1276,7 @@ src/CMakeFiles/athena.dir/pgen/tests/gr_bondi.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/gr_monopole.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/gr_monopole.cpp.o: ../src/pgen/tests/gr_monopole.cpp
 src/CMakeFiles/athena.dir/pgen/tests/gr_monopole.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/gr_monopole.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/gr_monopole.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/gr_monopole.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/gr_monopole.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/gr_monopole.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/gr_monopole.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/gr_monopole.cpp.i: cmake_force
@@ -1276,7 +1290,7 @@ src/CMakeFiles/athena.dir/pgen/tests/gr_monopole.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/linear_wave.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/linear_wave.cpp.o: ../src/pgen/tests/linear_wave.cpp
 src/CMakeFiles/athena.dir/pgen/tests/linear_wave.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/linear_wave.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/linear_wave.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/linear_wave.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/linear_wave.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/linear_wave.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/linear_wave.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/linear_wave.cpp.i: cmake_force
@@ -1290,7 +1304,7 @@ src/CMakeFiles/athena.dir/pgen/tests/linear_wave.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/lw_implode.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/lw_implode.cpp.o: ../src/pgen/tests/lw_implode.cpp
 src/CMakeFiles/athena.dir/pgen/tests/lw_implode.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/lw_implode.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_89) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/lw_implode.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/lw_implode.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/lw_implode.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/lw_implode.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/lw_implode.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/lw_implode.cpp.i: cmake_force
@@ -1304,7 +1318,7 @@ src/CMakeFiles/athena.dir/pgen/tests/lw_implode.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/orszag_tang.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/orszag_tang.cpp.o: ../src/pgen/tests/orszag_tang.cpp
 src/CMakeFiles/athena.dir/pgen/tests/orszag_tang.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_89) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/orszag_tang.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_90) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/orszag_tang.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/orszag_tang.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/orszag_tang.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/orszag_tang.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/orszag_tang.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/orszag_tang.cpp.i: cmake_force
@@ -1318,7 +1332,7 @@ src/CMakeFiles/athena.dir/pgen/tests/orszag_tang.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/shock_tube.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/shock_tube.cpp.o: ../src/pgen/tests/shock_tube.cpp
 src/CMakeFiles/athena.dir/pgen/tests/shock_tube.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_90) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/shock_tube.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_91) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/shock_tube.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/shock_tube.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/shock_tube.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/shock_tube.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/shock_tube.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/shock_tube.cpp.i: cmake_force
@@ -1332,7 +1346,7 @@ src/CMakeFiles/athena.dir/pgen/tests/shock_tube.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.cpp.o: ../src/pgen/tests/rad_check_tetrad.cpp
 src/CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_91) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_92) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/rad_check_tetrad.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.cpp.i: cmake_force
@@ -1346,7 +1360,7 @@ src/CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.cpp.o: ../src/pgen/tests/rad_hohlraum.cpp
 src/CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_92) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_93) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/rad_hohlraum.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.cpp.i: cmake_force
@@ -1360,7 +1374,7 @@ src/CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.cpp.o: ../src/pgen/tests/rad_linear_wave.cpp
 src/CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_93) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_94) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/rad_linear_wave.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.cpp.i: cmake_force
@@ -1374,7 +1388,7 @@ src/CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.cpp.o: ../src/pgen/tests/z4c_linear_wave.cpp
 src/CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_94) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_95) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/z4c_linear_wave.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.cpp.i: cmake_force
@@ -1388,7 +1402,7 @@ src/CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/pgen/tests/collapse.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/pgen/tests/collapse.cpp.o: ../src/pgen/tests/collapse.cpp
 src/CMakeFiles/athena.dir/pgen/tests/collapse.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_95) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/collapse.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_96) "Building CXX object src/CMakeFiles/athena.dir/pgen/tests/collapse.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/tests/collapse.cpp.o -MF CMakeFiles/athena.dir/pgen/tests/collapse.cpp.o.d -o CMakeFiles/athena.dir/pgen/tests/collapse.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/tests/collapse.cpp
 
 src/CMakeFiles/athena.dir/pgen/tests/collapse.cpp.i: cmake_force
@@ -1402,7 +1416,7 @@ src/CMakeFiles/athena.dir/pgen/tests/collapse.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/radiation/radiation.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/radiation/radiation.cpp.o: ../src/radiation/radiation.cpp
 src/CMakeFiles/athena.dir/radiation/radiation.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_96) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_97) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/radiation/radiation.cpp.o -MF CMakeFiles/athena.dir/radiation/radiation.cpp.o.d -o CMakeFiles/athena.dir/radiation/radiation.cpp.o -c /storage/home/nkm5669/work/athenak/src/radiation/radiation.cpp
 
 src/CMakeFiles/athena.dir/radiation/radiation.cpp.i: cmake_force
@@ -1416,7 +1430,7 @@ src/CMakeFiles/athena.dir/radiation/radiation.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/radiation/radiation_fluxes.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/radiation/radiation_fluxes.cpp.o: ../src/radiation/radiation_fluxes.cpp
 src/CMakeFiles/athena.dir/radiation/radiation_fluxes.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_97) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_fluxes.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_98) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_fluxes.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/radiation/radiation_fluxes.cpp.o -MF CMakeFiles/athena.dir/radiation/radiation_fluxes.cpp.o.d -o CMakeFiles/athena.dir/radiation/radiation_fluxes.cpp.o -c /storage/home/nkm5669/work/athenak/src/radiation/radiation_fluxes.cpp
 
 src/CMakeFiles/athena.dir/radiation/radiation_fluxes.cpp.i: cmake_force
@@ -1430,7 +1444,7 @@ src/CMakeFiles/athena.dir/radiation/radiation_fluxes.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/radiation/radiation_newdt.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/radiation/radiation_newdt.cpp.o: ../src/radiation/radiation_newdt.cpp
 src/CMakeFiles/athena.dir/radiation/radiation_newdt.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_98) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_newdt.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_99) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_newdt.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/radiation/radiation_newdt.cpp.o -MF CMakeFiles/athena.dir/radiation/radiation_newdt.cpp.o.d -o CMakeFiles/athena.dir/radiation/radiation_newdt.cpp.o -c /storage/home/nkm5669/work/athenak/src/radiation/radiation_newdt.cpp
 
 src/CMakeFiles/athena.dir/radiation/radiation_newdt.cpp.i: cmake_force
@@ -1444,7 +1458,7 @@ src/CMakeFiles/athena.dir/radiation/radiation_newdt.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/radiation/radiation_source.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/radiation/radiation_source.cpp.o: ../src/radiation/radiation_source.cpp
 src/CMakeFiles/athena.dir/radiation/radiation_source.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_99) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_source.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_100) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_source.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/radiation/radiation_source.cpp.o -MF CMakeFiles/athena.dir/radiation/radiation_source.cpp.o.d -o CMakeFiles/athena.dir/radiation/radiation_source.cpp.o -c /storage/home/nkm5669/work/athenak/src/radiation/radiation_source.cpp
 
 src/CMakeFiles/athena.dir/radiation/radiation_source.cpp.i: cmake_force
@@ -1458,7 +1472,7 @@ src/CMakeFiles/athena.dir/radiation/radiation_source.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/radiation/radiation_tasks.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/radiation/radiation_tasks.cpp.o: ../src/radiation/radiation_tasks.cpp
 src/CMakeFiles/athena.dir/radiation/radiation_tasks.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_100) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_tasks.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_101) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_tasks.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/radiation/radiation_tasks.cpp.o -MF CMakeFiles/athena.dir/radiation/radiation_tasks.cpp.o.d -o CMakeFiles/athena.dir/radiation/radiation_tasks.cpp.o -c /storage/home/nkm5669/work/athenak/src/radiation/radiation_tasks.cpp
 
 src/CMakeFiles/athena.dir/radiation/radiation_tasks.cpp.i: cmake_force
@@ -1472,7 +1486,7 @@ src/CMakeFiles/athena.dir/radiation/radiation_tasks.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/radiation/radiation_tetrad.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/radiation/radiation_tetrad.cpp.o: ../src/radiation/radiation_tetrad.cpp
 src/CMakeFiles/athena.dir/radiation/radiation_tetrad.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_101) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_tetrad.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_102) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_tetrad.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/radiation/radiation_tetrad.cpp.o -MF CMakeFiles/athena.dir/radiation/radiation_tetrad.cpp.o.d -o CMakeFiles/athena.dir/radiation/radiation_tetrad.cpp.o -c /storage/home/nkm5669/work/athenak/src/radiation/radiation_tetrad.cpp
 
 src/CMakeFiles/athena.dir/radiation/radiation_tetrad.cpp.i: cmake_force
@@ -1486,7 +1500,7 @@ src/CMakeFiles/athena.dir/radiation/radiation_tetrad.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/radiation/radiation_update.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/radiation/radiation_update.cpp.o: ../src/radiation/radiation_update.cpp
 src/CMakeFiles/athena.dir/radiation/radiation_update.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_102) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_update.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_103) "Building CXX object src/CMakeFiles/athena.dir/radiation/radiation_update.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/radiation/radiation_update.cpp.o -MF CMakeFiles/athena.dir/radiation/radiation_update.cpp.o.d -o CMakeFiles/athena.dir/radiation/radiation_update.cpp.o -c /storage/home/nkm5669/work/athenak/src/radiation/radiation_update.cpp
 
 src/CMakeFiles/athena.dir/radiation/radiation_update.cpp.i: cmake_force
@@ -1500,7 +1514,7 @@ src/CMakeFiles/athena.dir/radiation/radiation_update.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/srcterms/srcterms.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/srcterms/srcterms.cpp.o: ../src/srcterms/srcterms.cpp
 src/CMakeFiles/athena.dir/srcterms/srcterms.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_103) "Building CXX object src/CMakeFiles/athena.dir/srcterms/srcterms.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_104) "Building CXX object src/CMakeFiles/athena.dir/srcterms/srcterms.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/srcterms/srcterms.cpp.o -MF CMakeFiles/athena.dir/srcterms/srcterms.cpp.o.d -o CMakeFiles/athena.dir/srcterms/srcterms.cpp.o -c /storage/home/nkm5669/work/athenak/src/srcterms/srcterms.cpp
 
 src/CMakeFiles/athena.dir/srcterms/srcterms.cpp.i: cmake_force
@@ -1514,7 +1528,7 @@ src/CMakeFiles/athena.dir/srcterms/srcterms.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/srcterms/srcterms_newdt.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/srcterms/srcterms_newdt.cpp.o: ../src/srcterms/srcterms_newdt.cpp
 src/CMakeFiles/athena.dir/srcterms/srcterms_newdt.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_104) "Building CXX object src/CMakeFiles/athena.dir/srcterms/srcterms_newdt.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_105) "Building CXX object src/CMakeFiles/athena.dir/srcterms/srcterms_newdt.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/srcterms/srcterms_newdt.cpp.o -MF CMakeFiles/athena.dir/srcterms/srcterms_newdt.cpp.o.d -o CMakeFiles/athena.dir/srcterms/srcterms_newdt.cpp.o -c /storage/home/nkm5669/work/athenak/src/srcterms/srcterms_newdt.cpp
 
 src/CMakeFiles/athena.dir/srcterms/srcterms_newdt.cpp.i: cmake_force
@@ -1528,7 +1542,7 @@ src/CMakeFiles/athena.dir/srcterms/srcterms_newdt.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/srcterms/turb_driver.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/srcterms/turb_driver.cpp.o: ../src/srcterms/turb_driver.cpp
 src/CMakeFiles/athena.dir/srcterms/turb_driver.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_105) "Building CXX object src/CMakeFiles/athena.dir/srcterms/turb_driver.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_106) "Building CXX object src/CMakeFiles/athena.dir/srcterms/turb_driver.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/srcterms/turb_driver.cpp.o -MF CMakeFiles/athena.dir/srcterms/turb_driver.cpp.o.d -o CMakeFiles/athena.dir/srcterms/turb_driver.cpp.o -c /storage/home/nkm5669/work/athenak/src/srcterms/turb_driver.cpp
 
 src/CMakeFiles/athena.dir/srcterms/turb_driver.cpp.i: cmake_force
@@ -1542,7 +1556,7 @@ src/CMakeFiles/athena.dir/srcterms/turb_driver.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/tmunu/tmunu.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/tmunu/tmunu.cpp.o: ../src/tmunu/tmunu.cpp
 src/CMakeFiles/athena.dir/tmunu/tmunu.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_106) "Building CXX object src/CMakeFiles/athena.dir/tmunu/tmunu.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_107) "Building CXX object src/CMakeFiles/athena.dir/tmunu/tmunu.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/tmunu/tmunu.cpp.o -MF CMakeFiles/athena.dir/tmunu/tmunu.cpp.o.d -o CMakeFiles/athena.dir/tmunu/tmunu.cpp.o -c /storage/home/nkm5669/work/athenak/src/tmunu/tmunu.cpp
 
 src/CMakeFiles/athena.dir/tmunu/tmunu.cpp.i: cmake_force
@@ -1556,7 +1570,7 @@ src/CMakeFiles/athena.dir/tmunu/tmunu.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/units/units.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/units/units.cpp.o: ../src/units/units.cpp
 src/CMakeFiles/athena.dir/units/units.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_107) "Building CXX object src/CMakeFiles/athena.dir/units/units.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_108) "Building CXX object src/CMakeFiles/athena.dir/units/units.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/units/units.cpp.o -MF CMakeFiles/athena.dir/units/units.cpp.o.d -o CMakeFiles/athena.dir/units/units.cpp.o -c /storage/home/nkm5669/work/athenak/src/units/units.cpp
 
 src/CMakeFiles/athena.dir/units/units.cpp.i: cmake_force
@@ -1570,7 +1584,7 @@ src/CMakeFiles/athena.dir/units/units.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/utils/change_rundir.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/utils/change_rundir.cpp.o: ../src/utils/change_rundir.cpp
 src/CMakeFiles/athena.dir/utils/change_rundir.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_108) "Building CXX object src/CMakeFiles/athena.dir/utils/change_rundir.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_109) "Building CXX object src/CMakeFiles/athena.dir/utils/change_rundir.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/utils/change_rundir.cpp.o -MF CMakeFiles/athena.dir/utils/change_rundir.cpp.o.d -o CMakeFiles/athena.dir/utils/change_rundir.cpp.o -c /storage/home/nkm5669/work/athenak/src/utils/change_rundir.cpp
 
 src/CMakeFiles/athena.dir/utils/change_rundir.cpp.i: cmake_force
@@ -1584,7 +1598,7 @@ src/CMakeFiles/athena.dir/utils/change_rundir.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/utils/show_config.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/utils/show_config.cpp.o: ../src/utils/show_config.cpp
 src/CMakeFiles/athena.dir/utils/show_config.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_109) "Building CXX object src/CMakeFiles/athena.dir/utils/show_config.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_110) "Building CXX object src/CMakeFiles/athena.dir/utils/show_config.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/utils/show_config.cpp.o -MF CMakeFiles/athena.dir/utils/show_config.cpp.o.d -o CMakeFiles/athena.dir/utils/show_config.cpp.o -c /storage/home/nkm5669/work/athenak/src/utils/show_config.cpp
 
 src/CMakeFiles/athena.dir/utils/show_config.cpp.i: cmake_force
@@ -1598,7 +1612,7 @@ src/CMakeFiles/athena.dir/utils/show_config.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.o: ../src/utils/lagrange_interpolator.cpp
 src/CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_110) "Building CXX object src/CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_111) "Building CXX object src/CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.o -MF CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.o.d -o CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.o -c /storage/home/nkm5669/work/athenak/src/utils/lagrange_interpolator.cpp
 
 src/CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.i: cmake_force
@@ -1609,10 +1623,24 @@ src/CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.s"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /storage/home/nkm5669/work/athenak/src/utils/lagrange_interpolator.cpp -o CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.s
 
+src/CMakeFiles/athena.dir/utils/tr_table.cpp.o: src/CMakeFiles/athena.dir/flags.make
+src/CMakeFiles/athena.dir/utils/tr_table.cpp.o: ../src/utils/tr_table.cpp
+src/CMakeFiles/athena.dir/utils/tr_table.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_112) "Building CXX object src/CMakeFiles/athena.dir/utils/tr_table.cpp.o"
+	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/utils/tr_table.cpp.o -MF CMakeFiles/athena.dir/utils/tr_table.cpp.o.d -o CMakeFiles/athena.dir/utils/tr_table.cpp.o -c /storage/home/nkm5669/work/athenak/src/utils/tr_table.cpp
+
+src/CMakeFiles/athena.dir/utils/tr_table.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/athena.dir/utils/tr_table.cpp.i"
+	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /storage/home/nkm5669/work/athenak/src/utils/tr_table.cpp > CMakeFiles/athena.dir/utils/tr_table.cpp.i
+
+src/CMakeFiles/athena.dir/utils/tr_table.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/athena.dir/utils/tr_table.cpp.s"
+	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /storage/home/nkm5669/work/athenak/src/utils/tr_table.cpp -o CMakeFiles/athena.dir/utils/tr_table.cpp.s
+
 src/CMakeFiles/athena.dir/z4c/z4c.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c.cpp.o: ../src/z4c/z4c.cpp
 src/CMakeFiles/athena.dir/z4c/z4c.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_111) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_113) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c.cpp.i: cmake_force
@@ -1626,7 +1654,7 @@ src/CMakeFiles/athena.dir/z4c/z4c.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_adm.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_adm.cpp.o: ../src/z4c/z4c_adm.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_adm.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_112) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_adm.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_114) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_adm.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_adm.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_adm.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_adm.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_adm.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_adm.cpp.i: cmake_force
@@ -1640,7 +1668,7 @@ src/CMakeFiles/athena.dir/z4c/z4c_adm.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.o: ../src/z4c/z4c_calcrhs.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_113) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_115) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_calcrhs.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.i: cmake_force
@@ -1654,7 +1682,7 @@ src/CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_newdt.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_newdt.cpp.o: ../src/z4c/z4c_newdt.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_newdt.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_114) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_newdt.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_116) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_newdt.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_newdt.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_newdt.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_newdt.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_newdt.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_newdt.cpp.i: cmake_force
@@ -1668,7 +1696,7 @@ src/CMakeFiles/athena.dir/z4c/z4c_newdt.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_tasks.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_tasks.cpp.o: ../src/z4c/z4c_tasks.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_tasks.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_115) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_tasks.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_117) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_tasks.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_tasks.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_tasks.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_tasks.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_tasks.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_tasks.cpp.i: cmake_force
@@ -1682,7 +1710,7 @@ src/CMakeFiles/athena.dir/z4c/z4c_tasks.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_update.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_update.cpp.o: ../src/z4c/z4c_update.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_update.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_116) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_update.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_118) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_update.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_update.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_update.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_update.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_update.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_update.cpp.i: cmake_force
@@ -1696,7 +1724,7 @@ src/CMakeFiles/athena.dir/z4c/z4c_update.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_gauge.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_gauge.cpp.o: ../src/z4c/z4c_gauge.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_gauge.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_117) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_gauge.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_119) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_gauge.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_gauge.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_gauge.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_gauge.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_gauge.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_gauge.cpp.i: cmake_force
@@ -1710,7 +1738,7 @@ src/CMakeFiles/athena.dir/z4c/z4c_gauge.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_Sbc.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_Sbc.cpp.o: ../src/z4c/z4c_Sbc.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_Sbc.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_118) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_Sbc.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_120) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_Sbc.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_Sbc.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_Sbc.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_Sbc.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_Sbc.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_Sbc.cpp.i: cmake_force
@@ -1724,7 +1752,7 @@ src/CMakeFiles/athena.dir/z4c/z4c_Sbc.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.o: ../src/z4c/z4c_calculate_weyl_scalars.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_119) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_121) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_calculate_weyl_scalars.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.i: cmake_force
@@ -1738,7 +1766,7 @@ src/CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.o: ../src/z4c/z4c_wave_extr.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_120) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_122) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_wave_extr.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.i: cmake_force
@@ -1752,7 +1780,7 @@ src/CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.o: ../src/z4c/z4c_puncture_tracker.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_121) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_123) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_puncture_tracker.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.i: cmake_force
@@ -1766,7 +1794,7 @@ src/CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.s: cmake_force
 src/CMakeFiles/athena.dir/z4c/z4c_amr.cpp.o: src/CMakeFiles/athena.dir/flags.make
 src/CMakeFiles/athena.dir/z4c/z4c_amr.cpp.o: ../src/z4c/z4c_amr.cpp
 src/CMakeFiles/athena.dir/z4c/z4c_amr.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_122) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_amr.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_124) "Building CXX object src/CMakeFiles/athena.dir/z4c/z4c_amr.cpp.o"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/z4c/z4c_amr.cpp.o -MF CMakeFiles/athena.dir/z4c/z4c_amr.cpp.o.d -o CMakeFiles/athena.dir/z4c/z4c_amr.cpp.o -c /storage/home/nkm5669/work/athenak/src/z4c/z4c_amr.cpp
 
 src/CMakeFiles/athena.dir/z4c/z4c_amr.cpp.i: cmake_force
@@ -1777,19 +1805,19 @@ src/CMakeFiles/athena.dir/z4c/z4c_amr.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/athena.dir/z4c/z4c_amr.cpp.s"
 	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /storage/home/nkm5669/work/athenak/src/z4c/z4c_amr.cpp -o CMakeFiles/athena.dir/z4c/z4c_amr.cpp.s
 
-src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.o: src/CMakeFiles/athena.dir/flags.make
-src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.o: ../src/pgen/elliptica_rns_dipole_lightbulb.cpp
-src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_123) "Building CXX object src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.o"
-	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.o -MF CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.o.d -o CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/elliptica_rns_dipole_lightbulb.cpp
+src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o: src/CMakeFiles/athena.dir/flags.make
+src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o: ../src/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp
+src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o: src/CMakeFiles/athena.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_125) "Building CXX object src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o"
+	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o -MF CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o.d -o CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o -c /storage/home/nkm5669/work/athenak/src/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp
 
-src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.i"
-	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /storage/home/nkm5669/work/athenak/src/pgen/elliptica_rns_dipole_lightbulb.cpp > CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.i
+src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.i"
+	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /storage/home/nkm5669/work/athenak/src/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp > CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.i
 
-src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.s"
-	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /storage/home/nkm5669/work/athenak/src/pgen/elliptica_rns_dipole_lightbulb.cpp -o CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.s
+src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.s"
+	cd /storage/home/nkm5669/work/athenak/build/src && /storage/home/nkm5669/work/athenak/build/../kokkos/bin/nvcc_wrapper $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /storage/home/nkm5669/work/athenak/src/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp -o CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.s
 
 # Object files for target athena
 athena_OBJECTS = \
@@ -1831,6 +1859,7 @@ athena_OBJECTS = \
 "CMakeFiles/athena.dir/eos/ideal_srmhd.cpp.o" \
 "CMakeFiles/athena.dir/eos/ideal_grmhd.cpp.o" \
 "CMakeFiles/athena.dir/eos/primitive-solver/unit_system.cpp.o" \
+"CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.o" \
 "CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.o" \
 "CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.o" \
 "CMakeFiles/athena.dir/hydro/hydro.cpp.o" \
@@ -1903,6 +1932,7 @@ athena_OBJECTS = \
 "CMakeFiles/athena.dir/utils/change_rundir.cpp.o" \
 "CMakeFiles/athena.dir/utils/show_config.cpp.o" \
 "CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.o" \
+"CMakeFiles/athena.dir/utils/tr_table.cpp.o" \
 "CMakeFiles/athena.dir/z4c/z4c.cpp.o" \
 "CMakeFiles/athena.dir/z4c/z4c_adm.cpp.o" \
 "CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.o" \
@@ -1915,7 +1945,7 @@ athena_OBJECTS = \
 "CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.o" \
 "CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.o" \
 "CMakeFiles/athena.dir/z4c/z4c_amr.cpp.o" \
-"CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.o"
+"CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o"
 
 # External object files for target athena
 athena_EXTERNAL_OBJECTS =
@@ -1958,6 +1988,7 @@ src/athena: src/CMakeFiles/athena.dir/eos/ideal_grhyd.cpp.o
 src/athena: src/CMakeFiles/athena.dir/eos/ideal_srmhd.cpp.o
 src/athena: src/CMakeFiles/athena.dir/eos/ideal_grmhd.cpp.o
 src/athena: src/CMakeFiles/athena.dir/eos/primitive-solver/unit_system.cpp.o
+src/athena: src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.o
 src/athena: src/CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.cpp.o
 src/athena: src/CMakeFiles/athena.dir/geodesic-grid/spherical_grid.cpp.o
 src/athena: src/CMakeFiles/athena.dir/hydro/hydro.cpp.o
@@ -2030,6 +2061,7 @@ src/athena: src/CMakeFiles/athena.dir/units/units.cpp.o
 src/athena: src/CMakeFiles/athena.dir/utils/change_rundir.cpp.o
 src/athena: src/CMakeFiles/athena.dir/utils/show_config.cpp.o
 src/athena: src/CMakeFiles/athena.dir/utils/lagrange_interpolator.cpp.o
+src/athena: src/CMakeFiles/athena.dir/utils/tr_table.cpp.o
 src/athena: src/CMakeFiles/athena.dir/z4c/z4c.cpp.o
 src/athena: src/CMakeFiles/athena.dir/z4c/z4c_adm.cpp.o
 src/athena: src/CMakeFiles/athena.dir/z4c/z4c_calcrhs.cpp.o
@@ -2042,9 +2074,8 @@ src/athena: src/CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.cpp.o
 src/athena: src/CMakeFiles/athena.dir/z4c/z4c_wave_extr.cpp.o
 src/athena: src/CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.cpp.o
 src/athena: src/CMakeFiles/athena.dir/z4c/z4c_amr.cpp.o
-src/athena: src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.o
+src/athena: src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o
 src/athena: src/CMakeFiles/athena.dir/build.make
-src/athena: ../Elliptica_ID_Reader/lib/libelliptica_id_reader.a
 src/athena: kokkos/containers/src/libkokkoscontainers.a
 src/athena: kokkos/core/src/libkokkoscore.a
 src/athena: /swst/apps/cuda/11.5.0_gcc-8.5.0/lib64/stubs/libcuda.so
@@ -2052,7 +2083,7 @@ src/athena: /swst/apps/cuda/11.5.0_gcc-8.5.0/lib64/libcudart.so
 src/athena: kokkos/simd/src/libkokkossimd.a
 src/athena: /usr/lib/gcc/x86_64-redhat-linux/8/libgomp.so
 src/athena: src/CMakeFiles/athena.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_124) "Linking CXX executable athena"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/storage/home/nkm5669/work/athenak/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_126) "Linking CXX executable athena"
 	cd /storage/home/nkm5669/work/athenak/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/athena.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

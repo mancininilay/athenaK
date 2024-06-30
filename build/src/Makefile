@@ -991,6 +991,30 @@ eos/isothermal_mhd.cpp.s:
 	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/eos/isothermal_mhd.cpp.s
 .PHONY : eos/isothermal_mhd.cpp.s
 
+eos/primitive-solver/eos_compose.o: eos/primitive-solver/eos_compose.cpp.o
+.PHONY : eos/primitive-solver/eos_compose.o
+
+# target to build an object file
+eos/primitive-solver/eos_compose.cpp.o:
+	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.o
+.PHONY : eos/primitive-solver/eos_compose.cpp.o
+
+eos/primitive-solver/eos_compose.i: eos/primitive-solver/eos_compose.cpp.i
+.PHONY : eos/primitive-solver/eos_compose.i
+
+# target to preprocess a source file
+eos/primitive-solver/eos_compose.cpp.i:
+	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.i
+.PHONY : eos/primitive-solver/eos_compose.cpp.i
+
+eos/primitive-solver/eos_compose.s: eos/primitive-solver/eos_compose.cpp.s
+.PHONY : eos/primitive-solver/eos_compose.s
+
+# target to generate assembly for a file
+eos/primitive-solver/eos_compose.cpp.s:
+	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.cpp.s
+.PHONY : eos/primitive-solver/eos_compose.cpp.s
+
 eos/primitive-solver/unit_system.o: eos/primitive-solver/unit_system.cpp.o
 .PHONY : eos/primitive-solver/unit_system.o
 
@@ -2119,29 +2143,29 @@ particles/particles_tasks.cpp.s:
 	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/particles/particles_tasks.cpp.s
 .PHONY : particles/particles_tasks.cpp.s
 
-pgen/elliptica_rns_dipole_lightbulb.o: pgen/elliptica_rns_dipole_lightbulb.cpp.o
-.PHONY : pgen/elliptica_rns_dipole_lightbulb.o
+pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.o: pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o
+.PHONY : pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.o
 
 # target to build an object file
-pgen/elliptica_rns_dipole_lightbulb.cpp.o:
-	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.o
-.PHONY : pgen/elliptica_rns_dipole_lightbulb.cpp.o
+pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o:
+	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o
+.PHONY : pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.o
 
-pgen/elliptica_rns_dipole_lightbulb.i: pgen/elliptica_rns_dipole_lightbulb.cpp.i
-.PHONY : pgen/elliptica_rns_dipole_lightbulb.i
+pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.i: pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.i
+.PHONY : pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.i
 
 # target to preprocess a source file
-pgen/elliptica_rns_dipole_lightbulb.cpp.i:
-	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.i
-.PHONY : pgen/elliptica_rns_dipole_lightbulb.cpp.i
+pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.i:
+	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.i
+.PHONY : pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.i
 
-pgen/elliptica_rns_dipole_lightbulb.s: pgen/elliptica_rns_dipole_lightbulb.cpp.s
-.PHONY : pgen/elliptica_rns_dipole_lightbulb.s
+pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.s: pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.s
+.PHONY : pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.s
 
 # target to generate assembly for a file
-pgen/elliptica_rns_dipole_lightbulb.cpp.s:
-	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/pgen/elliptica_rns_dipole_lightbulb.cpp.s
-.PHONY : pgen/elliptica_rns_dipole_lightbulb.cpp.s
+pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.s:
+	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.s
+.PHONY : pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.cpp.s
 
 pgen/pgen.o: pgen/pgen.cpp.o
 .PHONY : pgen/pgen.o
@@ -2839,6 +2863,30 @@ utils/show_config.cpp.s:
 	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/utils/show_config.cpp.s
 .PHONY : utils/show_config.cpp.s
 
+utils/tr_table.o: utils/tr_table.cpp.o
+.PHONY : utils/tr_table.o
+
+# target to build an object file
+utils/tr_table.cpp.o:
+	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/utils/tr_table.cpp.o
+.PHONY : utils/tr_table.cpp.o
+
+utils/tr_table.i: utils/tr_table.cpp.i
+.PHONY : utils/tr_table.i
+
+# target to preprocess a source file
+utils/tr_table.cpp.i:
+	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/utils/tr_table.cpp.i
+.PHONY : utils/tr_table.cpp.i
+
+utils/tr_table.s: utils/tr_table.cpp.s
+.PHONY : utils/tr_table.s
+
+# target to generate assembly for a file
+utils/tr_table.cpp.s:
+	cd /storage/home/nkm5669/work/athenak/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/athena.dir/build.make src/CMakeFiles/athena.dir/utils/tr_table.cpp.s
+.PHONY : utils/tr_table.cpp.s
+
 z4c/z4c.o: z4c/z4c.cpp.o
 .PHONY : z4c/z4c.o
 
@@ -3242,6 +3290,9 @@ help:
 	@echo "... eos/isothermal_mhd.o"
 	@echo "... eos/isothermal_mhd.i"
 	@echo "... eos/isothermal_mhd.s"
+	@echo "... eos/primitive-solver/eos_compose.o"
+	@echo "... eos/primitive-solver/eos_compose.i"
+	@echo "... eos/primitive-solver/eos_compose.s"
 	@echo "... eos/primitive-solver/unit_system.o"
 	@echo "... eos/primitive-solver/unit_system.i"
 	@echo "... eos/primitive-solver/unit_system.s"
@@ -3383,9 +3434,9 @@ help:
 	@echo "... particles/particles_tasks.o"
 	@echo "... particles/particles_tasks.i"
 	@echo "... particles/particles_tasks.s"
-	@echo "... pgen/elliptica_rns_dipole_lightbulb.o"
-	@echo "... pgen/elliptica_rns_dipole_lightbulb.i"
-	@echo "... pgen/elliptica_rns_dipole_lightbulb.s"
+	@echo "... pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.o"
+	@echo "... pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.i"
+	@echo "... pgen/dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing.s"
 	@echo "... pgen/pgen.o"
 	@echo "... pgen/pgen.i"
 	@echo "... pgen/pgen.s"
@@ -3473,6 +3524,9 @@ help:
 	@echo "... utils/show_config.o"
 	@echo "... utils/show_config.i"
 	@echo "... utils/show_config.s"
+	@echo "... utils/tr_table.o"
+	@echo "... utils/tr_table.i"
+	@echo "... utils/tr_table.s"
 	@echo "... z4c/z4c.o"
 	@echo "... z4c/z4c.i"
 	@echo "... z4c/z4c.s"

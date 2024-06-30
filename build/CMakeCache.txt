@@ -885,7 +885,7 @@ OpenMP_gomp_LIBRARY:FILEPATH=/usr/lib/gcc/x86_64-redhat-linux/8/libgomp.so
 OpenMP_pthread_LIBRARY:FILEPATH=/usr/lib64/libpthread.so
 
 //Name of problem generator function
-PROBLEM:STRING=elliptica_rns_dipole_lightbulb
+PROBLEM:STRING=dyngr_tov_dipole_lightbulb_flux_Ye_equilibrium_freezing
 
 //Name of the computer/site where compile is being run
 SITE:STRING=submit01
@@ -929,6 +929,8 @@ CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 CMAKE_COMMAND:INTERNAL=/storage/icds/swst/deployed/production/20220813/apps/cmake/3.21.4_gcc-8.5.0/bin/cmake
 //Path to cpack program executable.
 CMAKE_CPACK_COMMAND:INTERNAL=/storage/icds/swst/deployed/production/20220813/apps/cmake/3.21.4_gcc-8.5.0/bin/cpack
+//ADVANCED property for variable: CMAKE_CTEST_COMMAND
+CMAKE_CTEST_COMMAND-ADVANCED:INTERNAL=1
 //Path to ctest program executable.
 CMAKE_CTEST_COMMAND:INTERNAL=/storage/icds/swst/deployed/production/20220813/apps/cmake/3.21.4_gcc-8.5.0/bin/ctest
 //ADVANCED property for variable: CMAKE_CXX_COMPILER

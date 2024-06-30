@@ -517,6 +517,7 @@ src/CMakeFiles/athena.dir/bvals/bvals.cpp.o : /storage/home/nkm5669/work/athenak
     /usr/include/c++/8/bits/list.tcc \
     /storage/home/nkm5669/work/athenak/src/outputs/io_wrapper.hpp \
     /usr/lib/gcc/x86_64-redhat-linux/8/include/omp.h \
+    /storage/home/nkm5669/work/athenak/src/mesh/nghbr_index.hpp \
     /storage/home/nkm5669/work/athenak/src/mesh/mesh.hpp \
     /storage/home/nkm5669/work/athenak/src/mesh/meshblock.hpp \
     /storage/home/nkm5669/work/athenak/src/bvals/bvals.hpp \

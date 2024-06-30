@@ -533,4 +533,5 @@ src/CMakeFiles/athena.dir/mesh/meshblock.cpp.o : /storage/home/nkm5669/work/athe
     /storage/home/nkm5669/work/athenak/src/geodesic-grid/geodesic_grid.hpp \
     /storage/home/nkm5669/work/athenak/src/mesh/meshblock_tree.hpp \
     /storage/home/nkm5669/work/athenak/src/mesh/mesh_refinement.hpp \
-    /storage/home/nkm5669/work/athenak/src/coordinates/cell_locations.hpp
+    /storage/home/nkm5669/work/athenak/src/coordinates/cell_locations.hpp \
+    /storage/home/nkm5669/work/athenak/src/mesh/nghbr_index.hpp
