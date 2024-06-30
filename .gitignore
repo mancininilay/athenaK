@@ -1,5 +1,5 @@
 # build directories
-build/
+/build/
 /home/nilay/Code/AthenaK_magnetar_winds/athenak/Elliptica_ID_Reader/
 
 # Athena output files
