@@ -22,7 +22,7 @@
 #include "bvals/bvals.hpp"
 #include "z4c/z4c.hpp"
 #include "z4c/z4c_amr.hpp"
-#include "adm/adm.hpp"
+#include "coordinates/adm.hpp"
 
 namespace z4c {
 
@@ -160,9 +160,9 @@ Z4c::Z4c(MeshBlockPack *ppack, ParameterInput *pin) :
 
   // allocate boundary buffers for conserved (cell-centered) variables
   Kokkos::Profiling::pushRegion("Buffers");
-  pbval_u = new BoundaryValuesCC(ppack, pin, true);
+  pbval_u = new MeshBoundaryValuesCC(ppack, pin, true);
   pbval_u->InitializeBuffers((nz4c));
-  pbval_weyl = new BoundaryValuesCC(ppack, pin, true);
+  pbval_weyl = new MeshBoundaryValuesCC(ppack, pin, true);
   pbval_weyl->InitializeBuffers((2));
   Kokkos::Profiling::popRegion();
 

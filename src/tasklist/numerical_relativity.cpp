@@ -13,9 +13,7 @@
 
 #include "numerical_relativity.hpp"
 #include "z4c/z4c.hpp"
-#include "adm/adm.hpp"
-#include "dyngr/dyngr.hpp"
-#include "tmunu/tmunu.hpp"
+#include "dyn_grmhd/dyn_grmhd.hpp"
 
 namespace numrel {
 
@@ -158,7 +156,7 @@ void NumericalRelativity::AssembleNumericalRelativityTasks(
        std::map<std::string, std::shared_ptr<TaskList>>& tl) {
   // Assemble the task lists for all physics modules
   if (pmy_pack->pdyngr != nullptr) {
-    pmy_pack->pdyngr->QueueDynGRTasks();
+    pmy_pack->pdyngr->QueueDynGRMHDTasks();
   }
   if (pmy_pack->pz4c != nullptr) {
     pmy_pack->pz4c->QueueZ4cTasks();

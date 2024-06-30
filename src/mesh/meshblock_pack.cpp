@@ -18,11 +18,11 @@
 #include "hydro/hydro.hpp"
 #include "mhd/mhd.hpp"
 #include "ion-neutral/ion-neutral.hpp"
-#include "adm/adm.hpp"
-#include "tmunu/tmunu.hpp"
-#include "numerical-relativity/numerical_relativity.hpp"
+#include "coordinates/adm.hpp"
+#include "z4c/tmunu.hpp"
+#include "tasklist/numerical_relativity.hpp"
 #include "z4c/z4c.hpp"
-#include "dyngr/dyngr.hpp"
+#include "dyn_grmhd/dyn_grmhd.hpp"
 #include "z4c/z4c_puncture_tracker.hpp"
 #include "diffusion/viscosity.hpp"
 #include "diffusion/resistivity.hpp"
@@ -222,7 +222,7 @@ void MeshBlockPack::AddPhysics(ParameterInput *pin) {
   }
   if ((pin->DoesBlockExist("z4c") || pin->DoesBlockExist("adm")) &&
       (pin->DoesBlockExist("mhd")) ) {
-    pdyngr = dyngr::BuildDynGR(this, pin);
+    pdyngr = dyngr::BuildDynGRMHD(this, pin);
   }
 
   if (pz4c != nullptr || padm != nullptr) {

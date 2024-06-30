@@ -21,22 +21,18 @@
 #include "globals.hpp"
 #include "parameter_input.hpp"
 #include "mesh/mesh.hpp"
-#include "adm/adm.hpp"
+#include "coordinates/adm.hpp"
 #include "z4c/z4c.hpp"
 #include "coordinates/coordinates.hpp"
 #include "coordinates/cell_locations.hpp"
 #include "eos/eos.hpp"
 #include "hydro/hydro.hpp"
 #include "mhd/mhd.hpp"
-#include "dyngr/dyngr.hpp"
+#include "dyn_grmhd/dyn_grmhd.hpp"
 
 // Lorene
 #include "bin_ns.h"
 #include "unites.h"
-
-#if LORENE==0
-#error lorene_bns.cpp requires LORENE
-#endif
 
 // Prototype for user-defined history function
 void BNSHistory(HistoryData *pdata, Mesh *pm);
@@ -228,7 +224,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
           // pressure. Because PrimitiveSolver is templated, it's difficult to call it
           // directly. Thus, the easiest way is to save the internal energy density, IEN,
           // whose index overlaps the pressure, IPR, move the data to the GPU, then
-          // make a call to a virtual DynGR EOS function that will call the appropriate
+          // make a call to a virtual DynGRMHD EOS function that will call the appropriate
           // template function.
           Real egas = host_w0(m, IDN, k, j, i) * bns->ener_spec[idx] / ener_unit;
           host_w0(m, IEN, k, j, i) = egas;

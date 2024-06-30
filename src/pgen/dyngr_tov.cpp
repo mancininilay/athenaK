@@ -20,14 +20,14 @@
 #include "globals.hpp"
 #include "parameter_input.hpp"
 #include "mesh/mesh.hpp"
-#include "adm/adm.hpp"
+#include "coordinates/adm.hpp"
 #include "z4c/z4c.hpp"
 #include "coordinates/coordinates.hpp"
 #include "coordinates/cell_locations.hpp"
 #include "eos/eos.hpp"
 #include "hydro/hydro.hpp"
 #include "mhd/mhd.hpp"
-#include "dyngr/dyngr.hpp"
+#include "dyn_grmhd/dyn_grmhd.hpp"
 #include "utils/tr_table.hpp"
 
 #include <Kokkos_Random.hpp>
@@ -106,8 +106,9 @@ class PolytropeEOS {
  private:
   Real kappa;
   Real gamma;
+
  public:
-  PolytropeEOS(ParameterInput* pin) {
+  explicit PolytropeEOS(ParameterInput* pin) {
     kappa = pin->GetReal("problem", "kappa");
     gamma = pin->GetReal("mhd", "gamma");
   }
@@ -117,7 +118,7 @@ class PolytropeEOS {
   Real GetPFromRho(Real rho) const {
     return kappa*Kokkos::pow(rho, gamma);
   }
-  
+
   template<LocationTag loc>
   KOKKOS_INLINE_FUNCTION
   Real GetRhoFromP(Real P) const {
@@ -150,8 +151,9 @@ class TabulatedEOS {
   //static const Real fm_to_Msun = 6.771781959609192e-19
   //static const Real MeV_to_Msun = 8.962968324680417e-61
   static constexpr Real ener_to_geo = 2.8863099290608455e-6;
+
  public:
-  TabulatedEOS(ParameterInput* pin) {
+  explicit TabulatedEOS(ParameterInput* pin) {
     fname = pin->GetString("problem", "table");
 
     TableReader::Table table;
@@ -183,7 +185,7 @@ class TabulatedEOS {
     dlrho = m_log_rho.h_view(1)-m_log_rho.h_view(0);
     lrho_min = m_log_rho.h_view(0);
     lrho_max = m_log_rho.h_view(m_nn-1);
-    
+
     // Read pressure
     Real * table_Q1 = table["Q1"];
     for (size_t in = 0; in < m_nn; in++) {
@@ -227,7 +229,7 @@ class TabulatedEOS {
     if (lrho < lrho_min) {
       return 0.0;
     }
-    int lb = (int)((lrho-lrho_min)/dlrho);
+    int lb = static_cast<int>((lrho-lrho_min)/dlrho);
     int ub = lb + 1;
     if constexpr (loc == LocationTag::Host) {
       return exp(Interpolate(lrho, m_log_rho.h_view(lb), m_log_rho.h_view(ub),
@@ -245,7 +247,7 @@ class TabulatedEOS {
     if (lrho < lrho_min) {
       return 0.0;
     }
-    int lb = (int)((lrho-lrho_min)/dlrho);
+    int lb = static_cast<int>((lrho-lrho_min)/dlrho);
     int ub = lb + 1;
     if constexpr (loc == LocationTag::Host) {
       return exp(Interpolate(lrho, m_log_rho.h_view(lb), m_log_rho.h_view(ub),
@@ -260,7 +262,7 @@ class TabulatedEOS {
   KOKKOS_INLINE_FUNCTION
   Real GetYeFromRho(Real rho) const {
     Real lrho = log(rho);
-    int lb = (int)((lrho-lrho_min)/dlrho);
+    int lb = static_cast<int>((lrho-lrho_min)/dlrho);
     int ub = lb + 1;
     if constexpr (loc == LocationTag::Host) {
       return Interpolate(lrho, m_log_rho.h_view(lb), m_log_rho.h_view(ub),
@@ -276,7 +278,7 @@ class TabulatedEOS {
   Real GetRhoFromP(Real P) const {
     Real lP = log(P);
     int lb = 0;
-    int ub = m_nn;
+    int ub = m_nn-1;
     // If the pressure is below the minimum of the table, we return zero density.
     if (lP < lP_min) {
       return 0.0;
@@ -316,6 +318,9 @@ template<class TOVEOS>
 void SetupTOV(ParameterInput* pin, Mesh* pmy_mesh_, tov_pgen& tov) {
   MeshBlockPack* pmbp = pmy_mesh_->pmb_pack;
   TOVEOS eos{pin};
+
+  // Set pfloor to be consistent with the density floor.
+  tov.pfloor = eos.template GetPFromRho<LocationTag::Host>(tov.dfloor);
 
   bool minkowski = pin->GetOrAddBoolean("problem", "minkowski", false);
 
@@ -636,7 +641,7 @@ void SetupTOV(ParameterInput* pin, Mesh* pmy_mesh_, tov_pgen& tov) {
 
 //----------------------------------------------------------------------------------------
 //! \fn void ProblemGenerator::UserProblem()
-//  \brief Sets initial conditions for TOV star in DynGR
+//  \brief Sets initial conditions for TOV star in DynGRMHD
 //  Compile with '-D PROBLEM=dyngr_tov' to enroll as user-specific problem generator
 
 void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
@@ -666,7 +671,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   }
   tov.gamma = pin->GetOrAddReal(block, "gamma", 5.0/3.0);
   tov.dfloor = pin->GetOrAddReal(block, "dfloor", (FLT_MIN));
-  tov.pfloor = pin->GetOrAddReal(block, "pfloor", (FLT_MIN));
+  //tov.pfloor = pin->GetOrAddReal(block, "pfloor", (FLT_MIN));
   tov.v_pert = pin->GetOrAddReal("problem" , "v_pert", 0.0);
   tov.p_pert = pin->GetOrAddReal("problem", "p_pert", 0.0);
   tov.isotropic = pin->GetOrAddBoolean("problem", "isotropic", false);
@@ -681,9 +686,9 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   }
 
   // Select the right TOV template based on the EOS we need.
-  if (pmbp->pdyngr->eos_policy == DynGR_EOS::eos_ideal) {
+  if (pmbp->pdyngr->eos_policy == DynGRMHD_EOS::eos_ideal) {
     SetupTOV<PolytropeEOS>(pin, pmy_mesh_, tov);
-  } else if (pmbp->pdyngr->eos_policy == DynGR_EOS::eos_compose) {
+  } else if (pmbp->pdyngr->eos_policy == DynGRMHD_EOS::eos_compose) {
     SetupTOV<TabulatedEOS>(pin, pmy_mesh_, tov);
   } else {
     std::cout << "### WARNING in " << __FILE__ << " at line " << __LINE__ << std::endl
@@ -833,7 +838,7 @@ static void ConstructTOV(tov_pgen& tov, TOVEOS& eos) {
     R_iso(i+1) = R_iso(i) + dr*(dR1 + 2.0*dR2 + 2.0*dR3 + dR4)/6.0;
 
     // If the pressure falls below zero, we've hit the edge of the star.
-    if (P(i+1) <= 0.0) {
+    if (P(i+1) <= 0.0 || P(i+1) <= tov.pfloor) {
       tov.n_r = i+1;
       break;
     }
@@ -841,11 +846,11 @@ static void ConstructTOV(tov_pgen& tov, TOVEOS& eos) {
 
   // Now we can do a linear interpolation to estimate the actual edge of the star.
   int n_r = tov.n_r;
-  tov.R_edge = Interpolate(0.0, P(n_r-1), P(n_r), R(n_r-1), R(n_r));
+  tov.R_edge = Interpolate(tov.pfloor, P(n_r-1), P(n_r), R(n_r-1), R(n_r));
   tov.M_edge = Interpolate(tov.R_edge, R(n_r-1), R(n_r), M(n_r-1), M(n_r));
 
   // Replace the edges of the star.
-  P(n_r) = 0.0;
+  P(n_r) = tov.pfloor;
   M(n_r) = tov.M_edge;
   alp(n_r) = Interpolate(tov.R_edge, R(n_r-1), R(n_r), alp(n_r-1), alp(n_r));
   R(n_r) = tov.R_edge;
@@ -989,7 +994,8 @@ static void GetPrimitivesAtIsoPoint(const tov_pgen& tov, const TOVEOS& eos, Real
 
 template<class TOVEOS>
 KOKKOS_INLINE_FUNCTION
-static void GetPandRho(const tov_pgen& tov, const TOVEOS& eos, Real r, Real &rho, Real &p) {
+static void GetPandRho(const tov_pgen& tov, const TOVEOS& eos,
+                       Real r, Real &rho, Real &p) {
   if (r >= tov.R_edge) {
     rho = 0.;
     p   = 0.;

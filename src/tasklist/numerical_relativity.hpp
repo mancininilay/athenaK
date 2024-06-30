@@ -1,5 +1,5 @@
-#ifndef NUMERICAL_RELATIVITY_NUMERICAL_RELATIVITY_HPP_
-#define NUMERICAL_RELATIVITY_NUMERICAL_RELATIVITY_HPP_
+#ifndef TASKLIST_NUMERICAL_RELATIVITY_HPP_
+#define TASKLIST_NUMERICAL_RELATIVITY_HPP_
 //========================================================================================
 // AthenaXXX astrophysical plasma code
 // Copyright(C) 2020 James M. Stone <jmstone@ias.edu> and the Athena code team
@@ -21,7 +21,7 @@
 
 // Forward declarations
 namespace z4c {class Z4c;}
-namespace dyngr {class DynGR;}
+namespace dyngr {class DynGRMHD;}
 class ADM;
 class Tmunu;
 class MeshBlockPack;
@@ -36,6 +36,7 @@ enum TaskName {
   MHD_SendFlux,
   MHD_RecvFlux,
   MHD_ExplRK,
+  MHD_AddSrc,
   MHD_RestU,
   MHD_SendU,
   MHD_RecvU,
@@ -182,4 +183,4 @@ class NumericalRelativity {
 
 } // namespace numrel
 
-#endif  // NUMERICAL_RELATIVITY_NUMERICAL_RELATIVITY_HPP_
+#endif  // TASKLIST_NUMERICAL_RELATIVITY_HPP_

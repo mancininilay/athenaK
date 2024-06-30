@@ -1,28 +1,33 @@
-#ifndef DYNGR_RSOLVERS_HLLE_DYNGRMHD_HPP_
-#define DYNGR_RSOLVERS_HLLE_DYNGRMHD_HPP_
+#ifndef DYN_GRMHD_RSOLVERS_LLF_DYN_GRMHD_HPP_
+#define DYN_GRMHD_RSOLVERS_LLF_DYN_GRMHD_HPP_
 //========================================================================================
 // AthenaXXX astrophysical plasma code
 // Copyright(C) 2020 James M. Stone <jmstone@ias.edu> and the Athena code team
 // Licensed under the 3-clause BSD License (the "LICENSE")
 //========================================================================================
-//! \file hlle_dyngrmhd.hpp
-//! \brief HLLE Riemann solver for general relativistic magnetohydrodynamics
+//! \file llf_dyngrmhd.hpp
+//! \brief LLF Riemann solver for general relativistic magnetohydrodynamics
 
 #include <math.h>
 
 #include "coordinates/cell_locations.hpp"
-#include "adm/adm.hpp"
+#include "coordinates/adm.hpp"
 #include "eos/primitive_solver_hyd.hpp"
 #include "eos/primitive-solver/reset_floor.hpp"
 #include "eos/primitive-solver/geom_math.hpp"
+#include "flux_dyn_grmhd.hpp"
 
 namespace dyngr {
 
 //----------------------------------------------------------------------------------------
-//! \fn void SingleStateHLLE_DYNGR
+//! \fn void SingleStateLLF_DYNGR
+//! \brief inline function for calculating GRMHD fluxes via Lax-Friedrichs
+//! TODO: This could potentially be sped up by calculating the conserved variables without
+//  the help of PrimitiveSolver; there are redundant calculations with B^i v_i and W that
+//  may not be needed.
 template<int ivx, class EOSPolicy, class ErrorPolicy>
 KOKKOS_INLINE_FUNCTION
-void SingleStateHLLE_DYNGR(const PrimitiveSolverHydro<EOSPolicy, ErrorPolicy>& eos,
+void SingleStateLLF_DYNGR(const PrimitiveSolverHydro<EOSPolicy, ErrorPolicy>& eos,
     Real prim_l[NPRIM], Real prim_r[NPRIM], Real Bu_l[NPRIM], Real Bu_r[NPRIM],
     const int nmhd, const int nscal,
     Real g3d[NSPMETRIC], Real beta_u[3], Real alpha,
@@ -69,59 +74,32 @@ void SingleStateHLLE_DYNGR(const PrimitiveSolverHydro<EOSPolicy, ErrorPolicy>& e
   // Get the extremal wavespeeds
   Real lambda_l = fmin(lambda_ml, lambda_mr);
   Real lambda_r = fmax(lambda_pl, lambda_pr);
+  Real lambda = fmax(lambda_r, -lambda_l);
 
-  // Calculate fluxes in HLL region
-  Real qa = lambda_r*lambda_l/alpha;
-  Real qb = 1.0/(lambda_r - lambda_l);
-  Real f_hll[NCONS], bf_hll[NMAG];
-  f_hll[CDN] = (lambda_r*fl[CDN] - lambda_l*fr[CDN] +
-                qa*(cons_r[CDN] - cons_l[CDN])) * qb;
-  f_hll[CSX] = (lambda_r*fl[CSX] - lambda_l*fr[CSX] +
-                qa*(cons_r[CSX] - cons_l[CSX])) * qb;
-  f_hll[CSY] = (lambda_r*fl[CSY] - lambda_l*fr[CSY] +
-                qa*(cons_r[CSY] - cons_l[CSY])) * qb;
-  f_hll[CSZ] = (lambda_r*fl[CSZ] - lambda_l*fr[CSZ] +
-                qa*(cons_r[CSZ] - cons_l[CSZ])) * qb;
-  f_hll[CTA] = (lambda_r*fl[CTA] - lambda_l*fr[CTA] +
-                qa*(cons_r[CTA] - cons_l[CTA])) * qb;
-  bf_hll[ibx] = 0.0;
-  bf_hll[iby] = (lambda_r*bfl[iby] - lambda_l*bfr[iby] +
-                 qa*(Bu_r[iby] - Bu_l[iby])) * qb;
-  bf_hll[ibz] = (lambda_r*bfl[ibz] - lambda_l*bfr[ibz] +
-                 qa*(Bu_r[ibz] - Bu_l[ibz])) * qb;
-
-  Real *f_interface, *bf_interface;
-  if (lambda_l >= 0.) {
-    f_interface = &fl[0];
-    bf_interface = &bfl[0];
-  } else if (lambda_r <= 0.) {
-    f_interface = &fr[0];
-    bf_interface = &bfr[0];
-  } else {
-    f_interface = &f_hll[0];
-    bf_interface = &bf_hll[0];
-  }
-
-  Real vol = sdetg*alpha;
+  //Real vol = sdetg*alpha;
 
   // Calculate the fluxes
-  flux[CDN] = vol * f_interface[CDN];
-  flux[CSX] = vol * f_interface[CSX];
-  flux[CSY] = vol * f_interface[CSY];
-  flux[CSZ] = vol * f_interface[CSZ];
-  flux[CTA] = vol * f_interface[CTA];
+  flux[CDN] = 0.5*sdetg*(alpha*(fl[CDN] + fr[CDN]) - lambda*(cons_r[CDN] - cons_l[CDN]));
+  flux[CSX] = 0.5*sdetg*(alpha*(fl[CSX] + fr[CSX]) - lambda*(cons_r[CSX] - cons_l[CSX]));
+  flux[CSY] = 0.5*sdetg*(alpha*(fl[CSY] + fr[CSY]) - lambda*(cons_r[CSY] - cons_l[CSY]));
+  flux[CSZ] = 0.5*sdetg*(alpha*(fl[CSZ] + fr[CSZ]) - lambda*(cons_r[CSZ] - cons_l[CSZ]));
+  flux[CTA] = 0.5*sdetg*(alpha*(fl[CTA] + fr[CTA]) - lambda*(cons_r[CTA] - cons_l[CTA]));
 
-  bflux[IBY] = - vol * bf_interface[iby];
-  bflux[IBZ] = vol * bf_interface[ibz];
+  bflux[IBY] = - 0.5 * sdetg *
+               (alpha*(bfl[iby] + bfr[iby]) - lambda * (Bu_rund[iby] - Bu_lund[iby]));
+  bflux[IBZ] = 0.5 * sdetg *
+               (alpha*(bfl[ibz] + bfr[ibz]) - lambda * (Bu_rund[ibz] - Bu_lund[ibz]));
 }
 
 //----------------------------------------------------------------------------------------
-//! \fn void HLLE_DYNGR
-//! \brief inline function for calculating GRMHD fluxes via HLLE
-//----------------------------------------------------------------------------------------
+//! \fn void LLF_DYNGR
+//! \brief inline function for calculating GRMHD fluxes via Lax-Friedrichs
+//! TODO: This could potentially be sped up by calculating the conserved variables without
+//  the help of PrimitiveSolver; there are redundant calculations with B^i v_i and W that
+//  may not be needed.
 template<int ivx, class EOSPolicy, class ErrorPolicy>
 KOKKOS_INLINE_FUNCTION
-void HLLE_DYNGR(TeamMember_t const &member,
+void LLF_DYNGR(TeamMember_t const &member,
      const PrimitiveSolverHydro<EOSPolicy, ErrorPolicy>& eos,
      const RegionIndcs &indcs, const DualArray1D<RegionSize> &size,
      const CoordData &coord,
@@ -220,56 +198,32 @@ void HLLE_DYNGR(TeamMember_t const &member,
     // Get the extremal wavespeeds
     Real lambda_l = fmin(lambda_ml, lambda_mr);
     Real lambda_r = fmax(lambda_pl, lambda_pr);
+    Real lambda = fmax(lambda_r, -lambda_l);
 
-    // Calculate fluxes in HLL region
-    Real qa = lambda_r*lambda_l/alpha;
-    Real qb = 1.0/(lambda_r - lambda_l);
-    Real f_hll[NCONS], bf_hll[NMAG];
-    f_hll[CDN] = ((lambda_r*fl[CDN] - lambda_l*fr[CDN]) +
-                  qa*(cons_r[CDN] - cons_l[CDN])) * qb;
-    f_hll[CSX] = ((lambda_r*fl[CSX] - lambda_l*fr[CSX]) +
-                  qa*(cons_r[CSX] - cons_l[CSX])) * qb;
-    f_hll[CSY] = ((lambda_r*fl[CSY] - lambda_l*fr[CSY]) +
-                  qa*(cons_r[CSY] - cons_l[CSY])) * qb;
-    f_hll[CSZ] = ((lambda_r*fl[CSZ] - lambda_l*fr[CSZ]) +
-                  qa*(cons_r[CSZ] - cons_l[CSZ])) * qb;
-    f_hll[CTA] = ((lambda_r*fl[CTA] - lambda_l*fr[CTA]) +
-                  qa*(cons_r[CTA] - cons_l[CTA])) * qb;
-    bf_hll[ibx] = 0.0;
-    bf_hll[iby] = ((lambda_r*bfl[iby] - lambda_l*bfr[iby]) +
-                   qa*(Bu_r[iby] - Bu_l[iby])) * qb;
-    bf_hll[ibz] = ((lambda_r*bfl[ibz] - lambda_l*bfr[ibz]) +
-                   qa*(Bu_r[ibz] - Bu_l[ibz])) * qb;
-
-    Real *f_interface, *bf_interface;
-    if (lambda_l >= 0.) {
-      f_interface = &fl[0];
-      bf_interface = &bfl[0];
-    } else if (lambda_r <= 0.) {
-      f_interface = &fr[0];
-      bf_interface = &bfr[0];
-    } else {
-      f_interface = &f_hll[0];
-      bf_interface = &bf_hll[0];
-    }
-
-    Real vol = sdetg*alpha;
+    //Real vol = sdetg*alpha;
 
     // Calculate the fluxes
-    flx(m, IDN, k, j, i) = vol * f_interface[CDN];
-    flx(m, IEN, k, j, i) = vol * f_interface[CTA];
-    flx(m, IVX, k, j, i) = vol * f_interface[CSX];
-    flx(m, IVY, k, j, i) = vol * f_interface[CSY];
-    flx(m, IVZ, k, j, i) = vol * f_interface[CSZ];
+    flx(m, IDN, k, j, i) = 0.5 * sdetg * (alpha*(fl[CDN] + fr[CDN]) -
+                                  lambda * (cons_r[CDN] - cons_l[CDN]));
+    flx(m, IEN, k, j, i) = 0.5 * sdetg * (alpha*(fl[CTA] + fr[CTA]) -
+                                  lambda * (cons_r[CTA] - cons_l[CTA]));
+    flx(m, IVX, k, j, i) = 0.5 * sdetg * (alpha*(fl[CSX] + fr[CSX]) -
+                                  lambda * (cons_r[CSX] - cons_l[CSX]));
+    flx(m, IVY, k, j, i) = 0.5 * sdetg * (alpha*(fl[CSY] + fr[CSY]) -
+                                  lambda * (cons_r[CSY] - cons_l[CSY]));
+    flx(m, IVZ, k, j, i) = 0.5 * sdetg * (alpha*(fl[CSZ] + fr[CSZ]) -
+                                  lambda * (cons_r[CSZ] - cons_l[CSZ]));
     // The notation here is slightly misleading, as it suggests that Ey = -Fx(By) and
     // Ez = Fx(Bz), rather than Ez = -Fx(By) and Ey = Fx(Bz). However, the appropriate
     // containers for ey and ez for each direction are passed in as arguments to this
     // function, ensuring that the result is entirely consistent.
-    ey(m, k, j, i) = -vol * bf_interface[iby];
-    ez(m, k, j, i) = vol * bf_interface[ibz];
+    ey(m, k, j, i) = -0.5*sdetg*(alpha*(bfl[iby] + bfr[iby]) -
+                          lambda * (Bu_r[iby] - Bu_l[iby]));
+    ez(m, k, j, i) = 0.5*sdetg*(alpha*(bfl[ibz] + bfr[ibz]) -
+                          lambda * (Bu_r[ibz] - Bu_l[ibz]));
   });
 }
 
 } // namespace dyngr
 
-#endif  // DYNGR_RSOLVERS_HLLE_DYNGRMHD_HPP_
+#endif  // DYN_GRMHD_RSOLVERS_LLF_DYN_GRMHD_HPP_

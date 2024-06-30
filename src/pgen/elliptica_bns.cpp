@@ -19,19 +19,15 @@
 #include "globals.hpp"
 #include "parameter_input.hpp"
 #include "mesh/mesh.hpp"
-#include "adm/adm.hpp"
+#include "coordinates/adm.hpp"
 #include "z4c/z4c.hpp"
 #include "coordinates/coordinates.hpp"
 #include "coordinates/cell_locations.hpp"
 #include "eos/eos.hpp"
 #include "hydro/hydro.hpp"
 #include "mhd/mhd.hpp"
-#include "dyngr/dyngr.hpp"
+#include "dyn_grmhd/dyn_grmhd.hpp"
 #include "elliptica_id_reader_lib.h"
-
-#if ELLIPTICA==0
-#error elliptica_bns.cpp requires Elliptica
-#endif
 
 void EllipticaHistory(HistoryData *pdata, Mesh *pm);
 

@@ -15,9 +15,9 @@
 
 #include "athena.hpp"
 #include "mesh/mesh.hpp"
-#include "adm/adm.hpp"
+#include "coordinates/adm.hpp"
 #include "z4c/z4c.hpp"
-#include "tmunu/tmunu.hpp"
+#include "z4c/tmunu.hpp"
 #include "coordinates/cell_locations.hpp"
 
 namespace z4c {

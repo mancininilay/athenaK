@@ -11,8 +11,6 @@ add_executable(
         globals.cpp
         parameter_input.cpp
 
-        adm/adm.cpp
-
         bvals/bvals.cpp
         bvals/buffs_cc.cpp
         bvals/buffs_fc.cpp
@@ -29,6 +27,7 @@ add_executable(
         bvals/physics/radiation_bcs.cpp
         bvals/physics/z4c_bcs.cpp
 
+        coordinates/adm.cpp
         coordinates/coordinates.cpp
         coordinates/excision.cpp
 
@@ -38,9 +37,9 @@ add_executable(
 
         driver/driver.cpp
 
-        dyngr/dyngr.cpp
-        dyngr/dyngr_fluxes.cpp
-        dyngr/dyngr_fofc.cpp
+        dyn_grmhd/dyn_grmhd.cpp
+        dyn_grmhd/dyn_grmhd_fluxes.cpp
+        dyn_grmhd/dyn_grmhd_fofc.cpp
 
         eos/eos.cpp
         eos/ideal_hyd.cpp
@@ -84,8 +83,6 @@ add_executable(
         mhd/mhd_tasks.cpp
         mhd/mhd_update.cpp
 
-        numerical-relativity/numerical_relativity.cpp
-
         outputs/io_wrapper.cpp
         outputs/outputs.cpp
         outputs/basetype_output.cpp
@@ -128,11 +125,20 @@ add_executable(
         radiation/radiation_tetrad.cpp
         radiation/radiation_update.cpp
 
+        shearing_box/orbital_advection.cpp
+        shearing_box/orbital_advection_cc.cpp
+        shearing_box/orbital_advection_fc.cpp
+        shearing_box/shearing_box.cpp
+        shearing_box/shearing_box_cc.cpp
+        shearing_box/shearing_box_fc.cpp
+        shearing_box/shearing_box_srcterms.cpp
+        shearing_box/shearing_box_tasks.cpp
+
         srcterms/srcterms.cpp
         srcterms/srcterms_newdt.cpp
         srcterms/turb_driver.cpp
 
-        tmunu/tmunu.cpp
+        tasklist/numerical_relativity.cpp
 
         units/units.cpp
         utils/change_rundir.cpp
@@ -140,6 +146,7 @@ add_executable(
         utils/lagrange_interpolator.cpp
         utils/tr_table.cpp
 
+        z4c/tmunu.cpp
         z4c/z4c.cpp
         z4c/z4c_adm.cpp
         z4c/z4c_calcrhs.cpp

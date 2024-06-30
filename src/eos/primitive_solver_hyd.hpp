@@ -33,7 +33,7 @@
 #include "globals.hpp"
 #include "mesh/mesh.hpp"
 #include "parameter_input.hpp"
-#include "adm/adm.hpp"
+#include "coordinates/adm.hpp"
 #include "mhd/mhd.hpp"
 #include "coordinates/coordinates.hpp"
 #include "coordinates/cell_locations.hpp"
@@ -111,7 +111,7 @@ class PrimitiveSolverHydro {
       // Get table filename, then read the table,
       std::string fname = pin->GetString(block, "table");
       ps.GetEOSMutable().ReadTableFromFile(fname);
-      
+
       // Ensure table was read properly
       assert(ps.GetEOSMutable().IsInitialized());
     }
@@ -453,10 +453,10 @@ class PrimitiveSolverHydro {
                  "    Sy  = %.17g\n"
                  "    Sz  = %.17g\n"
                  "    tau = %.17g\n"
+                 "    Dye = %.17g\n"
                  "    Bx  = %.17g\n"
                  "    By  = %.17g\n"
                  "    Bz  = %.17g\n"
-                 "    Dye = %.17g\n"
                  "  Metric vars: \n"
                  "    detg = %.17g\n"
                  "    g_dd = {%.17g, %.17g, %.17g, %.17g, %.17g, %.17g}\n"
@@ -584,7 +584,7 @@ class PrimitiveSolverHydro {
 
   // A function for converting PrimitiveSolver errors to strings
   KOKKOS_INLINE_FUNCTION
-  const char * ErrorToString(Primitive::Error e) {
+  static const char * ErrorToString(Primitive::Error e) {
     switch(e) {
       case Primitive::Error::SUCCESS:
         return "SUCCESS";
@@ -615,7 +615,7 @@ class PrimitiveSolverHydro {
 
   // A function for checking for NaNs in the conserved variables.
   KOKKOS_INLINE_FUNCTION
-  int CheckForConservedNaNs(const Real cons_pt[NCONS]) const {
+  static int CheckForConservedNaNs(const Real cons_pt[NCONS]) {
     int nans = 0;
     if (!isfinite(cons_pt[CDN])) {
       printf("D is NaN!\n"); // NOLINT
@@ -642,7 +642,7 @@ class PrimitiveSolverHydro {
   }
 
   KOKKOS_INLINE_FUNCTION
-  void DumpPrimitiveVars(const Real prim_pt[NPRIM]) const {
+  static void DumpPrimitiveVars(const Real prim_pt[NPRIM]) {
     printf("Primitive vars: \n" // NOLINT
            "  rho = %.17g\n"
            "  ux  = %.17g\n"

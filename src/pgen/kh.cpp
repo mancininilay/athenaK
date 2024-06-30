@@ -19,8 +19,8 @@
 #include "eos/eos.hpp"
 #include "hydro/hydro.hpp"
 #include "mhd/mhd.hpp"
-#include "dyngr/dyngr.hpp"
-#include "adm/adm.hpp"
+#include "dyn_grmhd/dyn_grmhd.hpp"
+#include "coordinates/adm.hpp"
 #include "pgen.hpp"
 
 //----------------------------------------------------------------------------------------
