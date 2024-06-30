@@ -74,8 +74,6 @@ KOKKOS_INLINE_FUNCTION
 static void GetPrimitivesAtPoint(const tov_pgen& pgen, Real r,
                                  Real &rho, Real &p, Real &m, Real &alp);
 KOKKOS_INLINE_FUNCTION
-static void GetPandRho(const tov_pgen& pgen, Real r, Real &rho, Real &p);
-KOKKOS_INLINE_FUNCTION
 static Real Interpolate(Real x,
                         const Real x1, const Real x2, const Real y1, const Real y2);
 KOKKOS_INLINE_FUNCTION
@@ -127,11 +125,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   tov.kappa = pin->GetReal("problem", "kappa");
   tov.npoints = pin->GetReal("problem", "npoints");
   tov.dr    = pin->GetReal("problem", "dr");
-  if (pmbp->pdyngr->eos_policy != DynGR_EOS::eos_ideal) {
-    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
-              << "TOV star problem currently only compatible with eos_ideal"
-              << std::endl;
-  }
+  
   // Select either Hydro or MHD
   int nvars, nscalars;
   std::string block;
@@ -637,21 +631,6 @@ static void GetPrimitivesAtPoint(const tov_pgen& tov, Real r,
   rho = pow(p/tov.kappa, 1.0/tov.gamma);
 }
 
-KOKKOS_INLINE_FUNCTION
-static void GetPandRho(const tov_pgen& tov, Real r, Real &rho, Real &p) {
-  if (r >= tov.R_edge) {
-    rho = 0.;
-    p   = 0.;
-    return;
-  }
-  // Get the lower index for where our point must be located.
-  int idx = static_cast<int>(r/tov.dr);
-  const auto &R = tov.R.d_view;
-  const auto &Ps = tov.P.d_view;
-  // Interpolate to get the pressure
-  p = Interpolate(r, R(idx), R(idx+1), Ps(idx), Ps(idx+1));
-  rho = pow(p/tov.kappa, 1.0/tov.gamma);
-}
 
 KOKKOS_INLINE_FUNCTION
 static Real A1(Real x1, Real x2, Real x3, Real r0, Real b_norm) {
