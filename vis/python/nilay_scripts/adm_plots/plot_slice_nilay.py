@@ -132,6 +132,7 @@ def main(**kwargs):
     derived_dependencies = {}
 
     derived_dependencies['sigma'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
+    derived_dependencies['Poynting'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
     derived_dependencies['beta'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
     derived_dependencies['vr'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
     derived_dependencies['vphi'] = ('eint','dens', 'bcc1', 'bcc2', 'bcc3','velx', 'vely', 'velz')
@@ -846,6 +847,8 @@ def main(**kwargs):
     Br = (x*Bx + y*By + z*Bz)/r
     Bphi = (x*By - y*Bx)/(x**2 + y**2)
 
+    Poynting = vr * (Bx*Bx + By*By + Bz*Bz) - (Bx*vx + By*vy + Bz*vz)*Br 
+
     detg = gxx*gyy*gzz + 2*gxy*gyz*gxz - gxx*gyz**2 - gyy*gxz**2 - gzz*gxy**2
 
     Bx = Bx/np.sqrt(detg) #cursive B
@@ -867,7 +870,7 @@ def main(**kwargs):
     
     # Calculate derived quantity related to gas pressure
     if kwargs['variable'] in \
-            ['derived:' + name for name in ('pgas', 'sigma','beta','vr','vphi', 'kappa','betath', 'T', 'pthermal', 'prad_pgas','Br','Bphi','Machcs','Machva')]:
+            ['derived:' + name for name in ('pgas', 'sigma','beta','vr','vphi','Poynting', 'kappa','betath', 'T', 'pthermal', 'prad_pgas','Br','Bphi','Machcs','Machva')]:
         pgas = 1 #useless variable 
         conv = (12/11)*(5.635e38/1.6e-6)*(1/8.56e31)
 
@@ -890,6 +893,8 @@ def main(**kwargs):
             quantity = np.abs(vr)/np.sqrt(csq)
         elif kwargs['variable'] == 'derived:Machva':
             quantity = np.abs(vr)/np.sqrt(vasq)
+        elif kwargs['variable'] == 'derived:Poynting':
+            quantity = Poynting
         elif kwargs['variable'] == 'derived:betath':
             quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))/ (quantities['eint'])
         elif kwargs['variable'] == 'derived:pthermal':
