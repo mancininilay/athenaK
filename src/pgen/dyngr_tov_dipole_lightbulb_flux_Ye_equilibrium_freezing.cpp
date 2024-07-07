@@ -56,9 +56,10 @@ struct tov_pgen {
 
 Real C;
 Real B;
-Real rho_cut;
-Real r_cut2;
-Real r_cut;
+Real rho_cut; //lightbulb cutoff
+Real r_cut2;  //freezing cutoff (if on radius)
+Real rho_cut2; //freezing cutoff (if on density)
+Real r_cut;    //mag freezing cutoff
 Real T;
 Real Kappatilde;
 Real Kappa;
@@ -154,6 +155,7 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   C = pin->GetOrAddReal("problem", "C", 0.0);
   B = pin->GetOrAddReal("problem", "B", 0.0);
   rho_cut = pin->GetOrAddReal("problem", "rho_cut", 1.0);
+  rho_cut2 = pin->GetOrAddReal("problem", "rho_cut2", 1.0);
   r_cut2 = pin->GetOrAddReal("problem", "r_cut2", 1.0);
   r_cut = pin->GetOrAddReal("problem", "r_cut", 1.0);
   T = pin->GetOrAddReal("problem", "T", 0.0); 
@@ -833,6 +835,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real Tnu = T; //Tnue
   Real rhocut = rho_cut;
   Real rcut2 = r_cut2;
+  Real rhocut2 = rho_cut2;
   Real rcut = r_cut;
   Real r0_ = r0;
   Real b_norm_ = b_norm;
@@ -1052,7 +1055,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
     
     Real z2;
     if (w0(m,IDN,k,j,i)>rhocut2){
-      z2 = exp(2.0*(1.0 - w0(m,IDN,k,j,i)/rhocut2));
+      z2 = exp(2*(1.0 - w0(m,IDN,k,j,i)/rhocut2));
     } else {
       z2 = 1.0;
     }
