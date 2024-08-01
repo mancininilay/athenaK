@@ -1,0 +1,3 @@
+/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles/athena.dir
+/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles/edit_cache.dir
+/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles/rebuild_cache.dir

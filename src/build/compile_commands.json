@@ -1,0 +1,794 @@
+[
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/main.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/main.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/main.cpp",
+  "output": "CMakeFiles/athena.dir/main.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/globals.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/globals.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/globals.cpp",
+  "output": "CMakeFiles/athena.dir/globals.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/parameter_input.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/parameter_input.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/parameter_input.cpp",
+  "output": "CMakeFiles/athena.dir/parameter_input.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/bvals.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/bvals.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/bvals.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/bvals.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/buffs_cc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/buffs_cc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/buffs_cc.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/buffs_cc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/buffs_fc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/buffs_fc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/buffs_fc.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/buffs_fc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/bvals_cc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/bvals_cc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/bvals_cc.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/bvals_cc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/bvals_fc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/bvals_fc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/bvals_fc.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/bvals_fc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/bvals_part.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/bvals_part.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/bvals_part.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/bvals_part.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/bvals_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/bvals_tasks.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/bvals_tasks.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/bvals_tasks.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/flux_correct_cc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/flux_correct_cc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/flux_correct_cc.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/flux_correct_cc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/flux_correct_fc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/flux_correct_fc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/flux_correct_fc.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/flux_correct_fc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/prolongation.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/prolongation.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/prolongation.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/prolongation.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/prolong_prims.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/prolong_prims.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/prolong_prims.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/prolong_prims.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/physics/hydro_bcs.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/physics/hydro_bcs.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/physics/hydro_bcs.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/physics/hydro_bcs.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/physics/bfield_bcs.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/physics/bfield_bcs.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/physics/bfield_bcs.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/physics/bfield_bcs.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/physics/radiation_bcs.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/physics/radiation_bcs.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/physics/radiation_bcs.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/physics/radiation_bcs.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/bvals/physics/z4c_bcs.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/physics/z4c_bcs.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/bvals/physics/z4c_bcs.cpp",
+  "output": "CMakeFiles/athena.dir/bvals/physics/z4c_bcs.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/coordinates/adm.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/coordinates/adm.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/coordinates/adm.cpp",
+  "output": "CMakeFiles/athena.dir/coordinates/adm.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/coordinates/coordinates.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/coordinates/coordinates.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/coordinates/coordinates.cpp",
+  "output": "CMakeFiles/athena.dir/coordinates/coordinates.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/coordinates/excision.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/coordinates/excision.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/coordinates/excision.cpp",
+  "output": "CMakeFiles/athena.dir/coordinates/excision.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/diffusion/conduction.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/diffusion/conduction.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/diffusion/conduction.cpp",
+  "output": "CMakeFiles/athena.dir/diffusion/conduction.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/diffusion/resistivity.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/diffusion/resistivity.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/diffusion/resistivity.cpp",
+  "output": "CMakeFiles/athena.dir/diffusion/resistivity.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/diffusion/viscosity.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/diffusion/viscosity.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/diffusion/viscosity.cpp",
+  "output": "CMakeFiles/athena.dir/diffusion/viscosity.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/driver/driver.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/driver/driver.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/driver/driver.cpp",
+  "output": "CMakeFiles/athena.dir/driver/driver.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/dyn_grmhd/dyn_grmhd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/dyn_grmhd/dyn_grmhd.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/dyn_grmhd/dyn_grmhd.cpp",
+  "output": "CMakeFiles/athena.dir/dyn_grmhd/dyn_grmhd.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/dyn_grmhd/dyn_grmhd_fluxes.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/dyn_grmhd/dyn_grmhd_fluxes.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/dyn_grmhd/dyn_grmhd_fluxes.cpp",
+  "output": "CMakeFiles/athena.dir/dyn_grmhd/dyn_grmhd_fluxes.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/dyn_grmhd/dyn_grmhd_fofc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/dyn_grmhd/dyn_grmhd_fofc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/dyn_grmhd/dyn_grmhd_fofc.cpp",
+  "output": "CMakeFiles/athena.dir/dyn_grmhd/dyn_grmhd_fofc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/eos.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/eos.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/eos.cpp",
+  "output": "CMakeFiles/athena.dir/eos/eos.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/ideal_hyd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_hyd.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_hyd.cpp",
+  "output": "CMakeFiles/athena.dir/eos/ideal_hyd.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/ideal_mhd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_mhd.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_mhd.cpp",
+  "output": "CMakeFiles/athena.dir/eos/ideal_mhd.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/isothermal_hyd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/isothermal_hyd.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/isothermal_hyd.cpp",
+  "output": "CMakeFiles/athena.dir/eos/isothermal_hyd.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/isothermal_mhd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/isothermal_mhd.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/isothermal_mhd.cpp",
+  "output": "CMakeFiles/athena.dir/eos/isothermal_mhd.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/ideal_srhyd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_srhyd.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_srhyd.cpp",
+  "output": "CMakeFiles/athena.dir/eos/ideal_srhyd.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/ideal_grhyd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_grhyd.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_grhyd.cpp",
+  "output": "CMakeFiles/athena.dir/eos/ideal_grhyd.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/ideal_srmhd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_srmhd.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_srmhd.cpp",
+  "output": "CMakeFiles/athena.dir/eos/ideal_srmhd.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/ideal_grmhd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_grmhd.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_grmhd.cpp",
+  "output": "CMakeFiles/athena.dir/eos/ideal_grmhd.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp",
+  "output": "CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/eos_compose.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/eos_compose.cpp",
+  "output": "CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/geodesic-grid/geodesic_grid.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/geodesic-grid/geodesic_grid.cpp",
+  "output": "CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/geodesic-grid/spherical_grid.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/geodesic-grid/spherical_grid.cpp",
+  "output": "CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/hydro/hydro.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro.cpp",
+  "output": "CMakeFiles/athena.dir/hydro/hydro.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/hydro/hydro_fluxes.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_fluxes.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_fluxes.cpp",
+  "output": "CMakeFiles/athena.dir/hydro/hydro_fluxes.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/hydro/hydro_fofc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_fofc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_fofc.cpp",
+  "output": "CMakeFiles/athena.dir/hydro/hydro_fofc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/hydro/hydro_newdt.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_newdt.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_newdt.cpp",
+  "output": "CMakeFiles/athena.dir/hydro/hydro_newdt.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/hydro/hydro_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_tasks.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_tasks.cpp",
+  "output": "CMakeFiles/athena.dir/hydro/hydro_tasks.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/hydro/hydro_update.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_update.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_update.cpp",
+  "output": "CMakeFiles/athena.dir/hydro/hydro_update.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/ion-neutral/ion-neutral.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/ion-neutral/ion-neutral.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/ion-neutral/ion-neutral.cpp",
+  "output": "CMakeFiles/athena.dir/ion-neutral/ion-neutral.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/ion-neutral/ion-neutral_tasks.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/ion-neutral/ion-neutral_tasks.cpp",
+  "output": "CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mesh/build_tree.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/build_tree.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/build_tree.cpp",
+  "output": "CMakeFiles/athena.dir/mesh/build_tree.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mesh/load_balance.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/load_balance.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/load_balance.cpp",
+  "output": "CMakeFiles/athena.dir/mesh/load_balance.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mesh/mesh.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/mesh.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/mesh.cpp",
+  "output": "CMakeFiles/athena.dir/mesh/mesh.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mesh/meshblock.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock.cpp",
+  "output": "CMakeFiles/athena.dir/mesh/meshblock.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mesh/meshblock_pack.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock_pack.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock_pack.cpp",
+  "output": "CMakeFiles/athena.dir/mesh/meshblock_pack.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mesh/meshblock_tree.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock_tree.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock_tree.cpp",
+  "output": "CMakeFiles/athena.dir/mesh/meshblock_tree.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mesh/mesh_refinement.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/mesh_refinement.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/mesh_refinement.cpp",
+  "output": "CMakeFiles/athena.dir/mesh/mesh_refinement.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mhd/mhd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd.cpp",
+  "output": "CMakeFiles/athena.dir/mhd/mhd.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mhd/mhd_corner_e.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_corner_e.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_corner_e.cpp",
+  "output": "CMakeFiles/athena.dir/mhd/mhd_corner_e.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mhd/mhd_ct.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_ct.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_ct.cpp",
+  "output": "CMakeFiles/athena.dir/mhd/mhd_ct.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mhd/mhd_fluxes.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_fluxes.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_fluxes.cpp",
+  "output": "CMakeFiles/athena.dir/mhd/mhd_fluxes.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mhd/mhd_fofc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_fofc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_fofc.cpp",
+  "output": "CMakeFiles/athena.dir/mhd/mhd_fofc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mhd/mhd_newdt.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_newdt.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_newdt.cpp",
+  "output": "CMakeFiles/athena.dir/mhd/mhd_newdt.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mhd/mhd_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_tasks.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_tasks.cpp",
+  "output": "CMakeFiles/athena.dir/mhd/mhd_tasks.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/mhd/mhd_update.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_update.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_update.cpp",
+  "output": "CMakeFiles/athena.dir/mhd/mhd_update.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/io_wrapper.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/io_wrapper.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/io_wrapper.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/io_wrapper.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/outputs.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/outputs.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/outputs.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/outputs.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/basetype_output.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/basetype_output.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/basetype_output.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/basetype_output.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/derived_variables.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/derived_variables.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/derived_variables.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/derived_variables.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/binary.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/binary.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/binary.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/binary.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/eventlog.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/eventlog.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/eventlog.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/eventlog.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/formatted_table.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/formatted_table.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/formatted_table.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/formatted_table.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/history.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/history.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/history.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/history.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/restart.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/restart.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/restart.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/restart.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/coarsened_binary.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/coarsened_binary.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/coarsened_binary.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/coarsened_binary.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/track_prtcl.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/track_prtcl.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/track_prtcl.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/track_prtcl.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/vtk_mesh.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/vtk_mesh.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/vtk_mesh.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/vtk_mesh.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/vtk_prtcl.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/vtk_prtcl.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/vtk_prtcl.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/vtk_prtcl.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/particles/particles.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles.cpp",
+  "output": "CMakeFiles/athena.dir/particles/particles.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/particles/particles_pushers.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles_pushers.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles_pushers.cpp",
+  "output": "CMakeFiles/athena.dir/particles/particles_pushers.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/particles/particles_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles_tasks.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles_tasks.cpp",
+  "output": "CMakeFiles/athena.dir/particles/particles_tasks.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/outputs/pdf.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/pdf.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/pdf.cpp",
+  "output": "CMakeFiles/athena.dir/outputs/pdf.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/pgen.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/pgen.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/pgen.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/pgen.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/advection.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/advection.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/advection.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/advection.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/cpaw.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/cpaw.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/cpaw.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/cpaw.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/gr_bondi.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/gr_bondi.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/gr_bondi.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/gr_bondi.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/gr_monopole.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/gr_monopole.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/gr_monopole.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/gr_monopole.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/linear_wave.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/linear_wave.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/linear_wave.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/linear_wave.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/lw_implode.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/lw_implode.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/lw_implode.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/lw_implode.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/orszag_tang.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/orszag_tang.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/orszag_tang.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/orszag_tang.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/shock_tube.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/shock_tube.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/shock_tube.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/shock_tube.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_check_tetrad.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_check_tetrad.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_hohlraum.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_hohlraum.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_linear_wave.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_linear_wave.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/z4c_linear_wave.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/z4c_linear_wave.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/pgen/tests/collapse.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/collapse.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/collapse.cpp",
+  "output": "CMakeFiles/athena.dir/pgen/tests/collapse.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/radiation/radiation.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation.cpp",
+  "output": "CMakeFiles/athena.dir/radiation/radiation.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/radiation/radiation_fluxes.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_fluxes.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_fluxes.cpp",
+  "output": "CMakeFiles/athena.dir/radiation/radiation_fluxes.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/radiation/radiation_newdt.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_newdt.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_newdt.cpp",
+  "output": "CMakeFiles/athena.dir/radiation/radiation_newdt.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/radiation/radiation_source.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_source.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_source.cpp",
+  "output": "CMakeFiles/athena.dir/radiation/radiation_source.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/radiation/radiation_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_tasks.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_tasks.cpp",
+  "output": "CMakeFiles/athena.dir/radiation/radiation_tasks.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/radiation/radiation_tetrad.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_tetrad.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_tetrad.cpp",
+  "output": "CMakeFiles/athena.dir/radiation/radiation_tetrad.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/radiation/radiation_update.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_update.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_update.cpp",
+  "output": "CMakeFiles/athena.dir/radiation/radiation_update.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/shearing_box/orbital_advection.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection.cpp",
+  "output": "CMakeFiles/athena.dir/shearing_box/orbital_advection.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection_cc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection_cc.cpp",
+  "output": "CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection_fc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection_fc.cpp",
+  "output": "CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/shearing_box/shearing_box.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box.cpp",
+  "output": "CMakeFiles/athena.dir/shearing_box/shearing_box.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/shearing_box/shearing_box_cc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_cc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_cc.cpp",
+  "output": "CMakeFiles/athena.dir/shearing_box/shearing_box_cc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/shearing_box/shearing_box_fc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_fc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_fc.cpp",
+  "output": "CMakeFiles/athena.dir/shearing_box/shearing_box_fc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_srcterms.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_srcterms.cpp",
+  "output": "CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_tasks.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_tasks.cpp",
+  "output": "CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/srcterms/srcterms.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/srcterms.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/srcterms.cpp",
+  "output": "CMakeFiles/athena.dir/srcterms/srcterms.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/srcterms/srcterms_newdt.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/srcterms_newdt.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/srcterms_newdt.cpp",
+  "output": "CMakeFiles/athena.dir/srcterms/srcterms_newdt.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/srcterms/turb_driver.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/turb_driver.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/turb_driver.cpp",
+  "output": "CMakeFiles/athena.dir/srcterms/turb_driver.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/tasklist/numerical_relativity.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/tasklist/numerical_relativity.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/tasklist/numerical_relativity.cpp",
+  "output": "CMakeFiles/athena.dir/tasklist/numerical_relativity.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/units/units.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/units/units.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/units/units.cpp",
+  "output": "CMakeFiles/athena.dir/units/units.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/utils/change_rundir.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/change_rundir.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/change_rundir.cpp",
+  "output": "CMakeFiles/athena.dir/utils/change_rundir.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/utils/show_config.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/show_config.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/show_config.cpp",
+  "output": "CMakeFiles/athena.dir/utils/show_config.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/utils/lagrange_interpolator.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/lagrange_interpolator.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/lagrange_interpolator.cpp",
+  "output": "CMakeFiles/athena.dir/utils/lagrange_interpolator.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/utils/tr_table.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/tr_table.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/tr_table.cpp",
+  "output": "CMakeFiles/athena.dir/utils/tr_table.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/tmunu.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/tmunu.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/tmunu.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/tmunu.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_adm.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_adm.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_adm.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_adm.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_calcrhs.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_calcrhs.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_calcrhs.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_calcrhs.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_newdt.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_newdt.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_newdt.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_newdt.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_tasks.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_tasks.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_tasks.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_update.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_update.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_update.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_update.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_gauge.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_gauge.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_gauge.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_gauge.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_Sbc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_Sbc.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_Sbc.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_Sbc.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_calculate_weyl_scalars.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_calculate_weyl_scalars.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_wave_extr.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_wave_extr.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_wave_extr.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_wave_extr.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_puncture_tracker.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_puncture_tracker.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/z4c/z4c_amr.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_amr.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_amr.cpp",
+  "output": "CMakeFiles/athena.dir/z4c/z4c_amr.o"
+}
+]
