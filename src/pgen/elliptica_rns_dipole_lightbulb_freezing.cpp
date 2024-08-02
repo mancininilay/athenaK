@@ -59,8 +59,7 @@ Real rho_cut;  //cutoff for neutrino lightbulb
 Real r_cut; //cutoff for mhd freezing
 Real r_cut2; //cutoff for hydro freezing
 Real T; //neutrino temperature
-Real Kappatilde; //kappa constant of the true Eos
-Real Kappa; //kappa constant for the star initialization
+Real Kappatilde; //kappa constant of the true Eos (needed to compute some hydro quantities)
 Real Gamma; //nuclear eos adiabatic index
 Real b_norm; //magnetic field normalization
 Real r0; //magnetic field scale radius
@@ -114,14 +113,13 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
     block = std::string("mhd");
   }
 
-  Real Yfloor = pin->GetOrAddReal("problem", "s1_atmosphere", 0.46);
+  Real Yfloor = pin->GetOrAddReal(block, "s1_atmosphere", 0.46);
   C = pin->GetOrAddReal("problem", "C", 0.0);
   B = pin->GetOrAddReal("problem", "B", 0.0);
   rho_cut = pin->GetOrAddReal("problem", "rho_cut", 1.0);
   r_cut2 = pin->GetOrAddReal("problem", "r_cut2", 1.0);
   r_cut = pin->GetOrAddReal("problem", "r_cut", 1.0);
   T = pin->GetOrAddReal("problem", "T", 0.0); 
-  Kappa = pin->GetReal("problem", "kappa");
   Kappatilde = pin->GetOrAddReal("problem", "Kappatilde",86841);
   Gamma = pin->GetOrAddReal("problem", "Gamma", 3.005);
   m_ = pin->GetOrAddReal("problem", "m", 1.4);
@@ -606,7 +604,6 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real r0_ = r0;
   Real b_norm_ = b_norm;
   Real BB = B;  
-  Real kappa = Kappa;
   Real kappatilde = Kappatilde;
   Real gamma = Gamma;
   Real factor = kappatilde * (1.0 - ((1/3)/(gamma - 1.0)));
