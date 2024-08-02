@@ -120,13 +120,6 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   m_ = pin->GetOrAddReal("problem", "m", 1.4);
 
 
-  if (pmbp->pdyngr->eos_policy != DynGR_EOS::eos_ideal) {
-    std::cout << "### FATAL ERROR in " << __FILE__ << " at line " << __LINE__ << std::endl
-              << "sns star problem currently only compatible with eos_ideal"
-              << std::endl;
-  }
-
-
   // Capture variables for kernel
   auto &indcs = pmy_mesh_->mb_indcs;
   int &ng = indcs.ng;
@@ -853,7 +846,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
     if (r>0.0){
 
-      r = r*pow((1.0 + m/(2*r)),2)   //areal radius which is needed for lightbulb
+      r = r*pow((1.0 + m/(2*r)),2);   //areal radius which is needed for lightbulb
       Real lambda1 = 0.0109*(Q/pow(r,2))*((4.58*Tnu)+2.586+(0.438/Tnu))+ ((1.285e10)*pow(p,1.25));
       Real lambda2 = lambda1 + 0.0109*(Q/pow(r,2))*((6.477*Tnu)-2.586+(0.309/Tnu))+ ((1.285e10)*pow(p,1.25));
 
