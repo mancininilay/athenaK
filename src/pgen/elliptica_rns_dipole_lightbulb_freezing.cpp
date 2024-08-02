@@ -31,11 +31,6 @@
 #include "dyn_grmhd/dyn_grmhd.hpp"
 #include "elliptica_id_reader_lib.h"
 
-#if ELLIPTICA==0
-#error elliptica_bns.cpp requires Elliptica
-#endif
-
-
 
 // Prototypes for functions used internally in this pgen.
 
