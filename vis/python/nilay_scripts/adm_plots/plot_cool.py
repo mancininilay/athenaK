@@ -527,7 +527,7 @@ def main(**kwargs):
     
     # Calculate derived quantity related to gas pressure
     if kwargs['variable'] in \
-            ['derived:' + name for name in ('pgas', 'sigma','beta','vr','vphi','Poynting', 'kappa','betath', 'T', 'pthermal', 'prad_pgas','Br','Bphi','Machcs','Machva')]:
+            ['derived:' + name for name in ('pgas', 'sigma','beta','vr','vphi','Poynting', 'kappa','betath', 'T', 'pthermal', 'prad_pgas','Br','Bphi','Machcs','Machva','cool')]:
         pgas = 1 #useless variable 
        
 
