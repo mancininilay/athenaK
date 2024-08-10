@@ -524,9 +524,6 @@ def main(**kwargs):
     s = (5.21* T**3)/rho8 #entropy in kb/baryon
     
 
-    csq = ((4/3) * p)/hrho
-    vasq = bsq / (bsq + hrho)
-
     
     # Calculate derived quantity related to gas pressure
     if kwargs['variable'] in \
@@ -945,9 +942,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('data_file', help='name of input file, possibly including path')
     parser.add_argument('variable', help='name of variable to be plotted, any valid'
-                                         'derived quantity prefaced by "derived:"')
-    parser.add_argument('data_file2', help='name of second input file, possibly including path')
-    parser.add_argument('variable2', help='name of variable to be plotted, any valid'
                                          'derived quantity prefaced by "derived:"')
     parser.add_argument('output_file', help='name of output to be (over)written; use '
                         '"show" to show interactive plot instead')
