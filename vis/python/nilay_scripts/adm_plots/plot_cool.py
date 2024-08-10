@@ -509,7 +509,8 @@ def main(**kwargs):
         quantities[name] = np.array(quantities[name])
 
 
-
+    x, y, z = xyz(num_blocks_used, block_nx1, block_nx2, extents,
+                      kwargs['dimension'], kwargs['location'])
     rho = quantities['dens']
     p = quantities['eint']
     ktilde  = 86841
