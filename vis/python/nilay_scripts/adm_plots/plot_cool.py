@@ -558,7 +558,7 @@ def main(**kwargs):
             quantity = (quantities['eint']- (ktilde*(quantities['dens']**gamma)))
         elif kwargs['variable'] == 'derived:T':
             quantity = ((quantities['eint']- (ktilde*(quantities['dens']**gamma)))*conv)**0.25 #T in Mev
-        elif kwargs['variable'] == 'derived:T':
+        elif kwargs['variable'] == 'derived:cool':
             quantity = 0
         else:
             prad = quantities['r00_ff'] / 3.0
