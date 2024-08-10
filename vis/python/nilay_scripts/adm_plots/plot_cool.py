@@ -868,10 +868,10 @@ def main(**kwargs):
     factor = ktilde * (1.0 - ((1/3)/(gamma - 1.0)))
     hrho = rho + p + (3*(p - factor*(rho**gamma)))
     T = ((p- (ktilde*(rho**gamma)))*conv)**0.25 //T in MeV
-    ye = quantities['s_00'] //electron fraction
-    rhocgs = rho*6.262e17 //density in g/cm^3
+    ye = quantities['s_00'] #electron fraction
+    rhocgs = rho*6.262e17 #density in g/cm^3
     rho8 = rhocgs/1e8
-    s = (5.21* T**3)/rho8 //entropy in kb/baryon
+    s = (5.21* T**3)/rho8 #entropy in kb/baryon
     
 
     csq = ((4/3) * p)/hrho
