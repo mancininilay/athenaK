@@ -806,14 +806,14 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
 
     Real z2; //hydro freezing
     if (w0(m,IDN,k,j,i)>rhocut2){
-      z2 = exp(1.0 - w0(m,IDN,k,j,i)/rhocut2);
+      z2 = exp(2*(1.0 - w0(m,IDN,k,j,i)/rhocut2));
     } else {
       z2 = 1.0;
     }
 
     Real z3; //mhd freezing
     if (w0(m,IDN,k,j,i)>rhocut3){
-      z3 = exp(1.0 - w0(m,IDN,k,j,i)/rhocut3);
+      z3 = exp(2*(1.0 - w0(m,IDN,k,j,i)/rhocut3));
     } else {
       z3 = 1.0;
     }
