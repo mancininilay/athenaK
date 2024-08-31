@@ -51,8 +51,8 @@ void tovFluxes(HistoryData *pdata, Mesh *pm);
 Real C; //heating constant
 Real B; //cooling constant
 Real rho_cut;  //cutoff for neutrino lightbulb
-Real r_cut; //cutoff for mhd freezing
-Real r_cut2; //cutoff for hydro freezing
+Real rho_cut2; //cutoff for hydro freezing
+Real rho_cut3; //cutoff for mhd freezing
 Real T; //neutrino temperature
 Real Kappatilde; //kappa constant of the true Eos (needed to compute some hydro quantities)
 Real Gamma; //nuclear eos adiabatic index
@@ -112,8 +112,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   C = pin->GetOrAddReal("problem", "C", 0.0);
   B = pin->GetOrAddReal("problem", "B", 0.0);
   rho_cut = pin->GetOrAddReal("problem", "rho_cut", 1.0);
-  r_cut2 = pin->GetOrAddReal("problem", "r_cut2", 1.0);
-  r_cut = pin->GetOrAddReal("problem", "r_cut", 1.0);
+  rho_cut2 = pin->GetOrAddReal("problem", "rho_cut2", 1.0);
+  rho_cut3 = pin->GetOrAddReal("problem", "rho_cut3", 1.0);
   T = pin->GetOrAddReal("problem", "T", 0.0); 
   Kappatilde = pin->GetOrAddReal("problem", "Kappatilde",86841);
   Gamma = pin->GetOrAddReal("problem", "Gamma", 3.005);
@@ -587,8 +587,8 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
   Real Q = C; //Lve,52
   Real Tnu = T; //Tnue
   Real rhocut = rho_cut;
-  Real rcut2 = r_cut2;
-  Real rcut = r_cut;
+  Real rhocut2 = rho_cut2;
+  Real rhocut3 = rho_cut3;
   Real r0_ = r0;
   Real b_norm_ = b_norm;
   Real BB = B;  
@@ -804,9 +804,24 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
       z = 1.0;
     }
 
+    Real z2; //hydro freezing
+    if (w0(m,IDN,k,j,i)>rhocut2){
+      z2 = exp(1.0 - w0(m,IDN,k,j,i)/rhocut2);
+    } else {
+      z2 = 1.0;
+    }
+
+    Real z3; //mhd freezing
+    if (w0(m,IDN,k,j,i)>rhocut3){
+      z3 = exp(1.0 - w0(m,IDN,k,j,i)/rhocut3);
+    } else {
+      z3 = 1.0;
+    }
+
+  /*
    Real z2; //hydro freezing
    if (r<rcut2){
-      z2 = exp(100*(-1.0 + r/rcut2));
+      z2 = exp(10*(-1.0 + r/rcut2));
     } else {
       z2 = 1.0;
     }
@@ -816,7 +831,7 @@ void neutrinolightbulb(Mesh* pm, const Real bdt){
       z3 = exp(10*(-1.0 + r/rcut));
     } else {
       z3 = 1.0;
-    }
+    }*/
 
     //Let's compute the freezing of magnetic field:
 
