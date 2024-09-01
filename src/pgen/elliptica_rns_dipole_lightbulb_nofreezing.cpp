@@ -51,8 +51,8 @@ void tovFluxes(HistoryData *pdata, Mesh *pm);
 Real C; //heating constant
 Real B; //cooling constant
 Real rho_cut;  //cutoff for neutrino lightbulb
-Real rho_cut2; //cutoff for hydro freezing
-Real rho_cut3; //cutoff for mhd freezing
+//Real rho_cut2; //cutoff for hydro freezing
+//Real rho_cut3; //cutoff for mhd freezing
 Real T; //neutrino temperature
 Real Kappatilde; //kappa constant of the true Eos (needed to compute some hydro quantities)
 Real Gamma; //nuclear eos adiabatic index
@@ -112,8 +112,8 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
   C = pin->GetOrAddReal("problem", "C", 0.0);
   B = pin->GetOrAddReal("problem", "B", 0.0);
   rho_cut = pin->GetOrAddReal("problem", "rho_cut", 1.0);
-  rho_cut2 = pin->GetOrAddReal("problem", "rho_cut2", 1.0);
-  rho_cut3 = pin->GetOrAddReal("problem", "rho_cut3", 1.0);
+  //rho_cut2 = pin->GetOrAddReal("problem", "rho_cut2", 1.0);
+  //rho_cut3 = pin->GetOrAddReal("problem", "rho_cut3", 1.0);
   T = pin->GetOrAddReal("problem", "T", 0.0); 
   Kappatilde = pin->GetOrAddReal("problem", "Kappatilde",86841);
   Gamma = pin->GetOrAddReal("problem", "Gamma", 3.005);
