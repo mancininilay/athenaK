@@ -48,7 +48,6 @@ def main(**kwargs):
     print("Standard deviation of the last 200 points:", std_dev_last_200)
     x_vals, y_vals = running_average(x_vals, y_vals, 100.0)
 
-    print(data)
 
 
     # Load Python plotting modules
