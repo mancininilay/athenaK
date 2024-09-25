@@ -46,7 +46,7 @@ def main(**kwargs):
         import matplotlib
         matplotlib.use('agg')
         import matplotlib.pyplot as plt
-        xb = 1900* 4.90339e-3
+        xb = 20 
         plt.figure(figsize=(10, 6))
         plt.axvline(x=xb, color='black' ,linestyle='-',linewidth=0.4)
         plt.axvspan(0, xb, alpha=0.21, color='red')
@@ -54,6 +54,7 @@ def main(**kwargs):
         plt.ylabel(r'$\dot{M}(t)$ [$M_{\odot}$ s$^{-1}$]')
         plt.xlabel(r'$t$ [s]')
         plt.plot(x_vals, y_vals,color='black',linewidth=1.5)
+        plt.grid(True ,color='lightgrey', which="both",linestyle = '--',linewidth=0.5)
         plt.savefig(output_file)
 
 
