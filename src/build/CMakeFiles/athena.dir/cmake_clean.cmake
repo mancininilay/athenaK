@@ -69,6 +69,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/athena.dir/eos/isothermal_mhd.o.d"
   "CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o"
   "CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o.d"
+  "CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o"
+  "CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o.d"
   "CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o"
   "CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o.d"
   "CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o"

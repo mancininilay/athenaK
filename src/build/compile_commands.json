@@ -223,15 +223,21 @@
 },
 {
   "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
-  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp",
-  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp",
-  "output": "CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o"
-},
-{
-  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
   "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/eos_compose.cpp",
   "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/eos_compose.cpp",
   "output": "CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/piecewise_polytrope.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/piecewise_polytrope.cpp",
+  "output": "CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o"
+},
+{
+  "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",
+  "command": "/usr/bin/c++  -I/home/nilay/Code/AthenaK_magnetar_winds/athenak/src -g -o CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp",
+  "file": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp",
+  "output": "CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o"
 },
 {
   "directory": "/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build",

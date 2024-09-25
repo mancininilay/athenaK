@@ -655,6 +655,21 @@ eos/primitive-solver/eos_compose.s:
 .PHONY : eos/primitive-solver/eos_compose.s
 
 # target to build an object file
+eos/primitive-solver/piecewise_polytrope.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/athena.dir/build.make CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o
+.PHONY : eos/primitive-solver/piecewise_polytrope.o
+
+# target to preprocess a source file
+eos/primitive-solver/piecewise_polytrope.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/athena.dir/build.make CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.i
+.PHONY : eos/primitive-solver/piecewise_polytrope.i
+
+# target to generate assembly for a file
+eos/primitive-solver/piecewise_polytrope.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/athena.dir/build.make CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.s
+.PHONY : eos/primitive-solver/piecewise_polytrope.s
+
+# target to build an object file
 eos/primitive-solver/unit_system.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/athena.dir/build.make CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o
 .PHONY : eos/primitive-solver/unit_system.o
@@ -2223,6 +2238,9 @@ help:
 	@echo "... eos/primitive-solver/eos_compose.o"
 	@echo "... eos/primitive-solver/eos_compose.i"
 	@echo "... eos/primitive-solver/eos_compose.s"
+	@echo "... eos/primitive-solver/piecewise_polytrope.o"
+	@echo "... eos/primitive-solver/piecewise_polytrope.i"
+	@echo "... eos/primitive-solver/piecewise_polytrope.s"
 	@echo "... eos/primitive-solver/unit_system.o"
 	@echo "... eos/primitive-solver/unit_system.i"
 	@echo "... eos/primitive-solver/unit_system.s"

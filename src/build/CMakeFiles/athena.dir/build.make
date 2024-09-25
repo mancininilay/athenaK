@@ -587,24 +587,10 @@ CMakeFiles/athena.dir/eos/ideal_grmhd.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/athena.dir/eos/ideal_grmhd.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/ideal_grmhd.cpp -o CMakeFiles/athena.dir/eos/ideal_grmhd.s
 
-CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o: CMakeFiles/athena.dir/flags.make
-CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp
-CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o -MF CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o.d -o CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp
-
-CMakeFiles/athena.dir/eos/primitive-solver/unit_system.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/athena.dir/eos/primitive-solver/unit_system.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp > CMakeFiles/athena.dir/eos/primitive-solver/unit_system.i
-
-CMakeFiles/athena.dir/eos/primitive-solver/unit_system.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/athena.dir/eos/primitive-solver/unit_system.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp -o CMakeFiles/athena.dir/eos/primitive-solver/unit_system.s
-
 CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/eos_compose.cpp
 CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o -MF CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o.d -o CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/eos_compose.cpp
 
 CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.i: cmake_force
@@ -615,10 +601,38 @@ CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/eos_compose.cpp -o CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.s
 
+CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o: CMakeFiles/athena.dir/flags.make
+CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/piecewise_polytrope.cpp
+CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o: CMakeFiles/athena.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o -MF CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o.d -o CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/piecewise_polytrope.cpp
+
+CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/piecewise_polytrope.cpp > CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.i
+
+CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/piecewise_polytrope.cpp -o CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.s
+
+CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o: CMakeFiles/athena.dir/flags.make
+CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp
+CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o: CMakeFiles/athena.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o -MF CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o.d -o CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp
+
+CMakeFiles/athena.dir/eos/primitive-solver/unit_system.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/athena.dir/eos/primitive-solver/unit_system.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp > CMakeFiles/athena.dir/eos/primitive-solver/unit_system.i
+
+CMakeFiles/athena.dir/eos/primitive-solver/unit_system.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/athena.dir/eos/primitive-solver/unit_system.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/eos/primitive-solver/unit_system.cpp -o CMakeFiles/athena.dir/eos/primitive-solver/unit_system.s
+
 CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/geodesic-grid/geodesic_grid.cpp
 CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o -MF CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o.d -o CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/geodesic-grid/geodesic_grid.cpp
 
 CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.i: cmake_force
@@ -632,7 +646,7 @@ CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.s: cmake_force
 CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/geodesic-grid/spherical_grid.cpp
 CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o -MF CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o.d -o CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/geodesic-grid/spherical_grid.cpp
 
 CMakeFiles/athena.dir/geodesic-grid/spherical_grid.i: cmake_force
@@ -646,7 +660,7 @@ CMakeFiles/athena.dir/geodesic-grid/spherical_grid.s: cmake_force
 CMakeFiles/athena.dir/hydro/hydro.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/hydro/hydro.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro.cpp
 CMakeFiles/athena.dir/hydro/hydro.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/athena.dir/hydro/hydro.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/athena.dir/hydro/hydro.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/hydro/hydro.o -MF CMakeFiles/athena.dir/hydro/hydro.o.d -o CMakeFiles/athena.dir/hydro/hydro.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro.cpp
 
 CMakeFiles/athena.dir/hydro/hydro.i: cmake_force
@@ -660,7 +674,7 @@ CMakeFiles/athena.dir/hydro/hydro.s: cmake_force
 CMakeFiles/athena.dir/hydro/hydro_fluxes.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/hydro/hydro_fluxes.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_fluxes.cpp
 CMakeFiles/athena.dir/hydro/hydro_fluxes.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/athena.dir/hydro/hydro_fluxes.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/athena.dir/hydro/hydro_fluxes.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/hydro/hydro_fluxes.o -MF CMakeFiles/athena.dir/hydro/hydro_fluxes.o.d -o CMakeFiles/athena.dir/hydro/hydro_fluxes.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_fluxes.cpp
 
 CMakeFiles/athena.dir/hydro/hydro_fluxes.i: cmake_force
@@ -674,7 +688,7 @@ CMakeFiles/athena.dir/hydro/hydro_fluxes.s: cmake_force
 CMakeFiles/athena.dir/hydro/hydro_fofc.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/hydro/hydro_fofc.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_fofc.cpp
 CMakeFiles/athena.dir/hydro/hydro_fofc.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/athena.dir/hydro/hydro_fofc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/athena.dir/hydro/hydro_fofc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/hydro/hydro_fofc.o -MF CMakeFiles/athena.dir/hydro/hydro_fofc.o.d -o CMakeFiles/athena.dir/hydro/hydro_fofc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_fofc.cpp
 
 CMakeFiles/athena.dir/hydro/hydro_fofc.i: cmake_force
@@ -688,7 +702,7 @@ CMakeFiles/athena.dir/hydro/hydro_fofc.s: cmake_force
 CMakeFiles/athena.dir/hydro/hydro_newdt.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/hydro/hydro_newdt.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_newdt.cpp
 CMakeFiles/athena.dir/hydro/hydro_newdt.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/athena.dir/hydro/hydro_newdt.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/athena.dir/hydro/hydro_newdt.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/hydro/hydro_newdt.o -MF CMakeFiles/athena.dir/hydro/hydro_newdt.o.d -o CMakeFiles/athena.dir/hydro/hydro_newdt.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_newdt.cpp
 
 CMakeFiles/athena.dir/hydro/hydro_newdt.i: cmake_force
@@ -702,7 +716,7 @@ CMakeFiles/athena.dir/hydro/hydro_newdt.s: cmake_force
 CMakeFiles/athena.dir/hydro/hydro_tasks.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/hydro/hydro_tasks.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_tasks.cpp
 CMakeFiles/athena.dir/hydro/hydro_tasks.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/athena.dir/hydro/hydro_tasks.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object CMakeFiles/athena.dir/hydro/hydro_tasks.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/hydro/hydro_tasks.o -MF CMakeFiles/athena.dir/hydro/hydro_tasks.o.d -o CMakeFiles/athena.dir/hydro/hydro_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_tasks.cpp
 
 CMakeFiles/athena.dir/hydro/hydro_tasks.i: cmake_force
@@ -716,7 +730,7 @@ CMakeFiles/athena.dir/hydro/hydro_tasks.s: cmake_force
 CMakeFiles/athena.dir/hydro/hydro_update.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/hydro/hydro_update.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_update.cpp
 CMakeFiles/athena.dir/hydro/hydro_update.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object CMakeFiles/athena.dir/hydro/hydro_update.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/athena.dir/hydro/hydro_update.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/hydro/hydro_update.o -MF CMakeFiles/athena.dir/hydro/hydro_update.o.d -o CMakeFiles/athena.dir/hydro/hydro_update.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/hydro/hydro_update.cpp
 
 CMakeFiles/athena.dir/hydro/hydro_update.i: cmake_force
@@ -730,7 +744,7 @@ CMakeFiles/athena.dir/hydro/hydro_update.s: cmake_force
 CMakeFiles/athena.dir/ion-neutral/ion-neutral.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/ion-neutral/ion-neutral.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/ion-neutral/ion-neutral.cpp
 CMakeFiles/athena.dir/ion-neutral/ion-neutral.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/athena.dir/ion-neutral/ion-neutral.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/athena.dir/ion-neutral/ion-neutral.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/ion-neutral/ion-neutral.o -MF CMakeFiles/athena.dir/ion-neutral/ion-neutral.o.d -o CMakeFiles/athena.dir/ion-neutral/ion-neutral.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/ion-neutral/ion-neutral.cpp
 
 CMakeFiles/athena.dir/ion-neutral/ion-neutral.i: cmake_force
@@ -744,7 +758,7 @@ CMakeFiles/athena.dir/ion-neutral/ion-neutral.s: cmake_force
 CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/ion-neutral/ion-neutral_tasks.cpp
 CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.o -MF CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.o.d -o CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/ion-neutral/ion-neutral_tasks.cpp
 
 CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.i: cmake_force
@@ -758,7 +772,7 @@ CMakeFiles/athena.dir/ion-neutral/ion-neutral_tasks.s: cmake_force
 CMakeFiles/athena.dir/mesh/build_tree.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mesh/build_tree.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/build_tree.cpp
 CMakeFiles/athena.dir/mesh/build_tree.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/athena.dir/mesh/build_tree.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/athena.dir/mesh/build_tree.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mesh/build_tree.o -MF CMakeFiles/athena.dir/mesh/build_tree.o.d -o CMakeFiles/athena.dir/mesh/build_tree.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/build_tree.cpp
 
 CMakeFiles/athena.dir/mesh/build_tree.i: cmake_force
@@ -772,7 +786,7 @@ CMakeFiles/athena.dir/mesh/build_tree.s: cmake_force
 CMakeFiles/athena.dir/mesh/load_balance.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mesh/load_balance.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/load_balance.cpp
 CMakeFiles/athena.dir/mesh/load_balance.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/athena.dir/mesh/load_balance.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/athena.dir/mesh/load_balance.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mesh/load_balance.o -MF CMakeFiles/athena.dir/mesh/load_balance.o.d -o CMakeFiles/athena.dir/mesh/load_balance.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/load_balance.cpp
 
 CMakeFiles/athena.dir/mesh/load_balance.i: cmake_force
@@ -786,7 +800,7 @@ CMakeFiles/athena.dir/mesh/load_balance.s: cmake_force
 CMakeFiles/athena.dir/mesh/mesh.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mesh/mesh.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/mesh.cpp
 CMakeFiles/athena.dir/mesh/mesh.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/athena.dir/mesh/mesh.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object CMakeFiles/athena.dir/mesh/mesh.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mesh/mesh.o -MF CMakeFiles/athena.dir/mesh/mesh.o.d -o CMakeFiles/athena.dir/mesh/mesh.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/mesh.cpp
 
 CMakeFiles/athena.dir/mesh/mesh.i: cmake_force
@@ -800,7 +814,7 @@ CMakeFiles/athena.dir/mesh/mesh.s: cmake_force
 CMakeFiles/athena.dir/mesh/meshblock.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mesh/meshblock.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock.cpp
 CMakeFiles/athena.dir/mesh/meshblock.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object CMakeFiles/athena.dir/mesh/meshblock.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building CXX object CMakeFiles/athena.dir/mesh/meshblock.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mesh/meshblock.o -MF CMakeFiles/athena.dir/mesh/meshblock.o.d -o CMakeFiles/athena.dir/mesh/meshblock.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock.cpp
 
 CMakeFiles/athena.dir/mesh/meshblock.i: cmake_force
@@ -814,7 +828,7 @@ CMakeFiles/athena.dir/mesh/meshblock.s: cmake_force
 CMakeFiles/athena.dir/mesh/meshblock_pack.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mesh/meshblock_pack.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock_pack.cpp
 CMakeFiles/athena.dir/mesh/meshblock_pack.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building CXX object CMakeFiles/athena.dir/mesh/meshblock_pack.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building CXX object CMakeFiles/athena.dir/mesh/meshblock_pack.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mesh/meshblock_pack.o -MF CMakeFiles/athena.dir/mesh/meshblock_pack.o.d -o CMakeFiles/athena.dir/mesh/meshblock_pack.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock_pack.cpp
 
 CMakeFiles/athena.dir/mesh/meshblock_pack.i: cmake_force
@@ -828,7 +842,7 @@ CMakeFiles/athena.dir/mesh/meshblock_pack.s: cmake_force
 CMakeFiles/athena.dir/mesh/meshblock_tree.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mesh/meshblock_tree.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock_tree.cpp
 CMakeFiles/athena.dir/mesh/meshblock_tree.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building CXX object CMakeFiles/athena.dir/mesh/meshblock_tree.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building CXX object CMakeFiles/athena.dir/mesh/meshblock_tree.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mesh/meshblock_tree.o -MF CMakeFiles/athena.dir/mesh/meshblock_tree.o.d -o CMakeFiles/athena.dir/mesh/meshblock_tree.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/meshblock_tree.cpp
 
 CMakeFiles/athena.dir/mesh/meshblock_tree.i: cmake_force
@@ -842,7 +856,7 @@ CMakeFiles/athena.dir/mesh/meshblock_tree.s: cmake_force
 CMakeFiles/athena.dir/mesh/mesh_refinement.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mesh/mesh_refinement.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/mesh_refinement.cpp
 CMakeFiles/athena.dir/mesh/mesh_refinement.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building CXX object CMakeFiles/athena.dir/mesh/mesh_refinement.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building CXX object CMakeFiles/athena.dir/mesh/mesh_refinement.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mesh/mesh_refinement.o -MF CMakeFiles/athena.dir/mesh/mesh_refinement.o.d -o CMakeFiles/athena.dir/mesh/mesh_refinement.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mesh/mesh_refinement.cpp
 
 CMakeFiles/athena.dir/mesh/mesh_refinement.i: cmake_force
@@ -856,7 +870,7 @@ CMakeFiles/athena.dir/mesh/mesh_refinement.s: cmake_force
 CMakeFiles/athena.dir/mhd/mhd.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mhd/mhd.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd.cpp
 CMakeFiles/athena.dir/mhd/mhd.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building CXX object CMakeFiles/athena.dir/mhd/mhd.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building CXX object CMakeFiles/athena.dir/mhd/mhd.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mhd/mhd.o -MF CMakeFiles/athena.dir/mhd/mhd.o.d -o CMakeFiles/athena.dir/mhd/mhd.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd.cpp
 
 CMakeFiles/athena.dir/mhd/mhd.i: cmake_force
@@ -870,7 +884,7 @@ CMakeFiles/athena.dir/mhd/mhd.s: cmake_force
 CMakeFiles/athena.dir/mhd/mhd_corner_e.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mhd/mhd_corner_e.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_corner_e.cpp
 CMakeFiles/athena.dir/mhd/mhd_corner_e.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_corner_e.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_corner_e.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mhd/mhd_corner_e.o -MF CMakeFiles/athena.dir/mhd/mhd_corner_e.o.d -o CMakeFiles/athena.dir/mhd/mhd_corner_e.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_corner_e.cpp
 
 CMakeFiles/athena.dir/mhd/mhd_corner_e.i: cmake_force
@@ -884,7 +898,7 @@ CMakeFiles/athena.dir/mhd/mhd_corner_e.s: cmake_force
 CMakeFiles/athena.dir/mhd/mhd_ct.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mhd/mhd_ct.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_ct.cpp
 CMakeFiles/athena.dir/mhd/mhd_ct.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_ct.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_ct.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mhd/mhd_ct.o -MF CMakeFiles/athena.dir/mhd/mhd_ct.o.d -o CMakeFiles/athena.dir/mhd/mhd_ct.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_ct.cpp
 
 CMakeFiles/athena.dir/mhd/mhd_ct.i: cmake_force
@@ -898,7 +912,7 @@ CMakeFiles/athena.dir/mhd/mhd_ct.s: cmake_force
 CMakeFiles/athena.dir/mhd/mhd_fluxes.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mhd/mhd_fluxes.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_fluxes.cpp
 CMakeFiles/athena.dir/mhd/mhd_fluxes.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_fluxes.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_fluxes.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mhd/mhd_fluxes.o -MF CMakeFiles/athena.dir/mhd/mhd_fluxes.o.d -o CMakeFiles/athena.dir/mhd/mhd_fluxes.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_fluxes.cpp
 
 CMakeFiles/athena.dir/mhd/mhd_fluxes.i: cmake_force
@@ -912,7 +926,7 @@ CMakeFiles/athena.dir/mhd/mhd_fluxes.s: cmake_force
 CMakeFiles/athena.dir/mhd/mhd_fofc.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mhd/mhd_fofc.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_fofc.cpp
 CMakeFiles/athena.dir/mhd/mhd_fofc.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_fofc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_fofc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mhd/mhd_fofc.o -MF CMakeFiles/athena.dir/mhd/mhd_fofc.o.d -o CMakeFiles/athena.dir/mhd/mhd_fofc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_fofc.cpp
 
 CMakeFiles/athena.dir/mhd/mhd_fofc.i: cmake_force
@@ -926,7 +940,7 @@ CMakeFiles/athena.dir/mhd/mhd_fofc.s: cmake_force
 CMakeFiles/athena.dir/mhd/mhd_newdt.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mhd/mhd_newdt.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_newdt.cpp
 CMakeFiles/athena.dir/mhd/mhd_newdt.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_newdt.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_newdt.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mhd/mhd_newdt.o -MF CMakeFiles/athena.dir/mhd/mhd_newdt.o.d -o CMakeFiles/athena.dir/mhd/mhd_newdt.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_newdt.cpp
 
 CMakeFiles/athena.dir/mhd/mhd_newdt.i: cmake_force
@@ -940,7 +954,7 @@ CMakeFiles/athena.dir/mhd/mhd_newdt.s: cmake_force
 CMakeFiles/athena.dir/mhd/mhd_tasks.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mhd/mhd_tasks.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_tasks.cpp
 CMakeFiles/athena.dir/mhd/mhd_tasks.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_tasks.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_tasks.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mhd/mhd_tasks.o -MF CMakeFiles/athena.dir/mhd/mhd_tasks.o.d -o CMakeFiles/athena.dir/mhd/mhd_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_tasks.cpp
 
 CMakeFiles/athena.dir/mhd/mhd_tasks.i: cmake_force
@@ -954,7 +968,7 @@ CMakeFiles/athena.dir/mhd/mhd_tasks.s: cmake_force
 CMakeFiles/athena.dir/mhd/mhd_update.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/mhd/mhd_update.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_update.cpp
 CMakeFiles/athena.dir/mhd/mhd_update.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_update.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building CXX object CMakeFiles/athena.dir/mhd/mhd_update.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/mhd/mhd_update.o -MF CMakeFiles/athena.dir/mhd/mhd_update.o.d -o CMakeFiles/athena.dir/mhd/mhd_update.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/mhd/mhd_update.cpp
 
 CMakeFiles/athena.dir/mhd/mhd_update.i: cmake_force
@@ -968,7 +982,7 @@ CMakeFiles/athena.dir/mhd/mhd_update.s: cmake_force
 CMakeFiles/athena.dir/outputs/io_wrapper.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/io_wrapper.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/io_wrapper.cpp
 CMakeFiles/athena.dir/outputs/io_wrapper.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building CXX object CMakeFiles/athena.dir/outputs/io_wrapper.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building CXX object CMakeFiles/athena.dir/outputs/io_wrapper.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/io_wrapper.o -MF CMakeFiles/athena.dir/outputs/io_wrapper.o.d -o CMakeFiles/athena.dir/outputs/io_wrapper.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/io_wrapper.cpp
 
 CMakeFiles/athena.dir/outputs/io_wrapper.i: cmake_force
@@ -982,7 +996,7 @@ CMakeFiles/athena.dir/outputs/io_wrapper.s: cmake_force
 CMakeFiles/athena.dir/outputs/outputs.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/outputs.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/outputs.cpp
 CMakeFiles/athena.dir/outputs/outputs.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building CXX object CMakeFiles/athena.dir/outputs/outputs.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building CXX object CMakeFiles/athena.dir/outputs/outputs.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/outputs.o -MF CMakeFiles/athena.dir/outputs/outputs.o.d -o CMakeFiles/athena.dir/outputs/outputs.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/outputs.cpp
 
 CMakeFiles/athena.dir/outputs/outputs.i: cmake_force
@@ -996,7 +1010,7 @@ CMakeFiles/athena.dir/outputs/outputs.s: cmake_force
 CMakeFiles/athena.dir/outputs/basetype_output.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/basetype_output.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/basetype_output.cpp
 CMakeFiles/athena.dir/outputs/basetype_output.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building CXX object CMakeFiles/athena.dir/outputs/basetype_output.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building CXX object CMakeFiles/athena.dir/outputs/basetype_output.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/basetype_output.o -MF CMakeFiles/athena.dir/outputs/basetype_output.o.d -o CMakeFiles/athena.dir/outputs/basetype_output.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/basetype_output.cpp
 
 CMakeFiles/athena.dir/outputs/basetype_output.i: cmake_force
@@ -1010,7 +1024,7 @@ CMakeFiles/athena.dir/outputs/basetype_output.s: cmake_force
 CMakeFiles/athena.dir/outputs/derived_variables.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/derived_variables.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/derived_variables.cpp
 CMakeFiles/athena.dir/outputs/derived_variables.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building CXX object CMakeFiles/athena.dir/outputs/derived_variables.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building CXX object CMakeFiles/athena.dir/outputs/derived_variables.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/derived_variables.o -MF CMakeFiles/athena.dir/outputs/derived_variables.o.d -o CMakeFiles/athena.dir/outputs/derived_variables.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/derived_variables.cpp
 
 CMakeFiles/athena.dir/outputs/derived_variables.i: cmake_force
@@ -1024,7 +1038,7 @@ CMakeFiles/athena.dir/outputs/derived_variables.s: cmake_force
 CMakeFiles/athena.dir/outputs/binary.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/binary.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/binary.cpp
 CMakeFiles/athena.dir/outputs/binary.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building CXX object CMakeFiles/athena.dir/outputs/binary.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building CXX object CMakeFiles/athena.dir/outputs/binary.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/binary.o -MF CMakeFiles/athena.dir/outputs/binary.o.d -o CMakeFiles/athena.dir/outputs/binary.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/binary.cpp
 
 CMakeFiles/athena.dir/outputs/binary.i: cmake_force
@@ -1038,7 +1052,7 @@ CMakeFiles/athena.dir/outputs/binary.s: cmake_force
 CMakeFiles/athena.dir/outputs/eventlog.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/eventlog.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/eventlog.cpp
 CMakeFiles/athena.dir/outputs/eventlog.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building CXX object CMakeFiles/athena.dir/outputs/eventlog.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building CXX object CMakeFiles/athena.dir/outputs/eventlog.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/eventlog.o -MF CMakeFiles/athena.dir/outputs/eventlog.o.d -o CMakeFiles/athena.dir/outputs/eventlog.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/eventlog.cpp
 
 CMakeFiles/athena.dir/outputs/eventlog.i: cmake_force
@@ -1052,7 +1066,7 @@ CMakeFiles/athena.dir/outputs/eventlog.s: cmake_force
 CMakeFiles/athena.dir/outputs/formatted_table.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/formatted_table.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/formatted_table.cpp
 CMakeFiles/athena.dir/outputs/formatted_table.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building CXX object CMakeFiles/athena.dir/outputs/formatted_table.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building CXX object CMakeFiles/athena.dir/outputs/formatted_table.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/formatted_table.o -MF CMakeFiles/athena.dir/outputs/formatted_table.o.d -o CMakeFiles/athena.dir/outputs/formatted_table.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/formatted_table.cpp
 
 CMakeFiles/athena.dir/outputs/formatted_table.i: cmake_force
@@ -1066,7 +1080,7 @@ CMakeFiles/athena.dir/outputs/formatted_table.s: cmake_force
 CMakeFiles/athena.dir/outputs/history.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/history.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/history.cpp
 CMakeFiles/athena.dir/outputs/history.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building CXX object CMakeFiles/athena.dir/outputs/history.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building CXX object CMakeFiles/athena.dir/outputs/history.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/history.o -MF CMakeFiles/athena.dir/outputs/history.o.d -o CMakeFiles/athena.dir/outputs/history.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/history.cpp
 
 CMakeFiles/athena.dir/outputs/history.i: cmake_force
@@ -1080,7 +1094,7 @@ CMakeFiles/athena.dir/outputs/history.s: cmake_force
 CMakeFiles/athena.dir/outputs/restart.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/restart.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/restart.cpp
 CMakeFiles/athena.dir/outputs/restart.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building CXX object CMakeFiles/athena.dir/outputs/restart.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Building CXX object CMakeFiles/athena.dir/outputs/restart.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/restart.o -MF CMakeFiles/athena.dir/outputs/restart.o.d -o CMakeFiles/athena.dir/outputs/restart.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/restart.cpp
 
 CMakeFiles/athena.dir/outputs/restart.i: cmake_force
@@ -1094,7 +1108,7 @@ CMakeFiles/athena.dir/outputs/restart.s: cmake_force
 CMakeFiles/athena.dir/outputs/coarsened_binary.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/coarsened_binary.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/coarsened_binary.cpp
 CMakeFiles/athena.dir/outputs/coarsened_binary.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Building CXX object CMakeFiles/athena.dir/outputs/coarsened_binary.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_75) "Building CXX object CMakeFiles/athena.dir/outputs/coarsened_binary.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/coarsened_binary.o -MF CMakeFiles/athena.dir/outputs/coarsened_binary.o.d -o CMakeFiles/athena.dir/outputs/coarsened_binary.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/coarsened_binary.cpp
 
 CMakeFiles/athena.dir/outputs/coarsened_binary.i: cmake_force
@@ -1108,7 +1122,7 @@ CMakeFiles/athena.dir/outputs/coarsened_binary.s: cmake_force
 CMakeFiles/athena.dir/outputs/track_prtcl.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/track_prtcl.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/track_prtcl.cpp
 CMakeFiles/athena.dir/outputs/track_prtcl.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_75) "Building CXX object CMakeFiles/athena.dir/outputs/track_prtcl.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_76) "Building CXX object CMakeFiles/athena.dir/outputs/track_prtcl.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/track_prtcl.o -MF CMakeFiles/athena.dir/outputs/track_prtcl.o.d -o CMakeFiles/athena.dir/outputs/track_prtcl.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/track_prtcl.cpp
 
 CMakeFiles/athena.dir/outputs/track_prtcl.i: cmake_force
@@ -1122,7 +1136,7 @@ CMakeFiles/athena.dir/outputs/track_prtcl.s: cmake_force
 CMakeFiles/athena.dir/outputs/vtk_mesh.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/vtk_mesh.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/vtk_mesh.cpp
 CMakeFiles/athena.dir/outputs/vtk_mesh.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_76) "Building CXX object CMakeFiles/athena.dir/outputs/vtk_mesh.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_77) "Building CXX object CMakeFiles/athena.dir/outputs/vtk_mesh.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/vtk_mesh.o -MF CMakeFiles/athena.dir/outputs/vtk_mesh.o.d -o CMakeFiles/athena.dir/outputs/vtk_mesh.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/vtk_mesh.cpp
 
 CMakeFiles/athena.dir/outputs/vtk_mesh.i: cmake_force
@@ -1136,7 +1150,7 @@ CMakeFiles/athena.dir/outputs/vtk_mesh.s: cmake_force
 CMakeFiles/athena.dir/outputs/vtk_prtcl.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/vtk_prtcl.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/vtk_prtcl.cpp
 CMakeFiles/athena.dir/outputs/vtk_prtcl.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_77) "Building CXX object CMakeFiles/athena.dir/outputs/vtk_prtcl.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_78) "Building CXX object CMakeFiles/athena.dir/outputs/vtk_prtcl.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/vtk_prtcl.o -MF CMakeFiles/athena.dir/outputs/vtk_prtcl.o.d -o CMakeFiles/athena.dir/outputs/vtk_prtcl.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/vtk_prtcl.cpp
 
 CMakeFiles/athena.dir/outputs/vtk_prtcl.i: cmake_force
@@ -1150,7 +1164,7 @@ CMakeFiles/athena.dir/outputs/vtk_prtcl.s: cmake_force
 CMakeFiles/athena.dir/particles/particles.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/particles/particles.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles.cpp
 CMakeFiles/athena.dir/particles/particles.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_78) "Building CXX object CMakeFiles/athena.dir/particles/particles.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_79) "Building CXX object CMakeFiles/athena.dir/particles/particles.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/particles/particles.o -MF CMakeFiles/athena.dir/particles/particles.o.d -o CMakeFiles/athena.dir/particles/particles.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles.cpp
 
 CMakeFiles/athena.dir/particles/particles.i: cmake_force
@@ -1164,7 +1178,7 @@ CMakeFiles/athena.dir/particles/particles.s: cmake_force
 CMakeFiles/athena.dir/particles/particles_pushers.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/particles/particles_pushers.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles_pushers.cpp
 CMakeFiles/athena.dir/particles/particles_pushers.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_79) "Building CXX object CMakeFiles/athena.dir/particles/particles_pushers.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_80) "Building CXX object CMakeFiles/athena.dir/particles/particles_pushers.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/particles/particles_pushers.o -MF CMakeFiles/athena.dir/particles/particles_pushers.o.d -o CMakeFiles/athena.dir/particles/particles_pushers.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles_pushers.cpp
 
 CMakeFiles/athena.dir/particles/particles_pushers.i: cmake_force
@@ -1178,7 +1192,7 @@ CMakeFiles/athena.dir/particles/particles_pushers.s: cmake_force
 CMakeFiles/athena.dir/particles/particles_tasks.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/particles/particles_tasks.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles_tasks.cpp
 CMakeFiles/athena.dir/particles/particles_tasks.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_80) "Building CXX object CMakeFiles/athena.dir/particles/particles_tasks.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_81) "Building CXX object CMakeFiles/athena.dir/particles/particles_tasks.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/particles/particles_tasks.o -MF CMakeFiles/athena.dir/particles/particles_tasks.o.d -o CMakeFiles/athena.dir/particles/particles_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/particles/particles_tasks.cpp
 
 CMakeFiles/athena.dir/particles/particles_tasks.i: cmake_force
@@ -1192,7 +1206,7 @@ CMakeFiles/athena.dir/particles/particles_tasks.s: cmake_force
 CMakeFiles/athena.dir/outputs/pdf.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/outputs/pdf.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/pdf.cpp
 CMakeFiles/athena.dir/outputs/pdf.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_81) "Building CXX object CMakeFiles/athena.dir/outputs/pdf.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building CXX object CMakeFiles/athena.dir/outputs/pdf.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/outputs/pdf.o -MF CMakeFiles/athena.dir/outputs/pdf.o.d -o CMakeFiles/athena.dir/outputs/pdf.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/outputs/pdf.cpp
 
 CMakeFiles/athena.dir/outputs/pdf.i: cmake_force
@@ -1206,7 +1220,7 @@ CMakeFiles/athena.dir/outputs/pdf.s: cmake_force
 CMakeFiles/athena.dir/pgen/pgen.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/pgen.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/pgen.cpp
 CMakeFiles/athena.dir/pgen/pgen.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building CXX object CMakeFiles/athena.dir/pgen/pgen.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building CXX object CMakeFiles/athena.dir/pgen/pgen.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/pgen.o -MF CMakeFiles/athena.dir/pgen/pgen.o.d -o CMakeFiles/athena.dir/pgen/pgen.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/pgen.cpp
 
 CMakeFiles/athena.dir/pgen/pgen.i: cmake_force
@@ -1220,7 +1234,7 @@ CMakeFiles/athena.dir/pgen/pgen.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/advection.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/advection.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/advection.cpp
 CMakeFiles/athena.dir/pgen/tests/advection.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building CXX object CMakeFiles/athena.dir/pgen/tests/advection.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building CXX object CMakeFiles/athena.dir/pgen/tests/advection.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/advection.o -MF CMakeFiles/athena.dir/pgen/tests/advection.o.d -o CMakeFiles/athena.dir/pgen/tests/advection.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/advection.cpp
 
 CMakeFiles/athena.dir/pgen/tests/advection.i: cmake_force
@@ -1234,7 +1248,7 @@ CMakeFiles/athena.dir/pgen/tests/advection.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/cpaw.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/cpaw.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/cpaw.cpp
 CMakeFiles/athena.dir/pgen/tests/cpaw.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building CXX object CMakeFiles/athena.dir/pgen/tests/cpaw.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building CXX object CMakeFiles/athena.dir/pgen/tests/cpaw.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/cpaw.o -MF CMakeFiles/athena.dir/pgen/tests/cpaw.o.d -o CMakeFiles/athena.dir/pgen/tests/cpaw.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/cpaw.cpp
 
 CMakeFiles/athena.dir/pgen/tests/cpaw.i: cmake_force
@@ -1248,7 +1262,7 @@ CMakeFiles/athena.dir/pgen/tests/cpaw.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/gr_bondi.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/gr_bondi.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/gr_bondi.cpp
 CMakeFiles/athena.dir/pgen/tests/gr_bondi.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building CXX object CMakeFiles/athena.dir/pgen/tests/gr_bondi.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building CXX object CMakeFiles/athena.dir/pgen/tests/gr_bondi.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/gr_bondi.o -MF CMakeFiles/athena.dir/pgen/tests/gr_bondi.o.d -o CMakeFiles/athena.dir/pgen/tests/gr_bondi.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/gr_bondi.cpp
 
 CMakeFiles/athena.dir/pgen/tests/gr_bondi.i: cmake_force
@@ -1262,7 +1276,7 @@ CMakeFiles/athena.dir/pgen/tests/gr_bondi.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/gr_monopole.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/gr_monopole.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/gr_monopole.cpp
 CMakeFiles/athena.dir/pgen/tests/gr_monopole.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building CXX object CMakeFiles/athena.dir/pgen/tests/gr_monopole.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building CXX object CMakeFiles/athena.dir/pgen/tests/gr_monopole.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/gr_monopole.o -MF CMakeFiles/athena.dir/pgen/tests/gr_monopole.o.d -o CMakeFiles/athena.dir/pgen/tests/gr_monopole.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/gr_monopole.cpp
 
 CMakeFiles/athena.dir/pgen/tests/gr_monopole.i: cmake_force
@@ -1276,7 +1290,7 @@ CMakeFiles/athena.dir/pgen/tests/gr_monopole.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/linear_wave.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/linear_wave.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/linear_wave.cpp
 CMakeFiles/athena.dir/pgen/tests/linear_wave.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building CXX object CMakeFiles/athena.dir/pgen/tests/linear_wave.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building CXX object CMakeFiles/athena.dir/pgen/tests/linear_wave.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/linear_wave.o -MF CMakeFiles/athena.dir/pgen/tests/linear_wave.o.d -o CMakeFiles/athena.dir/pgen/tests/linear_wave.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/linear_wave.cpp
 
 CMakeFiles/athena.dir/pgen/tests/linear_wave.i: cmake_force
@@ -1290,7 +1304,7 @@ CMakeFiles/athena.dir/pgen/tests/linear_wave.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/lw_implode.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/lw_implode.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/lw_implode.cpp
 CMakeFiles/athena.dir/pgen/tests/lw_implode.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building CXX object CMakeFiles/athena.dir/pgen/tests/lw_implode.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_89) "Building CXX object CMakeFiles/athena.dir/pgen/tests/lw_implode.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/lw_implode.o -MF CMakeFiles/athena.dir/pgen/tests/lw_implode.o.d -o CMakeFiles/athena.dir/pgen/tests/lw_implode.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/lw_implode.cpp
 
 CMakeFiles/athena.dir/pgen/tests/lw_implode.i: cmake_force
@@ -1304,7 +1318,7 @@ CMakeFiles/athena.dir/pgen/tests/lw_implode.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/orszag_tang.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/orszag_tang.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/orszag_tang.cpp
 CMakeFiles/athena.dir/pgen/tests/orszag_tang.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_89) "Building CXX object CMakeFiles/athena.dir/pgen/tests/orszag_tang.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_90) "Building CXX object CMakeFiles/athena.dir/pgen/tests/orszag_tang.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/orszag_tang.o -MF CMakeFiles/athena.dir/pgen/tests/orszag_tang.o.d -o CMakeFiles/athena.dir/pgen/tests/orszag_tang.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/orszag_tang.cpp
 
 CMakeFiles/athena.dir/pgen/tests/orszag_tang.i: cmake_force
@@ -1318,7 +1332,7 @@ CMakeFiles/athena.dir/pgen/tests/orszag_tang.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/shock_tube.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/shock_tube.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/shock_tube.cpp
 CMakeFiles/athena.dir/pgen/tests/shock_tube.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_90) "Building CXX object CMakeFiles/athena.dir/pgen/tests/shock_tube.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_91) "Building CXX object CMakeFiles/athena.dir/pgen/tests/shock_tube.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/shock_tube.o -MF CMakeFiles/athena.dir/pgen/tests/shock_tube.o.d -o CMakeFiles/athena.dir/pgen/tests/shock_tube.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/shock_tube.cpp
 
 CMakeFiles/athena.dir/pgen/tests/shock_tube.i: cmake_force
@@ -1332,7 +1346,7 @@ CMakeFiles/athena.dir/pgen/tests/shock_tube.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_check_tetrad.cpp
 CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_91) "Building CXX object CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_92) "Building CXX object CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.o -MF CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.o.d -o CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_check_tetrad.cpp
 
 CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.i: cmake_force
@@ -1346,7 +1360,7 @@ CMakeFiles/athena.dir/pgen/tests/rad_check_tetrad.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_hohlraum.cpp
 CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_92) "Building CXX object CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_93) "Building CXX object CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.o -MF CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.o.d -o CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_hohlraum.cpp
 
 CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.i: cmake_force
@@ -1360,7 +1374,7 @@ CMakeFiles/athena.dir/pgen/tests/rad_hohlraum.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_linear_wave.cpp
 CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_93) "Building CXX object CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_94) "Building CXX object CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.o -MF CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.o.d -o CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/rad_linear_wave.cpp
 
 CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.i: cmake_force
@@ -1374,7 +1388,7 @@ CMakeFiles/athena.dir/pgen/tests/rad_linear_wave.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/z4c_linear_wave.cpp
 CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_94) "Building CXX object CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_95) "Building CXX object CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.o -MF CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.o.d -o CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/z4c_linear_wave.cpp
 
 CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.i: cmake_force
@@ -1388,7 +1402,7 @@ CMakeFiles/athena.dir/pgen/tests/z4c_linear_wave.s: cmake_force
 CMakeFiles/athena.dir/pgen/tests/collapse.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/pgen/tests/collapse.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/collapse.cpp
 CMakeFiles/athena.dir/pgen/tests/collapse.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_95) "Building CXX object CMakeFiles/athena.dir/pgen/tests/collapse.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_96) "Building CXX object CMakeFiles/athena.dir/pgen/tests/collapse.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/pgen/tests/collapse.o -MF CMakeFiles/athena.dir/pgen/tests/collapse.o.d -o CMakeFiles/athena.dir/pgen/tests/collapse.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/pgen/tests/collapse.cpp
 
 CMakeFiles/athena.dir/pgen/tests/collapse.i: cmake_force
@@ -1402,7 +1416,7 @@ CMakeFiles/athena.dir/pgen/tests/collapse.s: cmake_force
 CMakeFiles/athena.dir/radiation/radiation.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/radiation/radiation.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation.cpp
 CMakeFiles/athena.dir/radiation/radiation.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_96) "Building CXX object CMakeFiles/athena.dir/radiation/radiation.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_97) "Building CXX object CMakeFiles/athena.dir/radiation/radiation.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/radiation/radiation.o -MF CMakeFiles/athena.dir/radiation/radiation.o.d -o CMakeFiles/athena.dir/radiation/radiation.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation.cpp
 
 CMakeFiles/athena.dir/radiation/radiation.i: cmake_force
@@ -1416,7 +1430,7 @@ CMakeFiles/athena.dir/radiation/radiation.s: cmake_force
 CMakeFiles/athena.dir/radiation/radiation_fluxes.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/radiation/radiation_fluxes.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_fluxes.cpp
 CMakeFiles/athena.dir/radiation/radiation_fluxes.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_97) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_fluxes.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_98) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_fluxes.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/radiation/radiation_fluxes.o -MF CMakeFiles/athena.dir/radiation/radiation_fluxes.o.d -o CMakeFiles/athena.dir/radiation/radiation_fluxes.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_fluxes.cpp
 
 CMakeFiles/athena.dir/radiation/radiation_fluxes.i: cmake_force
@@ -1430,7 +1444,7 @@ CMakeFiles/athena.dir/radiation/radiation_fluxes.s: cmake_force
 CMakeFiles/athena.dir/radiation/radiation_newdt.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/radiation/radiation_newdt.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_newdt.cpp
 CMakeFiles/athena.dir/radiation/radiation_newdt.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_98) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_newdt.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_99) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_newdt.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/radiation/radiation_newdt.o -MF CMakeFiles/athena.dir/radiation/radiation_newdt.o.d -o CMakeFiles/athena.dir/radiation/radiation_newdt.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_newdt.cpp
 
 CMakeFiles/athena.dir/radiation/radiation_newdt.i: cmake_force
@@ -1444,7 +1458,7 @@ CMakeFiles/athena.dir/radiation/radiation_newdt.s: cmake_force
 CMakeFiles/athena.dir/radiation/radiation_source.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/radiation/radiation_source.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_source.cpp
 CMakeFiles/athena.dir/radiation/radiation_source.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_99) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_source.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_100) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_source.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/radiation/radiation_source.o -MF CMakeFiles/athena.dir/radiation/radiation_source.o.d -o CMakeFiles/athena.dir/radiation/radiation_source.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_source.cpp
 
 CMakeFiles/athena.dir/radiation/radiation_source.i: cmake_force
@@ -1458,7 +1472,7 @@ CMakeFiles/athena.dir/radiation/radiation_source.s: cmake_force
 CMakeFiles/athena.dir/radiation/radiation_tasks.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/radiation/radiation_tasks.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_tasks.cpp
 CMakeFiles/athena.dir/radiation/radiation_tasks.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_100) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_tasks.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_101) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_tasks.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/radiation/radiation_tasks.o -MF CMakeFiles/athena.dir/radiation/radiation_tasks.o.d -o CMakeFiles/athena.dir/radiation/radiation_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_tasks.cpp
 
 CMakeFiles/athena.dir/radiation/radiation_tasks.i: cmake_force
@@ -1472,7 +1486,7 @@ CMakeFiles/athena.dir/radiation/radiation_tasks.s: cmake_force
 CMakeFiles/athena.dir/radiation/radiation_tetrad.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/radiation/radiation_tetrad.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_tetrad.cpp
 CMakeFiles/athena.dir/radiation/radiation_tetrad.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_101) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_tetrad.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_102) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_tetrad.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/radiation/radiation_tetrad.o -MF CMakeFiles/athena.dir/radiation/radiation_tetrad.o.d -o CMakeFiles/athena.dir/radiation/radiation_tetrad.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_tetrad.cpp
 
 CMakeFiles/athena.dir/radiation/radiation_tetrad.i: cmake_force
@@ -1486,7 +1500,7 @@ CMakeFiles/athena.dir/radiation/radiation_tetrad.s: cmake_force
 CMakeFiles/athena.dir/radiation/radiation_update.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/radiation/radiation_update.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_update.cpp
 CMakeFiles/athena.dir/radiation/radiation_update.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_102) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_update.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_103) "Building CXX object CMakeFiles/athena.dir/radiation/radiation_update.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/radiation/radiation_update.o -MF CMakeFiles/athena.dir/radiation/radiation_update.o.d -o CMakeFiles/athena.dir/radiation/radiation_update.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/radiation/radiation_update.cpp
 
 CMakeFiles/athena.dir/radiation/radiation_update.i: cmake_force
@@ -1500,7 +1514,7 @@ CMakeFiles/athena.dir/radiation/radiation_update.s: cmake_force
 CMakeFiles/athena.dir/shearing_box/orbital_advection.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/shearing_box/orbital_advection.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection.cpp
 CMakeFiles/athena.dir/shearing_box/orbital_advection.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_103) "Building CXX object CMakeFiles/athena.dir/shearing_box/orbital_advection.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_104) "Building CXX object CMakeFiles/athena.dir/shearing_box/orbital_advection.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/shearing_box/orbital_advection.o -MF CMakeFiles/athena.dir/shearing_box/orbital_advection.o.d -o CMakeFiles/athena.dir/shearing_box/orbital_advection.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection.cpp
 
 CMakeFiles/athena.dir/shearing_box/orbital_advection.i: cmake_force
@@ -1514,7 +1528,7 @@ CMakeFiles/athena.dir/shearing_box/orbital_advection.s: cmake_force
 CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection_cc.cpp
 CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_104) "Building CXX object CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_105) "Building CXX object CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.o -MF CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.o.d -o CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection_cc.cpp
 
 CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.i: cmake_force
@@ -1528,7 +1542,7 @@ CMakeFiles/athena.dir/shearing_box/orbital_advection_cc.s: cmake_force
 CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection_fc.cpp
 CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_105) "Building CXX object CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_106) "Building CXX object CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.o -MF CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.o.d -o CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/orbital_advection_fc.cpp
 
 CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.i: cmake_force
@@ -1542,7 +1556,7 @@ CMakeFiles/athena.dir/shearing_box/orbital_advection_fc.s: cmake_force
 CMakeFiles/athena.dir/shearing_box/shearing_box.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/shearing_box/shearing_box.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box.cpp
 CMakeFiles/athena.dir/shearing_box/shearing_box.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_106) "Building CXX object CMakeFiles/athena.dir/shearing_box/shearing_box.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_107) "Building CXX object CMakeFiles/athena.dir/shearing_box/shearing_box.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/shearing_box/shearing_box.o -MF CMakeFiles/athena.dir/shearing_box/shearing_box.o.d -o CMakeFiles/athena.dir/shearing_box/shearing_box.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box.cpp
 
 CMakeFiles/athena.dir/shearing_box/shearing_box.i: cmake_force
@@ -1556,7 +1570,7 @@ CMakeFiles/athena.dir/shearing_box/shearing_box.s: cmake_force
 CMakeFiles/athena.dir/shearing_box/shearing_box_cc.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/shearing_box/shearing_box_cc.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_cc.cpp
 CMakeFiles/athena.dir/shearing_box/shearing_box_cc.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_107) "Building CXX object CMakeFiles/athena.dir/shearing_box/shearing_box_cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_108) "Building CXX object CMakeFiles/athena.dir/shearing_box/shearing_box_cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/shearing_box/shearing_box_cc.o -MF CMakeFiles/athena.dir/shearing_box/shearing_box_cc.o.d -o CMakeFiles/athena.dir/shearing_box/shearing_box_cc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_cc.cpp
 
 CMakeFiles/athena.dir/shearing_box/shearing_box_cc.i: cmake_force
@@ -1570,7 +1584,7 @@ CMakeFiles/athena.dir/shearing_box/shearing_box_cc.s: cmake_force
 CMakeFiles/athena.dir/shearing_box/shearing_box_fc.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/shearing_box/shearing_box_fc.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_fc.cpp
 CMakeFiles/athena.dir/shearing_box/shearing_box_fc.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_108) "Building CXX object CMakeFiles/athena.dir/shearing_box/shearing_box_fc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_109) "Building CXX object CMakeFiles/athena.dir/shearing_box/shearing_box_fc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/shearing_box/shearing_box_fc.o -MF CMakeFiles/athena.dir/shearing_box/shearing_box_fc.o.d -o CMakeFiles/athena.dir/shearing_box/shearing_box_fc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_fc.cpp
 
 CMakeFiles/athena.dir/shearing_box/shearing_box_fc.i: cmake_force
@@ -1584,7 +1598,7 @@ CMakeFiles/athena.dir/shearing_box/shearing_box_fc.s: cmake_force
 CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_srcterms.cpp
 CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_109) "Building CXX object CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_110) "Building CXX object CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.o -MF CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.o.d -o CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_srcterms.cpp
 
 CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.i: cmake_force
@@ -1598,7 +1612,7 @@ CMakeFiles/athena.dir/shearing_box/shearing_box_srcterms.s: cmake_force
 CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_tasks.cpp
 CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_110) "Building CXX object CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_111) "Building CXX object CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.o -MF CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.o.d -o CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/shearing_box/shearing_box_tasks.cpp
 
 CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.i: cmake_force
@@ -1612,7 +1626,7 @@ CMakeFiles/athena.dir/shearing_box/shearing_box_tasks.s: cmake_force
 CMakeFiles/athena.dir/srcterms/srcterms.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/srcterms/srcterms.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/srcterms.cpp
 CMakeFiles/athena.dir/srcterms/srcterms.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_111) "Building CXX object CMakeFiles/athena.dir/srcterms/srcterms.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_112) "Building CXX object CMakeFiles/athena.dir/srcterms/srcterms.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/srcterms/srcterms.o -MF CMakeFiles/athena.dir/srcterms/srcterms.o.d -o CMakeFiles/athena.dir/srcterms/srcterms.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/srcterms.cpp
 
 CMakeFiles/athena.dir/srcterms/srcterms.i: cmake_force
@@ -1626,7 +1640,7 @@ CMakeFiles/athena.dir/srcterms/srcterms.s: cmake_force
 CMakeFiles/athena.dir/srcterms/srcterms_newdt.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/srcterms/srcterms_newdt.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/srcterms_newdt.cpp
 CMakeFiles/athena.dir/srcterms/srcterms_newdt.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_112) "Building CXX object CMakeFiles/athena.dir/srcterms/srcterms_newdt.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_113) "Building CXX object CMakeFiles/athena.dir/srcterms/srcterms_newdt.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/srcterms/srcterms_newdt.o -MF CMakeFiles/athena.dir/srcterms/srcterms_newdt.o.d -o CMakeFiles/athena.dir/srcterms/srcterms_newdt.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/srcterms_newdt.cpp
 
 CMakeFiles/athena.dir/srcterms/srcterms_newdt.i: cmake_force
@@ -1640,7 +1654,7 @@ CMakeFiles/athena.dir/srcterms/srcterms_newdt.s: cmake_force
 CMakeFiles/athena.dir/srcterms/turb_driver.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/srcterms/turb_driver.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/turb_driver.cpp
 CMakeFiles/athena.dir/srcterms/turb_driver.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_113) "Building CXX object CMakeFiles/athena.dir/srcterms/turb_driver.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_114) "Building CXX object CMakeFiles/athena.dir/srcterms/turb_driver.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/srcterms/turb_driver.o -MF CMakeFiles/athena.dir/srcterms/turb_driver.o.d -o CMakeFiles/athena.dir/srcterms/turb_driver.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/srcterms/turb_driver.cpp
 
 CMakeFiles/athena.dir/srcterms/turb_driver.i: cmake_force
@@ -1654,7 +1668,7 @@ CMakeFiles/athena.dir/srcterms/turb_driver.s: cmake_force
 CMakeFiles/athena.dir/tasklist/numerical_relativity.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/tasklist/numerical_relativity.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/tasklist/numerical_relativity.cpp
 CMakeFiles/athena.dir/tasklist/numerical_relativity.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_114) "Building CXX object CMakeFiles/athena.dir/tasklist/numerical_relativity.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_115) "Building CXX object CMakeFiles/athena.dir/tasklist/numerical_relativity.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/tasklist/numerical_relativity.o -MF CMakeFiles/athena.dir/tasklist/numerical_relativity.o.d -o CMakeFiles/athena.dir/tasklist/numerical_relativity.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/tasklist/numerical_relativity.cpp
 
 CMakeFiles/athena.dir/tasklist/numerical_relativity.i: cmake_force
@@ -1668,7 +1682,7 @@ CMakeFiles/athena.dir/tasklist/numerical_relativity.s: cmake_force
 CMakeFiles/athena.dir/units/units.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/units/units.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/units/units.cpp
 CMakeFiles/athena.dir/units/units.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_115) "Building CXX object CMakeFiles/athena.dir/units/units.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_116) "Building CXX object CMakeFiles/athena.dir/units/units.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/units/units.o -MF CMakeFiles/athena.dir/units/units.o.d -o CMakeFiles/athena.dir/units/units.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/units/units.cpp
 
 CMakeFiles/athena.dir/units/units.i: cmake_force
@@ -1682,7 +1696,7 @@ CMakeFiles/athena.dir/units/units.s: cmake_force
 CMakeFiles/athena.dir/utils/change_rundir.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/utils/change_rundir.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/change_rundir.cpp
 CMakeFiles/athena.dir/utils/change_rundir.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_116) "Building CXX object CMakeFiles/athena.dir/utils/change_rundir.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_117) "Building CXX object CMakeFiles/athena.dir/utils/change_rundir.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/utils/change_rundir.o -MF CMakeFiles/athena.dir/utils/change_rundir.o.d -o CMakeFiles/athena.dir/utils/change_rundir.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/change_rundir.cpp
 
 CMakeFiles/athena.dir/utils/change_rundir.i: cmake_force
@@ -1696,7 +1710,7 @@ CMakeFiles/athena.dir/utils/change_rundir.s: cmake_force
 CMakeFiles/athena.dir/utils/show_config.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/utils/show_config.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/show_config.cpp
 CMakeFiles/athena.dir/utils/show_config.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_117) "Building CXX object CMakeFiles/athena.dir/utils/show_config.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_118) "Building CXX object CMakeFiles/athena.dir/utils/show_config.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/utils/show_config.o -MF CMakeFiles/athena.dir/utils/show_config.o.d -o CMakeFiles/athena.dir/utils/show_config.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/show_config.cpp
 
 CMakeFiles/athena.dir/utils/show_config.i: cmake_force
@@ -1710,7 +1724,7 @@ CMakeFiles/athena.dir/utils/show_config.s: cmake_force
 CMakeFiles/athena.dir/utils/lagrange_interpolator.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/utils/lagrange_interpolator.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/lagrange_interpolator.cpp
 CMakeFiles/athena.dir/utils/lagrange_interpolator.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_118) "Building CXX object CMakeFiles/athena.dir/utils/lagrange_interpolator.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_119) "Building CXX object CMakeFiles/athena.dir/utils/lagrange_interpolator.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/utils/lagrange_interpolator.o -MF CMakeFiles/athena.dir/utils/lagrange_interpolator.o.d -o CMakeFiles/athena.dir/utils/lagrange_interpolator.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/lagrange_interpolator.cpp
 
 CMakeFiles/athena.dir/utils/lagrange_interpolator.i: cmake_force
@@ -1724,7 +1738,7 @@ CMakeFiles/athena.dir/utils/lagrange_interpolator.s: cmake_force
 CMakeFiles/athena.dir/utils/tr_table.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/utils/tr_table.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/tr_table.cpp
 CMakeFiles/athena.dir/utils/tr_table.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_119) "Building CXX object CMakeFiles/athena.dir/utils/tr_table.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_120) "Building CXX object CMakeFiles/athena.dir/utils/tr_table.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/utils/tr_table.o -MF CMakeFiles/athena.dir/utils/tr_table.o.d -o CMakeFiles/athena.dir/utils/tr_table.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/utils/tr_table.cpp
 
 CMakeFiles/athena.dir/utils/tr_table.i: cmake_force
@@ -1738,7 +1752,7 @@ CMakeFiles/athena.dir/utils/tr_table.s: cmake_force
 CMakeFiles/athena.dir/z4c/tmunu.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/tmunu.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/tmunu.cpp
 CMakeFiles/athena.dir/z4c/tmunu.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_120) "Building CXX object CMakeFiles/athena.dir/z4c/tmunu.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_121) "Building CXX object CMakeFiles/athena.dir/z4c/tmunu.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/tmunu.o -MF CMakeFiles/athena.dir/z4c/tmunu.o.d -o CMakeFiles/athena.dir/z4c/tmunu.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/tmunu.cpp
 
 CMakeFiles/athena.dir/z4c/tmunu.i: cmake_force
@@ -1752,7 +1766,7 @@ CMakeFiles/athena.dir/z4c/tmunu.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c.cpp
 CMakeFiles/athena.dir/z4c/z4c.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_121) "Building CXX object CMakeFiles/athena.dir/z4c/z4c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_122) "Building CXX object CMakeFiles/athena.dir/z4c/z4c.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c.o -MF CMakeFiles/athena.dir/z4c/z4c.o.d -o CMakeFiles/athena.dir/z4c/z4c.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c.cpp
 
 CMakeFiles/athena.dir/z4c/z4c.i: cmake_force
@@ -1766,7 +1780,7 @@ CMakeFiles/athena.dir/z4c/z4c.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_adm.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_adm.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_adm.cpp
 CMakeFiles/athena.dir/z4c/z4c_adm.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_122) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_adm.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_123) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_adm.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_adm.o -MF CMakeFiles/athena.dir/z4c/z4c_adm.o.d -o CMakeFiles/athena.dir/z4c/z4c_adm.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_adm.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_adm.i: cmake_force
@@ -1780,7 +1794,7 @@ CMakeFiles/athena.dir/z4c/z4c_adm.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_calcrhs.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_calcrhs.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_calcrhs.cpp
 CMakeFiles/athena.dir/z4c/z4c_calcrhs.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_123) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_calcrhs.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_124) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_calcrhs.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_calcrhs.o -MF CMakeFiles/athena.dir/z4c/z4c_calcrhs.o.d -o CMakeFiles/athena.dir/z4c/z4c_calcrhs.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_calcrhs.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_calcrhs.i: cmake_force
@@ -1794,7 +1808,7 @@ CMakeFiles/athena.dir/z4c/z4c_calcrhs.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_newdt.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_newdt.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_newdt.cpp
 CMakeFiles/athena.dir/z4c/z4c_newdt.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_124) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_newdt.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_125) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_newdt.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_newdt.o -MF CMakeFiles/athena.dir/z4c/z4c_newdt.o.d -o CMakeFiles/athena.dir/z4c/z4c_newdt.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_newdt.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_newdt.i: cmake_force
@@ -1808,7 +1822,7 @@ CMakeFiles/athena.dir/z4c/z4c_newdt.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_tasks.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_tasks.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_tasks.cpp
 CMakeFiles/athena.dir/z4c/z4c_tasks.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_125) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_tasks.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_126) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_tasks.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_tasks.o -MF CMakeFiles/athena.dir/z4c/z4c_tasks.o.d -o CMakeFiles/athena.dir/z4c/z4c_tasks.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_tasks.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_tasks.i: cmake_force
@@ -1822,7 +1836,7 @@ CMakeFiles/athena.dir/z4c/z4c_tasks.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_update.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_update.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_update.cpp
 CMakeFiles/athena.dir/z4c/z4c_update.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_126) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_update.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_127) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_update.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_update.o -MF CMakeFiles/athena.dir/z4c/z4c_update.o.d -o CMakeFiles/athena.dir/z4c/z4c_update.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_update.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_update.i: cmake_force
@@ -1836,7 +1850,7 @@ CMakeFiles/athena.dir/z4c/z4c_update.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_gauge.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_gauge.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_gauge.cpp
 CMakeFiles/athena.dir/z4c/z4c_gauge.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_127) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_gauge.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_128) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_gauge.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_gauge.o -MF CMakeFiles/athena.dir/z4c/z4c_gauge.o.d -o CMakeFiles/athena.dir/z4c/z4c_gauge.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_gauge.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_gauge.i: cmake_force
@@ -1850,7 +1864,7 @@ CMakeFiles/athena.dir/z4c/z4c_gauge.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_Sbc.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_Sbc.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_Sbc.cpp
 CMakeFiles/athena.dir/z4c/z4c_Sbc.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_128) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_Sbc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_129) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_Sbc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_Sbc.o -MF CMakeFiles/athena.dir/z4c/z4c_Sbc.o.d -o CMakeFiles/athena.dir/z4c/z4c_Sbc.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_Sbc.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_Sbc.i: cmake_force
@@ -1864,7 +1878,7 @@ CMakeFiles/athena.dir/z4c/z4c_Sbc.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_calculate_weyl_scalars.cpp
 CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_129) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_130) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.o -MF CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.o.d -o CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_calculate_weyl_scalars.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.i: cmake_force
@@ -1878,7 +1892,7 @@ CMakeFiles/athena.dir/z4c/z4c_calculate_weyl_scalars.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_wave_extr.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_wave_extr.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_wave_extr.cpp
 CMakeFiles/athena.dir/z4c/z4c_wave_extr.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_130) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_wave_extr.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_131) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_wave_extr.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_wave_extr.o -MF CMakeFiles/athena.dir/z4c/z4c_wave_extr.o.d -o CMakeFiles/athena.dir/z4c/z4c_wave_extr.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_wave_extr.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_wave_extr.i: cmake_force
@@ -1892,7 +1906,7 @@ CMakeFiles/athena.dir/z4c/z4c_wave_extr.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_puncture_tracker.cpp
 CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_131) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_132) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o -MF CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o.d -o CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_puncture_tracker.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.i: cmake_force
@@ -1906,7 +1920,7 @@ CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.s: cmake_force
 CMakeFiles/athena.dir/z4c/z4c_amr.o: CMakeFiles/athena.dir/flags.make
 CMakeFiles/athena.dir/z4c/z4c_amr.o: /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_amr.cpp
 CMakeFiles/athena.dir/z4c/z4c_amr.o: CMakeFiles/athena.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_132) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_amr.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_133) "Building CXX object CMakeFiles/athena.dir/z4c/z4c_amr.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/athena.dir/z4c/z4c_amr.o -MF CMakeFiles/athena.dir/z4c/z4c_amr.o.d -o CMakeFiles/athena.dir/z4c/z4c_amr.o -c /home/nilay/Code/AthenaK_magnetar_winds/athenak/src/z4c/z4c_amr.cpp
 
 CMakeFiles/athena.dir/z4c/z4c_amr.i: cmake_force
@@ -1956,8 +1970,9 @@ athena_OBJECTS = \
 "CMakeFiles/athena.dir/eos/ideal_grhyd.o" \
 "CMakeFiles/athena.dir/eos/ideal_srmhd.o" \
 "CMakeFiles/athena.dir/eos/ideal_grmhd.o" \
-"CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o" \
 "CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o" \
+"CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o" \
+"CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o" \
 "CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o" \
 "CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o" \
 "CMakeFiles/athena.dir/hydro/hydro.o" \
@@ -2092,8 +2107,9 @@ athena: CMakeFiles/athena.dir/eos/ideal_srhyd.o
 athena: CMakeFiles/athena.dir/eos/ideal_grhyd.o
 athena: CMakeFiles/athena.dir/eos/ideal_srmhd.o
 athena: CMakeFiles/athena.dir/eos/ideal_grmhd.o
-athena: CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o
 athena: CMakeFiles/athena.dir/eos/primitive-solver/eos_compose.o
+athena: CMakeFiles/athena.dir/eos/primitive-solver/piecewise_polytrope.o
+athena: CMakeFiles/athena.dir/eos/primitive-solver/unit_system.o
 athena: CMakeFiles/athena.dir/geodesic-grid/geodesic_grid.o
 athena: CMakeFiles/athena.dir/geodesic-grid/spherical_grid.o
 athena: CMakeFiles/athena.dir/hydro/hydro.o
@@ -2189,7 +2205,7 @@ athena: CMakeFiles/athena.dir/z4c/z4c_puncture_tracker.o
 athena: CMakeFiles/athena.dir/z4c/z4c_amr.o
 athena: CMakeFiles/athena.dir/build.make
 athena: CMakeFiles/athena.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_133) "Linking CXX executable athena"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/nilay/Code/AthenaK_magnetar_winds/athenak/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_134) "Linking CXX executable athena"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/athena.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
