@@ -52,7 +52,7 @@ def main(**kwargs):
         plt.axvspan(0, xb, alpha=0.21, color='red', label= 'Transient Phase')
         plt.axvspan(xb,x_vals[-1], alpha=0.2, color='green', label= 'Steady State')
         plt.ylabel(r'$\dot{M}(t)$ [$M_{\odot}$ s$^{-1}$]')
-        plt.xlabel(r'$t$ [s]')
+        plt.xlabel(r'$t$ [ms]')
         plt.plot(x_vals, y_vals,color='black',linewidth=1.5)
         plt.grid(True ,color='lightgrey', which="both",linestyle = '--',linewidth=0.5)
         plt.legend(edgecolor='black',loc=1)
