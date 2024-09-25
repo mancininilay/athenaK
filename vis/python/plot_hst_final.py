@@ -50,7 +50,7 @@ def main(**kwargs):
         plt.figure(figsize=(10, 6))
         plt.axvline(x=xb, color='black' ,linestyle='-',linewidth=0.4)
         plt.axvspan(0, xb, alpha=0.21, color='red')
-        plt.axvspan(xb,xvals[:-1], alpha=0.2, color='green')
+        plt.axvspan(xb,x_vals[:-1], alpha=0.2, color='green')
         plt.ylabel(r'$\dot{M}(t)$ [$M_{\odot}$ s$^{-1}$]')
         plt.xlabel(r'$t$ [s]')
         plt.plot(x_vals, y_vals,color='black',linewidth=1.5)
