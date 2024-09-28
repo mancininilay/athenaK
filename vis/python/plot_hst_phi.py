@@ -52,7 +52,6 @@ def main(**kwargs):
         plt.xlabel(r'$t$ [ms]')
         plt.plot(x_vals, y_vals,color='black',linewidth=1.5)
         plt.grid(True ,color='lightgrey', which="both",linestyle = '--',linewidth=0.5)
-        plt.legend(edgecolor='black',loc=1)
         plt.savefig(output_file)
 
 
